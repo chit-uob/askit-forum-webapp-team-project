@@ -1,0 +1,1 @@
+org.springframework.test.context.ContextCustomizerFactory = uk.ac.bham.teamproject.config.TestContainersSpringContextCustomizerFactory

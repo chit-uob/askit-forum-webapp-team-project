@@ -63,24 +63,24 @@ publish-docker:
         - echo "pushing ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
         - ./mvnw -ntp -e -X jib:build -DskipTests -Pprod -Djib.to.auth.username=${CI_REGISTRY_USER} -Djib.to.auth.password=${CI_REGISTRY_PASSWORD} -Djib.to.image=${CI_REGISTRY_IMAGE}:latest -Dmaven.repo.local=$MAVEN_USER_HOME
 
-#uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
-#$RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine
-#this assumes docker and SSH is installed on the $VM
-#deploy-git:
-#  image: alpine:latest
-#  stage: deploy
-#  when: on_success
-#  before_script: 
-#    - chmod og= $RSA
-#    - apk update && apk add openssh-client
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml down || true"
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
-#  script:
-#    - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment 
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/src/main/docker/app.yml"
-#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml up -d"
+# uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
+# $RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine
+# this assumes docker and SSH is installed on the $VM
+deploy-git:
+ image: alpine:latest
+ stage: deploy
+ when: on_success
+ before_script: 
+   - chmod og= $RSA
+   - apk update && apk add openssh-client
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml down || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
+ script:
+   - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment 
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/src/main/docker/app.yml"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml up -d"
 

@@ -39,6 +39,9 @@ maven-compile:
 maven-package:
   stage: package
   script:
+    - echo "jhipster" | sudo -S apt-get update
+    - echo "jhipster" | sudo -S apt-get install -y chromium-browser
+    - echo whereis chromium-browser
     - ./mvnw -ntp verify -Pprod -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
   artifacts:
     paths:

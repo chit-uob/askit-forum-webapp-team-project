@@ -58,6 +58,6 @@ deploy-git:
    - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
 #   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/src/main/docker/app.yml"
 #   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml up -d"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name ${CI_REGISTRY_IMAGE}:tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name ${CI_REGISTRY_IMAGE}:tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
 

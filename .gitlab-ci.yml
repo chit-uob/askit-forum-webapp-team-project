@@ -7,57 +7,66 @@ cache:
   key: '$CI_COMMIT_REF_NAME'
 stages:
   - check
-  - build
+#  - build
   - test
-  - analyze
-  - package
-  - release
+#  - analyze
+#  - package
+#  - release
   - publish
   - deploy
 
 
+code-check:
+  image: python:3.11
+  stage: check
+  script:
+    - python manage.py check
+
+
+django-tests:
+  image: python:3.11
+  stage: test
+  script:
+    - python manage.py test
+
+
 publish-docker:
-    image: docker:stable
-    stage: publish
-    services:
-     - docker:dind
-    variables:
-     DOCKER_HOST: 'tcp://docker:2375'
-     DOCKER_DRIVER: overlay2
-     DOCKER_TLS_CERTDIR: ""
-    script:
-        - echo "pushing ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
-        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-        - docker build -t ${CI_REGISTRY_IMAGE}:tpdjango djangosite/
-        - docker push ${CI_REGISTRY_IMAGE}:tpdjango
-        - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
-        - docker push ${CI_REGISTRY_IMAGE}:tpnginx
+  image: docker:stable
+  stage: publish
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: 'tcp://docker:2375'
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - echo "pushing ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t ${CI_REGISTRY_IMAGE}:tpdjango djangosite/
+    - docker push ${CI_REGISTRY_IMAGE}:tpdjango
+    - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
+    - docker push ${CI_REGISTRY_IMAGE}:tpnginx
 
 # uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
 # $RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine
 # this assumes docker and SSH is installed on the $VM
 deploy-git:
- image: alpine:latest
- stage: deploy
- when: on_success
- before_script:
-   - chmod og= $RSA
-   - apk update && apk add openssh-client
-#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml down || true"
-#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
-#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpdjango || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpnginx || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpdjango || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpnginx || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpdjango"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpnginx"
- script:
-   - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
-#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/src/main/docker/app.yml"
-#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml up -d"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"
+  image: alpine:latest
+  stage: deploy
+  when: on_success
+  before_script:
+    - chmod og= $RSA
+    - apk update && apk add openssh-client
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpdjango || true"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpnginx || true"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpdjango || true"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpnginx || true"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpdjango"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpnginx"
+  script:
+    - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"
 

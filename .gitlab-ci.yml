@@ -1,13 +1,10 @@
-image: jhipster/jhipster:v7.9.3
-
 variables:
   CI_IMG: "\"${CI_REGISTRY_IMAGE}:latest\""
   TP_URL: "${CI_PROJECT_NAMESPACE}.bham.team"
   TP_CONTACT: "${GITLAB_USER_EMAIL}"
+
 cache:
   key: '$CI_COMMIT_REF_NAME'
-  paths:
-    - .maven/
 stages:
   - check
   - build
@@ -17,39 +14,10 @@ stages:
   - release
   - publish
   - deploy
-before_script:
-  - export NG_CLI_ANALYTICS="false"
-  - export MAVEN_USER_HOME=`pwd`/.maven
 
-nohttp:
-  stage: check
-  script:
-    - ./mvnw -ntp checkstyle:check -Dmaven.repo.local=$MAVEN_USER_HOME
-
-maven-compile:
-  stage: build
-  script:
-    - ./mvnw -ntp compile -P-webapp -Dmaven.repo.local=$MAVEN_USER_HOME
-  artifacts:
-    paths:
-      - target/classes/
-      - target/generated-sources/
-    expire_in: 1 day
-
-maven-package:
-  stage: package
-  script:
-    - echo "jhipster" | sudo -S apt-get update
-    - echo "jhipster" | sudo -S apt-get install -y chromium-browser
-    - echo whereis chromium-browser
-    - ./mvnw -ntp verify -Pprod -DskipTests -Dmaven.repo.local=$MAVEN_USER_HOME
-  artifacts:
-    paths:
-      - target/*.jar
-      - target/classes
-    expire_in: 1 day
 
 publish-docker:
+    image: docker:stable
     stage: publish
     services:
      - docker:dind
@@ -57,11 +25,13 @@ publish-docker:
      DOCKER_HOST: 'tcp://docker:2375'
      DOCKER_DRIVER: overlay2
      DOCKER_TLS_CERTDIR: ""
-    dependencies:
-        - maven-package
     script:
         - echo "pushing ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
-        - ./mvnw -ntp -e -X jib:build -DskipTests -Pprod -Djib.to.auth.username=${CI_REGISTRY_USER} -Djib.to.auth.password=${CI_REGISTRY_PASSWORD} -Djib.to.image=${CI_REGISTRY_IMAGE}:latest -Dmaven.repo.local=$MAVEN_USER_HOME
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        - docker build -t ${CI_REGISTRY_IMAGE}:tpdjango djangosite/
+        - docker push ${CI_REGISTRY_IMAGE}:tpdjango
+        - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
+        - docker push ${CI_REGISTRY_IMAGE}:tpnginx
 
 # uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
 # $RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine
@@ -70,17 +40,24 @@ deploy-git:
  image: alpine:latest
  stage: deploy
  when: on_success
- before_script: 
+ before_script:
    - chmod og= $RSA
    - apk update && apk add openssh-client
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml down || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
+#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml down || true"
+#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm -f $(docker ps -a -q) || true"
+#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker volume rm $(docker volume ls -q) || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop ${CI_REGISTRY_IMAGE}:tpdjango || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop ${CI_REGISTRY_IMAGE}:tpnginx || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm ${CI_REGISTRY_IMAGE}:tpdjango || true"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm ${CI_REGISTRY_IMAGE}:tpnginx || true"
    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:latest"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpdjango"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpnginx"
  script:
-   - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment 
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/src/main/docker/app.yml"
-   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml up -d"
+   - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
+#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "sed -i '5s|teamproject|$CI_IMG|' ~/team-project-deployment/src/main/docker/app.yml"
+#   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/src/main/docker/app.yml up -d"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name ${CI_REGISTRY_IMAGE}:tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"
+   - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name ${CI_REGISTRY_IMAGE}:tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
 

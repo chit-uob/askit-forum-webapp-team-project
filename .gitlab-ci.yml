@@ -18,7 +18,7 @@ stages:
 
 
 code-check:
-  image: python:3.11
+  image: python:3.11.2
   stage: check
   only:
     - main
@@ -28,7 +28,7 @@ code-check:
 
 
 django-tests:
-  image: python:3.11
+  image: python:3.11.2
   stage: test
   only:
     - main

@@ -23,7 +23,7 @@ code-check:
   only:
     - main
   script:
-    - python manage.py check
+    - python djangosite/manage.py check
 
 
 django-tests:
@@ -32,7 +32,7 @@ django-tests:
   only:
     - main
   script:
-    - python manage.py test
+    - python djangosite/manage.py test
 
 
 publish-docker:

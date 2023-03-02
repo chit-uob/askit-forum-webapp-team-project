@@ -23,6 +23,7 @@ code-check:
   only:
     - main
   script:
+    - pip install -r djangosite/requirements.txt
     - python djangosite/manage.py check
 
 
@@ -32,6 +33,7 @@ django-tests:
   only:
     - main
   script:
+    - pip install -r djangosite/requirements.txt
     - python djangosite/manage.py test
 
 

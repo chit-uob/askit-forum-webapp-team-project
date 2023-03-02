@@ -5,6 +5,7 @@ variables:
 
 cache:
   key: '$CI_COMMIT_REF_NAME'
+
 stages:
   - check
 #  - build
@@ -19,6 +20,8 @@ stages:
 code-check:
   image: python:3.11
   stage: check
+  only:
+    - main
   script:
     - python manage.py check
 
@@ -26,6 +29,8 @@ code-check:
 django-tests:
   image: python:3.11
   stage: test
+  only:
+    - main
   script:
     - python manage.py test
 
@@ -33,6 +38,8 @@ django-tests:
 publish-docker:
   image: docker:stable
   stage: publish
+  only:
+    - main
   services:
     - docker:dind
   variables:
@@ -53,6 +60,8 @@ publish-docker:
 deploy-git:
   image: alpine:latest
   stage: deploy
+  only:
+    - main
   when: on_success
   before_script:
     - chmod og= $RSA
@@ -69,4 +78,3 @@ deploy-git:
     - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"
-

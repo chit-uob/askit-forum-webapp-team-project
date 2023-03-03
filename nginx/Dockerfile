@@ -10,3 +10,4 @@ VOLUME /etc/nginx
 #VOLUME /home/ec2-user/teamai55-22.bham.team
 
 EXPOSE 80
+EXPOSE 443

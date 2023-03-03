@@ -7,8 +7,6 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 #VOLUME /usr/share/nginx/html
 VOLUME /etc/nginx
 # add a volumn which maps from /home/ec2-user/teamai55-22.bham.team to /etc/nginx
-VOLUME /tmp/keys:/home/ec2-user/teamai55-22.bham.team
-
-
+#VOLUME /home/ec2-user/teamai55-22.bham.team
 
 EXPOSE 80

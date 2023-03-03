@@ -9,8 +9,4 @@ VOLUME /etc/nginx
 # add a volumn which maps from /home/ec2-user/teamai55-22.bham.team to /etc/nginx
 #VOLUME /home/ec2-user/teamai55-22.bham.team
 
-VOLUME /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key
-
-RUN chmod -R 770 /key
-
 EXPOSE 80

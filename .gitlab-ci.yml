@@ -79,4 +79,4 @@ deploy-git:
   script:
     - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx --volume /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key ${CI_REGISTRY_IMAGE}:tpnginx"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx ${CI_REGISTRY_IMAGE}:tpnginx"

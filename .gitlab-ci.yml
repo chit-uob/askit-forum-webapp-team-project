@@ -55,6 +55,8 @@ publish-docker:
     - docker push ${CI_REGISTRY_IMAGE}:tpdjango
     - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
     - docker push ${CI_REGISTRY_IMAGE}:tpnginx
+    - docker build -t ${CI_REGISTRY_IMAGE}:tppostgres postgres/
+    - docker push ${CI_REGISTRY_IMAGE}:tppostgres
 
 # uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
 # $RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine
@@ -76,7 +78,9 @@ deploy-git:
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpdjango"
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpnginx"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tppostgres"
   script:
     - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 5422:5432 --name tppostgres --network-alias tppostgres ${CI_REGISTRY_IMAGE}:tpdjango"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --link tppostgres:tppostgres --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 -p 443:443 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx --volume /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key ${CI_REGISTRY_IMAGE}:tpnginx"

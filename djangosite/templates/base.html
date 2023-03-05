@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Forum website</title>{% endblock %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+
+    {% block navbar %}<!-- insert default navigation text for every page --> {% endblock %}
+    {% block sidebar %}<!-- insert default navigation text for every page --> {% endblock %}
+    {% block content %}<!-- default content text (typically empty) --> {% endblock %}
+
+</body>
+</html>

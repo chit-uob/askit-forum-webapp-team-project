@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+<!-- a generic index page for the site -->
+
+{% block content %}
+<body>
+<!-- a header for the page -->
+<header>
+  <h1 class=" text-4xl">ASK A QUESTION</h1>
+</header>
+<!-- the main content of the page -->
+
+{% if items %}
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type='text/javascript'>
+    var people = {{ items_json|safe }};
+  </script>
+
+  <div id="app">
+
+    
+    <!-- <p>
+      <span :title="message">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+    </p>
+    <p :class="{ red: isRed }" @click="toggleRed">
+      This should be red... but click me to toggle it.
+    </p>
+  
+   
+    <p :style="{ color }" @click="toggleColour">
+      This should be green, and should toggle between green and blue on click.
+    </p> -->
+
+    
+
+    <ul>
+      <li v-for="person in people">
+        <a v-bind:href="person.url" class="bg-red-300">[[ person.name ]]</a> <button v-on:click="greet(person.name)">hey</button>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      delimiters: ['[[', ']]'],
+      el: '#app',
+      data() {
+        return {
+      message: 'Hello World!',
+      isRed: true,
+      color: 'green'
+    }
+      },
+      methods: {
+        toggleRed(){
+          this.isRed = !this.isRed
+        },
+        toggleColour(){
+          this.color = this.color === 'green' ? 'blue' : 'green'
+
+        }
+      }
+    });
+  </script>
+{% else %}
+  <p>No items available.</p>
+{% endif %}
+
+<style>
+  .red {
+    color: red;
+  }
+  </style>
+
+
+<!-- a footer for the page -->
+<footer>
+    <p>Here is the footer change pls</p>
+</footer>
+</body>
+{% endblock %}

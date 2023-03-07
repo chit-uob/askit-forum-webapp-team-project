@@ -1,17 +1,11 @@
+{% extends "base.html" %}
 <!-- a generic index page for the site -->
-<html>
-<head>
-    <title>Home</title>
-<!--?    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>-->
-    <script src="https://cdn.tailwindcss.com"></script>
 
-</head>
+{% block content %}
 <body>
 <!-- a header for the page -->
 <header>
   <h1 class=" text-4xl">ASK A QUESTION</h1>
-    <h1>Home</h1>
-    <p>Here is some content for the home page ping pong</p>
 </header>
 <!-- the main content of the page -->
 
@@ -22,9 +16,9 @@
   </script>
 
   <div id="app">
-    [[message]]
+
     
-    <p>
+    <!-- <p>
       <span :title="message">
         Hover your mouse over me for a few seconds to see my dynamically bound title!
       </span>
@@ -33,10 +27,10 @@
       This should be red... but click me to toggle it.
     </p>
   
-    <!-- style bindings also support object and arrays -->
+   
     <p :style="{ color }" @click="toggleColour">
       This should be green, and should toggle between green and blue on click.
-    </p>
+    </p> -->
 
     
 
@@ -79,9 +73,10 @@
   }
   </style>
 
+
 <!-- a footer for the page -->
 <footer>
     <p>Here is the footer change pls</p>
 </footer>
 </body>
-</html>
+{% endblock %}

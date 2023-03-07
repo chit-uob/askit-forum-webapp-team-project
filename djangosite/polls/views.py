@@ -6,7 +6,6 @@ import random
 
 # Create your views here.
 def index(request):
-<<<<<<<<< Temporary merge branch 1
     names = ("bob", "dan", "jack", "lizzy", "susan")
 
     items = []

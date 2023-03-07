@@ -21,7 +21,7 @@ code-check:
   image: python:3.11.2
   stage: check
   only:
-    - main
+    - release
   script:
     - pip install -r djangosite/requirements.txt
     - python djangosite/manage.py check
@@ -31,7 +31,7 @@ django-tests:
   image: python:3.11.2
   stage: test
   only:
-    - main
+    - release
   script:
     - pip install -r djangosite/requirements.txt
     - python djangosite/manage.py test
@@ -41,7 +41,7 @@ publish-docker:
   image: docker:stable
   stage: publish
   only:
-    - main
+    - release
   services:
     - docker:dind
   variables:
@@ -65,7 +65,7 @@ deploy-git:
   image: alpine:latest
   stage: deploy
   only:
-    - main
+    - release
   when: on_success
   before_script:
     - chmod og= $RSA

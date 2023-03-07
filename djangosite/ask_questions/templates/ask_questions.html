@@ -9,8 +9,9 @@
 <body>
 <!-- a header for the page -->
 <header>
+  <h1 class=" text-4xl">ASK A QUESTION</h1>
     <h1>Home</h1>
-    <p>Here is some content for the home page</p>
+    <p>Here is some content for the home page ping pong</p>
 </header>
 <!-- the main content of the page -->
 
@@ -22,6 +23,22 @@
 
   <div id="app">
     [[message]]
+    
+    <p>
+      <span :title="message">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+    </p>
+    <p :class="{ red: isRed }" @click="toggleRed">
+      This should be red... but click me to toggle it.
+    </p>
+  
+    <!-- style bindings also support object and arrays -->
+    <p :style="{ color }" @click="toggleColour">
+      This should be green, and should toggle between green and blue on click.
+    </p>
+
+    
 
     <ul>
       <li v-for="person in people">
@@ -34,14 +51,21 @@
     var app = new Vue({
       delimiters: ['[[', ']]'],
       el: '#app',
-      data: {
-          message: 'Hello Vue!',
-          people: people,
+      data() {
+        return {
+      message: 'Hello World!',
+      isRed: true,
+      color: 'green'
+    }
       },
       methods: {
-          greet: function(name) {
-              console.log('Hello from ' + name + '!')
-          }
+        toggleRed(){
+          this.isRed = !this.isRed
+        },
+        toggleColour(){
+          this.color = this.color === 'green' ? 'blue' : 'green'
+
+        }
       }
     });
   </script>
@@ -49,9 +73,15 @@
   <p>No items available.</p>
 {% endif %}
 
+<style>
+  .red {
+    color: red;
+  }
+  </style>
+
 <!-- a footer for the page -->
 <footer>
-    <p>Here is the footer</p>
+    <p>Here is the footer change pls</p>
 </footer>
 </body>
 </html>

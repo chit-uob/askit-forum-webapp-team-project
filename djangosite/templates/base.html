@@ -11,9 +11,9 @@
 
 {% block navbar %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<nav class="bg-teal-200 px-2 sm:px-4 py-2.5 rounded">
+<nav class="bg-teal-200 px-2 sm:px-4 py-2.5 rounded" id="nav_vue">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
-        <a class="pl-4 flex items-center">
+        <a class="pl-4 flex items-center" href="{% url 'home_page:index' %}">
             <span class="self-center text-xl font-bold whitespace-nowrap">ASK.IT</span>
         </a>
         <form class="w-1/2">
@@ -34,10 +34,19 @@
         </form>
         <button type="button"
                 class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                aria-controls="navbar-default" aria-expanded="false">
+                aria-controls="navbar-default" aria-expanded="false"
+                v-on:click="showNav">
             <span class="sr-only">Open main menu</span>
             <i class="fa fa-bars" aria-hidden="true"></i>
         </button>
+        <div class="w-full flex-grow mt-2 text-black p-4 z-20 hidden" id="mobile-nav">
+            <ul>
+                <li><i class="fa fa-bell-o pr-1" aria-hidden="true"></i>Notifications</li>
+                <li><i class="fa fa-user pr-1" aria-hidden="true"></i>Profile</li>
+                <li><i class="fa fa-question-circle pr-1" aria-hidden="true"></i>Help</li>
+                <li><i class="fa fa-cog pr-1" aria-hidden="true"></i>Settings</li>
+            </ul>
+        </div>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
                 <li>
@@ -64,6 +73,26 @@
         </div>
     </div>
 </nav>
+
+<script>
+    var app = new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#nav_vue',
+        data: {
+        },
+        methods: {
+            showNav: function (name) {
+                console.log('called shownav')
+                var x = document.getElementById("mobile-nav");
+if (            x.className.indexOf("hidden") === -1) {
+                    x.className += " hidden";
+                } else {
+                    x.className = x.className.replace(" hidden", "");
+                }
+            }
+        }
+    });
+</script>
 {% endblock %}
 {% block sidebar %}<!-- insert default navigation text for every page --> {% endblock %}
 {% block content %}<!-- default content text (typically empty) --> {% endblock %}

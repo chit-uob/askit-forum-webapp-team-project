@@ -1,5 +1,7 @@
 .idea
 
+node_modules
+
 /djangosite/db.sqlite3
 
 ### Django ###

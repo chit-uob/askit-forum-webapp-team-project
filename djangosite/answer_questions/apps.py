@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AnsweringConfig(AppConfig):
+class AnswerQuestionsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'answering'
+    name = 'answer_questions'

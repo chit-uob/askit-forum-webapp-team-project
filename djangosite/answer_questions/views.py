@@ -16,6 +16,7 @@ def view_question(request, question_id):
     context = {}
     try:
         question = Question.objects.get(id=question_id)
+        context['question_id'] = question.id
         context['title'] = question.title
         context['author'] = question.author
         context['module'] = question.module.title
@@ -29,6 +30,6 @@ def view_question(request, question_id):
         context['views'] = question.views
         context['upvote_or_downvote'] = check_upvote_or_downvote(question)
     except Question.DoesNotExist:
-        title = "Question does not exist"
+        context['question_id'] = context['title'] = context['author'] = context['module'] = context['explanation'] = context['tried_what'] = context['summary'] = context['pub_date'] = context['status'] = context['score'] = context['views'] = context['upvote_or_downvote'] = "Question does not exist"
     return render(request, 'answer_questions/view_question.html', context)
     # return JsonResponse(context)

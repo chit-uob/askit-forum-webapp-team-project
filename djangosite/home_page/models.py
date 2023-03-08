@@ -43,6 +43,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.CharField(max_length=3000)
     pub_date = models.DateTimeField(auto_now=True)
+    score = models.IntegerField(default=0)
     upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="answer_upvotes")
     downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="answer_downvotes")
 

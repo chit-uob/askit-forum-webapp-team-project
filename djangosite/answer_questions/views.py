@@ -51,8 +51,26 @@ def submit_answer(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         content = request.POST.get('content')
-        # don't have author yet
+        # todo don't have author yet
         # author =
         answer = Answer(question=question, content=content)
         answer.save()
+        return HttpResponseRedirect(reverse('answer_questions:view_question', args=(question_id,)))
+
+
+def upvote(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        # todo will have to check if user has already upvoted or downvoted
+        question.score += 1
+        question.save()
+        return HttpResponseRedirect(reverse('answer_questions:view_question', args=(question_id,)))
+
+
+def downvote(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        # todo will have to check if user has already upvoted or downvoted
+        question.score -= 1
+        question.save()
         return HttpResponseRedirect(reverse('answer_questions:view_question', args=(question_id,)))

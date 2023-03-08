@@ -21,3 +21,6 @@ def index(request):
     context["items_json"] = json.dumps(items)
 
     return render(request, 'index.html', context)
+
+def poll_home(request):
+    return render(request, 'poll_home.html')

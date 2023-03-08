@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+<!-- a generic index page for the site -->
+
+{% block content %}
+<body>
+<!-- a header for the page -->
+<header>
+  <h1 class="p-3 text-5xl">ASK A QUESTION as</h1>
+</header>
+<!-- the main content of the page -->
+
+{% if items %}
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" ></script>
+  
+  
+  <script type='text/javascript'>
+    var people = {{ items_json|safe }};
+  </script>
+
+  <div id="app">
+
+<!--     
+<form>
+   <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+       <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
+           <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
+               <div class="flex items-center space-x-1 sm:pr-4">
+                <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('bold')">
+                  <i class="mdi mdi-format-bold"></i>
+              </button>
+                   
+               </div>
+           </div>
+           <button type="button" data-tooltip-target="tooltip-fullscreen" class="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+               <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+               <span class="sr-only">Full screen</span>
+           </button>
+           <div id="tooltip-fullscreen" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+               Show full screen
+               <div class="tooltip-arrow" data-popper-arrow></div>
+           </div>
+       </div>
+       <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+           <label for="editor" class="sr-only">Publish post</label>
+           <textarea id="editor" rows="8" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write an article..." required></textarea>
+       </div>
+   </div>
+   <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+       Publish post
+   </button>
+</form> -->
+
+    
+    
+  <form>
+    <div class="min-w-screen min-h-screen bg-gray-200 flex items-center justify-center px-5 py-5">
+      <div class="w-full max-w-6xl mx-auto rounded-xl bg-white shadow-lg p-5 text-black" x-data="app()" x-init="init($refs.wysiwyg)">
+          <div class="border border-gray-200 overflow-hidden rounded-md">
+            <div class="flex items-center space-x-1 sm:pr-4">
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" v-on:click="format('bold')">
+                      <i class="mdi mdi-format-bold"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('italic')">
+                      <i class="mdi mdi-format-italic"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50" @click="format('underline')">
+                      <i class="mdi mdi-format-underline"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('formatBlock','P')">
+                      <i class="mdi mdi-format-paragraph"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('formatBlock','H1')">
+                      <i class="mdi mdi-format-header-1"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('formatBlock','H2')">
+                      <i class="mdi mdi-format-header-2"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50" @click="format('formatBlock','H3')">
+                      <i class="mdi mdi-format-header-3"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('insertUnorderedList')">
+                      <i class="mdi mdi-format-list-bulleted"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 mr-1 hover:text-indigo-500 active:bg-gray-50" @click="format('insertOrderedList')">
+                      <i class="mdi mdi-format-list-numbered"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-l border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('justifyLeft')">
+                      <i class="mdi mdi-format-align-left"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('justifyCenter')">
+                      <i class="mdi mdi-format-align-center"></i>
+                  </button>
+                  <button class="outline-none focus:outline-none border-r border-gray-200 w-10 h-10 hover:text-indigo-500 active:bg-gray-50" @click="format('justifyRight')">
+                      <i class="mdi mdi-format-align-right"></i>
+                  </button>
+              </div>
+              <div  class="w-full"></div>
+                <textarea x-ref="wysiwyg" class="w-full h-96 overflow-y-auto"></textarea>
+            </div>
+          </div>
+      </div>
+  </div>
+</form>
+    
+
+
+
+    <h2 class="p-3 text-2xl">This question will be public in Haskell</h2>
+    <div class="mb-6">
+      <label for="large-input" class="block mb-2 text-sm font-medium text-green-700 dark:text-black">Large input</label>
+      <input type="text" id="large-input" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  </div>
+
+    
+<div class="mb-6">
+  <label for="success" class="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Your name</label>
+  <input type="text" id="success" class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500" placeholder="Success input">
+  <p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Well done!</span> Some success message.</p>
+</div>
+<div>
+  <label for="error" class="block mb-2 text-sm font-medium text-red-700 dark:text-red-500">Your name</label>
+  <input type="text" id="error" class="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 block w-full p-2.5 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500" placeholder="Error input">
+  <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oh, snapp!</span> Some error message.</p>
+</div>
+
+
+    
+    <!-- <p>
+      <span :title="message">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+      </span>
+    </p>
+    <p :class="{ red: isRed }" @click="toggleRed">
+      This should be red... but click me to toggle it.
+    </p>
+  
+   
+    <p :style="{ color }" @click="toggleColour">
+      This should be green, and should toggle between green and blue on click.
+    </p> -->
+
+    
+
+    <ul>
+      <li v-for="person in people">
+        <a v-bind:href="person.url" class="bg-red-300">[[ person.name ]]</a> <button v-on:click="greet(person.name)">hey</button>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      delimiters: ['[[', ']]'],
+      el: '#app',
+
+      
+      data() {
+        return {
+      message: 'Hello World!',
+      isRed: true,
+      color: 'green'
+    }
+      },
+      methods: {
+        toggleRed(){
+          this.isRed = !this.isRed
+        },
+        toggleColour(){
+          this.color = this.color === 'green' ? 'blue' : 'green'
+
+        },
+        format: function(cmd, param) {
+            this.wysiwyg.contentDocument.execCommand(cmd, !1, param||null)
+        }
+      },
+
+      return :{
+        wysiwyg: null,
+        init: function(el) {
+            // Get el
+            this.wysiwyg = el;
+            // Add CSS
+            this.wysiwyg.contentDocument.querySelector('head').innerHTML += `<style>
+            *, ::after, ::before {box-sizing: border-box;}
+            :root {tab-size: 4;}
+            html {line-height: 1.15;text-size-adjust: 100%;}
+            body {margin: 0px; padding: 1rem 0.5rem;}
+            body {font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";}
+            </style>`;
+            this.wysiwyg.contentDocument.body.innerHTML += `
+            <h1>Hello World!</h1>
+            <p>Welcome to the pure AlpineJS and Tailwind WYSIWYG.</p>
+            `;
+            // Make editable
+            this.wysiwyg.contentDocument.designMode = "on";
+        },
+        
+    }
+})
+    
+  </script>
+{% else %}
+  <p>No items available.</p>
+{% endif %}
+
+<style>
+  
+  @import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
+  .active\:bg-gray-50:active {
+    --tw-bg-opacity:1;
+    background-color: rgba(249,250,251,var(--tw-bg-opacity));
+}
+  </style>
+
+
+<!-- a footer for the page -->
+<footer>
+    <p>Here is the footer change pls</p>
+</footer>
+</body>
+{% endblock %}

@@ -15,7 +15,7 @@
 
         <h1>Answers: </h1>
         {% for answer in answer_list %}
-            <p>{{ answer.content }}, {{ answer.author }}, {{ answer.pub_date }}</p>
+            <p>{{ answer.content }}, {{ answer.author }}, {{ answer.pub_date }}, {{ answer.score }}, {{ answer.is_solution }}</p>
         {% endfor %}
 
 

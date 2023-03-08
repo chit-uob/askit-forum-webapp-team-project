@@ -39,11 +39,12 @@ def view_question(request, question_id):
             answer_dict['author'] = answer.author
             answer_dict['content'] = answer.content
             answer_dict['pub_date'] = answer.pub_date
+            answer_dict['score'] = answer.score
+            answer_dict['is_solution'] = answer.is_solution
             context['answer_list'].append(answer_dict)
     except Question.DoesNotExist:
         context['question_id'] = context['title'] = context['author'] = context['module'] = context['explanation'] = context['tried_what'] = context['summary'] = context['pub_date'] = context['status'] = context['score'] = context['views'] = context['upvote_or_downvote'] = "Question does not exist"
     return render(request, 'answer_questions/view_question.html', context)
-    # return JsonResponse(context)
 
 
 def submit_answer(request, question_id):

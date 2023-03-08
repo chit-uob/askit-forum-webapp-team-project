@@ -49,3 +49,29 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class User(models.Model):
+    name = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.name
+
+
+class Notifications(models.Model):
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    detail = models.CharField(max_length=300)
+    date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.detail
+
+class Comment(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
+    pub_date = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return self.author

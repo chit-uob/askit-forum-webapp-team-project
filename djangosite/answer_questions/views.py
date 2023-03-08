@@ -12,7 +12,6 @@ def check_upvote_or_downvote(question):
 
 
 def view_question(request, question_id):
-    print(Question.objects.all())
     context = {}
     try:
         question = Question.objects.get(id=question_id)

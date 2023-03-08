@@ -9,3 +9,5 @@ node_modules
 *.pot
 *.pyc
 __pycache__/
+
+.pytest_cache/

@@ -34,7 +34,7 @@ django-tests:
     - release
   script:
     - pip install -r djangosite/requirements.txt
-    - python djangosite/manage.py test
+    - pytest djangosite --ds=djangosite.dev_settings
 
 
 publish-docker:

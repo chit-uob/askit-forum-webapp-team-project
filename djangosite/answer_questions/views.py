@@ -16,6 +16,8 @@ def view_question(request, question_id):
     context = {}
     try:
         question = Question.objects.get(id=question_id)
+        question.views += 1
+        question.save()
         context['question_id'] = question.id
         context['title'] = question.title
         context['author'] = question.author

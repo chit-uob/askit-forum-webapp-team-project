@@ -2,4 +2,37 @@
 
 {% block title %}<title>View question</title>{% endblock %}
 
-{% block content %}<h1 class="font-bold">Question {{ question_id }}</h1>{% endblock %}
+{% block content %}
+
+        <form action="submit_answer/" method="post">
+            {% csrf_token %}
+            <input type="text" name="content">
+            <button type="submit">Submit answer</button>
+        </form>
+
+<h1 class="font-bold">Question {{ question_id }}</h1>
+<p>{{ title }}, {{ author }}, {{ module }}, {{ explanation }}, {{ tried_what }}, {{ summary }}, {{ pub_date }}, {{ status }}, {{ score }}, {{ views }}, {{ upvote_or_downvote }}, {{ tags }}</p>
+        <form action="upvote/" method="post">
+<!--? todo: should change to a javascript function which sends a request -->
+            {% csrf_token %}
+            <button type="submit">Upvote</button>
+        </form>
+        <form action="downvote/" method="post">
+<!--? todo: should change to a javascript function which sends a request -->
+            {% csrf_token %}
+            <button type="submit">Downvote</button>
+        </form>
+
+        <h1>Answers: </h1>
+        {% for answer in answer_list %}
+            <p>{{ answer.content }}, {{ answer.author }}, {{ answer.pub_date }}, {{ answer.score }}, {{ answer.is_solution }}</p>
+        {% endfor %}
+
+
+<p>The question is about .......</p>
+
+<p>&nbsp;</p>
+<label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">The Question about the course</label>
+<label id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></label>
+
+{% endblock %}

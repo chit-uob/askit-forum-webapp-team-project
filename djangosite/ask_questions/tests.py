@@ -17,4 +17,4 @@ class QuestionModelTests(TestCase):
         module = "OSSP"
         m = Module(title=module)
         q = Question(module=m, title=title1)
-        self.assertIs(q.title, title1)
+        assert q.title == title1

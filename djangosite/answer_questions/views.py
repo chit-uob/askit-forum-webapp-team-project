@@ -30,5 +30,5 @@ def view_question(request, question_id):
         context['upvote_or_downvote'] = check_upvote_or_downvote(question)
     except Question.DoesNotExist:
         title = "Question does not exist"
-    # return render(request, 'answer_questions/view_question.html', context)
-    return JsonResponse(context)
+    return render(request, 'answer_questions/view_question.html', context)
+    # return JsonResponse(context)

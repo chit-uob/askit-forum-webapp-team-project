@@ -131,4 +131,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CSRF_TRUSTED_ORIGINS = ['https://teamai55-22.bham.team/', 'https://www.teamai55-22.bham.team/']
+CSRF_TRUSTED_ORIGINS = ['https://teamai55-22.bham.team']

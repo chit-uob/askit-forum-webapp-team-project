@@ -3,12 +3,12 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Question, Module
+from home_page.models import Question, Module
 
 
 class QuestionModelTests(TestCase):
 
-    def example_test(self):
+    def test_example_test(self):
         """
         was_published_recently() returns False for questions whose pub_date
         is in the future.

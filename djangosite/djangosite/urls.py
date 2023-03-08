@@ -21,5 +21,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('', include('home_page.urls')),
     path('ask/', include('ask_questions.urls')),
-    path('answer/', include('answer_questions.urls')),
+    path('question/', include('answer_questions.urls')),
 ]

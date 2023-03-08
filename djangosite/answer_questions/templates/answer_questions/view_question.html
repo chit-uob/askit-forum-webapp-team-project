@@ -4,8 +4,19 @@
 
 {% block content %}
 
+        <form action="submit_answer/" method="post">
+            {% csrf_token %}
+            <input type="text" name="content">
+            <button type="submit">Submit answer</button>
+        </form>
+
 <h1 class="font-bold">Question {{ question_id }}</h1>
 <p>{{ title }}, {{ author }}, {{ module }}, {{ explanation }}, {{ tried_what }}, {{ summary }}, {{ pub_date }}, {{ status }}, {{ score }}, {{ views }}, {{ upvote_or_downvote }}</p>
+
+        <h1>Answers: </h1>
+        {% for answer in answer_list %}
+            <p>{{ answer.content }}, {{ answer.author }}, {{ answer.pub_date }}</p>
+        {% endfor %}
 
 
 <h2>The question is about .......</h2>

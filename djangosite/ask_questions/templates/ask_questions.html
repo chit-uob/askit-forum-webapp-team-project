@@ -13,6 +13,10 @@
 {% if items %}
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script>
+
   <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" ></script> -->
   
   
@@ -21,7 +25,8 @@
   </script>
 
   <div id="app">
-    <wysiwyg v-model="myHTML" />
+    <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+    <!-- <wysiwyg v-model="myHTML" /> -->
 
     
 
@@ -314,6 +319,15 @@
   </div>
 
   <script>
+Vue.createApp( {
+    data() {
+        editor: ClassicEditor,
+        editorData; '<p>Content of the editor.</p>',
+        editorConfig; {
+            // The configuration of the editor.
+        }
+    }
+} ).use( CKEditor ).mount( '#app' );
     var app = new Vue({
       delimiters: ['[[', ']]'],
       el: '#app',
@@ -326,6 +340,21 @@
       color: 'green'
     }
       },
+
+      export default {
+        name: 'app',
+        components: {
+            // Use the <ckeditor> component in this view.
+            ckeditor: CKEditor.component
+        },
+        data() {
+            return {
+                editor: ClassicEditor,
+
+                // ...
+            };
+        }
+    }
       methods: {
         toggleRed(){
           this.isRed = !this.isRed
@@ -336,7 +365,7 @@
         },
         format: function(cmd, param) {
             this.wysiwyg.contentDocument.execCommand(cmd, !1, param||null)
-        }
+        },
       },
 
       // return :{

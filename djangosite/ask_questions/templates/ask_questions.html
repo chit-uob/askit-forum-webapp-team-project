@@ -19,10 +19,7 @@
 
   <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" ></script> -->
   
-  
-  <script type='text/javascript'>
-    var people = {{ items_json|safe }};
-  </script>
+
 
   <div id="app">
     <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
@@ -405,7 +402,7 @@ Vue.createApp( {
   .active\:bg-gray-50:active {
     --tw-bg-opacity:1;
     background-color: rgba(249,250,251,var(--tw-bg-opacity)); */
-}
+
   </style>
 
 

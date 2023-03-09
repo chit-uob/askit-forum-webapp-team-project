@@ -23,8 +23,8 @@ code-check:
   only:
     - release
   script:
-    - pip install -r djangosite/requirements.txt
-    - python djangosite/manage.py check
+    - pip install -r askit/requirements.txt
+    - python askit/manage.py check
 
 
 django-tests:
@@ -33,8 +33,8 @@ django-tests:
   only:
     - release
   script:
-    - pip install -r djangosite/requirements.txt
-    - pytest djangosite --ds=djangosite.dev_settings
+    - pip install -r askit/requirements.txt
+    - pytest askit --ds=askit.dev_settings
 
 
 publish-docker:
@@ -53,10 +53,12 @@ publish-docker:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t ${CI_REGISTRY_IMAGE}:tpdjango djangosite/
     - docker push ${CI_REGISTRY_IMAGE}:tpdjango
-    - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
-    - docker push ${CI_REGISTRY_IMAGE}:tpnginx
-    - docker build -t ${CI_REGISTRY_IMAGE}:tppostgres postgres/
-    - docker push ${CI_REGISTRY_IMAGE}:tppostgres
+    - docker build -t ${CI_REGISTRY_IMAGE}:tpvue askit_frontend/
+    - docker push ${CI_REGISTRY_IMAGE}:tpvue
+#    - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
+#    - docker push ${CI_REGISTRY_IMAGE}:tpnginx
+#    - docker build -t ${CI_REGISTRY_IMAGE}:tppostgres postgres/
+#    - docker push ${CI_REGISTRY_IMAGE}:tppostgres
 
 # uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
 # $RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine

@@ -34,7 +34,7 @@ django-tests:
     - vueAndDjango
   script:
     - pip install -r askit/requirements.txt
-    - pytest askit --ds=askit.dev_settings
+    - pytest askit
 
 
 publish-docker:

@@ -10,13 +10,14 @@
           <i class="fa fa-arrow-down"></i>
         </button>
       </div>
-      <h1 class="text-3xl font-bold ">{{ question.title }}</h1>
-      <p>&nbsp;</p>
-      <p class="mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
-          question.tried_what
-        }}, {{ question.summary }}, {{ question.pub_date }},
-        {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-        {{ question.tags }}</p>
+      <div>
+        <h1 class="text-3xl font-bold ">{{ question.title }}</h1>
+        <p class="mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
+            question.tried_what
+          }}, {{ question.summary }}, {{ question.pub_date }},
+          {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
+          {{ question.tags }}</p>
+      </div>
     </div>
     <div class="p-4">
       <p class="mb-4">{{ question.author }}, {{ question.module }}, {{ question.explanation }}, {{
@@ -86,7 +87,7 @@ export default {
       console.log(this.answerInput)
       axiosClient.post(`/question/${this.$route.params.id}/submit_answer/`,
           {
-        content: this.answerInput,
+            content: this.answerInput,
           })
           .then((response) => {
             this.answers.push(response.data);

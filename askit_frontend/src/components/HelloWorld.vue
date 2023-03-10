@@ -4,7 +4,7 @@
       Welcome!
     </p>
     <p class="text-gray-500 text-lg">
-      Vue and Tailwind CSS in action asjdhksadhj
+      Vue and Tailwind CSS in action
     </p>
  </div>
 </template>

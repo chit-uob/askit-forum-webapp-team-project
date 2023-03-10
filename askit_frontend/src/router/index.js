@@ -29,7 +29,7 @@ const routes = [
     component: ask_questionsVue
   },
   {
-    path: '/module',
+    path: '/module/:mod',
     name:'module',
     component: ModuleView
   },

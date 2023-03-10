@@ -72,4 +72,10 @@ def submit_answer(request, question_id):
         # author =
         answer = Answer(question=question, content=content)
         answer.save()
-        return JsonResponse({"success": True})
+        answer_dict = {}
+        answer_dict['author'] = answer.author
+        answer_dict['content'] = answer.content
+        answer_dict['pub_date'] = answer.pub_date
+        answer_dict['score'] = answer.score
+        answer_dict['is_solution'] = answer.is_solution
+        return JsonResponse(answer_dict)

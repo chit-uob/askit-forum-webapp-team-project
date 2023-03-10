@@ -70,7 +70,7 @@ export default {
   mounted() {
     axiosClient({
       method: "get",
-      url: "/question/1/",
+      url: `/question/${this.$route.params.id}/`,
     })
         .then((response) => {
           this.question = response.data;
@@ -84,7 +84,7 @@ export default {
   methods: {
     addAnswer() {
       console.log(this.answerInput)
-      axiosClient.post("/question/1/submit_answer/",
+      axiosClient.post(`/question/${this.$route.params.id}/submit_answer/`,
           {
         content: this.answerInput,
           })

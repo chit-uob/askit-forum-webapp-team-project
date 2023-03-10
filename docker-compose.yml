@@ -36,7 +36,7 @@
         - /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key
         - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     tpdjango:
-      image: git.cs.bham.ac.uk:5050/team-projects-2022-23/team22-22:tpdjango
+      image: git.cs.bham.ac.uk:5050/team-projects-2022-23/teamai55-22:tpdjango
 #      ports:
 #         - "8000:8000"
       restart: 'always'
@@ -46,7 +46,7 @@
           max-size: "10k"
           max-file: "3"
     tpvue:
-      image:  git.cs.bham.ac.uk:5050/team-projects-2022-23/team22-22:tpvue
+      image:  git.cs.bham.ac.uk:5050/team-projects-2022-23/teamai55-22:tpvue
       restart: 'always'
       logging:
         driver: "json-file"

@@ -10,47 +10,47 @@
           <i class="fa fa-arrow-down"></i>
         </button>
       </div>
-        <h1 class="text-3xl font-bold ">{{ question.title }}</h1>
-        <br>
-        <p class="mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
-            question.tried_what
-          }}, {{ question.summary }}, {{ question.pub_date }},
-          {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-          {{ question.tags }}</p>
-      </div>
-      <div class="p-4">
-        <p class="mb-4">{{ question.author }}, {{ question.module }}, {{ question.explanation }}, {{
-            question.tried_what
-          }}, {{ question.summary }}, {{ question.pub_date }},
-          {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-          {{ question.tags }}</p>
-        <form @submit.prevent="addAnswer" class="mt-4">
-          <!--          {% csrf_token %}-->
-          <div class="flex items-center">
-            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                   type="text" name="content" v-model="answerInput">
-            <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
-              Submit answer
-            </button>
-          </div>
-          <br><br>
-        </form>
-        <h1 class="text-2xl font-bold mb-4">Answers:</h1>
-
-        <!--        {% for answer in answer_list %}-->
-        <div v-for="answer in answers" :key="answer.id">
-          <div class="p-4 mb-4 bg-white rounded-lg shadow">
-                      <p class="text-lg">{{ answer.content }}</p>
-                      <p class="text-gray-600 text-sm mt-2">Author: {{ answer.author }} | Published: {{ answer.pub_date }} | Score:
-                        {{ answer.score }}</p>
-                      {% if answer.is_solution %}
-            <p class="text-green-500 text-sm font-semibold mt-2">Solution</p>
-            <!--          {% endif %}-->
-          </div>
-          <!--        {% endfor %}-->
+      <h1 class="text-3xl font-bold ">{{ question.title }}</h1>
+      <p>&nbsp;</p>
+      <p class="mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
+          question.tried_what
+        }}, {{ question.summary }}, {{ question.pub_date }},
+        {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
+        {{ question.tags }}</p>
+    </div>
+    <div class="p-4">
+      <p class="mb-4">{{ question.author }}, {{ question.module }}, {{ question.explanation }}, {{
+          question.tried_what
+        }}, {{ question.summary }}, {{ question.pub_date }},
+        {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
+        {{ question.tags }}</p>
+      <form @submit.prevent="addAnswer" class="mt-4">
+        <!--          {% csrf_token %}-->
+        <div class="flex items-center">
+          <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                 type="text" name="content" v-model="answerInput">
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
+            Submit answer
+          </button>
         </div>
+        <br><br>
+      </form>
+      <h1 class="text-2xl font-bold mb-4">Answers:</h1>
+
+      <!--        {% for answer in answer_list %}-->
+      <div v-for="answer in answers" :key="answer.id">
+        <div class="p-4 mb-4 bg-white rounded-lg shadow">
+          <p class="text-lg">{{ answer.content }}</p>
+          <p class="text-gray-600 text-sm mt-2">Author: {{ answer.author }} | Published: {{ answer.pub_date }} | Score:
+            {{ answer.score }}</p>
+          {% if answer.is_solution %}
+          <p class="text-green-500 text-sm font-semibold mt-2">Solution</p>
+          <!--          {% endif %}-->
+        </div>
+        <!--        {% endfor %}-->
       </div>
     </div>
+  </div>
 
 
 </template>
@@ -85,13 +85,11 @@ export default {
   },
   methods: {
     addAnswer() {
-      axiosClient({
-        method: "post",
-        url: "/question/1/submit_answer/",
-        data: {
-          content: this.answerInput,
-        },
-      })
+      console.log(this.answerInput)
+      axiosClient.post("/question/1/submit_answer/",
+          {
+        content: this.answerInput,
+          })
           .then((response) => {
             this.answers.push(response.data);
             this.answerInput = "";

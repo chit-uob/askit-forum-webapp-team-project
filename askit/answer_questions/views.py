@@ -1,5 +1,6 @@
 from django.http import JsonResponse
-from home_page.models import Question, Answer, Tag
+from django.views.decorators.csrf import csrf_exempt
+from home_page.models import Question, Answer, Tag, Module
 
 
 
@@ -21,7 +22,7 @@ def view_question(request, question_id):
         context['summary'] = question.summary
         context['pub_date'] = question.pub_date
         context['status'] = question.status
-        context['tags'] = list(question.tags.all())
+        context['tags'] = str(question.tags.all())
         context['score'] = question.score
         context['views'] = question.views
         context['upvote_or_downvote'] = check_upvote_or_downvote(question)
@@ -39,3 +40,33 @@ def view_question(request, question_id):
     except Question.DoesNotExist:
         context['question_id'] = context['title'] = context['author'] = context['module'] = context['explanation'] = context['tried_what'] = context['summary'] = context['pub_date'] = context['status'] = context['score'] = context['views'] = context['upvote_or_downvote'] = "Question does not exist"
     return JsonResponse(context)
+
+
+def create_question(request):
+    m = Module(title="OSSP", description="ossp des")
+    m.save()
+    q = Question(module=m, title="how to do", explanation="exp", tried_what="tried", summary="sum")
+    q.save()
+    q2 = Question(module=m, title="question2", explanation="exp", tried_what="tried", summary="sum")
+    q2.save()
+    t = Tag(tag_name="tag1")
+    t.save()
+    t2 = Tag(tag_name="tag2")
+    t2.save()
+    q.tags.add(t)
+    q.tags.add(t2)
+    q2.tags.add(t)
+    q.save()
+    q2.save()
+    return JsonResponse({"success": True})
+
+@csrf_exempt
+def submit_answer(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        content = request.POST.get('content')
+        # todo don't have author yet
+        # author =
+        answer = Answer(question=question, content=content)
+        answer.save()
+        return JsonResponse({"success": True})

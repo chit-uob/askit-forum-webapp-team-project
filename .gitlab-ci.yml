@@ -21,7 +21,7 @@ code-check:
   image: python:3.11.2
   stage: check
   only:
-    - release
+    - vueAndDjango
   script:
     - pip install -r askit/requirements.txt
     - python askit/manage.py check
@@ -31,7 +31,7 @@ django-tests:
   image: python:3.11.2
   stage: test
   only:
-    - release
+    - vueAndDjango
   script:
     - pip install -r askit/requirements.txt
     - pytest askit --ds=askit.dev_settings
@@ -41,7 +41,7 @@ publish-docker:
   image: docker:stable
   stage: publish
   only:
-    - release
+    - vueAndDjango
   services:
     - docker:dind
   variables:
@@ -67,7 +67,7 @@ deploy-git:
   image: alpine:latest
   stage: deploy
   only:
-    - release
+    - vueAndDjango
   when: on_success
   before_script:
     - chmod og= $RSA

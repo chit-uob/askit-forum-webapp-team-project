@@ -58,8 +58,6 @@
 <script>
 import axiosClient from "@/views/axiosClient";
 
-
-
 export default {
   name: "QuestionView",
   data() {

@@ -1,8 +1,4 @@
 from django.http import JsonResponse
-# print current working directory
-import os
-print(os.getcwd())
-
 from home_page.models import Question, Answer, Tag
 
 

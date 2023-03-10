@@ -2,11 +2,11 @@
   <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden" style="width:90%;">
     <div class="p-4 flex items-center">
       <div class="flex flex-col items-center">
-        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-5">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2">
           <i class="fa fa-arrow-up"></i>
         </button>
-        <br>
-        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-5">
+        <span class="text-gray-600 text-lg font-bold mr-2">{{ question.score }}</span>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2">
           <i class="fa fa-arrow-down"></i>
         </button>
       </div>

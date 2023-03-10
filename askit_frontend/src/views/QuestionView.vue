@@ -54,6 +54,18 @@
 </template>
 
 <script>
+
+import axiosClient from "@/views/axiosClient";
+
+axiosClient({
+  method: "get",
+  url: "/question/1/"}
+).then(response => {
+  console.log(response.data);
+}).catch(error => {
+  console.log(error);
+});
+
 export default {
   name: "QuestionView",
 };

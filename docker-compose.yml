@@ -3,8 +3,8 @@
     db:
       # Official Postgres image from DockerHub (we use the last version)
       image: 'postgres:latest'
-      ports:
-        - "127.0.0.1:5432:5432"
+#      ports:
+#        - "127.0.0.1:5432:5432"
       environment:
         POSTGRES_USER: postgres # The PostgreSQL user (useful to connect to the database)
         POSTGRES_PASSWORD: postgres # The PostgreSQL password (useful to connect to the database)

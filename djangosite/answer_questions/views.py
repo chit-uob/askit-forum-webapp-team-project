@@ -44,6 +44,7 @@ def view_question(request, question_id):
             context['answer_list'].append(answer_dict)
     except Question.DoesNotExist:
         context['question_id'] = context['title'] = context['author'] = context['module'] = context['explanation'] = context['tried_what'] = context['summary'] = context['pub_date'] = context['status'] = context['score'] = context['views'] = context['upvote_or_downvote'] = "Question does not exist"
+        context['tags'] = "Tags"
     return render(request, 'answer_questions/view_question.html', context)
 
 

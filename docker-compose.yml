@@ -36,7 +36,7 @@
         - /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key
         - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     tpdjango:
-      image: git.cs.bham.ac.uk:5050/team-projects-2022-23/teamai55-22:tpdjango
+      image: git.cs.bham.ac.uk:5050/team-projects-2022-23/teamai55-22:tpdjangoapi
 #      ports:
 #         - "8000:8000"
       restart: 'always'

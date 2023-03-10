@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import QuestionView from '../views/QuestionView.vue'
 import ask_questionsVue from '@/views/ask_questions.vue'
+import ModuleView from '../views/ModuleView.vue'
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/ask',
     name:'ask',
     component: ask_questionsVue
+  },
+  {
+    path: '/module',
+    name:'module',
+    component: ModuleView
   },
 ]
 

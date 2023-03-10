@@ -43,11 +43,8 @@
           <p class="text-lg">{{ answer.content }}</p>
           <p class="text-gray-600 text-sm mt-2">Author: {{ answer.author }} | Published: {{ answer.pub_date }} | Score:
             {{ answer.score }}</p>
-          {% if answer.is_solution %}
-          <p class="text-green-500 text-sm font-semibold mt-2">Solution</p>
-          <!--          {% endif %}-->
+          <p v-if="answer.is_solution" class="text-green-500 text-sm font-semibold mt-2">Solution</p>
         </div>
-        <!--        {% endfor %}-->
       </div>
     </div>
   </div>
@@ -77,7 +74,8 @@ export default {
     })
         .then((response) => {
           this.question = response.data;
-          this.answers = response.data.answers;
+          console.log(response.data)
+          this.answers = response.data.answer_list;
         })
         .catch((error) => {
           console.log(error);

@@ -65,8 +65,12 @@ def submit_answer(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         content = request.POST.get('content')
+        print(content)
+        for key, value in request.POST.items():
+            print(f'Key: {key}')
+            print(f'Value: {value}')
         # todo don't have author yet
         # author =
-        answer = Answer(question=question, content=content)
-        answer.save()
+        # answer = Answer(question=question, content=content)
+        # answer.save()
         return JsonResponse({"success": True})

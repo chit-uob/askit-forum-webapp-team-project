@@ -12,12 +12,12 @@ def view_question_list(request, mod):
         context['title'] = question.title
         context['author'] = question.author
         context['pub_date'] = question.pub_date
-        context['tags'] = list(question.tags.all())
+        context['tags'] = str(question.tags.all())
         context['score'] = question.score
         context['views'] = question.views
         context['upvote'] = question.upvotes
         context['downvote'] = question.downvotes
         question_array.append(context)
 
-    return JsonResponse(context)
+    return JsonResponse(question_array)
 

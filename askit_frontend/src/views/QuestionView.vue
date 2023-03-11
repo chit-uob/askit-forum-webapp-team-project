@@ -1,5 +1,5 @@
 <template>
-
+<body style="background-color:#dbeafe; ">
   <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden" style="width:90%;">
     <div class="p-4 flex items-center">
       <div class="flex flex-col items-center">
@@ -11,48 +11,72 @@
           <i class="fa fa-arrow-down"></i>
         </button>
       </div>
-      <div>
-        <h1 class="text-3xl font-bold ">{{ question.title }}</h1>
+      <div class="flex-grow">
+        <h1 class="p-2 text-3xl font-bold font-mono">Question {{ question.title }}</h1>
         <div class="flex justify-between mb-2">
-        <p>{{question.author}}</p>
-          <p>{{question.pub_date}}</p>
+          <p class="p-2 font-thin font-sans"> Abc(abc123@student.bham.ac.uk){{question.author}}</p>
+          <span class="text-gray-600 w-full text-right">Date Published: {{question.pub_date}}</span>
         </div>
-        <p class="mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
+        <div>
+        <p class="p-2 mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
             question.tried_what
           }}, {{ question.summary }}, {{ question.pub_date }},
           {{ question.status }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-          {{ question.tags }}</p>
+          {{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}</p>
         <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ question.tags }}</button>
+
+          </div>
       </div>
     </div>
-    <div class="p-4">
+    <div class="p-10">
 
-      <form @submit.prevent="addAnswer" class="mt-4">
+    <button class="bg-blue-200 hover:bg-blue-300 text-black font-sans font-bold py-2 px-4 ml-4 rounded border-gray-300"  @click="showForm = !showForm">Answer</button>
+
+    <div v-if="showForm">
+
+      <form @submit.prevent="addAnswer">
+        </form>
         <!--          {% csrf_token %}-->
-        <div class="flex items-center">
+      <br>
           <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                  type="text" name="content" v-model="answerInput">
+
           <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
             Submit answer
           </button>
         </div>
+
         <br><br>
-      </form>
+
       <h1 class="text-2xl font-bold mb-4">Answers:</h1>
 
       <!--        {% for answer in answer_list %}-->
       <div v-for="answer in answers" :key="answer.id">
-        <div class="p-4 mb-4 bg-white rounded-lg shadow">
-          <p class="text-lg">{{ answer.content }}</p>
-          <p class="text-gray-600 text-sm mt-2">Author: {{ answer.author }} | Published: {{ answer.pub_date }} | Score:
+        <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
+          <div class="flex flex-col items-center">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2">
+          <i class="fa fa-arrow-up"></i>
+        </button>
+        <span class="text-gray-600 text-lg font-bold mr-2">{{ question.score }}</span>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2">
+          <i class="fa fa-arrow-down"></i>
+        </button>
+      </div>
+          <div>
+            <p class="text-lg">{{ answer.content }}</p>
+          <p class="text-gray-600 text-sm mt-2">Author: abc123@student.bham.ac.uk {{ answer.author }} | Published: {{ answer.pub_date }} | Score:
             {{ answer.score }}</p>
           <p v-if="answer.is_solution" class="text-green-500 text-sm font-semibold mt-2">Solution</p>
+
+          </div>
+
+
         </div>
       </div>
     </div>
   </div>
 
-
+</body>
 </template>
 
 <script>
@@ -62,6 +86,7 @@ export default {
   name: "QuestionView",
   data() {
     return {
+      showForm: false,
       question: {
         title: "Loading...",
         explanation: "Loading...",
@@ -99,6 +124,7 @@ export default {
             console.log(error);
           });
     },
+
   },
 };
 </script>

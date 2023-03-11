@@ -1,4 +1,5 @@
 <template>
+
   <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden" style="width:90%;">
     <div class="p-4 flex items-center">
       <div class="flex flex-col items-center">
@@ -12,19 +13,20 @@
       </div>
       <div>
         <h1 class="text-3xl font-bold ">{{ question.title }}</h1>
+        <div class="flex justify-between mb-2">
+        <p>{{question.author}}</p>
+          <p>{{question.pub_date}}</p>
+        </div>
         <p class="mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
             question.tried_what
           }}, {{ question.summary }}, {{ question.pub_date }},
-          {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
+          {{ question.status }}, {{ question.views }}, {{ question.upvote_or_downvote }},
           {{ question.tags }}</p>
+        <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ question.tags }}</button>
       </div>
     </div>
     <div class="p-4">
-      <p class="mb-4">{{ question.author }}, {{ question.module }}, {{ question.explanation }}, {{
-          question.tried_what
-        }}, {{ question.summary }}, {{ question.pub_date }},
-        {{ question.status }}, {{ question.score }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-        {{ question.tags }}</p>
+
       <form @submit.prevent="addAnswer" class="mt-4">
         <!--          {% csrf_token %}-->
         <div class="flex items-center">

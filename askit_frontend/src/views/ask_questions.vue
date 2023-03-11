@@ -9,6 +9,9 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css'
 <body class="bg-amber-200">
     <div class="absolute left-2/3 ml-7 w-0.5 h-screen bg-gray-600"></div>
 </body>
+<!-- <p class= ".p-52">rules</p> -->
+<label for="message" class="block mb-2 -ml-40 text-lg font-medium text-gray-900 dark:text-black">Title</label>
+
   
 <label for="message" class="block mb-2 text-lg font-medium text-gray-900 dark:text-black">Title</label>
 <textarea id="message" rows="1" class="block p-2.5 w-2/3 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your title"></textarea>

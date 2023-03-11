@@ -33,6 +33,7 @@ def view_question(request, question_id):
         context['answer_list'] = []
         for answer in answer_query_result:
             answer_dict = {}
+            answer_dict['id'] = answer.id
             answer_dict['author'] = answer.author
             answer_dict['content'] = answer.content
             answer_dict['pub_date'] = answer.pub_date
@@ -47,19 +48,31 @@ def view_question(request, question_id):
 def create_question(request):
     m = Module(title="OSSP", description="ossp des")
     m.save()
+    m1 = Module(title="TP", description="ossp des")
+    m1.save()
+    m2 = Module(title="SE", description="ossp des")
+    m2.save()
     q = Question(module=m, title="how to do", explanation="exp", tried_what="tried", summary="sum")
     q.save()
     q2 = Question(module=m, title="question2", explanation="exp", tried_what="tried", summary="sum")
     q2.save()
-    t = Tag(tag_name="tag1")
+    q3 = Question(module=m1, title="question3", explanation="exp", tried_what="tried", summary="sum")
+    q3.save()
+    q4 = Question(module=m2, title="question4", explanation="exp", tried_what="tried", summary="sum")
+    q4.save()
+    t = Tag(tag_name="Apple pie")
     t.save()
-    t2 = Tag(tag_name="tag2")
+    t2 = Tag(tag_name="Banana")
     t2.save()
     q.tags.add(t)
     q.tags.add(t2)
     q2.tags.add(t)
+    q3.tags.add(t)
+    q4.tags.add(t)
     q.save()
     q2.save()
+    q3.save()
+    q4.save()
     return JsonResponse({"success": True})
 
 @csrf_exempt
@@ -79,3 +92,39 @@ def submit_answer(request, question_id):
         answer_dict['score'] = answer.score
         answer_dict['is_solution'] = answer.is_solution
         return JsonResponse(answer_dict)
+
+
+@csrf_exempt
+def upvote(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        question.score += 1
+        question.save()
+        return JsonResponse({"success": True, "score": question.score})
+
+
+@csrf_exempt
+def downvote(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        question.score -= 1
+        question.save()
+        return JsonResponse({"success": True, "score": question.score})
+
+
+@csrf_exempt
+def upvote_answer(request, question_id, answer_id):
+    if request.method == 'POST':
+        answer = Answer.objects.get(id=answer_id)
+        answer.score += 1
+        answer.save()
+        return JsonResponse({"success": True, "score": answer.score})
+
+
+@csrf_exempt
+def downvote_answer(request, question_id, answer_id):
+    if request.method == 'POST':
+        answer = Answer.objects.get(id=answer_id)
+        answer.score -= 1
+        answer.save()
+        return JsonResponse({"success": True, "score": answer.score})

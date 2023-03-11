@@ -91,3 +91,21 @@ def submit_answer(request, question_id):
         answer_dict['score'] = answer.score
         answer_dict['is_solution'] = answer.is_solution
         return JsonResponse(answer_dict)
+
+
+@csrf_exempt
+def upvote(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        question.score += 1
+        question.save()
+        return JsonResponse({"success": True, "score": question.score})
+
+
+@csrf_exempt
+def downvote(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        question.score -= 1
+        question.save()
+        return JsonResponse({"success": True, "score": question.score})

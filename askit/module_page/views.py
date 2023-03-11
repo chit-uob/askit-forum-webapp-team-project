@@ -8,7 +8,7 @@ def view_question_list(request, mod):
     question_array = []
     for question in questions:
         context = {}
-        context['question_id'] = question.id
+        context['id'] = question.id
         context['title'] = question.title
         context['author'] = question.author
         context['pub_date'] = question.pub_date

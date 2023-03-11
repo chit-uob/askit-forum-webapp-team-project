@@ -54,16 +54,16 @@
 
       <h1 class="text-2xl font-bold mb-4">Answers:</h1>
 
-      <!--        {% for answer in answer_list %}-->
+
       <div v-for="answer in answers" :key="answer.id">
         <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
           <div class="flex flex-col items-center">
             <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2">
-              <i class="fa fa-arrow-up"></i>
+              <i class="fa fa-arrow-up" v-on:click="upvoteAnswer(answer.id)"></i>
             </button>
             <span class="text-gray-600 text-lg font-bold mr-2">{{ answer.score }}</span>
             <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2">
-              <i class="fa fa-arrow-down"></i>
+              <i class="fa fa-arrow-down" v-on:click="downvoteAnswer(answer.id)"></i>
             </button>
           </div>
           <div class="flex-grow">
@@ -105,7 +105,6 @@ export default {
     })
         .then((response) => {
           this.question = response.data;
-          console.log(response.data)
           this.answers = response.data.answer_list;
         })
         .catch((error) => {
@@ -140,6 +139,34 @@ export default {
       axiosClient.post(`/question/${this.$route.params.id}/downvote/`)
           .then((response) => {
             this.question.score = response.data.score;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+    upvoteAnswer(answerId) {
+      axiosClient.post(`/question/${this.$route.params.id}/answer/${answerId}/upvote/`)
+          .then((response) => {
+            this.answers = this.answers.map((answer) => {
+              if (answer.id === answerId) {
+                answer.score = response.data.score;
+              }
+              return answer;
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+downvoteAnswer(answerId) {
+      axiosClient.post(`/question/${this.$route.params.id}/answer/${answerId}/downvote/`)
+          .then((response) => {
+            this.answers = this.answers.map((answer) => {
+              if (answer.id === answerId) {
+                answer.score = response.data.score;
+              }
+              return answer;
+            });
           })
           .catch((error) => {
             console.log(error);

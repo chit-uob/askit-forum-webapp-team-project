@@ -15,9 +15,9 @@ def view_question_list(request, mod):
         context['tags'] = str(question.tags.all())
         context['score'] = question.score
         context['views'] = question.views
-        context['upvote'] = question.upvotes
-        context['downvote'] = question.downvotes
+        # context['upvote'] = question.upvotes
+        # context['downvote'] = question.downvotes
         question_array.append(context)
 
-    return JsonResponse(question_array)
+    return JsonResponse(question_array, safe=False)
 

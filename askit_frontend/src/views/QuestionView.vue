@@ -3,12 +3,12 @@
   <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden w-10/12">
     <div class="p-4 flex items-center">
       <div class="flex flex-col items-center">
-        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2">
-          <i class="fa fa-arrow-up" v-on:click="upvoteQuestion"></i>
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" v-on:click="upvoteQuestion">
+          <i class="fa fa-arrow-up" ></i>
         </button>
         <span class="text-gray-600 text-lg font-bold mr-2">{{ question.score }}</span>
-        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2">
-          <i class="fa fa-arrow-down" v-on:click="downvoteQuestion"></i>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2" v-on:click="downvoteQuestion">
+          <i class="fa fa-arrow-down"></i>
         </button>
       </div>
       <div class="flex-grow">
@@ -58,12 +58,12 @@
       <div v-for="answer in answers" :key="answer.id">
         <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
           <div class="flex flex-col items-center">
-        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2">
-          <i class="fa fa-arrow-up" v-on:click="upvoteAnswer(answer.id)"></i>
+        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" v-on:click="upvoteAnswer(answer.id)">
+          <i class="fa fa-arrow-up"></i>
         </button>
         <span class="text-gray-600 text-lg font-bold mr-2">{{ answer.score }}</span>
-        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2">
-          <i class="fa fa-arrow-down" v-on:click="downvoteAnswer(answer.id)"></i>
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2" v-on:click="downvoteAnswer(answer.id)">
+          <i class="fa fa-arrow-down" ></i>
         </button>
           </div>
           <div class="flex-grow">

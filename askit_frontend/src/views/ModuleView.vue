@@ -36,3 +36,34 @@
       </div>
       </div>
   </template>
+
+<script>
+import axiosClient from "@/views/axiosClient";
+
+export default {
+  name: "ModuleView",
+  data() {
+    return {
+      
+      questions: [
+      ]
+    };
+  },
+  mounted() {
+    axiosClient({
+      method: "get",
+      url: `/module/${this.$route.params.mod}/`,
+    })
+        .then((response) => {
+          this.questions = response.data;
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  },
+  methods: {
+    
+  }
+};
+</script>

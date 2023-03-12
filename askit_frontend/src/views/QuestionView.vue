@@ -1,6 +1,6 @@
 <template>
-<body style="background-color:#dbeafe; ">
-  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden" style="width:90%;">
+<body class="bg-sky-100">
+  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden w-10/12">
     <div class="p-4 flex items-center">
       <div class="flex flex-col items-center">
         <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2">
@@ -41,7 +41,6 @@
 
       <form @submit.prevent="addAnswer">
 
-        <!--          {% csrf_token %}-->
       <br>
           <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
                  type="text" name="content" v-model="answerInput">
@@ -56,7 +55,6 @@
 
       <h1 class="text-2xl font-bold mb-4">Answers:</h1>
 
-      <!--        {% for answer in answer_list %}-->
       <div v-for="answer in answers" :key="answer.id">
         <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
           <div class="flex flex-col items-center">

@@ -2,10 +2,12 @@
 
 node_modules
 
-/djangosite/db.sqlite3
+db.sqlite3
 
 ### Django ###
 *.log
 *.pot
 *.pyc
 __pycache__/
+
+.pytest_cache/

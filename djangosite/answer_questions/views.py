@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from home_page.models import Question, Answer
+from home_page.models import Question, Answer, Module, Tag
 
 # Create your views here.
 def index(request):
@@ -75,3 +75,22 @@ def downvote(request, question_id):
         question.score -= 1
         question.save()
         return HttpResponseRedirect(reverse('answer_questions:view_question', args=(question_id,)))
+
+
+def create_question(request):
+    m = Module(title="OSSP", description="ossp des")
+    m.save()
+    q = Question(module=m, title="how to do", explanation="exp", tried_what="tried", summary="sum")
+    q.save()
+    q2 = Question(module=m, title="question2", explanation="exp", tried_what="tried", summary="sum")
+    q2.save()
+    t = Tag(tag_name="tag1")
+    t.save()
+    t2 = Tag(tag_name="tag2")
+    t2.save()
+    q.tags.add(t)
+    q.tags.add(t2)
+    q2.tags.add(t)
+    q.save()
+    q2.save()
+    return HttpResponseRedirect(reverse('answer_questions:view_question', args=(1,)))

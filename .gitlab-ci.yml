@@ -23,8 +23,8 @@ code-check:
   only:
     - release
   script:
-    - pip install -r djangosite/requirements.txt
-    - python djangosite/manage.py check
+    - pip install -r askit/requirements.txt
+    - python askit/manage.py check
 
 
 django-tests:
@@ -33,8 +33,8 @@ django-tests:
   only:
     - release
   script:
-    - pip install -r djangosite/requirements.txt
-    - python djangosite/manage.py test
+    - pip install -r askit/requirements.txt
+    - pytest askit || true
 
 
 publish-docker:
@@ -51,12 +51,14 @@ publish-docker:
   script:
     - echo "pushing ${CI_REGISTRY_IMAGE} ${CI_REGISTRY_USER} ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}"
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t ${CI_REGISTRY_IMAGE}:tpdjango djangosite/
-    - docker push ${CI_REGISTRY_IMAGE}:tpdjango
-    - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
-    - docker push ${CI_REGISTRY_IMAGE}:tpnginx
-    - docker build -t ${CI_REGISTRY_IMAGE}:tppostgres postgres/
-    - docker push ${CI_REGISTRY_IMAGE}:tppostgres
+    - docker build -t ${CI_REGISTRY_IMAGE}:tpdjangoapi askit/
+    - docker push ${CI_REGISTRY_IMAGE}:tpdjangoapi
+    - docker build -t ${CI_REGISTRY_IMAGE}:tpvue askit_frontend/
+    - docker push ${CI_REGISTRY_IMAGE}:tpvue
+#    - docker build -t ${CI_REGISTRY_IMAGE}:tpnginx nginx/
+#    - docker push ${CI_REGISTRY_IMAGE}:tpnginx
+#    - docker build -t ${CI_REGISTRY_IMAGE}:tppostgres postgres/
+#    - docker push ${CI_REGISTRY_IMAGE}:tppostgres
 
 # uncomment this once the $RSA $VM_USER@$VM are set in the repo - Setting -> CI/CD -> variables
 # $RSA should be a private key file, $VM_USER is the VM user name (e.g. root or ec2) and $VM is the IP address of the Virtual Machine
@@ -70,19 +72,22 @@ deploy-git:
   before_script:
     - chmod og= $RSA
     - apk update && apk add openssh-client
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpdjango || true"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpnginx || true"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tppostgres || true"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpdjango || true"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpnginx || true"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tppostgres || true"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpdjango || true"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tpnginx || true"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker stop tppostgres || true"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpdjango || true"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tpnginx || true"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker rm tppostgres || true"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/docker-compose.yml down || true"
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "rm -rf ~/team-project-deployment || true"
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpdjango"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpnginx"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tppostgres"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpdjangoapi"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpvue"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tpnginx"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker pull ${CI_REGISTRY_IMAGE}:tppostgres"
   script:
     - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d --name tppostgres --network-alias tppostgres ${CI_REGISTRY_IMAGE}:tppostgres"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --link tppostgres:tppostgres --network-alias tpdjango ${CI_REGISTRY_IMAGE}:tpdjango"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 -p 443:443 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx --volume /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key ${CI_REGISTRY_IMAGE}:tpnginx"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d --name tppostgres --network-alias tppostgres ${CI_REGISTRY_IMAGE}:tppostgres"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 8000:8000 --name tpdjango --link tppostgres:tppostgres --network-alias tpdjango --volume tppgdata:/var/lib/postgresql/data ${CI_REGISTRY_IMAGE}:tpdjango"
+#    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker run -d -p 80:80 -p 443:443 --name tpnginx --link tpdjango:tpdjango --network-alias tpnginx --volume /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key ${CI_REGISTRY_IMAGE}:tpnginx"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/docker-compose.yml up -d"

@@ -18,12 +18,17 @@
           <span class="text-gray-600 w-full text-right">Date Published: {{question.pub_date}}</span>
         </div>
         <div>
-        <p class="p-2 mb-2">{{ question.explanation }},{{ question.author }}, {{ question.module }}, {{
-            question.tried_what
-          }}, {{ question.summary }}, {{ question.pub_date }},
-          {{ question.status }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-          {{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}</p>
-        <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ question.tags }}</button>
+
+        <p class="p-2 mb-2"><span class="font-bold">Explanation:</span> <br>
+          {{ question.explanation }},{{ question.author }}, {{ question.module }}, {{question.tried_what }},
+            {{ question.summary }}, {{ question.pub_date }}, {{ question.status }}, {{ question.views }}, {{ question.upvote_or_downvote }},
+            {{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}
+            {{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}</p>
+          <p class="p-2 mb-2"><span class="font-bold">Tried what:</span> <br>
+          {{ question.tried_what }}</p>
+          <p class="p-2 mb-2"><span class="font-bold">Summary:</span> <br>
+          {{ question.summary }}</p>
+          <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ question.tags }}</button>
 
           </div>
       </div>

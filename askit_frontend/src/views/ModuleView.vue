@@ -26,9 +26,6 @@ export default {
     return {
       
       questions: [
-        { id: 1, title: 'Learn HTML?', author: 'Aymon', tags: ['HTML', 'help'] },
-        { id: 2, title: 'Learn JavaScript?', author: 'Aliyu', tags: ['JS', 'help'] },
-        { id: 3, title: 'Learn Vue?', author: 'Adi', tags: ['Vue', 'help'] }
       ]
     };
   },

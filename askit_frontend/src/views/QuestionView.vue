@@ -22,8 +22,7 @@
         <p class="p-2 mb-2"><span class="font-bold">Explanation:</span> <br>
           {{ question.explanation }},{{ question.author }}, {{ question.module }}, {{question.tried_what }},
             {{ question.summary }}, {{ question.pub_date }}, {{ question.status }}, {{ question.views }}, {{ question.upvote_or_downvote }},
-            {{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}
-            {{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}{{ question.tags }}</p>
+            {{ question.tags }}</p>
           <p class="p-2 mb-2"><span class="font-bold">Tried what:</span> <br>
           {{ question.tried_what }}</p>
           <p class="p-2 mb-2"><span class="font-bold">Summary:</span> <br>
@@ -38,16 +37,18 @@
     <button class="bg-blue-200 hover:bg-blue-300 text-black font-sans font-bold py-2 px-4 ml-4 rounded border-gray-300"  @click="showForm = !showForm">Answer</button>
 
     <div v-if="showForm">
-
       <form @submit.prevent="addAnswer">
-
-      <br>
-          <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                 type="text" name="content" v-model="answerInput">
-
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
+        <br>
+        <div class="w-2/3">
+      <QuillEditor theme="snow" toolbar="full" name="content" v-model="answerInput">
+      </QuillEditor>
+    </div>
+    <br>
+<!--        <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"-->
+<!--                 type="text" name="content" v-model="answerInput">-->
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
             Submit answer
-          </button>
+        </button>
         </form>
         </div>
 
@@ -174,6 +175,12 @@ downvoteAnswer(answerId) {
     },
   },
 };
+</script>
+<script setup>
+// import { Ref } from 'vue';
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
+
 </script>
 
 <style scoped>

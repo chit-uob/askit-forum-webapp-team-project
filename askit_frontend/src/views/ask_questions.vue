@@ -9,8 +9,6 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 <div class="absolute left-2/3 ml-7 mt-0.5 w-0.5 h-screen bg-gray-600"></div>
 
-<!-- <p class= ".p-52">rules</p> -->
-<!-- <label for="message" class="block -ml-40 text-lg font-medium text-gray-900 dark:text-black">Title</label> -->
 
 <div>
 <label for="message" class="block mb-2 text-lg font-medium text-gray-900 dark:text-black">Title</label>

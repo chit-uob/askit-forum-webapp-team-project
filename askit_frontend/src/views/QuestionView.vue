@@ -105,8 +105,7 @@ export default {
     })
         .then((response) => {
           this.question = response.data;
-          console.log(response.data)
-          this.answers = response.data.answer_list;
+          this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
         })
         .catch((error) => {
           console.log(error);
@@ -153,7 +152,7 @@ upvoteQuestion() {
                 answer.score = response.data.score;
               }
               return answer;
-            });
+            }).sort((a, b) => b.score - a.score);
           })
           .catch((error) => {
             console.log(error);
@@ -167,7 +166,7 @@ downvoteAnswer(answerId) {
                 answer.score = response.data.score;
               }
               return answer;
-            });
+            }).sort((a, b) => b.score - a.score);
           })
           .catch((error) => {
             console.log(error);

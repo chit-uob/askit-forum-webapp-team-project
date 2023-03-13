@@ -1,33 +1,27 @@
 from django.shortcuts import render
 import json
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 # Create your views here.
 from home_page.models import Question, Module, Tag, Answer
 from django.views.decorators.csrf import csrf_exempt
-import requests
 
 @csrf_exempt
 def submit_question(request):
     if request.method == 'POST':
         # question = Question.objects.get(id=question_id)
         post_data = json.loads(request.body)
-        content = post_data['content']
-        # author =
-        module = Module(module="Testing")
-        module.save()
-        question_dict = {}
-        question_dict['author'] = Question.author
-        question_dict['title'] = Question.title
-        question_dict['explanation'] = Question.explanation
-        question_dict['tried_what'] = Question.tried_what
-        question_dict['summary'] = Question.summary
-        question_dict['status'] = Question.status
-        question_dict['tags'] = Question.tags
-        question_dict['pub_date'] = Question.pub_date
-        question_dict['score'] = Question.score
-        question_dict['views'] = Question.views
+        title = post_data['title']
+        explanation = post_data['explanation']
+        tried_what = post_data['tried']
+        summary = post_data['summary']
 
-        return JsonResponse(question_dict)
+        module = Module.objects.get(id=1)
+        q = Question(module=module, title=title, explanation=explanation, tried_what=tried_what, summary=summary)
+        q.save()
+        id = q.id
+        return JsonResponse({"success": True, "id": id})
+
+
 
 def display_questions(request, question_id):
     dis_question = {}

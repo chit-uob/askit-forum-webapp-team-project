@@ -29,11 +29,12 @@ export default {
       })
           .then((response) => {
             console.log(response);
+            // redirect to question base on response.id
+            window.location.href = '/question/' + response.data.id;
           })
           .catch((error) => {
             console.log(error);
           });
-      )
       console.log(this.questionTitle)
       console.log(this.questionExplanation)
       console.log(this.questionTried)

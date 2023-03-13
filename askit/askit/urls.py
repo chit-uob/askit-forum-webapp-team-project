@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/v1/', include('djoser.urls.authtoken')),
     path('api/question/', include('answer_questions.urls')),
     path('api/module/', include('module_page.urls')),
+    path('api/ask/', include('ask_questions.urls')),
 ]

@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from home_page.models import Question, Module
+from home_page.models import Question, Module, Answer
 
 # Create your views here.
 def view_question_list(request, mod):
@@ -8,16 +8,17 @@ def view_question_list(request, mod):
     question_array = []
     for question in questions:
         context = {}
-        context['question_id'] = question.id
+        context['id'] = question.id
         context['title'] = question.title
         context['author'] = question.author
         context['pub_date'] = question.pub_date
         context['tags'] = str(question.tags.all())
         context['score'] = question.score
         context['views'] = question.views
-        context['upvote'] = question.upvotes
-        context['downvote'] = question.downvotes
+        context['num_answers'] = Answer.objects.filter(question = question).count()
+        # context['upvote'] = question.upvotes
+        # context['downvote'] = question.downvotes
         question_array.append(context)
 
-    return JsonResponse(question_array)
+    return JsonResponse(question_array, safe=False)
 

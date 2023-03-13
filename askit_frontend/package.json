@@ -14,7 +14,6 @@
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
-
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -25,6 +24,7 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
+    "@vueup/vue-quill": "^1.1.1",
     "autoprefixer": "^10.4.13",
     "babel-jest": "^27.0.6",
     "cypress": "^9.7.0",
@@ -32,7 +32,6 @@
     "postcss": "^8.4.21",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
-    "tailwindcss": "^3.2.7",
-    "@vueup/vue-quill": "^1.1.1"
+    "tailwindcss": "^3.2.7"
   }
 }

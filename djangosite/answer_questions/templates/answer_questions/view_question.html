@@ -7,22 +7,33 @@
 
 <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden" style="width:90%;">
   <div class="p-4 flex items-center">
-    <div class="flex flex-col items-center">
-       <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-5">
-       <i class="fa fa-arrow-up"></i>
-       </button>
-        <br>
-       <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-5">
-       <i class="fa fa-arrow-down"></i>
-       </button>
-    </div>
-    <h1 class="text-3xl font-bold ">{{ title }}</h1>
+  <div class="flex flex-col items-center">
+  <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2" >
+    <i class="fa fa-arrow-up"></i>
+  </button>
+  <div class="flex items-center">
+    <span class="text-gray-600 text-lg font-bold mr-2" id="counter">0</span>
+  </div>
+  <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2" >
+    <i class="fa fa-arrow-down"></i>
+  </button>
+</div>
+
+      <div=>
+    <h1 class="text-3xl font-bold mr-2">{{ title }}</h1>
       <br>
-      <p class="mb-2">{{ explanation }},{{ author }}, {{ module }}, {{ tried_what }}, {{ summary }}, {{ pub_date }}, {{ status }}, {{ score }}, {{ views }}, {{ upvote_or_downvote }}, {{ tags }}</p>
+      <div class=" flex items-center">
+          <p class="mb-1 mr-5">{{ author }}</p>
+          <p class="mb-1 ">{{ pub_date }}</p>
+
+      </div>
+      <br>
+      <p class="mb-2">{{ explanation }}, {{ module }}, {{ tried_what }}, {{ summary }},  {{ status }}, {{ score }}, {{ views }}, {{ upvote_or_downvote }} </p>
+      <p class="mb-2">{{ tags }}</p>
 
   </div>
   <div class="p-4">
-    <p class="mb-4">{{ author }}, {{ module }}, {{ explanation }}, {{ tried_what }}, {{ summary }}, {{ pub_date }}, {{ status }}, {{ score }}, {{ views }}, {{ upvote_or_downvote }}, {{ tags }}</p>
+
     <form action="submit_answer/" method="post" class="mt-4">
       {% csrf_token %}
       <div class="flex items-center">
@@ -43,9 +54,6 @@
     {% endfor %}
   </div>
 </div>
-
-</body>
-
 
 <!--{% for answer in answer_list %}-->
 <!--  <div class="p-4 mb-4 bg-white rounded-lg shadow">-->
@@ -71,5 +79,5 @@
 
 
 <p>&nbsp;</p>
-
+</body>
 {% endblock %}

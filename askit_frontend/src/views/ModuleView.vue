@@ -6,10 +6,12 @@
     <div class="w-full h-screen">
       <div class="p-10 inline-flex justify-between w-full">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
-        <button type="submit"
+        <a href="/ask">
+        <button type="submit" 
                 class="text-white  bg-blue-600 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
           Ask Question
         </button>
+        </a>
       </div>
       <h2 class="pl-10 text-2xl font-bold"> Top Questions</h2>
       <div v-for="question in questions" :key="question.id">

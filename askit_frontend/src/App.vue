@@ -1,9 +1,4 @@
 <template>
-<!--  <nav>-->
-<!--    <router-link to="/">Home</router-link> |-->
-<!--    <router-link to="/about">About</router-link> |-->
-<!--    <router-link to="/question">Question</router-link>-->
-<!--  </nav>-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <nav class="bg-teal-200 px-2 sm:px-4 py-2.5 rounded" id="nav_vue">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
@@ -68,4 +63,24 @@
     </div>
 </nav>
   <router-view/>
+
+<footer class="p-4 bg-sky-100 rounded-lg shadow md:flex md:items-center md:justify-between md:p-6">
+    <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 sm:mt-0">
+<!--        <li>-->
+<!--            <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>-->
+<!--        </li>-->
+        <li>
+            <a href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+        </li>
+<!--        <li>-->
+<!--            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="#" class="hover:underline">Contact</a>-->
+<!--        </li>-->
+    </ul>
+</footer>
+
 </template>

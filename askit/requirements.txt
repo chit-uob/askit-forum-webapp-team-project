@@ -4,3 +4,4 @@ pytest-django==4.5.2
 djangorestframework==3.14.0
 django-cors-headers==3.14.0
 djoser==2.1.0
+oneai==0.9.10

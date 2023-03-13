@@ -20,7 +20,20 @@ export default {
   },
   methods: {
     addQuestion() {
-      axiosClient.post('/ask/')
+      axiosClient.post('/ask/', {
+        title: this.questionTitle,
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+        tags: this.questionTags,
+        summary: this.questionSummary,
+      })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      )
       console.log(this.questionTitle)
       console.log(this.questionExplanation)
       console.log(this.questionTried)

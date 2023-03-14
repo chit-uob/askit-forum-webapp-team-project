@@ -1,24 +1,26 @@
 <template>
+<div class="p-10">
+<p class="text-2xl text-center font-bold p-3">Team 55 Privacy Policy</p>
+<p>This privacy policy will explain how our organization uses the personal data we collect from you when you use our website.</p>
 
-  <p>Team 55 Privacy Policy<br>
-This privacy policy will explain how our organization uses the personal data we collect from you when you use our website.</p>
-
-<p>Topics: <br>
-What data do we collect? <br>
-How do we collect your data? <br>
-How will we use your data? <br>
-How do we store your data? <br>
-Marketing<br>
-What are your data protection rights? <br>
-What are cookies? <br>
-How do we use cookies? <br>
-What types of cookies do we use? <br>
-How to manage your cookies <br>
-Privacy policies of other websites <br>
-Changes to our privacy policy <br>
-How to contact us <br>
-How to contact the appropriate authorities</p>
-
+<p class="font-bold">Topics: </p>
+<ul class="indent-4">
+<li>- What data do we collect? </li>
+<li>- How do we collect your data?</li>
+<li>- How will we use your data? </li>
+<li>- How do we store your data? </li>
+<li>- Marketing</li>
+<li>- What are your data protection rights? </li>
+<li>- What are cookies? </li>
+<li>- How do we use cookies? </li>
+<li>- What types of cookies do we use? </li>
+<li>- How to manage your cookies </li>
+<li>- Privacy policies of other websites </li>
+<li>- Changes to our privacy policy </li>
+<li>- How to contact us </li>
+<li>- How to contact the appropriate authorities</li>
+</ul>
+<br>
 <p>What data do we collect? <br>
 Our Website collects the following data: <br>
 Personal identification information (Name, email address,) <br>
@@ -101,7 +103,7 @@ Should you wish to report a complaint or if you feel that Our Team has not addre
 Web: itservicedesk.bham.ac.uk <br>
 Tel: +44 (0)121 414 7171<br>
 </p>
-
+</div>
 </template>
 
 <script>

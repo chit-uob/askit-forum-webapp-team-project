@@ -28,7 +28,7 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/ask',
+    path: '/ask/:mod',
     name:'ask',
     component: ask_questionsVue
   },

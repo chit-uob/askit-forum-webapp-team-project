@@ -12,7 +12,9 @@ def view_question_list(request, mod):
         context['title'] = question.title
         context['author'] = question.author
         context['pub_date'] = question.pub_date
-        context['tags'] = str(question.tags.all())
+        context['tags'] = []
+        for x in question.tags.all():
+            context['tags'].append(str(x))
         context['score'] = question.score
         context['views'] = question.views
         context['num_answers'] = Answer.objects.filter(question = question).count()

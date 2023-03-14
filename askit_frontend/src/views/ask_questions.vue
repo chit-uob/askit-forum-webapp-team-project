@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     addQuestion() {
-      axiosClient.post('/ask/', {
+      axiosClient.post(`/ask/module/${this.$route.params.mod}/`, {
         title: this.questionTitle,
         explanation: this.questionExplanation,
         tried: this.questionTried,
@@ -40,6 +40,34 @@ export default {
       console.log(this.questionTried)
       console.log(this.questionTags)
       console.log(this.questionSummary)
+    },
+
+    getSummary(){
+      axiosClient.post("/ask/summary/", {
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+      })
+          .then((response) => {
+            console.log(response);
+            this.questionSummary = response.data.summary;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+
+    getTags(){
+      axiosClient.post("/ask/tagging/", {
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+      })
+          .then((response) => {
+            console.log(response);
+            this.questionTags = response.data.tag;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
   }
 }
@@ -63,7 +91,7 @@ export default {
     
 <!-- Explain your problem -->
   <div class="w-full">
-    <label for="large-input" class="block mb-2 text-lg font-medium text-green-700 ">Explain your problem</label>
+    <label for="large-input" class="block mb-2 text-lg font-medium text-gray-900 ">Explain your problem</label>
     <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionExplanation" content-type="text">
     </QuillEditor>
   </div>
@@ -71,7 +99,7 @@ export default {
 
 <!-- what have you already tried? -->
   <div class="w-full">
-    <label for="large-input" class="block mb-2 text-lg font-medium text-green-700 ">What have you already tried?</label>
+    <label for="large-input" class="block mb-2 text-lg font-medium text-gray-900 ">What have you already tried?</label>
     <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionTried" content-type="text">
     </QuillEditor>
   </div>
@@ -79,12 +107,12 @@ export default {
   
   <!--summary-->
   <div class>
-    <label for="message" class="block mb-2 text-lg font-medium text-green-700 ">Summary (optional)</label>
+    <label for="message" class="block mb-2 text-lg font-medium text-gray-900 ">Summary (optional)</label>
     <textarea id="message" rows="1"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
     <button type="button"
-            class=" mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">
+            class=" mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " v-on:click="getSummary">
       Auto-generate summary
     </button>
   </div>
@@ -92,12 +120,12 @@ export default {
 
   <!--tags-->
   <div class="mb-6">
-    <label for="message" class="block mb-2 text-lg font-medium text-green-700 ">Tags</label>
+    <label for="message" class="block mb-2 text-lg font-medium text-gray-900 ">Tags</label>
     <textarea id="message" rows="1"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
     <button type="button"
-            class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+            class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2" v-on:click="getTags">
       Auto-generate tags
     </button>
   </div>

@@ -47,35 +47,35 @@ def view_question(request, question_id):
     return JsonResponse(context)
 
 
-def create_question(request):
-    m = Module(title="OSSP", description="ossp des")
-    m.save()
-    m1 = Module(title="TP", description="ossp des")
-    m1.save()
-    m2 = Module(title="SE", description="ossp des")
-    m2.save()
-    q = Question(module=m, title="how to do", explanation="exp", tried_what="tried", summary="sum")
-    q.save()
-    q2 = Question(module=m, title="question2", explanation="exp", tried_what="tried", summary="sum")
-    q2.save()
-    q3 = Question(module=m1, title="question3", explanation="exp", tried_what="tried", summary="sum")
-    q3.save()
-    q4 = Question(module=m2, title="question4", explanation="exp", tried_what="tried", summary="sum")
-    q4.save()
-    t = Tag(tag_name="Apple pie")
-    t.save()
-    t2 = Tag(tag_name="Banana")
-    t2.save()
-    q.tags.add(t)
-    q.tags.add(t2)
-    q2.tags.add(t)
-    q3.tags.add(t)
-    q4.tags.add(t)
-    q.save()
-    q2.save()
-    q3.save()
-    q4.save()
-    return JsonResponse({"success": True})
+# def create_question(request):
+#     m = Module(title="OSSP", description="ossp des")
+#     m.save()
+#     m1 = Module(title="TP", description="ossp des")
+#     m1.save()
+#     m2 = Module(title="SE", description="ossp des")
+#     m2.save()
+#     q = Question(module=m, title="how to do", explanation="exp", tried_what="tried", summary="sum")
+#     q.save()
+#     q2 = Question(module=m, title="question2", explanation="exp", tried_what="tried", summary="sum")
+#     q2.save()
+#     q3 = Question(module=m1, title="question3", explanation="exp", tried_what="tried", summary="sum")
+#     q3.save()
+#     q4 = Question(module=m2, title="question4", explanation="exp", tried_what="tried", summary="sum")
+#     q4.save()
+#     t = Tag(tag_name="Apple pie")
+#     t.save()
+#     t2 = Tag(tag_name="Banana")
+#     t2.save()
+#     q.tags.add(t)
+#     q.tags.add(t2)
+#     q2.tags.add(t)
+#     q3.tags.add(t)
+#     q4.tags.add(t)
+#     q.save()
+#     q2.save()
+#     q3.save()
+#     q4.save()
+#     return JsonResponse({"success": True})
 
 
 def set_up_test_database(request):
@@ -104,18 +104,18 @@ def set_up_test_database(request):
     ossp_q2_a1.save()
     ossp_q2_a2 = Answer(question=ossp_q2, content="In operating systems, a process is an executing instance of a program. A process is comprised of an executable program, associated data, and system resources such as memory and CPU time. Processes are managed by the operating system's kernel, which is responsible for allocating resources to them, scheduling their execution, and providing interprocess communication mechanisms. A thread, on the other hand, is a lightweight process that shares the same resources as its parent process but executes independently.")
     ossp_q2_a2.save()
-    tp_q1 = Question(module=tp, title="How to start the project?",
+    tp_q1 = Question(id=1, module=tp, title="How to start the project?",
                      explanation="I am new to team project, and I don't know how to start the project. Can anyone give me some advice?",
                      tried_what="", summary="How to start the project?")
     tp_q1.save()
     tp_q1_a1 = Answer(question=tp_q1, content="You can start by reading the project description carefully and understanding the requirements. Then you can start to think about how to implement the project. You can also discuss with your team members about the project.")
     tp_q1_a1.save()
-    tp_q1 = Question(module=tp,
+    tp_q1 = Question(id=2, module=tp,
                      title="The marking criteria for the GDPR policy says we need to state where our servers are located - where are the University provided VPS's located?",
                      explanation="", tried_what="", summary="Where are the University provided VPS's located?")
     tp_q1.save()
 
-    tp_q2 = Question(module=tp,
+    tp_q2 = Question(id=3, module=tp,
                      title="How can I access a postgres database during development? My axios requests on the frontend are returning empty and I think its because.",
                      explanation="", tried_what="", summary="Accessing a postgres database during development")
     tp_q2.save()
@@ -124,7 +124,7 @@ def set_up_test_database(request):
                       content="Can you instead use a terminal, connect to the VM (with ssh) and log to postgres on it? It might less easy to use than an intelliJ tool, but at least we can avoid restrictions")
     tp_q2_a1.save()
 
-    tp_q3 = Question(module=tp,
+    tp_q3 = Question(id=4, module=tp,
                      title="I added some dependencies to the angular.json file but when I tried to push the changes",
                      explanation=", the pipeline failed at the package stage. How can I solve this issue?", tried_what="", summary="Angular dependency issue")
     tp_q3.save()
@@ -132,7 +132,7 @@ def set_up_test_database(request):
     tp_q3_a1 = Answer(question=tp_q3, content="Which dependencies have you added?")
     tp_q3_a1.save()
 
-    tp_q4 = Question(module=tp,
+    tp_q4 = Question(id=5, module=tp,
                      title="Hello, we are Team DAI 57 and are currently facing an issue with our git repository. ",
                      explanation="A commit was made that had some errors and when other team members clone the repository, we all get errors related to it, we have tried going back to a previous commit and pushing that to be the recent one and have attempted all possible options but it is not working for us. We have communicated this concern with both Professor Panos and Niloofer and we were recommended to ask if it’s possible we can have our repository reset please.", tried_what="", summary="Git repository issue")
     tp_q4.save()
@@ -166,7 +166,7 @@ def set_up_test_database(request):
     tp_q2.save()
     tp_q3.save()
     tp_q4.save()
-    return HttpResponse("Done")
+    return HttpResponse("The database has been reset, visit https://teamai55-22.bham.team to go back to the home page")
 
 
 @csrf_exempt

@@ -18,8 +18,16 @@ def submit_question(request, mod):
         explanation = post_data['explanation']
         tried_what = post_data['tried']
         summary = post_data['summary']
+        tags_str = post_data['tags']
+        tags = tags_str.split(',')
         module = Module.objects.get(title=mod)
         q = Question(module=module, title=title, explanation=explanation, tried_what=tried_what, summary=summary)
+        q.save()
+        for tag in tags:
+            tag = tag.strip()
+            t = Tag.objects.get_or_create(tag_name=tag)
+            t[0].save()
+            q.tags.add(t[0])
         q.save()
         id = q.id
         return JsonResponse({"success": True, "id": id})

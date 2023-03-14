@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     addQuestion() {
-      axiosClient.post(`/ask/${this.$route.params.mod}/`, {
+      axiosClient.post(`/ask/module/${this.$route.params.mod}/`, {
         title: this.questionTitle,
         explanation: this.questionExplanation,
         tried: this.questionTried,

@@ -12,7 +12,7 @@
     <div class="w-full h-screen">
       <div class="p-10 inline-flex justify-between w-full">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
-        <a href="/ask">
+        <a :href="`/ask/${$route.params.mod}`">
         <button type="submit" 
                 class="text-white  bg-blue-600 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
           Ask Question

@@ -10,7 +10,7 @@ import oneai
 oneai.api_key = "042258be-d1e8-4bd0-9df1-ce48677e096d"
 
 @csrf_exempt
-def submit_question(request):
+def submit_question(request, mod):
     if request.method == 'POST':
         # question = Question.objects.get(id=question_id)
         post_data = json.loads(request.body)
@@ -18,7 +18,7 @@ def submit_question(request):
         explanation = post_data['explanation']
         tried_what = post_data['tried']
         summary = post_data['summary']
-        module = Module.objects.get(id=1)
+        module = Module.objects.get(title=mod)
         q = Question(module=module, title=title, explanation=explanation, tried_what=tried_what, summary=summary)
         q.save()
         id = q.id

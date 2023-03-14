@@ -75,7 +75,7 @@
 <br>
 <p><span class="font-bold">The right to data portability</span> - You have the right to request that our Team transfer the data that we have collected from you to another organization, or directly to you, under certain conditions.</p>
 <br>
-<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at our email: axh1220@student.bham.ac.uk</p>
+<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us at our email: team55.52.ai@gmail.com</p>
 <br>
 <p class="font-bold text-lg">What are cookies? </p>
 <p>Cookies are text files placed on your computer to collect standard Internet log information and visitor behavior information. When you visit our websites, we may collect information from you automatically through cookies or similar technology.</p>
@@ -108,7 +108,7 @@
 <p class="font-bold text-lg">How to contact us </p>
 <p>If you have any questions about Our Team's privacy policy, the data we hold on you, or you would like to exercise one of your data protection rights, please do not hesitate to contact us.</p>
 <br>
-<p>Email us at: axh1220@student.bham.ac.uk</p>
+<p>Email us at: team55.52.ai@gmail.com</p>
 <br>
 <p class="font-bold text-lg">How to contact the appropriate authority </p>
 <p>Should you wish to report a complaint or if you feel that Our Team has not addressed your concern in a satisfactory manner, you may contact the University of Birmingham IT Help Desk. <br>

@@ -4,15 +4,18 @@ import QuestionView from '@/views/QuestionView.vue'
 import ask_questionsVue from '@/views/ask_questions.vue'
 import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
+import PrivacyView from "@/views/PrivacyView.vue";
 
 const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: AboutView
+  },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    component: PrivacyView
   },
   {
     path: '/question/:id',

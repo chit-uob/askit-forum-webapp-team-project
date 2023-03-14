@@ -36,8 +36,8 @@
     </div>
     <div class="w-[400px] h-full bg-gray-200 p-3">
       <h1 class=" font-bold text-lg">Modules</h1>
-        <a href="/module/OSSP" class=" text-sky-600"><p>OSSP</p></a>
-        <a href="/module/TP" class="text-sky-600"><p>TP</p></a>
+        <a href="/module/OSSP" class=" text-sky-600 hover:underline"><p>OSSP</p></a>
+        <a href="/module/TP" class="text-sky-600 hover:underline"><p>TP</p></a>
       
     </div>
   </div>

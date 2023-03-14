@@ -18,7 +18,7 @@ def submit_question(request, mod):
         explanation = post_data['explanation']
         tried_what = post_data['tried']
         summary = post_data['summary']
-        tags_str = post_data['tags']
+        tags_str = str(post_data['tags'])
         tags = tags_str.split(',')
         module = Module.objects.get(title=mod)
         q = Question(module=module, title=title, explanation=explanation, tried_what=tried_what, summary=summary)

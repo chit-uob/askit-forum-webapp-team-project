@@ -50,7 +50,7 @@
       <div v-if="showForm">
         <form @submit.prevent="addAnswer">
           <br>
-          <div class="w-2/3">
+          <div class="w-full">
             <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="answerInput" contentType="text">
             </QuillEditor>
           </div>

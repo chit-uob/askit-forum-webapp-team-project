@@ -63,7 +63,7 @@ export default {
     
 <!-- Explain your problem -->
   <div class="w-full">
-    <label for="large-input" class="block mb-2 text-lg font-medium text-green-700 ">Explain your problem</label>
+    <label for="large-input" class="block mb-2 text-lg font-medium text-gray-900 ">Explain your problem</label>
     <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionExplanation" content-type="text">
     </QuillEditor>
   </div>
@@ -71,7 +71,7 @@ export default {
 
 <!-- what have you already tried? -->
   <div class="w-full">
-    <label for="large-input" class="block mb-2 text-lg font-medium text-green-700 ">What have you already tried?</label>
+    <label for="large-input" class="block mb-2 text-lg font-medium text-gray-900 ">What have you already tried?</label>
     <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionTried" content-type="text">
     </QuillEditor>
   </div>
@@ -79,7 +79,7 @@ export default {
   
   <!--summary-->
   <div class>
-    <label for="message" class="block mb-2 text-lg font-medium text-green-700 ">Summary (optional)</label>
+    <label for="message" class="block mb-2 text-lg font-medium text-gray-900 ">Summary (optional)</label>
     <textarea id="message" rows="1"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
@@ -92,7 +92,7 @@ export default {
 
   <!--tags-->
   <div class="mb-6">
-    <label for="message" class="block mb-2 text-lg font-medium text-green-700 ">Tags</label>
+    <label for="message" class="block mb-2 text-lg font-medium text-gray-900 ">Tags</label>
     <textarea id="message" rows="1"
               class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>

@@ -116,7 +116,7 @@ def set_up_test_database(request):
     tp_q1.save()
 
     tp_q2 = Question(module=tp,
-                     title="How can I access a postgres database during development? My axios requests on the frontend are returning empty and I think its because because the database is on the vm not on my machine. Unsure what to do about this. It doesn't allow me to use intelliJ remotely using ssh.",
+                     title="How can I access a postgres database during development? My axios requests on the frontend are returning empty and I think its because.",
                      explanation="", tried_what="", summary="Accessing a postgres database during development")
     tp_q2.save()
 
@@ -125,16 +125,16 @@ def set_up_test_database(request):
     tp_q2_a1.save()
 
     tp_q3 = Question(module=tp,
-                     title="I added some dependencies to the angular.json file but when I tried to push the changes, the pipeline failed at the package stage. How can I solve this issue?",
-                     explanation="", tried_what="", summary="Angular dependency issue")
+                     title="I added some dependencies to the angular.json file but when I tried to push the changes",
+                     explanation=", the pipeline failed at the package stage. How can I solve this issue?", tried_what="", summary="Angular dependency issue")
     tp_q3.save()
 
     tp_q3_a1 = Answer(question=tp_q3, content="Which dependencies have you added?")
     tp_q3_a1.save()
 
     tp_q4 = Question(module=tp,
-                     title="Hello, we are Team DAI 57 and are currently facing an issue with our git repository. A commit was made that had some errors and when other team members clone the repository, we all get errors related to it, we have tried going back to a previous commit and pushing that to be the recent one and have attempted all possible options but it is not working for us. We have communicated this concern with both Professor Panos and Niloofer and we were recommended to ask if it’s possible we can have our repository reset please.",
-                     explanation="", tried_what="", summary="Git repository issue")
+                     title="Hello, we are Team DAI 57 and are currently facing an issue with our git repository. ",
+                     explanation="A commit was made that had some errors and when other team members clone the repository, we all get errors related to it, we have tried going back to a previous commit and pushing that to be the recent one and have attempted all possible options but it is not working for us. We have communicated this concern with both Professor Panos and Niloofer and we were recommended to ask if it’s possible we can have our repository reset please.", tried_what="", summary="Git repository issue")
     tp_q4.save()
 
     tp_q4_a1 = Answer(question=tp_q4,

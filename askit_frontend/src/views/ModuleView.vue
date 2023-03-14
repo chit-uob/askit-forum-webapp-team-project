@@ -31,7 +31,11 @@
             <div class=" w-8/12 p-3 flex flex-col justify-evenly">
               <h3>{{ question.title }}</h3>
               <p>Asked by [User]{{ question.author }}</p>
-              <p>{{ question.tags.substring(10,question.tags.length-1) }}</p>
+              <div class="flex">
+            <div v-for="tag in question.tags" class="mr-2">
+              <button class="bg-blue-50 hover:bg-blue-100 text-blue-400 mt-0.5  px-2 rounded h-[25px] text-sm font-light text-center">{{ tag }}</button>
+            </div>
+          </div>
             </div>
             <div class=" w-[80px] p-3 flex flex-col justify-evenly">
               <h3>{{ question.pub_date }}</h3>

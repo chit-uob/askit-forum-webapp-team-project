@@ -93,7 +93,7 @@
 <p>There are a number of different types of cookies, however, our website uses: </p>
 <ul class="indent-4">
 <li>- Functionality - Our Team uses these cookies so that we recognize you on our website and remember your previously selected preferences. These could include what language you prefer and location you are in. A mix of first-party and third-party cookies are used. </li>
-<li>- Advertising - Our Team uses these cookies to collect information about your visit to our website, the content you viewed, the links you followed and information about your browser, device, and your IP address.</li>
+<li>- Advertising - Our Team do not use these cookies. These cookies collect information about your visit to our website, the content you viewed, the links you followed and information about your browser, device, and your IP address.</li>
 </ul>
 <br>
 <p class="font-bold text-lg">How to manage cookies </p>

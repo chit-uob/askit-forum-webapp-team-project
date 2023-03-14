@@ -20,7 +20,6 @@
           <span class="text-gray-600 w-full text-right">Date Published: {{ question.pub_date }}</span>
         </div>
         <div>
-
           <p class="p-2 mb-2"><span class="font-bold">Explanation:</span> <br>
             {{ question.explanation }}
             <!--          ,{{ question.author }}, {{ question.module }}, {{question.tried_what }},-->
@@ -35,18 +34,14 @@
               <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ tag }}</button>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
     <div class="p-10">
-
       <button
           class="bg-blue-200 hover:bg-blue-300 text-black font-sans font-bold py-2 px-4 ml-4 rounded border-gray-300"
           @click="showForm = !showForm">Answer
       </button>
-
       <div v-if="showForm">
         <form @submit.prevent="addAnswer">
           <br>
@@ -62,11 +57,8 @@
           </button>
         </form>
       </div>
-
       <br><br>
-
       <h1 class="text-2xl font-bold mb-4">Answers:</h1>
-
       <div v-for="answer in answers" :key="answer.id">
         <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
           <div class="flex flex-col items-center">
@@ -92,7 +84,6 @@
       </div>
     </div>
   </div>
-
   </body>
 </template>
 

@@ -1,103 +1,97 @@
 <template>
-  <body class="bg-sky-100">
-  <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden w-10/12">
-    <div class="p-4 flex items-center">
-      <div class="flex flex-col items-center">
-        <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2"
-                v-on:click="upvoteQuestion">
-          <i class="fa fa-arrow-up"></i>
-        </button>
-        <span class="text-gray-600 text-lg font-bold mr-2">{{ question.score }}</span>
-        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
-                v-on:click="downvoteQuestion">
-          <i class="fa fa-arrow-down"></i>
-        </button>
-      </div>
-      <div class="flex-grow">
-        <h1 class="p-2 text-3xl font-bold font-mono">Question {{ question.title }}</h1>
-        <div class="flex justify-between mb-2">
-          <p class="p-2 font-thin font-sans"> Abc(abc123@student.bham.ac.uk){{ question.author }}</p>
-          <span class="text-gray-600 w-full text-right">Date Published: {{ question.pub_date }}</span>
+  <div class="bg-sky-100">
+    <div class="max-w-6xl mx-auto bg-white shadow-lg overflow-hidden w-10/12">
+      <div class="p-4 flex items-center">
+        <div class="flex flex-col items-center">
+          <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2"
+                  v-on:click="upvoteQuestion">
+            <i class="fa fa-arrow-up"></i>
+          </button>
+          <span class="text-gray-600 text-lg font-bold mr-2">{{ question.score }}</span>
+          <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
+                  v-on:click="downvoteQuestion">
+            <i class="fa fa-arrow-down"></i>
+          </button>
         </div>
-        <div>
+        <div class="flex-grow">
+          <h1 class="p-2 text-3xl font-bold font-mono">{{ question.title }}</h1>
+          <div class="flex justify-between mb-2">
+            <p class="p-2 font-thin font-sans">Author: {{ question.author }}</p>
+            <span class="text-gray-600 w-full text-right">Date Published: {{ formatPubDate(question.pub_date) }}</span>
+          </div>
+          <div>
 
-          <p class="p-2 mb-2"><span class="font-bold">Explanation:</span> <br>
-            {{ question.explanation }}
-            <!--          ,{{ question.author }}, {{ question.module }}, {{question.tried_what }},-->
-            <!--            {{ question.summary }}, {{ question.pub_date }}, {{ question.status }}, {{ question.views }}, {{ question.upvote_or_downvote }}, {{ question.tags }}-->
-          </p>
-          <p class="p-2 mb-2"><span class="font-bold">Tried what:</span> <br>
-            {{ question.tried_what }}</p>
-          <p class="p-2 mb-2"><span class="font-bold">Summary:</span> <br>
-            {{ question.summary }}</p>
-          <div class="flex">
-            <div v-for="tag in question.tags" class="mr-2">
-              <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ tag }}</button>
+            <p class="p-2 mb-2"><span class="font-bold">Explanation:</span> <br>
+              {{ question.explanation }}
+            </p>
+            <p class="p-2 mb-2"><span class="font-bold">Tried what:</span> <br>
+              {{ question.tried_what }}</p>
+            <p class="p-2 mb-2"><span class="font-bold">Summary:</span> <br>
+              {{ question.summary }}</p>
+            <div class="flex">
+              <div v-for="tag in question.tags" class="mr-2">
+                <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ tag }}</button>
+              </div>
             </div>
           </div>
 
-
         </div>
       </div>
-    </div>
-    <div class="p-10">
-
-      <button
-          class="bg-blue-200 hover:bg-blue-300 text-black font-sans font-bold py-2 px-4 ml-4 rounded border-gray-300"
-          @click="showForm = !showForm">Answer
-      </button>
-
-      <div v-if="showForm">
-        <form @submit.prevent="addAnswer">
+      <div class="px-2 flex justify-center">
+        <button
+            class="bg-blue-100 hover:bg-blue-300 text-black font-sans font-bold py-2 px-4 ml-4 rounded border-gray-300 w-5/6"
+            @click="showForm = !showForm">Answer this question
+        </button>
+      </div>
+      <div v-if="showForm" class="p-2 flex justify-center">
+        <form @submit.prevent="addAnswer" class="w-5/6">
           <br>
-          <div class="w-full">
+          <div>
             <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="answerInput" contentType="text">
             </QuillEditor>
           </div>
           <br>
-          <!--        <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"-->
-          <!--                 type="text" name="content" v-model="answerInput">-->
           <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
             Submit answer
           </button>
         </form>
       </div>
+      <div class="p-5">
 
-      <br><br>
+        <h1 class="text-2xl font-bold mb-4">Answers:</h1>
 
-      <h1 class="text-2xl font-bold mb-4">Answers:</h1>
-
-      <div v-for="answer in answers" :key="answer.id">
-        <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
-          <div class="flex flex-col items-center">
-            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2"
-                    v-on:click="upvoteAnswer(answer.id)">
-              <i class="fa fa-arrow-up"></i>
-            </button>
-            <span class="text-gray-600 text-lg font-bold mr-2">{{ answer.score }}</span>
-            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
-                    v-on:click="downvoteAnswer(answer.id)">
-              <i class="fa fa-arrow-down"></i>
-            </button>
-          </div>
-          <div class="flex-grow">
-            <div class="flex justify-between">
-              <p class="text-gray-600 text-sm">Author: abc123@student.bham.ac.uk {{ answer.author }} </p>
-              <p class="text-gray-600 text-sm text-right ">Published: {{ answer.pub_date }}</p>
+        <div v-for="answer in answers" :key="answer.id">
+          <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
+            <div class="flex flex-col items-center">
+              <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2"
+                      v-on:click="upvoteAnswer(answer.id)">
+                <i class="fa fa-arrow-up"></i>
+              </button>
+              <span class="text-gray-600 text-lg font-bold mr-2">{{ answer.score }}</span>
+              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
+                      v-on:click="downvoteAnswer(answer.id)">
+                <i class="fa fa-arrow-down"></i>
+              </button>
             </div>
-            <p v-if="answer.is_solution" class="text-green-500 text-sm font-semibold mt-2">Solution</p>
-            <p class="text-lg">{{ answer.content }}</p>
+            <div class="flex-grow">
+              <div class="flex justify-between">
+                <p class="text-gray-600 text-sm">Author: {{ answer.author }} </p>
+                <p class="text-gray-600 text-sm text-right ">Published: {{ formatPubDate(answer.pub_date) }}</p>
+              </div>
+              <p v-if="answer.is_solution" class="text-green-500 text-sm font-semibold mt-2">Solution</p>
+              <p class="text-lg">{{ answer.content }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  </body>
+  </div>
 </template>
 
 <script>
 import axiosClient from "@/views/axiosClient";
+import dayjs from "dayjs";
 
 export default {
   name: "QuestionView",
@@ -108,6 +102,9 @@ export default {
       question: {
         title: "Loading...",
         explanation: "Loading...",
+        tried_what: "Loading...",
+        summary: "Loading...",
+        pub_date: "2000-01-01T00:00:00Z",
 
       },
       answers: [],
@@ -189,13 +186,17 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+
+    },
+    formatPubDate(pubDate) {
+      return dayjs(pubDate).format("DD/MM/YYYY HH:mm");
     },
   },
 };
 </script>
 <script setup>
 // import { Ref } from 'vue';
-import {QuillEditor} from '@vueup/vue-quill'
+import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 </script>

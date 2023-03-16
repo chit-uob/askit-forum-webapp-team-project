@@ -60,6 +60,10 @@
 
         <h1 class="mb-4 text-2xl font-bold">Answers:</h1>
 
+        <div v-if="answers.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+          <p class="text-lg">No answers yet. Be the first to answer this question!</p>
+        </div>
+
         <div v-for="answer in answers" :key="answer.id">
           <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
             <div class="flex flex-col items-center">

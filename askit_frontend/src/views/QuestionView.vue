@@ -91,7 +91,6 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
-import dayjs from "dayjs";
 
 export default {
   name: "QuestionView",
@@ -188,16 +187,13 @@ export default {
           });
 
     },
-    formatPubDate(pubDate) {
-      return dayjs(pubDate).format("DD/MM/YYYY HH:mm");
-    },
   },
 };
 </script>
 <script setup>
-// import { Ref } from 'vue';
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import { formatPubDate } from "./dateUtils";
 
 </script>
 

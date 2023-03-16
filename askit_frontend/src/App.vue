@@ -28,7 +28,8 @@
         <span class="sr-only">Open main menu</span>
         <i class="fa fa-bars" aria-hidden="true"></i>
       </button>
-      <div class="z-20 mt-2 w-full flex-grow p-4 text-black" :class="this.showMobileNav ? 'block' : 'hidden'" id="mobile-nav">
+      <div class="z-20 mt-2 w-full flex-grow p-4 text-black" :class="this.showMobileNav ? 'block' : 'hidden'"
+           id="mobile-nav">
         <ul>
           <li><i class="pr-1 fa fa-bell-o" aria-hidden="true"></i>Notifications</li>
           <li><i class="pr-1 fa fa-user" aria-hidden="true"></i>Profile</li>
@@ -86,17 +87,17 @@
 </template>
 
 <script>
-  export default {
-    name: 'App',
-    data() {
-      return {
-        showMobileNav: false
-      }
-    },
-    methods: {
-      showNav() {
-        this.showMobileNav = !this.showMobileNav;
-      }
+export default {
+  name: 'App',
+  data() {
+    return {
+      showMobileNav: false
+    }
+  },
+  methods: {
+    showNav() {
+      this.showMobileNav = !this.showMobileNav;
     }
   }
+}
 </script>

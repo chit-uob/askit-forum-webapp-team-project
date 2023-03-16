@@ -7,41 +7,41 @@ import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
 
 const routes = [
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutView
-  },
-  {
-    path: '/privacy',
-    name: 'privacy',
-    component: PrivacyView
-  },
-  {
-    path: '/question/:id',
-    name: 'question',
-    component: QuestionView,
-  },
-      {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/ask/:mod',
-    name:'ask',
-    component: AskView
-  },
-  {
-    path: '/module/:mod',
-    name:'module',
-    component: ModuleView
-  },
+    {
+        path: '/about',
+        name: 'about',
+        component: AboutView
+    },
+    {
+        path: '/privacy',
+        name: 'privacy',
+        component: PrivacyView
+    },
+    {
+        path: '/question/:id',
+        name: 'question',
+        component: QuestionView,
+    },
+    {
+        path: '/',
+        name: 'home',
+        component: HomeView
+    },
+    {
+        path: '/ask/:mod',
+        name: 'ask',
+        component: AskView
+    },
+    {
+        path: '/module/:mod',
+        name: 'module',
+        component: ModuleView
+    },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+    history: createWebHistory(process.env.BASE_URL),
+    routes
 })
 
 export default router

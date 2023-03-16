@@ -1,49 +1,49 @@
 <template>
   <div class="bg-sky-100">
-    <div class="max-w-6xl mx-auto bg-white shadow-lg overflow-hidden w-10/12">
-      <div class="p-4 flex items-center">
+    <div class="mx-auto w-10/12 max-w-6xl overflow-hidden bg-white shadow-lg">
+      <div class="flex items-center p-4">
         <div class="flex flex-col items-center">
-          <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2"
+          <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
                   v-on:click="upvoteQuestion">
             <i class="fa fa-arrow-up"></i>
           </button>
-          <span class="text-gray-600 text-lg font-bold mr-2">{{ question.score }}</span>
-          <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
+          <span class="mr-2 text-lg font-bold text-gray-600">{{ question.score }}</span>
+          <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                   v-on:click="downvoteQuestion">
             <i class="fa fa-arrow-down"></i>
           </button>
         </div>
         <div class="flex-grow">
-          <h1 class="p-2 text-3xl font-bold font-mono">{{ question.title }}</h1>
-          <div class="flex justify-between mb-2">
-            <p class="p-2 font-thin font-sans">Author: {{ question.author }}</p>
-            <span class="text-gray-600 w-full text-right">Date Published: {{ formatPubDate(question.pub_date) }}</span>
+          <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
+          <div class="mb-2 flex justify-between">
+            <p class="p-2 font-sans font-thin">Author: {{ question.author }}</p>
+            <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
           </div>
           <div>
 
-            <p class="p-2 mb-2"><span class="font-bold">Explanation:</span> <br>
+            <p class="mb-2 p-2"><span class="font-bold">Explanation:</span> <br>
               {{ question.explanation }}
             </p>
-            <p class="p-2 mb-2"><span class="font-bold">Tried what:</span> <br>
+            <p class="mb-2 p-2"><span class="font-bold">Tried what:</span> <br>
               {{ question.tried_what }}</p>
-            <p class="p-2 mb-2"><span class="font-bold">Summary:</span> <br>
+            <p class="mb-2 p-2"><span class="font-bold">Summary:</span> <br>
               {{ question.summary }}</p>
             <div class="flex">
               <div v-for="tag in question.tags" class="mr-2">
-                <button class="bg-blue-50 hover:bg-blue-100 text-blue-400  py-1 px-2 rounded ">{{ tag }}</button>
+                <button class="rounded bg-blue-50 px-2 py-1 text-blue-400 hover:bg-blue-100">{{ tag }}</button>
               </div>
             </div>
           </div>
 
         </div>
       </div>
-      <div class="px-2 flex justify-center">
+      <div class="flex justify-center px-2">
         <button
-            class="bg-blue-100 hover:bg-blue-300 text-black font-sans font-bold py-2 px-4 ml-4 rounded border-gray-300 w-5/6"
+            class="ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
             @click="showForm = !showForm">Answer this question
         </button>
       </div>
-      <div v-if="showForm" class="p-2 flex justify-center">
+      <div v-if="showForm" class="flex justify-center p-2">
         <form @submit.prevent="addAnswer" class="w-5/6">
           <br>
           <div>
@@ -51,34 +51,34 @@
             </QuillEditor>
           </div>
           <br>
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 ml-4 rounded" type="submit">
+          <button class="ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
             Submit answer
           </button>
         </form>
       </div>
       <div class="p-5">
 
-        <h1 class="text-2xl font-bold mb-4">Answers:</h1>
+        <h1 class="mb-4 text-2xl font-bold">Answers:</h1>
 
         <div v-for="answer in answers" :key="answer.id">
-          <div class="p-4 flex items-center mb-4 bg-white rounded-lg shadow">
+          <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
             <div class="flex flex-col items-center">
-              <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded mr-2"
+              <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
                       v-on:click="upvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-up"></i>
               </button>
-              <span class="text-gray-600 text-lg font-bold mr-2">{{ answer.score }}</span>
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded mr-2"
+              <span class="mr-2 text-lg font-bold text-gray-600">{{ answer.score }}</span>
+              <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                       v-on:click="downvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-down"></i>
               </button>
             </div>
             <div class="flex-grow">
               <div class="flex justify-between">
-                <p class="text-gray-600 text-sm">Author: {{ answer.author }} </p>
-                <p class="text-gray-600 text-sm text-right ">Published: {{ formatPubDate(answer.pub_date) }}</p>
+                <p class="text-sm text-gray-600">Author: {{ answer.author }} </p>
+                <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(answer.pub_date) }}</p>
               </div>
-              <p v-if="answer.is_solution" class="text-green-500 text-sm font-semibold mt-2">Solution</p>
+              <p v-if="answer.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
               <p class="text-lg">{{ answer.content }}</p>
             </div>
           </div>

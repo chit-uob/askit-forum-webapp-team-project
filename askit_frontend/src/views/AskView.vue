@@ -1,0 +1,170 @@
+<script>
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import axiosClient from "@/views/axiosClient";
+
+export default {
+  name: 'AskView',
+  components: {
+    QuillEditor
+  },
+  data() {
+    return {
+      questionTitle: '',
+      questionExplanation: '',
+      questionTried: '',
+      questionTags: '',
+      questionSummary: '',
+    }
+  },
+  methods: {
+    addQuestion() {
+      axiosClient.post(`/ask/module/${this.$route.params.mod}/`, {
+        title: this.questionTitle,
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+        tags: this.questionTags,
+        summary: this.questionSummary,
+      })
+          .then((response) => {
+            console.log(response);
+            // redirect to question base on response.id
+            window.location.href = '/question/' + response.data.id;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+
+    getSummary() {
+      axiosClient.post("/ask/summary/", {
+        title: this.questionTitle,
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+      })
+          .then((response) => {
+            this.questionSummary = response.data.summary;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+
+    getTags() {
+      axiosClient.post("/ask/tagging/", {
+        title: this.questionTitle,
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+      })
+          .then((response) => {
+            this.questionTags = response.data.tag.join(', ');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
+  }
+}
+
+</script>
+
+<template>
+
+  <!--  <div class="absolute left-2/3 ml-7 mt-0.5 w-0.5 h-full bg-gray-600"></div>-->
+  <!--  <div class="absolute left-2/3 ml-7 mt-96 w-0.5 h-full bg-gray-600"></div>-->
+
+
+  <div class="flex">
+
+    <div class="pl-4 pt-2 w-full md:w-2/3">
+      <label for="message" class="block text-lg font-medium text-gray-900">Title</label>
+      <textarea id="message" rows="1"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter your title" v-model="questionTitle"></textarea>
+
+      <!-- Explain your problem -->
+      <div class="w-full">
+        <label for="large-input" class="block mb-2 text-lg font-medium text-gray-900 ">Explain your problem</label>
+        <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionExplanation"
+                     content-type="text">
+        </QuillEditor>
+      </div>
+
+
+      <!-- what have you already tried? -->
+      <div class="w-full">
+        <label for="large-input" class="block mb-2 text-lg font-medium text-gray-900 ">What have you already
+          tried?</label>
+        <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionTried"
+                     content-type="text">
+        </QuillEditor>
+      </div>
+
+      <!--summary-->
+      <div class>
+        <label for="message" class="block mb-2 text-lg font-medium text-gray-900 ">Summary (optional)</label>
+        <textarea id="message" rows="1"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
+        <button type="button"
+                class=" mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
+                v-on:click="getSummary">
+          Auto-generate summary
+        </button>
+      </div>
+
+      <!--tags-->
+      <div class="mb-6">
+        <label for="message" class="block mb-2 text-lg font-medium text-gray-900 ">Tags</label>
+        <textarea id="message" rows="1"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
+        <button type="button"
+                class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+                v-on:click="getTags">
+          Auto-generate tags
+        </button>
+      </div>
+
+      <button v-on:click="addQuestion" type="button"
+              class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+        Add Question
+      </button>
+    </div>
+
+    <div class="hidden md:block md:w-1/3">
+      <div class="text-center">
+        <p class="text-black text-lg font-medium underline">Rules:</p>
+      </div>
+      <div class="flex justify-end">
+        <div class="w-11/12">
+          <ol class="list-decimal list-inside">
+            <li class="mb-2 break-words">No subtle put-downs or unfriendly language.</li>
+            <li class="mb-2 break-words">No name-calling or personal attacks.</li>
+            <li class="mb-2 break-words">No bigotry.</li>
+            <li class="mb-2 break-words">No harassment.</li>
+            <li class="mb-2 break-words">Report any unacceptable behaviour</li>
+
+
+            <div class="text-center">
+              <p class="text-black text-lg font-medium underline">How to write a good
+                question!</p>
+            </div>
+
+            <li class="mb-2 break-words">Make sure your question is on-topic and suitable for this site</li>
+            <li class="mb-2 break-words">Search, and research</li>
+            <li class="mb-2 break-words">Write a title that summarizes the specific problem</li>
+            <li class="mb-2 break-words">Introduce the problem before you post any code</li>
+            <li class="mb-2 break-words">Help othersreproduce the problem</li>
+            <li class="mb-2 break-words">Check if the auto generated tags are relevant</li>
+            <li class="mb-2 break-words">Proofread before posting!</li>
+            <li class="mb-2 break-words">Ensure that the summary properly captures your question</li>
+            <li class="mb-2 break-words">Make sure to respond to feedback after posting!!</li>
+
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

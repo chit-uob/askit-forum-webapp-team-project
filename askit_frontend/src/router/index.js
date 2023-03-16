@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import QuestionView from '@/views/QuestionView.vue'
-import ask_questionsVue from '@/views/ask_questions.vue'
+import AskView from '@/views/AskView.vue'
 import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
@@ -30,7 +30,7 @@ const routes = [
   {
     path: '/ask/:mod',
     name:'ask',
-    component: ask_questionsVue
+    component: AskView
   },
   {
     path: '/module/:mod',

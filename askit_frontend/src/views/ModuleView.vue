@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex min-h-screen">
     <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
       <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
@@ -22,7 +22,7 @@
       <h2 class="pl-10 text-2xl font-bold">All Questions</h2>
       <div v-for="question in questions" :key="question.id">
         <a class="flex w-full pt-2 pr-10 pl-10" :href="`/question/${question.id}`">
-          <div class="inline-flex h-20 w-full rounded-2xl bg-cyan-200 shadow card">
+          <div class="inline-flex w-full rounded-2xl bg-cyan-200 shadow card">
             <div class="flex flex-col justify-evenly border-r-2 border-black p-3 w-[100px]">
               <p class="text-right text-xs">{{ question.score }} votes</p>
               <p class="text-right text-xs">{{ question.num_answers }} answers</p>

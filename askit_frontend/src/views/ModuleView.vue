@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex min-h-screen">
     <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
       <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">

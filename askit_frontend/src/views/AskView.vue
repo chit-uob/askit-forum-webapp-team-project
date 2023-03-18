@@ -39,7 +39,7 @@ export default {
     },
 
     getSummary() {
-      this.summaryLoadWheel = 'flex pt-3.5 pl-1'
+      this.summaryLoadWheel = 'flex pl-1'
       axiosClient.post("/ask/summary/", {
         title: this.questionTitle,
         explanation: this.questionExplanation,
@@ -56,7 +56,7 @@ export default {
     },
 
     getTags() {
-      this.tagLoadWheel = 'flex pt-3.5 pl-1'
+      this.tagLoadWheel = 'flex pl-1'
       axiosClient.post("/ask/tagging/", {
         title: this.questionTitle,
         explanation: this.questionExplanation,
@@ -119,7 +119,7 @@ display: initial;
         <textarea id="message" rows="1"
                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
-        <div class="flex">
+        <div class="flex items-center">
         <button type="button"
                 class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
                 v-on:click="getSummary">
@@ -141,7 +141,7 @@ display: initial;
         <textarea id="message" rows="1"
                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
-        <div class="flex">
+        <div class="flex items-center">
         <button type="button"
                 class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
                 v-on:click="getTags">

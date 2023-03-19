@@ -109,7 +109,7 @@ display: initial;
       <div class="w-full">
         <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">Explain your problem</label>
         <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-72" v-model:content="questionExplanation"
-                     content-type="text">
+                     content-type="json">
         </QuillEditor>
       </div>
 
@@ -119,7 +119,7 @@ display: initial;
         <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">What have you already
           tried?</label>
         <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionTried"
-                     content-type="text">
+                     content-type="json">
         </QuillEditor>
       </div>
 

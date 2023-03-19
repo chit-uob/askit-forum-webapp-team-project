@@ -47,7 +47,7 @@
         <form @submit.prevent="addAnswer" class="w-5/6">
           <br>
           <div>
-            <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="answerInput" contentType="text">
+            <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="answerInput" contentType="json">
             </QuillEditor>
           </div>
           <br>

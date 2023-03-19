@@ -77,14 +77,23 @@ export default {
 </script>
 
 <style>
+
+/* .h-screen {
+    height: 100vh;
+  } */
 .loading{
 display: initial;
 }
 </style>
 <template>
 
-  <!--  <div class="absolute left-2/3 ml-7 h-full bg-gray-600 mt-0.5 w-0.5"></div>-->
-  <!--  <div class="absolute left-2/3 mt-96 ml-7 h-full bg-gray-600 w-0.5"></div>-->
+   <!-- <div class="absolute left-2/3 ml-5 h-96 bg-gray-600 w-0.5"></div>
+   <div class="absolute left-2/3 ml-5 h-96 mt-96 bg-gray-600 w-0.5"></div> 
+   <div class="absolute  bottom-28 left-2/3 ml-5 h-72 mt-12 bg-gray-600 w-0.5"></div>  -->
+
+   <!-- <div class="h-screen flex left-2/3 ml-5">
+    <div class="h-full w-1 bg-gray-500"></div>
+  </div> -->
 
 
   <div class="flex">
@@ -95,6 +104,7 @@ display: initial;
                 class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Enter your title" v-model="questionTitle"></textarea>
 
+                
       <!-- Explain your problem -->
       <div class="w-full">
         <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">Explain your problem</label>

@@ -88,9 +88,20 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
-
 export default {
   name: 'App',
+  beforeCreate() {
+    this.$store.commit('initializeStore')
+
+    const token = this.$store.state.token
+
+    if( token ) {
+      axiosClient.defaults.headers.common['Authorization'] = "Token " + token
+    }
+    else{
+      axiosClient.defaults.headers.common['Authorization'] = ''
+    }
+  },
   data() {
     return {
       showMobileNav: false,
@@ -110,7 +121,9 @@ export default {
       }).catch(error => {
         console.log(error);
       })
-    }
+    },
   }
 }
+
+
 </script>

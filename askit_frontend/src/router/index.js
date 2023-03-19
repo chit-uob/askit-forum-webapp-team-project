@@ -5,6 +5,8 @@ import AskView from '@/views/AskView.vue'
 import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
+import LoginView from "@/views/LoginView.vue";
+import SignUpView from "@/views/SignUpView.vue";
 
 const routes = [
     {
@@ -36,6 +38,16 @@ const routes = [
         path: '/module/:mod',
         name: 'module',
         component: ModuleView
+    },
+    {
+        path: '/log-in',
+        name: 'LogIn',
+        component: LoginView
+    },
+    {
+        path: '/sign-up',
+        name: 'SignUp',
+        component: SignUpView
     },
 ]
 

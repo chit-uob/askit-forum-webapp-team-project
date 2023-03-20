@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'home_page.apps.HomePageConfig',
     'ask_questions.apps.AskQuestionsConfig',
     'answer_questions.apps.AnswerQuestionsConfig',
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [

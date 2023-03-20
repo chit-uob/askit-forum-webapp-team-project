@@ -4,7 +4,7 @@ from django.conf import settings
 
 # Create your models here.
 class Module(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=3000)
     pub_date = models.DateTimeField(auto_now=True)
     admins = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="module_admins")

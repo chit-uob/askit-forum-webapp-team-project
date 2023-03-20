@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/question/', include('answer_questions.urls')),
     path('api/module/', include('module_page.urls')),
     path('api/ask/', include('ask_questions.urls')),
+    path('api/search/', include('search.urls')),
 ]

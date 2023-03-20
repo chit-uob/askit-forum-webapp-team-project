@@ -9,12 +9,14 @@ from ask_questions.aiAPI import text_to_summary, text_to_tag_array
 def submit_question(request, mod):
     if request.method == 'POST':
         post_data = json.loads(request.body)
-        title = post_data['title']
-        explanation = post_data['explanation']
-        tried_what = post_data['tried']
-        summary = post_data['summary']
+        title = post_data['title'][:150]
+        explanation = post_data['explanation'][:3000]
+        tried_what = post_data['tried'][:500]
+        summary = post_data['summary'][:500]
         tags_str = str(post_data['tags'])
         tags = tags_str.split(',')
+        for i in range(len(tags)):
+            tags[i] = tags[i].strip().lower()[:50]
         module = Module.objects.get(title=mod)
         q = Question(module=module, title=title, explanation=explanation, tried_what=tried_what, summary=summary)
         q.save()

@@ -9,7 +9,6 @@ def text_to_summary(text):  # accepts string inputs
             oneai.skills.Summarize(),
         ]
     )
-
     output = pipeline.run(text)
     return output.summary.text
 

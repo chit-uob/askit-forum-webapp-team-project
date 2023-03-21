@@ -73,7 +73,7 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
     pub_date = models.DateTimeField(auto_now=True)
-    content = models.CharField(max_length=3000)
+    content = models.CharField(max_length=3000, default="")
 
 
 

@@ -5,3 +5,5 @@ djangorestframework==3.14.0
 django-cors-headers==3.14.0
 djoser==2.1.0
 oneai==0.9.10
+spacy==3.5.0
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.0.0/en_core_web_sm-3.0.0-py3-none-any.whl

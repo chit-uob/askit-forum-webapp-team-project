@@ -10,6 +10,9 @@ export default {
   },
   data() {
     return {
+      tagClass: "mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300",
+      isSummDisabled: false,
+      isTagDisabled: false,
       summaryLoadWheel: 'hidden',
       tagLoadWheel: 'hidden',
       questionTitle: '',
@@ -39,6 +42,7 @@ export default {
     },
 
     getSummary() {
+      this.isSummDisabled = true
       this.summaryLoadWheel = 'flex pl-1'
       axiosClient.post("/ask/summary/", {
         title: this.questionTitle,
@@ -48,14 +52,17 @@ export default {
           .then((response) => {
             this.summaryLoadWheel = 'hidden'
             this.questionSummary = response.data.summary;
+            this.isSummDisabled = false
           })
           .catch((error) => {
+            this.isSummDisabled = false
             this.summaryLoadWheel = 'hidden'
             console.log(error);
           });
     },
 
     getTags() {
+      this.isTagDisabled = true
       this.tagLoadWheel = 'flex pl-1'
       axiosClient.post("/ask/tagging/", {
         title: this.questionTitle,
@@ -65,8 +72,10 @@ export default {
           .then((response) => {
             this.tagLoadWheel = 'hidden'
             this.questionTags = response.data.tag.join(', ');
+            this.isTagDisabled = false
           })
           .catch((error) => {
+            this.isTagDisabled = false
             this.tagLoadWheel = 'hidden'
             console.log(error);
           });
@@ -123,7 +132,7 @@ display: initial;
       <div class="w-full">
         <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">Explain your problem</label>
         <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-72" v-model:content="questionExplanation"
-                     content-type="json">
+                     content-type="text">
         </QuillEditor>
       </div>
 
@@ -133,19 +142,19 @@ display: initial;
         <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">What have you already
           tried?</label>
         <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionTried"
-                     content-type="json">
+                     content-type="text">
         </QuillEditor>
       </div>
 
       <!--summary-->
       <div class>
         <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Summary (optional)</label>
-        <textarea id="message" rows="1"
+        <textarea :disabled="isSummDisabled" id="message" rows="1"
                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
         <div class="flex items-center">
-        <button type="button"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+        <button type="button" :disabled="isSummDisabled"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-500"
                 v-on:click="getSummary">
           Auto-generate summary
         </button>
@@ -162,12 +171,12 @@ display: initial;
       <!--tags-->
       <div class="mb-6">
         <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Tags</label>
-        <textarea id="message" rows="1"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
+        <textarea :disabled="isTagDisabled" id="message" rows="1"
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-600"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
         <div class="flex items-center">
-        <button type="button"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300"
+        <button type="button" :disabled="isTagDisabled"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600"
                 v-on:click="getTags">
           Auto-generate tags
         </button>

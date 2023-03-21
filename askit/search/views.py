@@ -6,7 +6,7 @@ from home_page.models import Question, Module, Tag, Answer
 
 
 @csrf_exempt
-def search_all_modules(request):
+def search_questions(request):
     if request.method == 'GET':
         search_term = request.GET['searchTerm']
         if 'module' in request.GET:

@@ -39,7 +39,7 @@ const routes = [
         component: ModuleView
     },
     {
-        path: '/search/:query',
+        path: '/search/',
         name: 'search',
         component: SearchView
     }

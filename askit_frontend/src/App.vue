@@ -102,14 +102,14 @@ export default {
       this.showMobileNav = !this.showMobileNav;
     },
     search() {
-      console.log(this.$route.path)
-      axiosClient.post('/search/all/', {
-        searchTerm: this.searchTerm
-      }).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-      })
+      console.log(this.$route.path);
+      if (this.$route.path.startsWith('/module/')) {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module:this.$route.path.split('/')[2]}});
+      } else if (this.$route.path.startsWith('/search')) {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module:this.$route.query.module}});
+      } else {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module:null}});
+      }
     }
   }
 }

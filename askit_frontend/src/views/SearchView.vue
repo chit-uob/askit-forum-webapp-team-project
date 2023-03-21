@@ -15,7 +15,7 @@
         <h1 class="text-5xl font-bold">Results for: {{ $route.query.searchTerm }}</h1>
 
         <div>
-          <a :href="`/ask/${$route.params.mod}`">
+          <a :href="`/advanced-search/`">
           <button type="submit"
                   class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
             Advanced Search
@@ -76,15 +76,12 @@ export default {
   watch: {
     $route: {
       handler: function () {
-        console.log(this.$route.query.searchTerm);
-        console.log(this.$route.query.module);
         axiosClient.get(`/search/normal`, {
           params: {
             searchTerm: this.$route.query.searchTerm,
             module: this.$route.query.module,
           }
         }).then((response) => {
-          console.log(response.data);
           this.questions = response.data;
         }).catch((error) => {
           console.log(error);

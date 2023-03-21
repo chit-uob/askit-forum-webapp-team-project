@@ -6,6 +6,7 @@ import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
 import SearchView from "@/views/SearchView.vue";
+import AdvancedSearchView from "@/views/AdvancedSearchView.vue";
 
 const routes = [
     {
@@ -42,6 +43,11 @@ const routes = [
         path: '/search/',
         name: 'search',
         component: SearchView
+    },
+    {
+        path: '/advanced-search/',
+        name: 'advanced-search',
+        component: AdvancedSearchView
     }
 ]
 

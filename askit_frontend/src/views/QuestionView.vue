@@ -34,7 +34,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <div class="flex justify-center px-2">
@@ -89,7 +88,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -101,6 +99,7 @@ export default {
   data() {
     return {
       showForm: false,
+      showComments: false,
 
       question: {
         title: "Loading...",
@@ -112,6 +111,8 @@ export default {
       },
       answers: [],
       answerInput: "",
+      all_comments:[],
+      commentInput: ""
     };
   },
   mounted() {
@@ -138,6 +139,22 @@ export default {
             this.answers.push(response.data);
             this.answerInput = "";
             this.showForm = false;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+
+    addComment() {
+      console.log(this.commentInput)
+      axiosClient.post(`/question/${this.$route.params.id}/submit_comment/`,
+          {
+            content: this.commentInput,
+          })
+          .then((response) => {
+            this.all_comments.push(response.data);
+            this.commentInput = "";
+            this.showComments = false;
           })
           .catch((error) => {
             console.log(error);

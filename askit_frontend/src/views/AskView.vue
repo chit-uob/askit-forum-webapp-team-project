@@ -79,6 +79,20 @@ export default {
             this.tagLoadWheel = 'hidden'
             console.log(error);
           });
+    },
+
+    get_spacy() {
+      axiosClient.post("/ask/spacy/", {
+        title: this.questionTitle,
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+      })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
   }
 }

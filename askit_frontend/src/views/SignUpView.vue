@@ -2,9 +2,11 @@
     <div >
         <h1>Sign up</h1>
         <form @submit.prevent="submitForm">
-            <input type="email" name="username" v-model="username" placeholder="email">
-            <input type="password" name="password" v-model="password" placeholder="password">
-            <button type="submit">Sign up</button>
+            <label for="username">Username</label>
+            <input type="email" name="username" v-model="username" placeholder="email"  class="border-2">
+            <label for="password">Password</label>
+            <input type="password" name="password" v-model="password" placeholder="password" class="border-2">
+            <button type="submit"  class="bg-blue-300">Sign up</button>
         </form>
     </div>
 </template>

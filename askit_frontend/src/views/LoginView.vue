@@ -3,9 +3,11 @@
         <h1>Log in</h1>
 
         <form @submit.prevent="submitForm">
-            <input type="email" name="username" v-model="username">
-            <input type="password" name="password" v-model="password">
-            <button type="submit">Log in</button>
+            <label for="username">Username</label>
+            <input type="email" name="username" v-model="username" class="border-2">
+            <label for="password">Password</label>
+            <input type="password" name="password" v-model="password" class="border-2">
+            <button type="submit" class="bg-blue-300">Log in</button>
         </form> 
     </div>
 </template>

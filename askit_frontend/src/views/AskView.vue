@@ -10,7 +10,6 @@ export default {
   },
   data() {
     return {
-      summClass: 'mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300',
       tagClass: "mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300",
       isSummDisabled: false,
       isTagDisabled: false,
@@ -44,7 +43,6 @@ export default {
 
     getSummary() {
       this.isSummDisabled = true
-      this.summClass = 'mt-3 mr-2 mb-2 rounded-lg bg-slate-500 px-5 text-sm font-medium text-white py-2.5 hover:bg-slate-600 focus:ring-4 focus:ring-blue-300',
       this.summaryLoadWheel = 'flex pl-1'
       axiosClient.post("/ask/summary/", {
         title: this.questionTitle,
@@ -52,13 +50,11 @@ export default {
         tried: this.questionTried,
       })
           .then((response) => {
-            this.summClass= 'mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300',
             this.summaryLoadWheel = 'hidden'
             this.questionSummary = response.data.summary;
             this.isSummDisabled = false
           })
           .catch((error) => {
-            this.summClass = 'mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300',
             this.isSummDisabled = false
             this.summaryLoadWheel = 'hidden'
             console.log(error);
@@ -67,7 +63,6 @@ export default {
 
     getTags() {
       this.isTagDisabled = true
-      this.tagClass = "mt-3 mr-2 mb-2 rounded-lg bg-slate-500 px-5 text-sm font-medium text-white py-2.5 hover:bg-slate-600 focus:ring-4 focus:ring-blue-300",
       this.tagLoadWheel = 'flex pl-1'
       axiosClient.post("/ask/tagging/", {
         title: this.questionTitle,
@@ -75,13 +70,11 @@ export default {
         tried: this.questionTried,
       })
           .then((response) => {
-            this.tagClass = "mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300",
             this.tagLoadWheel = 'hidden'
             this.questionTags = response.data.tag.join(', ');
             this.isTagDisabled = false
           })
           .catch((error) => {
-            this.tagClass = "mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300",
             this.isTagDisabled = false
             this.tagLoadWheel = 'hidden'
             console.log(error);
@@ -147,7 +140,7 @@ display: initial;
                   placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
         <div class="flex items-center">
         <button type="button" :disabled="isSummDisabled"
-                :class="summClass"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-500"
                 v-on:click="getSummary">
           Auto-generate summary
         </button>
@@ -168,8 +161,8 @@ display: initial;
                   class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
         <div class="flex items-center">
-        <button  type="button" :disabled="isTagDisabled"
-                :class="tagClass"
+        <button type="button" :disabled="isTagDisabled"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-500"
                 v-on:click="getTags">
           Auto-generate tags
         </button>

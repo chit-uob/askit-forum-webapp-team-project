@@ -78,7 +78,7 @@ export default {
       handler: function () {
         console.log(this.$route.query.searchTerm);
         console.log(this.$route.query.module);
-        axiosClient.get(`/search`, {
+        axiosClient.get(`/search/normal`, {
           params: {
             searchTerm: this.$route.query.searchTerm,
             module: this.$route.query.module,

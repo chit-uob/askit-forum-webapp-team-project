@@ -1,5 +1,6 @@
 <template>
-  <div class="flex min-h-screen">
+
+   <div class="flex min-h-screen">
     <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
       <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
@@ -9,7 +10,7 @@
         <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>
       </div>
     </div>
-    <div class="w-2/3 pb-[50px]">
+    <div class="w-2/3">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
         <a :href="`/ask/${$route.params.mod}`">
@@ -47,40 +48,16 @@
         </a>
       </div>
     </div>
-    <div class="hidden flex-col bg-gray-200 p-3 w-[400px] md:block">
-
-
-    </div>
   </div>
+
 </template>
 
 <script>
-import axiosClient from "@/views/axiosClient";
-
 export default {
-  name: "ModuleView",
-  data() {
-    return {
-      questions: []
-    };
-  },
-  mounted() {
-    axiosClient({
-      method: "get",
-      url: `/module/${this.$route.params.mod}/`,
-    })
-        .then((response) => {
-          this.questions = response.data;
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-  },
-  methods: {}
-};
+  name: "SearchView"
+}
 </script>
 
-<script setup>
-import { formatPubDate } from "./dateUtils";
-</script>
+<style scoped>
+
+</style>

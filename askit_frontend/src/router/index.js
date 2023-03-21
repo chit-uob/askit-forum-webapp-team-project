@@ -5,6 +5,7 @@ import AskView from '@/views/AskView.vue'
 import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
+import SearchView from "@/views/SearchView.vue";
 
 const routes = [
     {
@@ -37,6 +38,11 @@ const routes = [
         name: 'module',
         component: ModuleView
     },
+    {
+        path: '/search/:query',
+        name: 'search',
+        component: SearchView
+    }
 ]
 
 const router = createRouter({

@@ -41,6 +41,7 @@ export default {
                 axiosClient.defaults.headers.common['Authorization'] = "Token " + token
 
                 localStorage.setItem("token", token)
+                this.$router.push('/')
             })
             .catch(error => {
                 console.log(error)

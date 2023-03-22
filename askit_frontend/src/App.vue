@@ -1,6 +1,6 @@
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <nav class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
+  <nav v-if="enable" class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
         <span class="text-xl font-bold">ASK.IT</span>
@@ -90,7 +90,20 @@
 import axiosClient from "@/views/axiosClient";
 export default {
   name: 'App',
+  watch:{
+    $route: {
+      handler: function(){
+        if (this.$route.path.startsWith('/log-in')) {
+      this.enable = false
+      }
+      else{
+        this.enable = true
+      }
+      }
+    }
+  },
   beforeCreate() {
+    
     this.$store.commit('initializeStore')
 
     const token = this.$store.state.token
@@ -105,7 +118,8 @@ export default {
   data() {
     return {
       showMobileNav: false,
-      searchTerm: ''
+      searchTerm: '',
+      enable: true
     }
   },
   methods: {

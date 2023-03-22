@@ -32,6 +32,6 @@ def search_questions(request):
             return JsonResponse(question_array, safe=False)
 
 
-def advanced_search():
+def advanced_search(request):
     # todo: implement advanced search
     return JsonResponse([], safe=False)

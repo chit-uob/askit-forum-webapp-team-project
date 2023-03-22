@@ -16,11 +16,11 @@
 
         <div>
           <a :href="`/advanced-search/`">
-          <button type="submit"
-                  class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
-            Advanced Search
-          </button>
-        </a>
+            <button type="submit"
+                    class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
+              Advanced Search
+            </button>
+          </a>
           <a :href="`/ask/${$route.params.mod}`">
             <button type="submit"
                     class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
@@ -76,19 +76,42 @@ export default {
   watch: {
     $route: {
       handler: function () {
-        axiosClient.get(`/search/normal`, {
-          params: {
-            searchTerm: this.$route.query.searchTerm,
-            module: this.$route.query.module,
-          }
-        }).then((response) => {
-          this.questions = response.data;
-        }).catch((error) => {
-          console.log(error);
-        });
-      },
-      immediate: true,
+        // check if the query contains key titleContains
+        console.log('before check')
+        console.log(!this.$route.query.titleContains)
+        if (!this.$route.query.titleContains) {
+          console.log('normal search')
+          axiosClient.get(`/search/normal`, {
+            params: {
+              searchTerm: this.$route.query.searchTerm,
+              module: this.$route.query.module,
+            }
+          }).then((response) => {
+            this.questions = response.data;
+          }).catch((error) => {
+            console.log(error);
+          });
+        } else {
+          axiosClient.get(`/search/advanced`, {
+            params: {
+              titleContains: this.$route.query.titleContains,
+              contentContains: this.$route.query.contentContains,
+              containTags: this.$route.query.containTags,
+              course: this.$route.query.course,
+              byUser: this.$route.query.byUser,
+              postedAfter: this.$route.query.postedAfter,
+              postedBefore: this.$route.query.postedBefore,
+              answered: this.$route.query.answered,
+            }
+          }).then((response) => {
+            this.questions = response.data;
+          }).catch((error) => {
+            console.log(error);
+          });
+        }
+      }
     },
+    immediate: true,
   },
 }
 </script>

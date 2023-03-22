@@ -20,7 +20,6 @@
             <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
           </div>
           <div>
-
             <p class="mb-2 p-2"><span class="font-bold">Explanation:</span> <br>
               {{ question.explanation }}
             </p>
@@ -56,7 +55,6 @@
         </form>
       </div>
       <div class="p-5">
-
         <h1 class="mb-4 text-2xl font-bold">Answers:</h1>
 
         <div v-if="answers.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">

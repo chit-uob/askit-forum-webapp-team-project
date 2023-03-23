@@ -1,5 +1,3 @@
-import json
-
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from home_page.models import Question, Module, Tag, Answer

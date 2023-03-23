@@ -92,6 +92,7 @@ export default {
             console.log(error);
           });
         } else {
+          console.log('advanced search')
           axiosClient.get(`/search/advanced`, {
             params: {
               titleContains: this.$route.query.titleContains,
@@ -109,9 +110,10 @@ export default {
             console.log(error);
           });
         }
-      }
+      },
+      immediate: true,
     },
-    immediate: true,
+
   },
 }
 </script>

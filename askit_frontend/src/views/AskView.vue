@@ -79,6 +79,20 @@ export default {
             this.tagLoadWheel = 'hidden'
             console.log(error);
           });
+    },
+
+    get_spacy() {
+      axiosClient.post("/ask/spacy/", {
+        title: this.questionTitle,
+        explanation: this.questionExplanation,
+        tried: this.questionTried,
+      })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
   }
 }
@@ -158,11 +172,11 @@ display: initial;
       <div class="mb-6">
         <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Tags</label>
         <textarea :disabled="isTagDisabled" id="message" rows="1"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
+                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-600"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
         <div class="flex items-center">
         <button type="button" :disabled="isTagDisabled"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-500"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600"
                 v-on:click="getTags">
           Auto-generate tags
         </button>

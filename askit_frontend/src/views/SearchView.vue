@@ -51,6 +51,7 @@
             </div>
             <div class="flex flex-col justify-evenly p-3 w-[80px]">
               <h3>{{ formatPubDate(question.pub_date) }}</h3>
+              <p>{{ question.module }}</p>
             </div>
           </div>
         </a>

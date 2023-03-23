@@ -3,7 +3,6 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from home_page.models import Question, Answer, Tag, Module, Comment
 
-
 def check_upvote_or_downvote(question):
     return "upvote"
 

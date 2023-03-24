@@ -58,10 +58,10 @@
       </div>
 
       <div class="p-5">
-        <h1 class="mb-4 text-2xl font-bold">Comments:</h1>
+        <h1 class="mb-4 font-bold">Comments:</h1>
 
         <div v-if="all_comments.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
-          <p class="text-lg">No comments yet.</p>
+          <p>No comments yet.</p>
         </div>
 
         <div v-for="com in all_comments" :key="com.id">

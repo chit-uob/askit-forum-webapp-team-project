@@ -9,6 +9,14 @@
           <input type="email" name="username" v-model="username" placeholder="Email" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
+          <label for="firstname" class="block text-gray-700 font-bold mb-2">First name</label>
+          <input type="text" name="firstname" v-model="firstname" placeholder="First name" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        <div class="mb-4">
+          <label for="lastname" class="block text-gray-700 font-bold mb-2">Last name</label>
+          <input type="text" name="lastname" v-model="lastname" placeholder="Last name" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        <div class="mb-4">
           <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
           <input type="password" name="password" v-model="password" placeholder="Password" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
@@ -42,18 +50,25 @@ export default {
         return{
             username: '',
             password: '',
+            firstname: '',
+            lastname: '',
         }
     },
     methods: {
         submitForm(e) {
-            console.log(this.username)
-            console.log(this.password)
             axiosClient.post('/v1/users/', {
                 username: this.username,
+                email: this.username,
                 password: this.password
             })
             .then(response =>{
-                this.$router.push('/log-in')
+              console.log(this.lastname)
+              axiosClient.post(`/signup/`, {
+                              username: this.username,
+                              firstName: this.firstname,
+                              lastName: this.lastname
+      })
+                //this.$router.push('/log-in')
                 console.log(response)
             })
             .catch(error => {

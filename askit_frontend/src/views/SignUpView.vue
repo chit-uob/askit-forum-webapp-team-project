@@ -68,7 +68,7 @@ export default {
                               firstName: this.firstname,
                               lastName: this.lastname
       })
-                //this.$router.push('/log-in')
+                this.$router.push('/log-in')
                 console.log(response)
             })
             .catch(error => {

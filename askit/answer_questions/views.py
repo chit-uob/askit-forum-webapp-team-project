@@ -9,8 +9,6 @@ from rest_framework.authentication import TokenAuthentication
 def check_upvote_or_downvote(question):
     return "upvote"
 
-@api_view(['GET'])
-@authentication_classes([TokenAuthentication])
 def view_question(request, question_id):
     print(request.user.pk)
     if request.user.is_authenticated:
@@ -157,7 +155,8 @@ def set_up_test_database(request):
     tp_q4.save()
     return HttpResponse("The database has been reset, visit https://teamai55-22.bham.team to go back to the home page")
 
-
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
 @csrf_exempt
 def submit_answer(request, question_id):
     if request.method == 'POST':

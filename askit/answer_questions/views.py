@@ -2,13 +2,19 @@ import json
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from home_page.models import Question, Answer, Tag, Module
+from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.authentication import TokenAuthentication
 
 
 def check_upvote_or_downvote(question):
     return "upvote"
 
-
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
 def view_question(request, question_id):
+    print(request.user.pk)
+    if request.user.is_authenticated:
+        print(request.auth)
     context = {}
     try:
         question = Question.objects.get(id=question_id)

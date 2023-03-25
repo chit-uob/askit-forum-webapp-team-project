@@ -62,8 +62,8 @@
         </ul>
       </div>
       <button type="button" v-on:click="logout"
-                  class="">
-            Logout
+              class="">
+        Logout
       </button>
     </div>
   </nav>
@@ -92,36 +92,35 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
+
 export default {
   name: 'App',
-  watch:{
+  watch: {
     $route: {
-      handler: function(){
-      if ((this.$route.path.startsWith('/log-in'))||(this.$route.path.startsWith('/sign-up'))) {
-      this.enable = false
-      if (this.$store.state.isAuthenticated) {
-        this.$router.push("/")
-      }
-      }
-      else{
-        this.enable = true
-      }
-      if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in'))||(this.$route.path.startsWith('/sign-up')))) {
-        this.$router.push("/log-in/")
-      }
+      handler: function () {
+        if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up'))) {
+          this.enable = false
+          if (this.$store.state.isAuthenticated) {
+            this.$router.push("/")
+          }
+        } else {
+          this.enable = true
+        }
+        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')))) {
+          this.$router.push("/log-in/")
+        }
       }
     }
   },
   beforeCreate() {
-    
+
     this.$store.commit('initializeStore')
 
     const token = this.$store.state.token
 
-    if( token ) {
+    if (token) {
       axiosClient.defaults.headers.common['Authorization'] = "Token " + token
-    }
-    else{
+    } else {
       axiosClient.defaults.headers.common['Authorization'] = ''
     }
   },
@@ -146,21 +145,21 @@ export default {
         console.log(error);
       })
     },
-    logout(){
+    logout() {
       axiosClient.post('/v1/token/logout/')
-            .then(response =>{
-                console.log(response)
+          .then(response => {
+            console.log(response)
 
-                this.$store.commit('removeToken')
+            this.$store.commit('removeToken')
 
-                axiosClient.defaults.headers.common['Authorization'] = ""
-                localStorage.setItem("token", "")
-                this.$router.push('/log-in/')
-            })
-            .catch(error => {
-                console.log(error)
-            })
-          }
+            axiosClient.defaults.headers.common['Authorization'] = ""
+            localStorage.setItem("token", "")
+            this.$router.push('/log-in/')
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    }
   }
 }
 

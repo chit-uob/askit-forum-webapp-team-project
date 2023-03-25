@@ -107,7 +107,7 @@ export default {
           this.enable = true
         }
         if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')))) {
-          this.$router.push("/log-in/")
+          this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
         }
       }
     }

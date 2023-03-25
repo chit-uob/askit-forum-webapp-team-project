@@ -2,11 +2,12 @@ import json
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from home_page.models import Question, Answer, Tag, Module
+from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.authentication import TokenAuthentication
 
 
 def check_upvote_or_downvote(question):
     return "upvote"
-
 
 def view_question(request, question_id):
     context = {}
@@ -151,9 +152,13 @@ def set_up_test_database(request):
     tp_q4.save()
     return HttpResponse("The database has been reset, visit https://teamai55-22.bham.team to go back to the home page")
 
-
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
 @csrf_exempt
 def submit_answer(request, question_id):
+    print(request.user.pk)
+    if request.user.is_authenticated:
+        print(request.auth)
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         post_data = json.loads(request.body)

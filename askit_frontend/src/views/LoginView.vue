@@ -12,8 +12,14 @@
           <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
           <input type="password" name="password" v-model="password" placeholder="Password" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
+        <div class="mb-2">
         <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">Log in</button>
+        </div>
+        <div>
+        <a href="/sign-up/">Don't have an account sign up!</a>
+        </div>
       </form>
+      
     </div>
   </div>
 </template>

@@ -61,6 +61,10 @@
           </li>
         </ul>
       </div>
+      <button type="button" v-on:click="logout"
+                  class="">
+            Logout
+      </button>
     </div>
   </nav>
   <router-view/>
@@ -93,11 +97,17 @@ export default {
   watch:{
     $route: {
       handler: function(){
-        if (this.$route.path.startsWith('/log-in')) {
+      if ((this.$route.path.startsWith('/log-in'))||(this.$route.path.startsWith('/sign-up'))) {
       this.enable = false
+      if (this.$store.state.isAuthenticated) {
+        this.$router.push("/")
+      }
       }
       else{
         this.enable = true
+      }
+      if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in'))||(this.$route.path.startsWith('/sign-up')))) {
+        this.$router.push("/log-in/")
       }
       }
     }
@@ -136,6 +146,21 @@ export default {
         console.log(error);
       })
     },
+    logout(){
+      axiosClient.post('/v1/token/logout/')
+            .then(response =>{
+                console.log(response)
+
+                this.$store.commit('removeToken')
+
+                axiosClient.defaults.headers.common['Authorization'] = ""
+                localStorage.setItem("token", "")
+                this.$router.push('/log-in/')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+          }
   }
 }
 

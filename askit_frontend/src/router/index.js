@@ -5,7 +5,8 @@ import AskView from '@/views/AskView.vue'
 import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
-import createdModule from "@/views/createdModule.vue";
+import createdModule from "@/views/CreateModule.vue";
+import CreateModule from "@/views/CreateModule.vue";
 
 const routes = [
     {
@@ -41,7 +42,7 @@ const routes = [
     {
         path: '/new',
         name: 'newmodule',
-        component: createdModule
+        component: CreateModule
     },
 ]
 

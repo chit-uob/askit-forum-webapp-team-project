@@ -17,7 +17,7 @@
                   class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
             Log in
           </button>
-          <label v-if="invalid" class="text-red-600 pl-4" >Wrong email or password</label>
+          <label v-if="invalid" class="text-red-600 pl-4" >{{ errorMessage }}</label>
         </div>
         <div>
           <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
@@ -54,7 +54,8 @@ export default {
       password: '',
       fields: true,
       invalid: false,
-      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400'
+      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400',
+      errorMessage: ''
     }
   },
   methods: {
@@ -79,6 +80,12 @@ export default {
           })
           .catch(error => {
             console.log(error)
+            if (error.response.status === 400) {
+              this.errorMessage = "Invalid username or password"
+            } else {
+              // set this.errorMessage to the first element of the only attribute of error.response.data
+              this.errorMessage = Object.values(error.response.data)[0][0]
+            }
             this.invalid = true
             this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
           })

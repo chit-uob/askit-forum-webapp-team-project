@@ -13,6 +13,7 @@
     <div class="w-2/3">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">Results for: {{ $route.query.searchTerm }}</h1>
+        <h1 class="text-5xl font-bold" v-if="moduleSpecific">Module: {{ moduleSpecificModule }}</h1>
 
         <div>
           <a :href="`/advanced-search/`">
@@ -69,6 +70,8 @@ export default {
   data() {
     return {
       questions: [],
+      moduleSpecific: false,
+      moduleSpecificModule: "",
     };
   },
   mounted() {
@@ -78,8 +81,6 @@ export default {
     $route: {
       handler: function () {
         // check if the query contains key titleContains
-        console.log('before check')
-        console.log(!this.$route.query.titleContains)
         if (!this.$route.query.titleContains) {
           console.log('normal search')
           axiosClient.get(`/search/normal`, {
@@ -89,6 +90,10 @@ export default {
             }
           }).then((response) => {
             this.questions = response.data;
+            if (this.$route.query.module) {
+              this.moduleSpecific = true;
+              this.moduleSpecificModule = this.$route.query.module;
+            }
           }).catch((error) => {
             console.log(error);
           });

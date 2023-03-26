@@ -2,8 +2,10 @@ import json
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from home_page.models import Question, Answer, Tag, Module, Comment
-from rest_framework.decorators import api_view, authentication_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 
 def check_upvote_or_downvote(question):
     return "upvote"
@@ -163,73 +165,107 @@ def set_up_test_database(request):
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def submit_answer(request, question_id):
-    print(request.user.pk)
-    if request.user.is_authenticated:
-        print(request.auth)
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         post_data = json.loads(request.body)
         content = post_data['content']
-        # todo don't have author yet
-        # author =
-        answer = Answer(question=question, content=content)
+        author = request.user
+        answer = Answer(question=question, content=content, author=author)
         answer.save()
         answer_dict = {'id': answer.id,
-                       'author': answer.author,
+                       'author': getattr(answer.author, 'username', 'Anonymous'),
                        'content': answer.content,
                        'pub_date': answer.pub_date,
                        'score': answer.score,
                        'is_solution': answer.is_solution}
         return JsonResponse(answer_dict)
 
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def submit_comment(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         post_data = json.loads(request.body)
         content = post_data['content']
-        comment = Comment(question=question, content=content)
+        author = request.user
+        comment = Comment(question=question, content=content, author=author)
         comment.save()
         comment_dict = {'id': comment.id,
-                        'author': comment.author,
+                        'author': getattr(comment.author, 'username', 'Anonymous'),
                         'content': comment.content,
                         'pub_date': comment.pub_date}
         return JsonResponse(comment_dict)
 
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def upvote(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
+        # check if user has already upvoted or downvoted
+        if question.upvotes.filter(id=request.user.id).exists() or question.downvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "error": "You have already voted on this question"})
+        # add to upvotes and increase score
+        question.upvotes.add(request.user)
         question.score += 1
         question.save()
         return JsonResponse({"success": True, "score": question.score})
 
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def downvote(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
+        # check if user has already upvoted or downvoted
+        if question.upvotes.filter(id=request.user.id).exists() or question.downvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "error": "You have already voted on this question"})
+        # add to downvotes and decrease score
+        question.downvotes.add(request.user)
         question.score -= 1
         question.save()
         return JsonResponse({"success": True, "score": question.score})
 
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def upvote_answer(request, question_id, answer_id):
     if request.method == 'POST':
         answer = Answer.objects.get(id=answer_id)
+        # check if user has already upvoted or downvoted
+        if answer.upvotes.filter(id=request.user.id).exists() or answer.downvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "error": "You have already voted on this answer"})
+        # add to upvotes and increase score
+        answer.upvotes.add(request.user)
         answer.score += 1
         answer.save()
         return JsonResponse({"success": True, "score": answer.score})
 
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def downvote_answer(request, question_id, answer_id):
     if request.method == 'POST':
         answer = Answer.objects.get(id=answer_id)
+        # check if user has already upvoted or downvoted
+        if answer.upvotes.filter(id=request.user.id).exists() or answer.downvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "error": "You have already voted on this answer"})
+        # add to downvotes and decrease score
+        answer.downvotes.add(request.user)
         answer.score -= 1
         answer.save()
         return JsonResponse({"success": True, "score": answer.score})

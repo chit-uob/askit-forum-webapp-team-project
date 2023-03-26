@@ -6,13 +6,13 @@
         <h1 class="text-3xl font-bold mb-8 text-center">Sign up</h1>
         <div class="mb-4">
           <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>
-          <input type="email" name="username" v-model="username" placeholder="Email"
+          <input :class="validEmail" type="email" name="username" v-model="username" placeholder="Email"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
           <label for="firstname" class="block text-gray-700 font-bold mb-2">First name</label>
           <input type="text" name="firstname" v-model="firstname" placeholder="First name"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 ">
         </div>
         <div class="mb-4">
           <label for="lastname" class="block text-gray-700 font-bold mb-2">Last name</label>
@@ -21,17 +21,18 @@
         </div>
         <div class="mb-4">
           <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
-          <input type="password" name="password" v-model="password" placeholder="Password"
+          <input :class="invalidPasswordBox" type="password" name="password" v-model="password" placeholder="Password"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
-          <button type="submit"
-                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
+          <button :disabled="!isValidEmail || isFormComplete" type="submit"
+                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
             Sign up
           </button>
+          <label v-if="invalid" class="text-red-600 pl-4">Weak password!</label>
         </div>
         <div>
-          <a href="/log-in/">Already have an account log in!</a>
+          <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
         </div>
       </form>
     </div>
@@ -62,10 +63,33 @@ export default {
       password: '',
       firstname: '',
       lastname: '',
+      validEmail: '',
+      invalid: false,
+      invalidPasswordBox: ''
+      
+    }
+  },
+  computed: {
+    isValidEmail() {
+      if(/^[^@]+@\w+(\.\w+)+\w$/.test(this.username)){
+        this.validEmail = 'border-green-500 focus:ring-green-400'
+        return true
+      }
+      else{ 
+        this.validEmail = 'focus:ring-blue-400 border-gray-200'
+        return false
+      }
+    },
+    isFormComplete(){
+      if ((this.username=='') || (this.password=='') || (this.firstname=='') || (this.lastname=='')) {
+        return true
+      }
+      else return false
     }
   },
   methods: {
     submitForm(e) {
+      console.log(this.lastname)
       axiosClient.post('/v1/users/', {
         username: this.username,
         email: this.username,
@@ -73,7 +97,7 @@ export default {
         password: this.password
       })
           .then(response => {
-            console.log(this.lastname)
+            
             axiosClient.post(`/signup/`, {
               username: this.username,
               first_name: this.firstname,
@@ -85,6 +109,8 @@ export default {
           })
           .catch(error => {
             console.log(error)
+            this.invalid = true
+            this.invalidPasswordBox= 'border-red-500 focus:ring-red-100'
           })
     }
   }

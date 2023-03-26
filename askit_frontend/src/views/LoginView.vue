@@ -5,20 +5,19 @@
       <form @submit.prevent="submitForm" class="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 class="text-3xl font-bold mb-8 text-center">Log in</h1>
         <div class="mb-4">
-          <label for="username" class="block text-gray-700 font-bold mb-2">Username</label>
-          <input type="email" name="username" v-model="username" placeholder="Email"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>
+          <input type="email" name="username" v-model="username" placeholder="Email" :class="textInput">        
         </div>
         <div class="mb-4">
           <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
-          <input type="password" name="password" v-model="password" placeholder="Password"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="password" name="password" v-model="password" placeholder="Password" :class="textInput">
         </div>
         <div class="mb-2">
           <button type="submit"
                   class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
             Log in
           </button>
+          <label v-if="invalid" class="text-red-600 pl-4" >Wrong email or password</label>
         </div>
         <div>
           <button v-on:click="redirectToSignUp">Don't have an account sign up!</button>
@@ -53,6 +52,9 @@ export default {
     return {
       username: '',
       password: '',
+      fields: true,
+      invalid: false,
+      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400'
     }
   },
   methods: {
@@ -77,6 +79,8 @@ export default {
           })
           .catch(error => {
             console.log(error)
+            this.invalid = true
+            this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
           })
     },
     redirectToSignUp() {

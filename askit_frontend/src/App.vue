@@ -72,6 +72,8 @@
   <footer class="rounded-lg bg-sky-100 p-4 shadow md:flex md:items-center md:justify-between md:p-6">
     <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
     </span>
+    <span class="text-sm text-gray-500 sm:text-center">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
+    </span>
     <ul class="mt-3 flex flex-wrap items-center text-sm text-gray-500 sm:mt-0">
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">About</a>-->
@@ -136,14 +138,17 @@ export default {
       this.showMobileNav = !this.showMobileNav;
     },
     search() {
-      console.log(this.$route.path)
-      axiosClient.post('/search/all/', {
-        searchTerm: this.searchTerm
-      }).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-      })
+      console.log(this.$route.path);
+      if (this.$route.path.startsWith('/module/')) {
+        this.$router.push({
+          path: '/search',
+          query: {searchTerm: this.searchTerm, module: this.$route.path.split('/')[2]}
+        });
+      } else if (this.$route.path.startsWith('/search')) {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module: this.$route.query.module}});
+      } else {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module: null}});
+      }
     },
     logout() {
       axiosClient.post('/v1/token/logout/')

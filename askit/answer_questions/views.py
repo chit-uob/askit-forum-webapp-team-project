@@ -1,10 +1,9 @@
 import json
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from home_page.models import Question, Answer, Tag, Module
+from home_page.models import Question, Answer, Tag, Module, Comment
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.authentication import TokenAuthentication
-
 
 def check_upvote_or_downvote(question):
     return "upvote"
@@ -30,6 +29,16 @@ def view_question(request, question_id):
         context['score'] = question.score
         context['views'] = question.views
         context['upvote_or_downvote'] = check_upvote_or_downvote(question)
+
+        Comment_query_result = Comment.objects.filter(question=question)
+        context['comment_list'] = []
+        for comment in Comment_query_result:
+            comment_dict = {}
+            comment_dict['id'] = comment.id
+            comment_dict['author'] = comment.author
+            comment_dict['content'] = comment.content
+            comment_dict['pub_date'] = comment.pub_date
+            context['comment_list'].append(comment_dict)
 
         answer_query_result = Answer.objects.filter(question=question)
         context['answer_list'] = []
@@ -174,6 +183,20 @@ def submit_answer(request, question_id):
                        'score': answer.score,
                        'is_solution': answer.is_solution}
         return JsonResponse(answer_dict)
+
+@csrf_exempt
+def submit_comment(request, question_id):
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        post_data = json.loads(request.body)
+        content = post_data['content']
+        comment = Comment(question=question, content=content)
+        comment.save()
+        comment_dict = {'id': comment.id,
+                        'author': comment.author,
+                        'content': comment.content,
+                        'pub_date': comment.pub_date}
+        return JsonResponse(comment_dict)
 
 
 @csrf_exempt

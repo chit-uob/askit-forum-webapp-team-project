@@ -20,7 +20,6 @@
             <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
           </div>
           <div>
-
             <p class="mb-2 p-2"><span class="font-bold">Explanation:</span> <br>
               {{ question.explanation }}
             </p>
@@ -34,9 +33,51 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
+
+      <div class="flex justify-center px-2">
+        <br>
+      <button
+            class="ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
+            @click="showComments = !showComments">Add Comment
+        </button>
+      </div>
+      <div v-if="showComments" class="flex justify-center p-2">
+        <form @submit.prevent="addComment" class="w-5/6">
+          <br>
+          <div>
+            <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="commentInput" contentType="text">
+            </QuillEditor>
+          </div>
+          <br>
+          <button class="ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
+
+      <div class="p-5">
+        <h1 class="mb-4 font-bold">Comments:</h1>
+
+        <div v-if="all_comments.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+          <p>No comments yet.</p>
+        </div>
+
+        <div v-for="com in all_comments" :key="com.id">
+          <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+            <div class="flex-grow">
+              <div class="flex justify-between">
+                <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
+                <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
+              </div>
+              <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
+              <p class="text-lg">{{ com.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="flex justify-center px-2">
         <button
             class="ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
@@ -57,7 +98,6 @@
         </form>
       </div>
       <div class="p-5">
-
         <h1 class="mb-4 text-2xl font-bold">Answers:</h1>
 
         <div v-if="answers.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
@@ -89,7 +129,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -101,6 +140,7 @@ export default {
   data() {
     return {
       showForm: false,
+      showComments: false,
 
       question: {
         title: "Loading...",
@@ -112,6 +152,8 @@ export default {
       },
       answers: [],
       answerInput: "",
+      all_comments:[],
+      commentInput: ""
     };
   },
   mounted() {
@@ -138,6 +180,22 @@ export default {
             this.answers.push(response.data);
             this.answerInput = "";
             this.showForm = false;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+
+    addComment() {
+      console.log(this.commentInput)
+      axiosClient.post(`/question/${this.$route.params.id}/submit_comment/`,
+          {
+            content: this.commentInput,
+          })
+          .then((response) => {
+            this.all_comments.push(response.data);
+            this.commentInput = "";
+            this.showComments = false;
           })
           .catch((error) => {
             console.log(error);

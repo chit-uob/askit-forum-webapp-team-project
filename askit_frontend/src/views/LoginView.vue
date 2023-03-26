@@ -20,7 +20,7 @@
           <label v-if="invalid" class="text-red-600 pl-4" >Wrong email or password</label>
         </div>
         <div>
-          <button v-on:click="redirectToSignUp">Don't have an account sign up!</button>
+          <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
         </div>
       </form>
 

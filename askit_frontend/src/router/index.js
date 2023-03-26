@@ -7,6 +7,10 @@ import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
 import createdModule from "@/views/CreateModule.vue";
 import CreateModule from "@/views/CreateModule.vue";
+import LoginView from "@/views/LoginView.vue";
+import SignUpView from "@/views/SignUpView.vue";
+import SearchView from "@/views/SearchView.vue";
+import AdvancedSearchView from "@/views/AdvancedSearchView.vue";
 
 const routes = [
     {
@@ -38,6 +42,26 @@ const routes = [
         path: '/module/:mod',
         name: 'module',
         component: ModuleView
+    },
+    {
+        path: '/log-in',
+        name: 'LogIn',
+        component: LoginView
+    },
+    {
+        path: '/sign-up',
+        name: 'SignUp',
+        component: SignUpView
+    },
+    {
+        path: '/search/',
+        name: 'search',
+        component: SearchView
+    },
+    {
+        path: '/advanced-search/',
+        name: 'advanced-search',
+        component: AdvancedSearchView
     },
     {
         path: '/new',

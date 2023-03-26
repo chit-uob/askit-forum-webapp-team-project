@@ -9,7 +9,7 @@
         <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>
       </div>
     </div>
-    <div class="w-2/3">
+    <div class="w-2/3 pb-[50px]">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
         <a :href="`/ask/${$route.params.mod}`">

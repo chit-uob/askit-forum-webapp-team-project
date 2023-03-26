@@ -10,7 +10,7 @@ def view_question_list(request, mod):
     for question in questions:
         context = {'id': question.id,
                    'title': question.title,
-                   'author': question.author,
+                   'author': getattr(question.author, 'username', None),
                    'pub_date': question.pub_date,
                    'tags': []
                    }

@@ -1,6 +1,6 @@
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <nav class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
+  <nav v-if="enable" class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
         <span class="text-xl font-bold">ASK.IT</span>
@@ -61,12 +61,18 @@
           </li>
         </ul>
       </div>
+      <button type="button" v-on:click="logout"
+              class="">
+        Logout
+      </button>
     </div>
   </nav>
   <router-view/>
 
   <footer class="rounded-lg bg-sky-100 p-4 shadow md:flex md:items-center md:justify-between md:p-6">
     <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
+    </span>
+    <span class="text-sm text-gray-500 sm:text-center">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
     </span>
     <ul class="mt-3 flex flex-wrap items-center text-sm text-gray-500 sm:mt-0">
       <!--        <li>-->
@@ -91,10 +97,40 @@ import axiosClient from "@/views/axiosClient";
 
 export default {
   name: 'App',
+  watch: {
+    $route: {
+      handler: function () {
+        if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up'))) {
+          this.enable = false
+          if (this.$store.state.isAuthenticated) {
+            this.$router.push("/")
+          }
+        } else {
+          this.enable = true
+        }
+        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')))) {
+          this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
+        }
+      }
+    }
+  },
+  beforeCreate() {
+
+    this.$store.commit('initializeStore')
+
+    const token = this.$store.state.token
+
+    if (token) {
+      axiosClient.defaults.headers.common['Authorization'] = "Token " + token
+    } else {
+      axiosClient.defaults.headers.common['Authorization'] = ''
+    }
+  },
   data() {
     return {
       showMobileNav: false,
-      searchTerm: ''
+      searchTerm: '',
+      enable: true
     }
   },
   methods: {
@@ -102,15 +138,35 @@ export default {
       this.showMobileNav = !this.showMobileNav;
     },
     search() {
-      console.log(this.$route.path)
-      axiosClient.post('/search/all/', {
-        searchTerm: this.searchTerm
-      }).then(response => {
-        console.log(response);
-      }).catch(error => {
-        console.log(error);
-      })
+      console.log(this.$route.path);
+      if (this.$route.path.startsWith('/module/')) {
+        this.$router.push({
+          path: '/search',
+          query: {searchTerm: this.searchTerm, module: this.$route.path.split('/')[2]}
+        });
+      } else if (this.$route.path.startsWith('/search')) {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module: this.$route.query.module}});
+      } else {
+        this.$router.push({path: '/search', query: {searchTerm: this.searchTerm, module: null}});
+      }
+    },
+    logout() {
+      axiosClient.post('/v1/token/logout/')
+          .then(response => {
+            console.log(response)
+
+            this.$store.commit('removeToken')
+
+            axiosClient.defaults.headers.common['Authorization'] = ""
+            localStorage.setItem("token", "")
+            this.$router.push('/log-in/')
+          })
+          .catch(error => {
+            console.log(error)
+          })
     }
   }
 }
+
+
 </script>

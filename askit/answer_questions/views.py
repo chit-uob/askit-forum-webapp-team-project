@@ -211,8 +211,12 @@ def upvote(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         # check if user has already upvoted or downvoted
-        if question.upvotes.filter(id=request.user.id).exists() or question.downvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "error": "You have already voted on this question"})
+        if question.upvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "score": question.score, "error": "You have already upvoted this question"})
+        if question.downvotes.filter(id=request.user.id).exists():
+            # remove from downvotes and increase score
+            question.downvotes.remove(request.user)
+            question.score += 1
         # add to upvotes and increase score
         question.upvotes.add(request.user)
         question.score += 1
@@ -228,8 +232,12 @@ def downvote(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         # check if user has already upvoted or downvoted
-        if question.upvotes.filter(id=request.user.id).exists() or question.downvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "error": "You have already voted on this question"})
+        if question.downvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "score": question.score, "error": "You have already downvoted this question"})
+        if question.upvotes.filter(id=request.user.id).exists():
+            # remove from upvotes and decrease score
+            question.upvotes.remove(request.user)
+            question.score -= 1
         # add to downvotes and decrease score
         question.downvotes.add(request.user)
         question.score -= 1
@@ -245,8 +253,12 @@ def upvote_answer(request, question_id, answer_id):
     if request.method == 'POST':
         answer = Answer.objects.get(id=answer_id)
         # check if user has already upvoted or downvoted
-        if answer.upvotes.filter(id=request.user.id).exists() or answer.downvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "error": "You have already voted on this answer"})
+        if answer.upvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "score": answer.score, "error": "You have already upvoted this answer"})
+        if answer.downvotes.filter(id=request.user.id).exists():
+            # remove from downvotes and increase score
+            answer.downvotes.remove(request.user)
+            answer.score += 1
         # add to upvotes and increase score
         answer.upvotes.add(request.user)
         answer.score += 1
@@ -262,8 +274,12 @@ def downvote_answer(request, question_id, answer_id):
     if request.method == 'POST':
         answer = Answer.objects.get(id=answer_id)
         # check if user has already upvoted or downvoted
-        if answer.upvotes.filter(id=request.user.id).exists() or answer.downvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "error": "You have already voted on this answer"})
+        if answer.downvotes.filter(id=request.user.id).exists():
+            return JsonResponse({"success": False, "score": answer.score, "error": "You have already downvoted this answer"})
+        if answer.upvotes.filter(id=request.user.id).exists():
+            # remove from upvotes and decrease score
+            answer.upvotes.remove(request.user)
+            answer.score -= 1
         # add to downvotes and decrease score
         answer.downvotes.add(request.user)
         answer.score -= 1

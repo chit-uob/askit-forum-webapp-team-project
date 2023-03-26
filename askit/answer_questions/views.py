@@ -7,9 +7,28 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 
-def check_upvote_or_downvote(question):
-    return "upvote"
+def check_upvote_or_downvote_question(question, user):
+    print(question.upvotes.filter(id=user.id))
+    if question.upvotes.filter(id=user.id).exists():
+        return "upvote"
+    elif question.downvotes.filter(id=user.id).exists():
+        return "downvote"
+    else:
+        return "none"
 
+
+def check_upvote_or_downvote_answer(answer, user):
+    if answer.upvotes.filter(id=user.id).exists():
+        return "upvote"
+    elif answer.downvotes.filter(id=user.id).exists():
+        return "downvote"
+    else:
+        return "none"
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def view_question(request, question_id):
     context = {}
     try:
@@ -30,7 +49,7 @@ def view_question(request, question_id):
             context['tags'].append(str(x))
         context['score'] = question.score
         context['views'] = question.views
-        context['upvote_or_downvote'] = check_upvote_or_downvote(question)
+        context['upvote_or_downvote'] = check_upvote_or_downvote_question(question, request.user)
 
         Comment_query_result = Comment.objects.filter(question=question)
         context['comment_list'] = []
@@ -52,6 +71,7 @@ def view_question(request, question_id):
             answer_dict['pub_date'] = answer.pub_date
             answer_dict['score'] = answer.score
             answer_dict['is_solution'] = answer.is_solution
+            answer_dict['upvote_or_downvote'] = check_upvote_or_downvote_answer(answer, request.user)
             context['answer_list'].append(answer_dict)
     except Question.DoesNotExist:
         context['question_id'] = context['title'] = context['author'] = context['module'] = context['explanation'] = \
@@ -207,7 +227,7 @@ def submit_comment(request, question_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
-def upvote(request, question_id):
+def upvote_question(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         # check if user has already upvoted or downvoted
@@ -228,7 +248,7 @@ def upvote(request, question_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
-def downvote(request, question_id):
+def downvote_question(request, question_id):
     if request.method == 'POST':
         question = Question.objects.get(id=question_id)
         # check if user has already upvoted or downvoted

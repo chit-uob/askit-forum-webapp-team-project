@@ -4,11 +4,13 @@
       <div class="flex items-center p-4">
         <div class="flex flex-col items-center">
           <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
+                  :class="{ 'border border-4 border-green-600': question.upvote_or_downvote === 'upvote'}"
                   v-on:click="upvoteQuestion">
             <i class="fa fa-arrow-up"></i>
           </button>
           <span class="mr-2 text-lg font-bold text-gray-600">{{ question.score }}</span>
           <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
+                  :class="{ 'border border-4 border-red-600': question.upvote_or_downvote === 'downvote'}"
                   v-on:click="downvoteQuestion">
             <i class="fa fa-arrow-down"></i>
           </button>
@@ -108,11 +110,13 @@
           <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
             <div class="flex flex-col items-center">
               <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
+                      :class="{ 'border border-4 border-green-600': answer.upvote_or_downvote === 'upvote' }"
                       v-on:click="upvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-up"></i>
               </button>
               <span class="mr-2 text-lg font-bold text-gray-600">{{ answer.score }}</span>
               <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
+                      :class="{ 'border border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
                       v-on:click="downvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-down"></i>
               </button>
@@ -206,6 +210,9 @@ export default {
       axiosClient.post(`/question/${this.$route.params.id}/upvote/`)
           .then((response) => {
             this.question.score = response.data.score;
+            if (response.data.success) {
+              this.question.upvote_or_downvote = "upvote";
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -215,6 +222,9 @@ export default {
       axiosClient.post(`/question/${this.$route.params.id}/downvote/`)
           .then((response) => {
             this.question.score = response.data.score;
+            if (response.data.success) {
+              this.question.upvote_or_downvote = "downvote";
+            }
           })
           .catch((error) => {
             console.log(error);
@@ -226,6 +236,9 @@ export default {
             this.answers = this.answers.map((answer) => {
               if (answer.id === answerId) {
                 answer.score = response.data.score;
+                if (response.data.success) {
+                  answer.upvote_or_downvote = "upvote";
+                }
               }
               return answer;
             }).sort((a, b) => b.score - a.score);
@@ -240,6 +253,9 @@ export default {
             this.answers = this.answers.map((answer) => {
               if (answer.id === answerId) {
                 answer.score = response.data.score;
+                if (response.data.success) {
+                  answer.upvote_or_downvote = "downvote";
+                }
               }
               return answer;
             }).sort((a, b) => b.score - a.score);

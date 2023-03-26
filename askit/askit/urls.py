@@ -10,5 +10,5 @@ urlpatterns = [
     path('api/module/', include('module_page.urls')),
     path('api/ask/', include('ask_questions.urls')),
     path('api/search/', include('search.urls')),
-    path('api/search/', include('create_module.urls')),
+    path('api/create_module/', include('create_module.urls')),
 ]

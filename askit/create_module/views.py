@@ -8,8 +8,9 @@ from home_page.models import Module
 def new_module(request):
     if request.method == 'POST':
         post_data = json.loads(request.body)
+        print(post_data)
         title = post_data['title']
-        description = post_data['description']
+        description = post_data['explanation']
         m = Module(title=title, description=description)
         m.save()
-        return JsonResponse({"success": True})
+        return JsonResponse({'title': title, 'description': description})

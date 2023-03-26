@@ -6,32 +6,37 @@
         <h1 class="text-3xl font-bold mb-8 text-center">Sign up</h1>
         <div class="mb-4">
           <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>
-          <input type="email" name="username" v-model="username" placeholder="Email" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="email" name="username" v-model="username" placeholder="Email"
+                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
           <label for="firstname" class="block text-gray-700 font-bold mb-2">First name</label>
-          <input type="text" name="firstname" v-model="firstname" placeholder="First name" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="text" name="firstname" v-model="firstname" placeholder="First name"
+                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
           <label for="lastname" class="block text-gray-700 font-bold mb-2">Last name</label>
-          <input type="text" name="lastname" v-model="lastname" placeholder="Last name" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="text" name="lastname" v-model="lastname" placeholder="Last name"
+                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
           <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
-          <input type="password" name="password" v-model="password" placeholder="Password" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <input type="password" name="password" v-model="password" placeholder="Password"
+                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
-        <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">Sign up</button>
+          <button type="submit"
+                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
+            Sign up
+          </button>
         </div>
         <div>
-        <a href="/log-in/">Already have an account log in!</a>
+          <a href="/log-in/">Already have an account log in!</a>
         </div>
       </form>
     </div>
   </div>
 </template>
-
-
 
 
 <!--<template>-->
@@ -50,37 +55,38 @@
 import axiosClient from './axiosClient';
 
 export default {
-    name: 'SignUpView',
-    data(){
-        return{
-            username: '',
-            password: '',
-            firstname: '',
-            lastname: '',
-        }
-    },
-    methods: {
-        submitForm(e) {
-            axiosClient.post('/v1/users/', {
-                username: this.username,
-                email: this.username,
-                
-                password: this.password
-            })
-            .then(response =>{
-              console.log(this.lastname)
-              axiosClient.post(`/signup/`, {
-                              username: this.username,
-                              first_name: this.firstname,
-                              last_name: this.lastname,
-      })
-                this.$router.push('/log-in')
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        }
+  name: 'SignUpView',
+  data() {
+    return {
+      username: '',
+      password: '',
+      firstname: '',
+      lastname: '',
     }
+  },
+  methods: {
+    submitForm(e) {
+      axiosClient.post('/v1/users/', {
+        username: this.username,
+        email: this.username,
+
+        password: this.password
+      })
+          .then(response => {
+            console.log(this.lastname)
+            axiosClient.post(`/signup/`, {
+              username: this.username,
+              first_name: this.firstname,
+              last_name: this.lastname,
+            })
+            console.log(this.$route.query.redirect)
+            this.$router.push({name: 'LogIn', query: {redirect: this.$route.query.redirect}})
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    }
+  }
 }
 </script>

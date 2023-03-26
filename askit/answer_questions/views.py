@@ -16,7 +16,7 @@ def view_question(request, question_id):
         question.save()
         context['question_id'] = question.id
         context['title'] = question.title
-        context['author'] = question.author
+        context['author'] = getattr(question.author, 'username', 'Anonymous')
         context['module'] = question.module.title
         context['explanation'] = question.explanation
         context['tried_what'] = question.tried_what
@@ -35,7 +35,7 @@ def view_question(request, question_id):
         for comment in Comment_query_result:
             comment_dict = {}
             comment_dict['id'] = comment.id
-            comment_dict['author'] = comment.author
+            comment_dict['author'] = getattr(comment.author, 'username', 'Anonymous')
             comment_dict['content'] = comment.content
             comment_dict['pub_date'] = comment.pub_date
             context['comment_list'].append(comment_dict)
@@ -45,7 +45,7 @@ def view_question(request, question_id):
         for answer in answer_query_result:
             answer_dict = {}
             answer_dict['id'] = answer.id
-            answer_dict['author'] = answer.author
+            answer_dict['author'] = getattr(answer.author, 'username', 'Anonymous')
             answer_dict['content'] = answer.content
             answer_dict['pub_date'] = answer.pub_date
             answer_dict['score'] = answer.score

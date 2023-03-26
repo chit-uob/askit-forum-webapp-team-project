@@ -16,7 +16,7 @@
         <div class="flex-grow">
           <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
           <div class="mb-2 flex justify-between">
-            <p class="p-2 font-sans font-thin">Author: {{ question.author }}</p>
+            <p class="p-2 font-sans font-thin w-full">Author: {{ question.author }}</p>
             <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
           </div>
           <div>

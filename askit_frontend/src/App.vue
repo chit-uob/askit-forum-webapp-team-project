@@ -79,7 +79,7 @@
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">About</a>-->
       <!--        </li>-->
       <li>
-        <a href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+        <a target="_blank" href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
       </li>
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>-->
@@ -108,9 +108,13 @@ export default {
         } else {
           this.enable = true
         }
-        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')))) {
+        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
           this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
         }
+        if(this.$route.path.startsWith('/privacy')){
+          this.enable = false
+        }
+        
       }
     }
   },

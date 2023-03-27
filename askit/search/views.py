@@ -68,9 +68,10 @@ def advanced_search(request):
             adv_module_search = Module.objects.get(title=course)
             adv_result = adv_result.filter(module=adv_module_search)
 
-        # if 'containTags' in request.GET:
-        #     containTags = request.GET['containTags']
-        #     adv_result = Question.objects.filter(tags__icontains=containTags)
+        if 'containTags' in request.GET:
+            containTags = request.GET['containTags']
+            tag_result = Tag.objects.filter(tag_name=containTags)
+            adv_result = adv_result.filter(tags__in=tag_result)
         
         question_array = []
         for question in adv_result:

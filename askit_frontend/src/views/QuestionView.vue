@@ -168,6 +168,7 @@ export default {
         .then((response) => {
           this.question = response.data;
           this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
+          this.all_comments = response.data.comment_list;
         })
         .catch((error) => {
           console.log(error);

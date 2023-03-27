@@ -57,11 +57,11 @@ def advanced_search(request):
         adv_result = Question.objects.all() 
         if 'titleContains' in request.GET:
             titleContains = request.GET['titleContains']
-            adv_result = Question.objects.filter(title__icontains=titleContains)
+            adv_result = adv_result.filter(title__icontains=titleContains)
 
         if 'contentContains' in request.GET:
             contentContains = request.GET['contentContains']
-            adv_result = Question.objects.filter(explanation__icontains=contentContains)
+            adv_result = adv_result.filter(explanation__icontains=contentContains)
 
         # if 'containTags' in request.GET:
         #     containTags = request.GET['containTags']

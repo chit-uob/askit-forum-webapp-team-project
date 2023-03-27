@@ -29,7 +29,7 @@
                   class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
             Sign up
           </button>
-          <label v-if="invalid" class="text-red-600 pl-4">Weak password!</label>
+          <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessage }}</label>
         </div>
         <div>
           <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
@@ -65,7 +65,8 @@ export default {
       lastname: '',
       validEmail: '',
       invalid: false,
-      invalidPasswordBox: ''
+      invalidPasswordBox: '',
+      errorMessage: ''
       
     }
   },
@@ -81,10 +82,7 @@ export default {
       }
     },
     isFormComplete(){
-      if ((this.username=='') || (this.password=='') || (this.firstname=='') || (this.lastname=='')) {
-        return true
-      }
-      else return false
+      return (this.username === '') || (this.password === '') || (this.firstname === '') || (this.lastname === '');
     }
   },
   methods: {
@@ -109,6 +107,7 @@ export default {
           })
           .catch(error => {
             console.log(error)
+            this.errorMessage = Object.values(error.response.data)[0][0]
             this.invalid = true
             this.invalidPasswordBox= 'border-red-500 focus:ring-red-100'
           })

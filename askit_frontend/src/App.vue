@@ -3,7 +3,7 @@
   <nav v-if="enable" class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
-        <span class="text-xl font-bold">ASK.IT</span>
+        <span class="text-2xl font-bold">ASK.IT</span>
       </router-link>
       <form class="w-1/2" @submit.prevent="search">
         <label for="default-search"
@@ -79,7 +79,7 @@
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">About</a>-->
       <!--        </li>-->
       <li>
-        <a href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+        <a target="_blank" href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
       </li>
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>-->
@@ -108,9 +108,13 @@ export default {
         } else {
           this.enable = true
         }
-        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')))) {
+        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
           this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
         }
+        if(this.$route.path.startsWith('/privacy')){
+          this.enable = false
+        }
+        
       }
     }
   },

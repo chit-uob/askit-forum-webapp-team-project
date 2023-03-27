@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from home_page.models import Question, Module, Tag, Answer
+from home_page.models import Question, Module, Tag, Answer, User, Notifications, Comment
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -80,6 +80,11 @@ def advanced_search(request):
             containTags = request.GET['containTags']
             tag_result = Tag.objects.filter(tag_name=containTags)
             adv_result = adv_result.filter(tags__in=tag_result)
+
+        if 'byUser' in request.GET:
+            byUser = request.GET['byUser']
+            user_result = User.objects.get(name=byUser)
+            adv_result = adv_result.filter(author=user_result)
         
         question_array = []
         for question in adv_result:

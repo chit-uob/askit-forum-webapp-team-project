@@ -5,6 +5,8 @@ import AskView from '@/views/AskView.vue'
 import AboutView from "@/views/AboutView.vue";
 import ModuleView from "@/views/ModuleView.vue";
 import PrivacyView from "@/views/PrivacyView.vue";
+import createdModule from "@/views/CreateModule.vue";
+import CreateModule from "@/views/CreateModule.vue";
 import LoginView from "@/views/LoginView.vue";
 import SignUpView from "@/views/SignUpView.vue";
 import SearchView from "@/views/SearchView.vue";
@@ -60,7 +62,12 @@ const routes = [
         path: '/advanced-search/',
         name: 'advanced-search',
         component: AdvancedSearchView
-    }
+    },
+    {
+        path: '/new',
+        name: 'newmodule',
+        component: CreateModule
+    },
 ]
 
 const router = createRouter({

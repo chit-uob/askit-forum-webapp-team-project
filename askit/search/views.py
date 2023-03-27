@@ -17,7 +17,7 @@ def search_questions(request):
             for question in search_results:
                 context = {'id': question.id,
                         'title': question.title,
-                        'author': question.author,
+                        'author': getattr(question.author, 'username', 'Anonymous'),
                         'pub_date': question.pub_date,
                         'tags': [],
                         'module': question.module.title
@@ -36,7 +36,7 @@ def search_questions(request):
             for question in search_results:
                 context = {'id': question.id,
                            'title': question.title,
-                           'author': question.author,
+                           'author': getattr(question.author, 'username', 'Anonymous'),
                            'pub_date': question.pub_date,
                            'tags': [],
                            'module': question.module.title
@@ -63,9 +63,9 @@ def advanced_search(request):
             contentContains = request.GET['contentContains']
             adv_result = adv_result.filter(explanation__icontains=contentContains)
 
-        # if 'containTags' in request.GET:
-        #     containTags = request.GET['containTags']
-        #     adv_result = Question.objects.filter(tags__icontains=containTags)
+        if 'containTags' in request.GET:
+            containTags = request.GET['containTags']
+            adv_result = Question.objects.filter(tags__icontains=containTags)
         
         question_array = []
         for question in adv_result:

@@ -110,9 +110,15 @@ export default {
           })
           .catch(error => {
             console.log(error)
-            this.errorMessage = Object.values(error.response.data)[0][0]
+            if(Object.values(error.response.data)[0][0] == "A user with that username already exists."){
+              this.errorMessage = "Email already in use."
+            }
+            else {
+              this.errorMessage = Object.values(error.response.data)[0][0]
+              this.invalidPasswordBox= 'border-red-500 focus:ring-red-100'
+            }
             this.invalid = true
-            this.invalidPasswordBox= 'border-red-500 focus:ring-red-100'
+            
           })
     }
   }

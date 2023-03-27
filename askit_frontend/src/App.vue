@@ -3,7 +3,7 @@
   <nav v-if="enable" class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
-        <span class="text-xl font-bold">ASK.IT</span>
+        <span class="text-2xl font-bold">ASK.IT</span>
       </router-link>
       <form class="w-1/2" @submit.prevent="search">
         <label for="default-search"

@@ -1,15 +1,20 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from home_page.models import Question, Module, Tag, Answer
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 @csrf_exempt
 def search_questions(request):
     if request.method == 'GET':
         search_term = request.GET['searchTerm']
         if 'module' in request.GET:
             module = request.GET['module']
-            # todo: implement search for a specific module (module is the module id)
             result_search = Module.objects.get(title=module)
             search_results = Question.objects.filter( title__icontains=search_term).filter(module=result_search)
 
@@ -50,6 +55,9 @@ def search_questions(request):
             return JsonResponse(question_array, safe=False)
 
 
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def advanced_search(request):
     # todo: implement advanced search
 

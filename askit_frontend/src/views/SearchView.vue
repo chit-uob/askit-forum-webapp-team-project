@@ -12,8 +12,11 @@
     </div>
     <div class="w-2/3">
       <div class="inline-flex w-full justify-between p-10">
-        <h1 class="text-5xl font-bold">Results for: {{ $route.query.searchTerm }}</h1>
-        <h1 class="text-5xl font-bold" v-if="moduleSpecific">Module: {{ moduleSpecificModule }}</h1>
+        <div>
+          <h1 class="text-5xl font-bold" v-if="!isAdvanceSearch">Results for: {{ $route.query.searchTerm }}</h1>
+          <h1 class="text-2xl font-bold" v-if="moduleSpecific">Module: {{ moduleSpecificModule }}</h1>
+          <h1 class="text-2xl font-bold" v-if="isAdvanceSearch">{{ isAdvanceSearchText }}</h1>
+        </div>
 
         <div>
           <a :href="`/advanced-search/`">
@@ -72,6 +75,8 @@ export default {
       questions: [],
       moduleSpecific: false,
       moduleSpecificModule: "",
+      isAdvanceSearch: false,
+      isAdvanceSearchText: "",
     };
   },
   mounted() {
@@ -112,6 +117,32 @@ export default {
             }
           }).then((response) => {
             this.questions = response.data;
+            this.isAdvanceSearch = true;
+            this.isAdvanceSearchText = `Advanced Search Results:`
+            if (this.$route.query.titleContains) {
+              this.isAdvanceSearchText += `| Title Contains: ${this.$route.query.titleContains}`
+            }
+            if (this.$route.query.contentContains) {
+              this.isAdvanceSearchText += `| Content Contains: ${this.$route.query.contentContains}`
+            }
+            if (this.$route.query.containTags) {
+              this.isAdvanceSearchText += `| Contain Tags: ${this.$route.query.containTags}`
+            }
+            if (this.$route.query.course) {
+              this.isAdvanceSearchText += `| Course: ${this.$route.query.course}`
+            }
+            if (this.$route.query.byUser) {
+              this.isAdvanceSearchText += `| By User: ${this.$route.query.byUser}`
+            }
+            if (this.$route.query.postedAfter) {
+              this.isAdvanceSearchText += `| Posted After: ${this.$route.query.postedAfter}`
+            }
+            if (this.$route.query.postedBefore) {
+              this.isAdvanceSearchText += `| Posted Before: ${this.$route.query.postedBefore}`
+            }
+            if (this.$route.query.answered) {
+              this.isAdvanceSearchText += `| Answered: ${this.$route.query.answered}`
+            }
           }).catch((error) => {
             console.log(error);
           });

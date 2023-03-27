@@ -25,6 +25,9 @@
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-4">
+          <p class="text-gray-700 font-bold mb-2"> By signing up, you agree to our <a href="/privacy" target="_blank" class="text-blue-400 hover:underline hover:text-blue-500">Privacy Policy</a>.</p>
+        </div>
+        <div class="mb-4">
           <button :disabled="!isValidEmail || isFormComplete" type="submit"
                   class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
             Sign up

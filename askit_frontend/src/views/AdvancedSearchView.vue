@@ -60,6 +60,7 @@ export default {
       this.$router.push({
         path: "/search",
         query: {
+          isAdvancedSearch: true,
           titleContains: this.titleContains,
           contentContains: this.contentContains,
           containTags: this.containTags,

@@ -81,7 +81,7 @@ export default {
     $route: {
       handler: function () {
         // check if the query contains key titleContains
-        if (!this.$route.query.titleContains) {
+        if (!this.$route.query.isAdvancedSearch) {
           console.log('normal search')
           axiosClient.get(`/search/normal`, {
             params: {

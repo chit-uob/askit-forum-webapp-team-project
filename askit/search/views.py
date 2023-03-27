@@ -71,7 +71,7 @@ def advanced_search(request):
         for question in adv_result:
             context = {'id': question.id,
                     'title': question.title,
-                    'author': question.author,
+                    'author': getattr(question.author, 'username', 'Anonymous'),
                     'pub_date': question.pub_date,
                     'tags': [],
                     'module': question.module.title

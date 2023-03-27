@@ -9,7 +9,7 @@
       <label for="content-contains" class="text-lg font-medium text-gray-900">Content contains: </label>
       <input type="text" id="content-contains" name="content-contains" placeholder="Content contains" v-model="contentContains"
              class="rounded-lg border border-gray-300 bg-gray-50 text-md text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-      <label for="contain-tags" class="text-lg font-medium text-gray-900">Contain tags: </label>
+      <label for="contain-tags" class="text-lg font-medium text-gray-900">Contain ALL of them tags, comma seperated: </label>
       <input type="text" id="contain-tags" name="contain-tags" placeholder="Contain tags" v-model="containTags"
              class="rounded-lg border border-gray-300 bg-gray-50 text-md text-gray-900 focus:border-blue-500 focus:ring-blue-500">
       <label for="course" class="text-lg font-medium text-gray-900">Course (module code): </label>

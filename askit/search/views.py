@@ -77,8 +77,13 @@ def advanced_search(request):
 
         if request.GET['containTags']:
             containTags = request.GET['containTags']
-            tag_result = Tag.objects.filter(tag_name=containTags)
-            adv_result = adv_result.filter(tags__in=tag_result)
+            # split the tags by comma
+            contain_tags_list = containTags.split(',')
+            # make them lower case and strip the spaces
+            contain_tags_list_processed = [tag.lower().strip() for tag in contain_tags_list]
+            for tag in contain_tags_list_processed:
+                tag_result = Tag.objects.filter(tag_name=tag)
+                adv_result = adv_result.filter(tags__in=tag_result)
 
         if request.GET['byUser']:
             byUser = request.GET['byUser']

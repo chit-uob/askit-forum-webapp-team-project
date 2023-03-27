@@ -90,6 +90,22 @@ def advanced_search(request):
             user_result = User.objects.get(email=byUser)
             adv_result = adv_result.filter(author=user_result)
 
+        if request.GET['postedAfter']:
+            postedAfter = request.GET['postedAfter']
+            adv_result = adv_result.filter(pub_date__gte=postedAfter)
+
+        if request.GET['postedBefore']:
+            postedBefore = request.GET['postedBefore']
+            adv_result = adv_result.filter(pub_date__lte=postedBefore)
+
+        if request.GET['answered']:
+            answered = request.GET['answered']
+            if answered == 'yes':
+                adv_result = adv_result.filter(answer__isnull=False)
+            elif answered == 'no':
+                adv_result = adv_result.filter(answer__isnull=True)
+
+                
         question_array = []
         for question in adv_result:
             context = {'id': question.id,

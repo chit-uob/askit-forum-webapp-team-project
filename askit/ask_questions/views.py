@@ -37,7 +37,7 @@ def submit_question(request, mod):
         question_id = q.id
         return JsonResponse({"success": True, "id": question_id})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
@@ -46,7 +46,7 @@ def summary_api(request):
     text = post_data['explanation']
     return JsonResponse({"summary": text_to_summary(text)})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @csrf_exempt

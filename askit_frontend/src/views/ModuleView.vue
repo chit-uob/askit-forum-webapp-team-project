@@ -9,7 +9,7 @@
 <!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
 <!--      </div>-->
 <!--    </div>-->
-    <div class="w-2/3 pb-[50px]">
+    <div class="w-[70%] pb-[50px]">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
         <div>
@@ -27,35 +27,36 @@
           </a>
         </div>
       </div>
-      <h2 class="pl-10 text-2xl font-bold">All Questions</h2>
-      <div v-for="question in questions" :key="question.id">
-        <a class="flex w-full pt-2 pr-10 pl-10" :href="`/question/${question.id}`">
-          <div class="inline-flex w-full rounded-2xl bg-cyan-200 shadow card">
-            <div class="flex flex-col justify-evenly border-r-2 border-black p-3 w-[100px]">
-              <p class="text-right text-xs">{{ question.score }} votes</p>
-              <p class="text-right text-xs">{{ question.num_answers }} answers</p>
-              <p class="text-right text-xs">{{ question.views }} views</p>
-            </div>
-            <div class="flex w-8/12 flex-col justify-evenly p-3">
-              <h3 class="truncate">{{ question.title }}</h3>
-              <p>Asked by {{ question.author }}</p>
-              <div class="flex">
-                <div v-for="tag in question.tags" class="mr-2">
-                  <button
-                      class="rounded bg-blue-50 px-2 text-center text-sm font-light text-blue-400 mt-0.5 h-[25px] hover:bg-blue-100">
-                    {{ tag }}
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col justify-evenly p-3 w-[80px]">
-              <h3>{{ formatPubDate(question.pub_date) }}</h3>
-            </div>
+      <h2 class="pl-10 text-2xl  mb-6">All questions</h2>
+
+      <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`" 
+      class="grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl bg-gradient-to-l from-[#f1fffd] to-[#ffffff] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.2em] border-gray-200 my-3  object-fill box-content">
+          <div class=" self-start ">{{ question.score }} votes</div>
+          <div class=" self-center ">{{ question.num_answers }} answers</div>
+          <span class=" self-end  ">{{ question.views }} views</span>
+        </div>
+
+        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
+          <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{ question.title }}</div>
+          <div class=" self-center ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span></div>
+          <div v-if="question.tags[0] != ''"  class="flex">
+            <div v-for="tag in question.tags" class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
           </div>
-        </a>
-      </div>
+          <div v-if="question.tags[0] == ''"  class="flex">
+            <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
+          </div>
+        </div>
+        
+        <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+          <div class="  place-self-center py-2 px-3 border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+            <div class=" text-center leading-[0.9] text-[38px] font-semibold ">{{ formatDay(question.pub_date) }}</div>
+            <div class=" text-center text-[16px] font-medium leading-none ">{{ formatMonthYear(question.pub_date).toLowerCase() }}</div>
+          </div>
+        </div>
+      </a>
     </div>
-    <div class="hidden flex-col bg-gray-200 p-3 w-[400px] md:block">
+    <div class="hidden flex-col bg-gray-200 w-[30%] p-3  md:block">
 
 
     </div>
@@ -91,4 +92,7 @@ export default {
 
 <script setup>
 import { formatPubDate } from "./dateUtils";
+import { formatDay } from "./dateUtils";
+import { formatMonthYear } from "./dateUtils"; 
+
 </script>

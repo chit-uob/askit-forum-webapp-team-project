@@ -31,8 +31,8 @@
       <h2 class="pl-10 text-2xl  mb-6">Popular questions</h2>
 
       <a v-for="question in popQuestions" :key="question.id" :href="`/question/${question.id}`" 
-      class="grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl bg-gradient-to-l from-[#f1fffd] to-[#ffffff] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
-        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.2em] border-gray-200 my-3  object-fill box-content">
+      class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
           <div class=" self-start ">{{ question.score }} votes</div>
           <div class=" self-center ">{{ question.num_answers }} answers</div>
           <span class=" self-end  ">{{ question.views }} views</span>
@@ -50,7 +50,7 @@
         </div>
         
         <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
-          <div class="  place-self-center py-2 px-3 border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+          <div class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
             <div class=" text-center leading-[0.9] text-[38px] font-semibold ">{{ formatDay(question.pub_date) }}</div>
             <div class=" text-center text-[16px] font-medium leading-none ">{{ formatMonthYear(question.pub_date).toLowerCase() }}</div>
           </div>
@@ -61,8 +61,8 @@
       <h2 class="pl-10 text-2xl mt-16 mb-6">All questions</h2>
 
       <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`" 
-      class="grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl bg-gradient-to-l from-[#f1fffd] to-[#ffffff] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
-        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.2em] border-gray-200 my-3  object-fill box-content">
+      class="transition ease-in-out delay-75 hover:scale-[1.02] grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl  bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
           <div class=" self-start ">{{ question.score }} votes</div>
           <div class=" self-center ">{{ question.num_answers }} answers</div>
           <span class=" self-end  ">{{ question.views }} views</span>

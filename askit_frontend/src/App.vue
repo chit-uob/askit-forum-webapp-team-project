@@ -72,22 +72,24 @@
   <footer class="rounded-lg bg-sky-100 p-4 shadow md:flex md:items-center md:justify-between md:p-6">
     <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
     </span>
-    <span class="text-sm text-gray-500 sm:text-center">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
+    <span class="text-sm text-gray-500 sm:text-center mr-1">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
     </span>
-    <ul class="mt-3 flex flex-wrap items-center text-sm text-gray-500 sm:mt-0">
+    <span class="text-sm text-gray-500 sm:text-center"><a target="_blank" href="/privacy" class="mr-4 hover:underline md:mr-1">Privacy Policy</a>
+    </span>
+    <!-- <ul class="mt-3 flex flex-wrap items-center text-sm text-gray-500 sm:mt-0"> -->
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">About</a>-->
       <!--        </li>-->
-      <li>
+      <!-- <li>
         <a target="_blank" href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-      </li>
+      </li> -->
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>-->
       <!--        </li>-->
       <!--        <li>-->
       <!--            <a href="#" class="hover:underline">Contact</a>-->
       <!--        </li>-->
-    </ul>
+    <!-- </ul> -->
   </footer>
 
 </template>

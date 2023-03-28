@@ -113,7 +113,7 @@ export default {
     })
         .then((response) => {
           this.questions = response.data;
-          this.questions.reverse()
+          this.questions.sort((a,b) => new Date(b.pub_date) - new Date(a.pub_date))
           this.popQuestions = this.questions
           this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 5) )
           this.popQuestions = this.popQuestions.sort((a,b) => b.views - a.views).slice(0,3)

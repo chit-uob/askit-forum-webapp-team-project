@@ -1,14 +1,14 @@
 <template>
   <div class="flex min-h-screen">
-    <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">
-      <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
-      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
-        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>
-      </div>
-      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
-        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>
-      </div>
-    </div>
+<!--    <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">-->
+<!--      <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>-->
+<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
+<!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->
+<!--      </div>-->
+<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
+<!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="w-2/3 pb-[50px]">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>

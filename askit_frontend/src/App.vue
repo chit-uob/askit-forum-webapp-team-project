@@ -67,7 +67,24 @@
       </button>
     </div>
   </nav>
-  <router-view/>
+  <div class="flex">
+    <div class="hidden flex-col justify-items-center bg-cyan-100 w-[175px] md:block">
+      <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
+<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
+<!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->
+<!--      </div>-->
+<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
+<!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
+<!--      </div>-->
+      <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
+        <a :href="'/module/' + module.title" class="text-sky-600 hover:underline"><p class="p-8">{{ module.title }}</p>
+        </a>
+      </div>
+    </div>
+    <div class="w-full">
+      <router-view/>
+    </div>
+  </div>
 
   <footer class="rounded-lg bg-sky-100 p-4 shadow md:flex md:items-center md:justify-between md:p-6">
     <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
@@ -113,10 +130,10 @@ export default {
         if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
           this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
         }
-        if(this.$route.path.startsWith('/privacy')){
+        if (this.$route.path.startsWith('/privacy')) {
           this.enable = false
         }
-        
+
       }
     }
   },
@@ -136,7 +153,8 @@ export default {
     return {
       showMobileNav: false,
       searchTerm: '',
-      enable: true
+      enable: true,
+      modules: []
     }
   },
   methods: {
@@ -171,6 +189,15 @@ export default {
             console.log(error)
           })
     }
+  },
+  created() {
+    axiosClient.get('/module/list/')
+        .then(response => {
+          this.modules = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
   }
 }
 

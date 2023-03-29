@@ -28,3 +28,19 @@ def view_question_list(request, mod):
         question_array.append(context)
 
     return JsonResponse(question_array, safe=False)
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def view_module_list(request):
+    modules = Module.objects.all()
+    module_array = []
+    for module in modules:
+        context = {'id': module.id,
+                   'title': module.title,
+                   'description': module.description,
+                   }
+        module_array.append(context)
+
+    return JsonResponse(module_array, safe=False)

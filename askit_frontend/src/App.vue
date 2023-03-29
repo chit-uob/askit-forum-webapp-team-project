@@ -42,22 +42,22 @@
           <li>
             <a href="#"
                class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
-               aria-current="page"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+               aria-current="page"><i class="fa fa-bell-o scale-150" aria-hidden="true"></i></a>
           </li>
           <li>
             <a href="#"
                class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
-                class="fa fa-user" aria-hidden="true"></i></a>
+                class="fa fa-user scale-150" aria-hidden="true"></i></a>
           </li>
           <li>
             <a href="#"
                class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
-                class="fa fa-question-circle" aria-hidden="true"></i></a>
+                class="fa fa-question-circle scale-150" aria-hidden="true"></i></a>
           </li>
           <li>
             <a href="#"
                class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
-                class="fa fa-cog" aria-hidden="true"></i></a>
+                class="fa fa-cog scale-150" aria-hidden="true"></i></a>
           </li>
         </ul>
       </div>

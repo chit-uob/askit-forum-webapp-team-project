@@ -40,34 +40,36 @@
 
       <div class="flex justify-center px-2">
         <br>
-      <button
-            class="ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
-            @click="showComments = !showComments">Add Comment
-        </button>
-      </div>
-      <div v-if="showComments" class="flex justify-center p-2">
-        <form @submit.prevent="addComment" class="w-5/6">
-          <br>
-          <div>
-            <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="commentInput" contentType="text">
-            </QuillEditor>
-          </div>
-          <br>
-          <button class="ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
-            Submit
-          </button>
-        </form>
       </div>
 
       <div class="p-5">
-        <h1 class="mb-4 font-bold">Comments:</h1>
+        <div class="flex items-center">
+          <h1 class="font-bold">Comments:</h1>
+          <button
+              class="ml-4 rounded border-gray-300 bg-blue-100 px-4 py-1 font-sans font-bold text-black hover:bg-blue-300"
+              @click="showComments = !showComments">Add Comment
+          </button>
+        </div>
+        <div v-if="showComments" class="flex justify-center p-2">
+          <form @submit.prevent="addComment" class="w-5/6">
+            <br>
+            <div>
+              <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="commentInput" contentType="text">
+              </QuillEditor>
+            </div>
+            <br>
+            <button class="ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
+              Submit
+            </button>
+          </form>
+        </div>
 
-        <div v-if="all_comments.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+        <div v-if="all_comments.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-2 shadow">
           <p>No comments yet.</p>
         </div>
 
         <div v-for="com in all_comments" :key="com.id">
-          <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+          <div class="flex items-center rounded-lg bg-white py-1 px-2 shadow">
             <div class="flex-grow">
               <div class="flex justify-between">
                 <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
@@ -156,7 +158,7 @@ export default {
       },
       answers: [],
       answerInput: "",
-      all_comments:[],
+      all_comments: [],
       commentInput: ""
     };
   },
@@ -168,6 +170,7 @@ export default {
         .then((response) => {
           this.question = response.data;
           this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
+          this.all_comments = response.data.comment_list;
         })
         .catch((error) => {
           console.log(error);

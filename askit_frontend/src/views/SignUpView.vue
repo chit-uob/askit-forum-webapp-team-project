@@ -4,27 +4,30 @@
       <h1 class="text-6xl font-bold text-center font-sans text-black mr-8">ASK.IT</h1>
       <form @submit.prevent="submitForm" class="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 class="text-3xl font-bold mb-8 text-center">Sign up</h1>
-        <div class="mb-4">
-          <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>
+        <div class="mb-2">
+          <label for="username" class="block text-gray-700 font-bold mb-1">Email</label>
           <input :class="validEmail" type="email" name="username" v-model="username" placeholder="Email"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-4">
-          <label for="firstname" class="block text-gray-700 font-bold mb-2">First name</label>
+        <div class="mb-2">
+          <label for="firstname" class="block text-gray-700 font-bold mb-1">First name</label>
           <input type="text" name="firstname" v-model="firstname" placeholder="First name"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 ">
         </div>
-        <div class="mb-4">
-          <label for="lastname" class="block text-gray-700 font-bold mb-2">Last name</label>
+        <div class="mb-2">
+          <label for="lastname" class="block text-gray-700 font-bold mb-1">Last name</label>
           <input type="text" name="lastname" v-model="lastname" placeholder="Last name"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-4">
-          <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
+        <div class="mb-2">
+          <label for="password" class="block text-gray-700 font-bold mb-1">Password</label>
           <input :class="invalidPasswordBox" type="password" name="password" v-model="password" placeholder="Password"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <div class="mb-4">
+        <div class="mb-3">
+          <p class="text-gray-700 font-bold mb-2"> By signing up, you agree to our <a href="/privacy" target="_blank" class="text-blue-400 hover:underline hover:text-blue-500">Privacy Policy</a>.</p>
+        </div>
+        <div class="mb-3">
           <button :disabled="!isValidEmail || isFormComplete" type="submit"
                   class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
             Sign up
@@ -107,9 +110,15 @@ export default {
           })
           .catch(error => {
             console.log(error)
-            this.errorMessage = Object.values(error.response.data)[0][0]
+            if(Object.values(error.response.data)[0][0] == "A user with that username already exists."){
+              this.errorMessage = "Email already in use."
+            }
+            else {
+              this.errorMessage = Object.values(error.response.data)[0][0]
+              this.invalidPasswordBox= 'border-red-500 focus:ring-red-100'
+            }
             this.invalid = true
-            this.invalidPasswordBox= 'border-red-500 focus:ring-red-100'
+            
           })
     }
   }

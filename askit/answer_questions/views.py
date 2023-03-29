@@ -305,3 +305,20 @@ def downvote_answer(request, question_id, answer_id):
         answer.score -= 1
         answer.save()
         return JsonResponse({"success": True, "score": answer.score})
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_question(request, question_id):
+    if request.method == 'DELETE':
+        question = Question.objects.get(id=question_id)
+        # moduleTitle = question.module
+        # id = question_id
+        # Question.objects.filter(id=id).delete()
+        # return JsonResponse({"success": True})
+        if request.user == question.author:
+            question.delete()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this question"})

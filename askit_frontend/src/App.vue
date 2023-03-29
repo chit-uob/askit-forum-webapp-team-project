@@ -71,11 +71,8 @@
     <div class="hidden flex-col justify-items-center bg-cyan-100 w-[175px] md:block" v-if="enable">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
       <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black" style="box-shadow: .13em .13em;">
-        <div class="place-self-center mx-3 truncate">
-          <a :href="'/module/' + module.title" class="self-center text-sky-600 hover:underline text-center truncate text-nowrap"><p class="p-8">{{ module.title }}</p>
+          <a :href="'/module/' + module.title" class="self-center text-sky-600 hover:no-underline text-center no-underline"><p class="py-8 px-2 truncate text-black">{{ module.title }}</p>
         </a>
-        </div>
-
       </div>
     </div>
     <div class="w-full">

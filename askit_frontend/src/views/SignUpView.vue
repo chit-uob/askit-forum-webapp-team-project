@@ -32,7 +32,7 @@
           <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessage }}</label>
         </div>
         <div>
-          <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
+          <label class="text-black">Already have an account? </label><a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Log in!</a>
         </div>
       </form>
     </div>

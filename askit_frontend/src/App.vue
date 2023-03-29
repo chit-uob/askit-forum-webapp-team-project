@@ -68,14 +68,8 @@
     </div>
   </nav>
   <div class="flex">
-    <div class="hidden flex-col justify-items-center bg-cyan-100 w-[175px] md:block">
+    <div class="hidden flex-col justify-items-center bg-cyan-100 w-[175px] md:block" v-if="enable">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->
-<!--      </div>-->
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
-<!--      </div>-->
       <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black" style="box-shadow: .13em .13em;">
         <a :href="'/module/' + module.title" class="text-sky-600 hover:underline text-center text-ellipsis overflow-hidden"><p class="p-8">{{ module.title }}</p>
         </a>

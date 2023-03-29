@@ -85,18 +85,19 @@
             <div class=" text-center text-[16px] font-medium leading-none ">{{ formatMonthYear(question.pub_date).toLowerCase() }}</div>
           </div>
         </div>
+
       </a>
       </div>
+      <button v-on:click="deleteModule" type="button"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+          Delete Course
+      </button>
     </div>
     <div class="hidden flex-col bg-gray-200 w-[30%] p-3  md:block">
 
 
     </div>
   </div>
-  <button v-on:click="deleteModule" type="button"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
-          Delete Course
-  </button>
 </template>
 
 <script>
@@ -135,7 +136,7 @@ export default {
       })
           .then((response) => {
             console.log(response.data)
-            this.$router.push({ name: 'Home' })
+            window.location.href = '/module/';
           })
           .catch((error) => {
             console.log(error);

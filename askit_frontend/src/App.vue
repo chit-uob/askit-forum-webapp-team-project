@@ -117,7 +117,7 @@ export default {
   watch: {
     $route: {
       handler: function () {
-        if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up'))) {
+        if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/password/reset'))) {
           this.enable = false
           if (this.$store.state.isAuthenticated) {
             this.$router.push("/")
@@ -125,7 +125,7 @@ export default {
         } else {
           this.enable = true
         }
-        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
+        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')) || (this.$route.path.startsWith('/password/reset')))) {
           this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
         }
         if (this.$route.path.startsWith('/privacy')) {

@@ -20,3 +20,13 @@ def new_module(request):
         m = Module(title=title, description=description)
         m.save()
         return JsonResponse({'title': title, 'description': description})
+
+def delete_module(request):
+    if request.method == 'POST':
+        post_data = json.loads(request.body)
+        print(post_data)
+        title = post_data['title']
+        description = post_data['explanation']
+        m = Module(title=title, description=description)
+        m.save()
+        return JsonResponse({'title': title, 'description': description})

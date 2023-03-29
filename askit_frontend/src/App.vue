@@ -78,7 +78,7 @@
 <!--      </div>-->
       <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black" style="box-shadow: .13em .13em;">
         <div class="place-self-center mx-3 truncate">
-          <a :href="'/module/' + module.title" class="text-sky-600 hover:underline text-center truncate text-nowrap"><p class="p-8">{{ module.title }}</p>
+          <a :href="'/module/' + module.title" class="self-center text-sky-600 hover:underline text-center truncate text-nowrap"><p class="p-8">{{ module.title }}</p>
         </a>
         </div>
 

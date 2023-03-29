@@ -67,13 +67,15 @@
 </template>
 
 <script>
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import axiosClient from "@/views/axiosClient";
 
 export default {
   name: "ModuleView",
   data() {
     return {
-      questions: []
+      questions: [],
+      title: ""
     };
   },
   mounted() {
@@ -93,11 +95,11 @@ export default {
     deleteModule() {
       axiosClient({
         method: "delete",
-        url: `/module/${this.$route.params.mod}/`,
+        url: `/create_module/delete/${this.$route.params.mod}/`,
       })
           .then((response) => {
             console.log(response.data)
-            this.$router.push({ name: "Home" });
+            this.$router.push({ name: 'Home' })
           })
           .catch((error) => {
             console.log(error);

@@ -29,6 +29,7 @@ services:
     volumes:
       - /home/ec2-user/teamai55-22.bham.team/teamai55-22.bham.team:/key
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt/live/ask.bham.team:/letsencrypt_key
   tpdjango:
     image: git.cs.bham.ac.uk:5050/team-projects-2022-23/teamai55-22:tpdjangoapi
     restart: 'always'

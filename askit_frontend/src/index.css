@@ -1,17 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer components {
-    .advanced-search-label-text {
-        @apply select-none text-lg font-medium text-gray-900;
-    }
-    .advanced-search-inputBox-text {
-        border-width: 3px;
-        @apply w-full rounded border-black bg-gray-50 text-gray-900 focus:ring-blue-500 focus:ring-2 focus:ring-offset-1
-    }
-    .advanced-search-inputBox-date {
-        border-width: 3px;
-        @apply rounded border-black bg-gray-50 text-gray-900 focus:ring-blue-500 focus:ring-2 focus:ring-offset-1
-    }
-}

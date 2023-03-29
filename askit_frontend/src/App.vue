@@ -76,8 +76,8 @@
 <!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
 <!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
 <!--      </div>-->
-      <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
-        <a :href="'/module/' + module.title" class="text-sky-600 hover:underline"><p class="p-8">{{ module.title }}</p>
+      <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black" style="box-shadow: .13em .13em;">
+        <a :href="'/module/' + module.title" class="text-sky-600 hover:underline text-center text-ellipsis overflow-hidden"><p class="p-8">{{ module.title }}</p>
         </a>
       </div>
     </div>

@@ -19,6 +19,7 @@ def new_module(request):
         description = post_data['explanation']
         m = Module(title=title, description=description)
         m.save()
+        m.admins.add(request.user)
         return JsonResponse({'title': title, 'description': description})
 @api_view(['DELETE'])
 @authentication_classes([TokenAuthentication])
@@ -26,6 +27,10 @@ def new_module(request):
 @csrf_exempt
 def delete_module(request, mod):
     if request.method == 'DELETE':
-        title = mod
-        Module.objects.filter(title=title).delete()
-        return JsonResponse({"Success": True})
+        the_module = Module.objects.get(title=mod)
+        # check if request.user is in the_module.admins
+        if request.user in the_module.admins.all():
+            the_module.delete()
+            return JsonResponse({'message': f'{mod} deleted'})
+        else:
+            return JsonResponse({'message': 'you are not authorized to delete this module'})

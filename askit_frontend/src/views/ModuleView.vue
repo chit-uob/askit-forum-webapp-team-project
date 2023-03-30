@@ -136,7 +136,7 @@ export default {
       })
           .then((response) => {
             console.log(response.data)
-            window.location.href = '/module/';
+            window.location.href = '/';
           })
           .catch((error) => {
             console.log(error);

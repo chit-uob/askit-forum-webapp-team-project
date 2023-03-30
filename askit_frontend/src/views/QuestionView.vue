@@ -280,8 +280,7 @@ export default {
     deleteQuestion(){
       axiosClient.delete(`/question/${this.$route.params.id}/delete/`)
           .then((response) => {
-            // this.$router.push({ name: "Home" });
-            window.location.href = '/module/';
+            window.location.href = `/module/${response.data.module}`;
           })
           .catch((error) => {
             console.log(error);

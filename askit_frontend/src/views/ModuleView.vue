@@ -9,7 +9,7 @@
 <!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
 <!--      </div>-->
 <!--    </div>-->
-    <div class="w-[70%] pb-[50px]">
+    <div class="md:w-[70%] pb-[50px] w-full">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
         <div>
@@ -31,7 +31,7 @@
       <h2 class="pl-10 text-2xl  mb-6">Popular questions</h2>
 
       <a v-for="question in popQuestions" :key="question.id" :href="`/question/${question.id}`" 
-      class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+      class="hidden  transition ease-in-out delay-75 hover:scale-[1.02] duration-300 sm:grid grid-cols-[100px_1fr_95px] md:mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
         <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
           <div class=" self-start ">{{ question.score }} votes</div>
           <div class=" self-center ">{{ question.num_answers }} answers</div>
@@ -56,12 +56,30 @@
           </div>
         </div>
       </a>
+
+      <a v-for="question in popQuestions" :key="question.id" :href="`/question/${question.id}`" 
+      class="transition ease-in-out delay-75 hover:scale-[1.02] duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+        <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
+          <div class="mr-1 inline">{{ question.score }} votes</div>
+          <div class="mx-1 inline ">{{ question.num_answers }} answers</div>
+          <span class="mx-1 inline ">{{ question.views }} views</span>
+        </div>
+
+          <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">{{ question.title }}</div>
+          <div v-if="question.tags[0] != ''"  class="flex-wrap inline-flex leading-none">
+            <div v-for="tag in question.tags" class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">[{{ tag }}]</div>
+          </div>
+          <div v-if="question.tags[0] == ''"  class="flex">
+            <div class=" text-xs">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
+          </div>
+          <div class=" text-xs mt-1 ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span> on the <span  class="">{{ formatDate(question.pub_date) }}</span></div>
+      </a>
       </div>
       <div>
       <h2 class="pl-10 text-2xl mt-16 mb-6">All questions</h2>
 
       <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`" 
-      class="transition ease-in-out delay-75 hover:scale-[1.02] grid grid-cols-[100px_1fr_95px] mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl  bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+      class="transition hover:scale-[1.01] sm:grid hidden grid-cols-[100px_1fr_95px] md:mx-10 mb-[10px] box-content min-h-[98px] rounded-2xl  bg-white hover:bg-[#f8fffc] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
         <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
           <div class=" self-start ">{{ question.score }} votes</div>
           <div class=" self-center ">{{ question.num_answers }} answers</div>
@@ -79,16 +97,34 @@
           </div>
         </div>
         
-        <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+        <div class="grid bg-lime-300 rounded-r-[13px] rounded-bl-2xl  box-content">
           <div class="  place-self-center py-2 px-3 border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
             <div class=" text-center leading-[0.9] text-[38px] font-semibold ">{{ formatDay(question.pub_date) }}</div>
             <div class=" text-center text-[16px] font-medium leading-none ">{{ formatMonthYear(question.pub_date).toLowerCase() }}</div>
           </div>
         </div>
       </a>
+
+      <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`" 
+      class="transition ease-in-out delay-75 hover:scale-[1.02] duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.24em] border-black " style="box-shadow: .27em .27em;">
+        <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
+          <div class="mr-1 inline">{{ question.score }} votes</div>
+          <div class="mx-1 inline ">{{ question.num_answers }} answers</div>
+          <span class="mx-1 inline ">{{ question.views }} views</span>
+        </div>
+
+          <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">{{ question.title }}</div>
+          <div v-if="question.tags[0] != ''"  class="flex-wrap inline-flex leading-none">
+            <div v-for="tag in question.tags" class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">[{{ tag }}]</div>
+          </div>
+          <div v-if="question.tags[0] == ''"  class="flex">
+            <div class=" text-xs">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
+          </div>
+          <div class=" text-xs mt-1 ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span> on the <span  class="">{{ formatDate(question.pub_date) }}</span></div>
+      </a>
       </div>
     </div>
-    <div class="hidden flex-col bg-gray-200 w-[30%] p-3  md:block">
+    <div class="hidden  flex-col bg-gray-200 w-[30%] p-3  md:block">
 
 
     </div>
@@ -127,7 +163,7 @@ export default {
 </script>
 
 <script setup>
-import { formatPubDate } from "./dateUtils";
+import { formatDate } from "./dateUtils";
 import { formatDay } from "./dateUtils";
 import { formatMonthYear } from "./dateUtils"; 
 import { withinTime } from "./dateUtils"

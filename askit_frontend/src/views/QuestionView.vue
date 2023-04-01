@@ -133,10 +133,6 @@
             </div>
           </div>
         </div>
-        <button v-on:click="deleteQuestion" type="button"
-                    class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
-              Delete Question
-          </button>
       </div>
     </div>
   </div>
@@ -158,16 +154,12 @@ export default {
         tried_what: "Loading...",
         summary: "Loading...",
         pub_date: "2000-01-01T00:00:00Z",
-        // Module: {
-        //   title: ""
-        // }
 
       },
       answers: [],
       answerInput: "",
       all_comments: [],
-      commentInput: "",
-      moduleTitle: "",
+      commentInput: ""
     };
   },
   mounted() {
@@ -179,7 +171,6 @@ export default {
           this.question = response.data;
           this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
           this.all_comments = response.data.comment_list;
-          //this.question.Module.title = response.data.Module.title;
         })
         .catch((error) => {
           console.log(error);
@@ -275,16 +266,7 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      },
 
-    deleteQuestion(){
-      axiosClient.delete(`/question/${this.$route.params.id}/delete/`)
-          .then((response) => {
-            window.location.href = `/module/${response.data.module}`;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
     },
   },
 };

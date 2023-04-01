@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9v6y%c4t!=4&bs+a_60pzqaj!%7ofeoz17*(5l&%=15p1wi1i*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,10 +38,10 @@ CSRF_TRUSTED_ORIGINS = ["https://teamai55-22.bham.team", "https://askit.bham.tea
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
     ),
     'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated'
     )
 }
 
@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     'ask_questions.apps.AskQuestionsConfig',
     'answer_questions.apps.AnswerQuestionsConfig',
     'search.apps.SearchConfig',
-    'create_module.apps.CreateModuleConfig',
 ]
 
 MIDDLEWARE = [

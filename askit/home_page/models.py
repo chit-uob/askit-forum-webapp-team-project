@@ -64,6 +64,13 @@ class Answer(models.Model):
         return self.content
 
 
+class User(models.Model):
+    name = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.name
+
 
 class Notifications(models.Model):
     receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)

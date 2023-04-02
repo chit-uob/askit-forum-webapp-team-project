@@ -88,13 +88,22 @@
 
       </a>
       </div>
-      <button v-on:click="deleteModule" type="button"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
-          Delete Course
-      </button>
+      
     </div>
-    <div class="hidden flex-col bg-gray-200 w-[30%] p-3  md:block">
-
+    <div class="hidden w-[30%] py-11 pr-9 md:block">
+      <div class=" rounded-lg border-[3px] border-black p-2" style="box-shadow: .2em .2em;">
+        <div class=" text-center font-medium pb-1 mb-2 border-b-2 border-black border-dotted">Admin tools</div>
+        <div class=" flex-wrap flex gap-2 ">
+            <button type="submit"
+                    class=" rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+              Add members
+            </button>
+            <button v-on:click="deleteModule" type="button"
+                class=" rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+                Delete Course
+            </button>
+        </div>
+      </div>
 
     </div>
   </div>

@@ -202,8 +202,8 @@
               <p class="text-lg">{{ answer.content }}</p>
             </div>
           </div>
-          <button    v-on:click="$event => deleteAnswer(answer.id)"
-                    class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+          <button class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+          v-on:click="deleteAnswer(answer.id)">
               Delete Answer
           </button>
         </div>
@@ -296,7 +296,7 @@ export default {
     deleteAnswer(answerId){
       axiosClient.delete(`/question/${this.$route.params.id}/answer/${answerId}/delete_answer/`)
           .then((response) => {
-            window.location.href = `/module/${response.data.module}`;
+            window.location.href = `/question/${this.$route.params.id}`;
           })
           .catch((error) => {
             console.log(error);

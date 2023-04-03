@@ -313,9 +313,24 @@ def downvote_answer(request, question_id, answer_id):
 def delete_question(request, question_id):
     if request.method == 'DELETE':
         question = Question.objects.get(id=question_id)
-        module_title = question.module.title
+        # module_title = question.module.title
         if request.user == question.author:
             question.delete()
-            return JsonResponse({"success": True, "module": module_title})
+            return JsonResponse({"success": True})
         else:
             return JsonResponse({"success": False, "error": "You are not the author of this question"})
+        
+
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_answer(request, question_id, answer_id):
+    if request.method == 'DELETE':
+        answer = Answer.objects.get(id=answer_id)
+        if request.user == answer.author:
+            answer.delete()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this answer"})

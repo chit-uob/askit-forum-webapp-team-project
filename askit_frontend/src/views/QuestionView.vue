@@ -202,7 +202,7 @@
               <p class="text-lg">{{ answer.content }}</p>
             </div>
           </div>
-          <button  v-if=" answer.author != 'adinotadmin@mail.com' "   v-on:click="deleteAnswer" type="button"
+          <button    v-on:click="$event => deleteAnswer(answer.id)"
                     class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
               Delete Answer
           </button>
@@ -293,10 +293,10 @@ export default {
           });
     },
 
-    deleteAnswer(){
-      axiosClient.delete(`/question/${this.$route.params.id}/delete_answer/`)
+    deleteAnswer(answerId){
+      axiosClient.delete(`/question/${this.$route.params.id}/answer/${answerId}/delete_answer/`)
           .then((response) => {
-            this.answers = response.data;
+            window.location.href = `/module/${response.data.module}`;
           })
           .catch((error) => {
             console.log(error);

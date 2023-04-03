@@ -69,3 +69,14 @@ def view_module_list(request):
         module_array.append(context)
 
     return JsonResponse(module_array, safe=False)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def is_admin(request,mod):
+    the_module = Module.objects.get(title=mod)
+    print(the_module.admins.all())
+    if request.user in the_module.admins.all(): 
+        return JsonResponse({'admin': True } )
+    else:
+        return JsonResponse({'admin': False } )

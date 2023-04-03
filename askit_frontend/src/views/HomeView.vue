@@ -1,4 +1,5 @@
 <template>
+  <div class="bg-pink-50">
   <div class="min-h-screen">
     <div class="flex justify-between py-10">
       <div class="px-16">
@@ -21,7 +22,7 @@
     <br>
 
     <div class="grid grid-cols-2 gap-5 px-10">
-      <div class="border-2 border-gray-400 rounded-md p-5">
+      <div class="bg-white border-2 border-gray-400 rounded-md p-5">
         <div class="flex items-center justify-center">
           <span class="text-xl text-center font-bold mb-5">Notifications</span>
           <font-awesome-icon icon="bell" class="text-xl text-center font-bold mb-5 ml-2"/>
@@ -31,11 +32,12 @@
         <div>Notification 2</div>
         <div>Notification 3</div>
       </div>
-      <div class="border-2 border-gray-400 rounded-md p-5">
+      <div class="bg-white border-2 border-gray-400 rounded-md p-5">
         <div class="text-xl text-center font-bold mb-5">Calendar</div>
         <hr class="border-gray-400 mb-5">
       </div>
     </div>
+  </div>
   </div>
 </template>
 

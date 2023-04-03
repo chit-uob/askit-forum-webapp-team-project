@@ -4,6 +4,10 @@ function formatPubDate(pubDate) {
     return dayjs(pubDate).format("DD/MM/YYYY HH:mm");
 }
 
+function formatDate(pubDate) {
+    return dayjs(pubDate).format("DD/MM/YY");
+}
+
 function formatDay(pubDate) {
     return dayjs(pubDate).format("DD");
 }
@@ -26,6 +30,8 @@ function withinTime(pubDate, timeFrame) {
 }
 
 export { formatPubDate };
+export { formatDate };
+
 export { formatDay };
 export { formatMonthYear };
 export { withinTime }

@@ -123,7 +123,8 @@ export default {
   data() {
     return {
       questions: [],
-      popQuestions: []
+      popQuestions: [],
+      admin: false
     };
   },
   mounted() {
@@ -137,6 +138,17 @@ export default {
           this.popQuestions = this.questions
           this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 5) )
           this.popQuestions = this.popQuestions.sort((a,b) => b.views - a.views).slice(0,3)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    axiosClient({
+      method: "get",
+      url: `/module/${this.$route.params.mod}/admin`,
+    })
+        .then((response) => {
+          this.admin= response.data.admin
+          console.log(response)
         })
         .catch((error) => {
           console.log(error);

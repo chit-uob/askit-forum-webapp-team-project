@@ -7,4 +7,5 @@ urlpatterns = [
     path('list/', views.view_module_list, name='module_list'),
     path('<str:mod>/', views.view_question_list, name='all_questions'),
     path('<str:mod>/popular/<int:days>', views.view_popular_questions, name='popular_questions'),
+    path('<str:mod>/admin', views.is_admin,name='is_admin')
 ]

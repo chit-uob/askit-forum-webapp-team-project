@@ -206,14 +206,18 @@
                 <p class="text-sm text-gray-600">Author: {{ answer.author }} </p>
                 <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(answer.pub_date) }}</p>
               </div>
+              <div class="flex items-center justify-between">
+
               <p v-if="answer.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
               <p class="text-lg">{{ answer.content }}</p>
-            </div>
-          </div>
-          <button v-if="user.username == answer.author" class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+              <button v-if="user.username == answer.author" class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
           v-on:click="deleteAnswer(answer.id)">
               Delete Answer
           </button>
+          </div>
+            </div>
+          </div>
+
         </div>
 
       </div>

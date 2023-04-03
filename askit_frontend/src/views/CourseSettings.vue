@@ -6,17 +6,18 @@
 </template>
 
 <script>
-import axiosClient from './axiosClient';
 
 export default {
-  name: "courseSettings",
+  name: "courseSettingsView",
 
-    data() {
-      return {
-        }
-      },
-    methods: {
-    },
+  data() {
+    return {}
+  },
+  methods: {},
 }
 
 </script>
+
+<style scoped>
+
+</style>

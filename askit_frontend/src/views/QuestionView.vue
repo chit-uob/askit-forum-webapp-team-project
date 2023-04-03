@@ -19,8 +19,9 @@
         <div class="flex-grow">
           <div class="flex justify-between items-center mb-2">
             <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
+            <!-- <p>hello there {{ user.username }} </p> -->
             <div class="relative inline-block text-left">
-    <button
+    <button v-if="user.username === question.author"
       class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
       type="button"
       @click="toggleDropdown"
@@ -209,7 +210,7 @@
               <p class="text-lg">{{ answer.content }}</p>
             </div>
           </div>
-          <button class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+          <button v-if="user.username == answer.author" class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
           v-on:click="deleteAnswer(answer.id)">
               Delete Answer
           </button>
@@ -222,6 +223,7 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
+import axios from 'axios';
 
 export default {
   name: "QuestionView",
@@ -230,6 +232,7 @@ export default {
       showForm: false,
       showComments: false,
       showDropdown: false,
+      user:{},
 
       question: {
         title: "Loading...",
@@ -263,8 +266,27 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+
+    axiosClient.get('/v1/users/me').then(response => {this.user = response.data}).catch(error => {console.log(error)})
   },
+
+
   methods: {
+
+  //   testform(e){
+  //     const loggedData = {
+  //     userLoggedIn: this.userLoggedIn
+  //   }
+
+  //   axiosClient.get('/v1/users/me',loggedData)
+  //       .then(response => {
+  //         console.log(response)
+  //         const user = response.data.{{User.USERNAME_FIELD}}
+
+  //         this.userLoggedIn = response.data
+  //       })
+
+  // },
     toggleDropdown() {
       this.showDropdown = !this.showDropdown;
     },

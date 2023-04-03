@@ -16,7 +16,13 @@
           </button>
         </div>
         <div class="flex-grow">
-          <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
+          <div class="flex justify-between items-center mb-2">
+            <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
+            <button  v-if=" question.author != 'adinotadmin@mail.com' "   v-on:click="deleteQuestion" type="button"
+                      class="justify-between rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+                Delete Question
+            </button>
+          </div>
           <div class="mb-2 flex justify-between">
             <p class="p-2 font-sans font-thin w-full">Author: {{ question.author }}</p>
             <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
@@ -132,11 +138,12 @@
               <p class="text-lg">{{ answer.content }}</p>
             </div>
           </div>
-        </div>
-        <button v-on:click="deleteQuestion" type="button"
+          <!-- <button  v-if=" answer.author != 'adinotadmin@mail.com' "   v-on:click="deleteQuestion" type="button"
                     class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
               Delete Question
-          </button>
+          </button> -->
+        </div>
+
       </div>
     </div>
   </div>

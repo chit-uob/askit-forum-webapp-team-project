@@ -139,17 +139,24 @@
         </div>
 
         <div v-for="com in all_comments" :key="com.id">
-          <div class="flex items-center rounded-lg bg-white py-1 px-2 shadow">
-            <div class="flex-grow">
-              <div class="flex justify-between">
-                <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
-                <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
-              </div>
-              <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
-              <p class="text-lg">{{ com.content }}</p>
-            </div>
-          </div>
-        </div>
+  <div class="flex items-center rounded-lg bg-white py-1 px-2 shadow">
+    <div class="flex-grow">
+      <div class="flex justify-between">
+        <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
+        <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
+      </div>
+      <div class="flex items-center justify-between">
+        <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
+        <p class="text-lg">{{ com.content }}</p>
+        <button v-on:click="deleteComment(com.id)" class="bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
+          Delete comment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
       </div>
 
       <div class="flex justify-center px-2">
@@ -291,6 +298,17 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+    },
+
+    deleteComment(comId){
+      axiosClient.delete(`/question/${this.$route.params.id}/comment/${comId}/delete_comment/`)
+          .then((response) => {
+            window.location.href = `/question/${this.$route.params.id}`;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
     },
 
     deleteAnswer(answerId){

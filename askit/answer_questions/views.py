@@ -221,7 +221,21 @@ def submit_comment(request, question_id):
                         'content': comment.content,
                         'pub_date': comment.pub_date}
         return JsonResponse(comment_dict)
-
+    
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_comment(request, question_id, comment_id):
+    if request.method == 'DELETE':
+        # post_data = json.loads(request.body)
+        # comment_id = post_data['comment_id']
+        comment = Comment.objects.get(id=comment_id)
+        if request.user == comment.author:
+            comment.delete()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this comment"})
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])

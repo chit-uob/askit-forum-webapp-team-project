@@ -15,13 +15,65 @@
             <i class="fa fa-arrow-down"></i>
           </button>
         </div>
+        
         <div class="flex-grow">
           <div class="flex justify-between items-center mb-2">
             <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
-            <button  v-if=" question.author != 'adinotadmin@mail.com' "   v-on:click="deleteQuestion" type="button"
+            <div class="relative inline-block text-left">
+    <button
+      class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+      type="button"
+      @click="toggleDropdown"
+    >
+      <span>Options</span>
+    </button>
+
+    <div
+      class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+      v-show="showDropdown"
+    >
+      <div class="py-1">
+        <button
+          class="flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          @click="editItem"
+        >
+        <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16"> <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" fill="blue"></path> </svg>        
+          Edit
+        </button>
+        <button v-on:click="deleteQuestion"
+          class="flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900"
+          
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+            <!-- <div class="relative">
+              <button @click="toggleMenu"
+                      class=" justify-between mr-20 px-4 py-2 rounded-md border-2 border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Options
+              </button>
+              <div v-show="showMenu"
+                  class=" justify-between mr-20 placeholder:absolute z-10 w-56 mt-2  bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+                <button class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                  Option 1
+                </button>
+                <button class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                  Option 2
+                </button>
+              </div>
+            </div> -->
+            <!-- <button    v-on:click="deleteQuestion" type="button"
                       class="justify-between rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
                 Delete Question
-            </button>
+                v-if=" question.author = 'adinotadmin@mail.com' " 
+            </button> -->
           </div>
           <div class="mb-2 flex justify-between">
             <p class="p-2 font-sans font-thin w-full">Author: {{ question.author }}</p>
@@ -138,10 +190,10 @@
               <p class="text-lg">{{ answer.content }}</p>
             </div>
           </div>
-          <!-- <button  v-if=" answer.author != 'adinotadmin@mail.com' "   v-on:click="deleteQuestion" type="button"
+          <button  v-if=" answer.author != 'adinotadmin@mail.com' "   v-on:click="deleteAnswer" type="button"
                     class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
-              Delete Question
-          </button> -->
+              Delete Answer
+          </button>
         </div>
 
       </div>
@@ -158,6 +210,7 @@ export default {
     return {
       showForm: false,
       showComments: false,
+      showDropdown: false,
 
       question: {
         title: "Loading...",
@@ -193,6 +246,9 @@ export default {
         });
   },
   methods: {
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
+    },
     addAnswer() {
       console.log(this.answerInput)
       axiosClient.post(`/question/${this.$route.params.id}/submit_answer/`,
@@ -224,6 +280,17 @@ export default {
             console.log(error);
           });
     },
+
+    deleteAnswer(){
+      axiosClient.delete(`/question/${this.$route.params.id}/delete_answer/`)
+          .then((response) => {
+            this.answers = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+    
 
     upvoteQuestion() {
       axiosClient.post(`/question/${this.$route.params.id}/upvote/`)

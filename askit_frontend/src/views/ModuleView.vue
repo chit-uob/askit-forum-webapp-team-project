@@ -12,20 +12,6 @@
     <div class="w-[70%] pb-[50px]">
       <div class="inline-flex w-full justify-between p-10">
         <h1 class="text-5xl font-bold">{{ $route.params.mod }}</h1>
-        <div>
-          <a :href="`/advanced-search/`">
-            <button type="submit"
-                    class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
-              Advanced Search
-            </button>
-          </a>
-          <a :href="`/ask/${$route.params.mod}`">
-            <button type="submit"
-                    class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
-              Ask Question
-            </button>
-          </a>
-        </div>
       </div>
       <div>
       <h2 class="pl-10 text-2xl  mb-6">Popular questions</h2>
@@ -92,16 +78,35 @@
     </div>
     <div class="hidden w-[30%] py-11 pr-9 md:block">
       <div class=" rounded-lg border-[3px] border-black p-2" style="box-shadow: .2em .2em;">
-        <div class=" text-center font-medium pb-1 mb-2 border-b-2 border-black border-dotted">Admin tools</div>
-        <div class=" flex-wrap flex gap-2 ">
+        <!-- <div class=" text-center font-medium pb-1 mb-2 border-b-2 border-black border-dotted">Admin tools</div>
+        -->
+        <div class=" flex-col flex gap-2 ">
+          <a :href="`/advanced-search/`" class="w-full">
             <button type="submit"
-                    class=" rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
+              Advanced Search
+            </button>
+          </a>
+          <a :href="`/ask/${$route.params.mod}`" class="w-full">
+            <button type="submit"
+                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
+              Ask Question
+            </button>
+          </a>
+            <button type="submit"
+                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
               Add members
             </button>
-            <button v-on:click="deleteModule" type="button"
-                class=" rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+            <button v-on:click="deleteModule" type="button" class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
                 Delete Course
             </button>
+            <a :href="`/course-settings/`" class="w-full">
+              <div>
+              <button type="submit" class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
+                Course Settings
+              </button>
+              </div>
+            </a>
         </div>
       </div>
 

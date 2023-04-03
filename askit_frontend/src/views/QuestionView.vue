@@ -149,7 +149,7 @@
       <div class="flex items-center justify-between">
         <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
         <p class="text-lg">{{ com.content }}</p>
-        <button v-on:click="deleteComment(com.id)" class="bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
+        <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)" class="bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
           Delete comment
         </button>
       </div>

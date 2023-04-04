@@ -78,7 +78,7 @@ export default {
             //axiosClient.defaults.headers.common['Authorization'] = "Token " + token
 
             //localStorage.setItem("token", token)
-           // this.$router.push(this.$route.query.redirect || '/')
+           this.$router.push(this.$route.query.redirect || '/')
           })
           .catch(error => {
             console.log(error)

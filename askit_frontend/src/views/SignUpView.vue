@@ -94,8 +94,8 @@ export default {
       axiosClient.post('/v1/users/', {
         username: this.username,
         email: this.username,
-
-        password: this.password
+        password: this.password,
+        re_password: this.password,
       })
           .then(response => {
             

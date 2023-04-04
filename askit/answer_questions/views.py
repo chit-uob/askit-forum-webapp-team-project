@@ -226,11 +226,11 @@ def submit_comment(request, question_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
-def delete_comment(request, question_id, comment_id):
+def delete_comment(request, question_id, com_id):
     if request.method == 'DELETE':
         # post_data = json.loads(request.body)
         # comment_id = post_data['comment_id']
-        comment = Comment.objects.get(id=comment_id)
+        comment = Comment.objects.get(id=com_id)
         if request.user == comment.author:
             comment.delete()
             return JsonResponse({"success": True})

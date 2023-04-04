@@ -11,7 +11,7 @@ import LoginView from "@/views/LoginView.vue";
 import SignUpView from "@/views/SignUpView.vue";
 import SearchView from "@/views/SearchView.vue";
 import AdvancedSearchView from "@/views/AdvancedSearchView.vue";
-import addMembersView from "@/views/addMembersView"; 
+import courseSettingsVue from "@/views/CourseSettings.vue";
 
 const routes = [
     {
@@ -70,10 +70,10 @@ const routes = [
         component: CreateModule
     },
     {
-        path: '/module/:mod/add-members',
-        name: 'add-members',
-        component: addMembersView
-    },
+        path: '/course_settings',
+        name: 'course_settings',
+        component: courseSettingsVue
+    }
 ]
 
 const router = createRouter({

@@ -70,7 +70,7 @@ const routes = [
         component: CreateModule
     },
     {
-        path: '/add-members',
+        path: '/module/:mod/add-members',
         name: 'add-members',
         component: addMembersView
     },

@@ -93,7 +93,7 @@
               Ask Question
             </button>
           </a>
-          <a href="/add-members">
+          <a :href= "`/module/${$route.params.mod}/add-members`">
             <button v-if="admin" type="submit"
                     class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
               Add members

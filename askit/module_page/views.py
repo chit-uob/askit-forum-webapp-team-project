@@ -1,5 +1,8 @@
 from django.http import JsonResponse
-from home_page.models import Question, Module, Answer
+import json
+from django.views.decorators.csrf import csrf_exempt
+from home_page.models import Question, Module, Answer, UserProfile
+from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -79,3 +82,50 @@ def is_admin(request,mod):
         return JsonResponse({'admin': True } )
     else:
         return JsonResponse({'admin': False } )
+    
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_all_users(request,mod):
+    users = User.objects.all()
+    the_module = Module.objects.get(title=mod)
+    user_array = []
+    for user in users:
+        print(user)
+        userProfile = UserProfile.objects.get(user = user)
+        admin = user in the_module.admins.all()
+        member = user in the_module.members.all() 
+        data = {'email': user.username,
+                'first_name': userProfile.first_name,
+                'last_name': userProfile.last_name,
+                'admin': admin,
+                'member': member,
+        }
+        user_array.append(data)
+    return JsonResponse(user_array, safe=False)
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def update_roles(request, mod):
+    if request.method == 'POST':
+        print(request.body)
+        post_data_array = json.loads(request.body)
+        for post_data in post_data_array:
+            username = post_data['email']
+            member = post_data['member']
+            admin = post_data['admin']
+            module = Module.objects.get(title=mod)
+            user = User.objects.get(username = username)
+            if member:
+                module.members.add(user)
+            else:
+                module.members.remove(user)
+            if admin:
+                module.admins.add(user)
+            else:
+                module.admins.remove(user)
+            module.save()
+        return JsonResponse({"success": True})
+

@@ -12,5 +12,4 @@ urlpatterns = [
     path('api/search/', include('search.urls')),
     path('api/signup/',include('signup.urls')),
     path('api/create_module/', include('create_module.urls')),
-    path('api/course-settings/', include('course_settings.urls')),
 ]

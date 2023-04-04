@@ -77,7 +77,7 @@ const routes = [
     },
 
     {
-        path: '/course_settings',
+        path: '/module/:mod/course-settings',
         name: 'course_settings',
         component: courseSettingsVue
     }

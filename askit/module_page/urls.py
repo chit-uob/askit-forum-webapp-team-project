@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('<str:mod>/admin', views.is_admin,name='is_admin'),
     path('<str:mod>/getUsers', views.get_all_users,name='get_Users'),
     path('<str:mod>/updateRoles', views.update_roles,name='update_role'),
+    path('<str:mod>/course-settings/', include('course_settings.urls')),
 ]

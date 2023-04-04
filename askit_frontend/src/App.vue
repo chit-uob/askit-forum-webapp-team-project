@@ -1,6 +1,6 @@
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <nav v-if="enable" class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
+  <nav v-if="enable" class="bg-teal-100 px-2 py-1 sm:px-4 border-b-[3px] border-black h-[62px]" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
         <span class="text-2xl font-bold">ASK.IT</span>
@@ -13,10 +13,10 @@
             <i class="fa fa-search" aria-hidden="true"></i>
           </div>
           <input type="search" id="default-search"
-                 class="block w-full rounded-lg border border-teal-400 bg-teal-50 p-4 pl-10 text-sm text-gray-900 focus:border-teal-500 focus:ring-teal-500"
+                 class="block w-full h-[45px] rounded-lg border-2 border-black bg-white p-4 pl-10 text-sm text-gray-900 focus:border-teal-500 focus:ring-teal-500"
                  placeholder="Search questions" v-model="searchTerm" required>
           <button type="submit"
-                  class="absolute rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white right-2.5 bottom-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                  class="absolute rounded-lg bg-blue-700 px-4 py-1 text-sm font-medium text-white h-[33px] right-2.5 bottom-1.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
             Search
           </button>
         </div>
@@ -68,7 +68,7 @@
     </div>
   </nav>
   <div class="flex">
-    <div class="hidden flex-col justify-items-center bg-cyan-100 w-[175px] md:block">
+    <div class="hidden flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
 <!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
 <!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->

@@ -114,20 +114,19 @@ export default {
       handler: function () {
         if (this.$route.path.startsWith('/log-in') ||
             this.$route.path.startsWith('/sign-up') ||
-            this.$route.path.startsWith('/privacy')
+            this.$route.path.startsWith('/privacy') ||
+            this.$route.path.startsWith('/password/reset')
         ) {
-        if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/password/reset'))) {
-          this.enable = false
           if (this.$store.state.isAuthenticated) {
             this.$router.push("/")
           }
           this.enable = false
         } else {
+          console.log("here")
           this.enable = true
-        }
-        if (!this.$store.state.isAuthenticated && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
-        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')) || (this.$route.path.startsWith('/password/reset')))) {
-          this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
+          if (!this.$store.state.isAuthenticated) {
+            this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
+          }
         }
       }
     }
@@ -137,11 +136,14 @@ export default {
 
     const token = this.$store.state.token
 
+    console.log(token)
+
     if (token) {
       axiosClient.defaults.headers.common['Authorization'] = "Token " + token
     } else {
       axiosClient.defaults.headers.common['Authorization'] = ''
     }
+
   },
   data() {
     return {
@@ -194,7 +196,7 @@ export default {
     }
   },
   created() {
-    if (this.enable) {
+    if (this.$store.state.isAuthenticated) {
       this.loadModules()
     }
   },

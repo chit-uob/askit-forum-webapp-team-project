@@ -18,7 +18,7 @@
           <div><input type="checkbox" name="admin" :id="`admin_`+user.email" :checked="user.admin" v-on:click="adminsChecked(index)"></div>
         </div>
       </div>
-      <button v-on:click="update" type="button">Update</button>
+      <button v-on:click="update" type="button" class="p-2 my-2 rounded border-black border-2">Update</button>
     </div>
   </div>
 </div>

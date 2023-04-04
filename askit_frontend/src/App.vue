@@ -173,7 +173,6 @@ export default {
     logout() {
       axiosClient.post('/v1/token/logout/')
           .then(response => {
-            console.log(response)
 
             this.$store.commit('removeToken')
 

@@ -104,9 +104,7 @@ export default {
               first_name: this.firstname,
               last_name: this.lastname,
             })
-            console.log(this.$route.query.redirect)
             this.$router.push({name: 'LogIn', query: {redirect: this.$route.query.redirect}})
-            console.log(response)
           })
           .catch(error => {
             console.log(error)

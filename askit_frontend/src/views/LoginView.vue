@@ -68,7 +68,6 @@ export default {
 
       axiosClient.post('/v1/token/login/', formData)
           .then(response => {
-            console.log(response)
 
             const token = response.data.auth_token
 

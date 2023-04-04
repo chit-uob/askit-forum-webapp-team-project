@@ -21,6 +21,7 @@
         </div>
         <div>
           <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
+          <button v-on:click="redirectToResetPassword" class="text-blue-400 hover:underline hover:text-blue-500">Forgot password?</button>
         </div>
       </form>
 
@@ -92,6 +93,9 @@ export default {
     },
     redirectToSignUp() {
       this.$router.push({name: 'SignUp', query: {redirect: this.$route.query.redirect}})
+    },
+    redirectToResetPassword() {
+      this.$router.push({name: 'ForgotPassword', query: {redirect: this.$route.query.redirect}})
     }
   }
 

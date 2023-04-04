@@ -68,14 +68,9 @@
     </div>
   </nav>
   <div class="flex">
-    <div class="hidden flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black">
+    <div class="hidden flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black"
+         v-if="enable">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->
-<!--      </div>-->
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
-<!--      </div>-->
       <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
         <a :href="'/module/' + module.title" class="text-sky-600 hover:underline"><p class="p-8">{{ module.title }}</p>
         </a>
@@ -117,26 +112,27 @@ export default {
   watch: {
     $route: {
       handler: function () {
+        if (this.$route.path.startsWith('/log-in') ||
+            this.$route.path.startsWith('/sign-up') ||
+            this.$route.path.startsWith('/privacy')
+        ) {
         if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/password/reset'))) {
           this.enable = false
           if (this.$store.state.isAuthenticated) {
             this.$router.push("/")
           }
+          this.enable = false
         } else {
           this.enable = true
         }
+        if (!this.$store.state.isAuthenticated && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
         if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')) || (this.$route.path.startsWith('/password/reset')))) {
           this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
         }
-        if (this.$route.path.startsWith('/privacy')) {
-          this.enable = false
-        }
-
       }
     }
   },
   beforeCreate() {
-
     this.$store.commit('initializeStore')
 
     const token = this.$store.state.token
@@ -186,17 +182,22 @@ export default {
           .catch(error => {
             console.log(error)
           })
+    },
+    loadModules() {
+      axiosClient.get('/module/list/')
+          .then(response => {
+            this.modules = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
     }
   },
   created() {
-    axiosClient.get('/module/list/')
-        .then(response => {
-          this.modules = response.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-  }
+    if (this.enable) {
+      this.loadModules()
+    }
+  },
 }
 
 

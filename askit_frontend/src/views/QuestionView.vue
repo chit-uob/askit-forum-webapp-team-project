@@ -370,7 +370,8 @@ export default {
     deleteComment(comId){
       axiosClient.delete(`/question/${this.$route.params.id}/comment/${comId}/delete_comment/`)
           .then((response) => {
-            window.location.href = `/question/${this.$route.params.id}`;
+            // window.location.href = `/question/${this.$route.params.id}`;
+            this.all_comments = this.all_comments.filter(comment => comment.id !== comId);
           })
           .catch((error) => {
             console.log(error);

@@ -6,7 +6,6 @@
         <h1 class="text-5xl font-bold">Welcome back</h1>
         <h1 class="text-5xl italic font-bold">user</h1>
       </div>
-
       <div class="grid grid-cols-2">
         <div class="grid grid-rows-3 text-right self-start">
           <h2 class="self-start text-3xl font-bold">Student name</h2>
@@ -28,14 +27,20 @@
           <font-awesome-icon icon="bell" class="text-xl text-center font-bold mb-5 ml-2"/>
         </div>
         <hr class="border-gray-400 mb-5">
+<!--        hard coded the below part-->
         <div>Notification 1</div>
         <div>Notification 2</div>
         <div>Notification 3</div>
       </div>
-      <div class="bg-white border-2 border-gray-400 rounded-md p-5">
+      <div class="box-content bg-white border-2 border-gray-400 rounded-md p-5">
         <div class="text-xl text-center font-bold mb-5">Calendar</div>
         <hr class="border-gray-400 mb-5">
       </div>
+    </div>
+    <br>
+    <br>
+    <div class="bg-white border-2 border-gray-400 rounded-md p-5 px-10">
+
     </div>
   </div>
   </div>

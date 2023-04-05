@@ -15,6 +15,10 @@
           </button>
           <label v-if="invalid" class="text-red-600 pl-4" >{{ errorMessage }}</label>
         </div>
+        <br>
+        <div>
+          <button v-on:click="redirectToLogIn" class="text-blue-400 hover:underline hover:text-blue-500">Log In?</button>
+        </div>
         <div>
           <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
         </div>
@@ -86,6 +90,9 @@ export default {
     },
     redirectToSignUp() {
       this.$router.push({name: 'SignUp', query: {redirect: this.$route.query.redirect}})
+    },
+    redirectToLogIn(){
+      this.$router.push({name: 'LogIn', query: {redirect: this.$route.query.redirect}})
     }
   }
 

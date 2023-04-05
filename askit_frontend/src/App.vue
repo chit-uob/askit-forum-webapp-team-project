@@ -1,5 +1,6 @@
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <nav v-if="enable" class="bg-teal-100 px-2 py-1 sm:px-4 border-b-[3px] border-black h-[62px]" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
@@ -67,9 +68,14 @@
       </button>
     </div>
   </nav>
+    <div class="absolute md:hidden">
+    <button class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded" @click="toggleModule">
+      Select module
+    </button>
+  </div>
   <div class="flex">
-    <div class="hidden flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black"
-         v-if="enable">
+    <div class="flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black"
+         v-if="enable" :class="{ hidden: !showModule }">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
       <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
         <a :href="'/module/' + module.title" class="text-sky-600 hover:underline"><p class="p-8">{{ module.title }}</p>
@@ -150,10 +156,14 @@ export default {
       showMobileNav: false,
       searchTerm: '',
       enable: true,
-      modules: []
+      modules: [],
+      showModule: false
     }
   },
   methods: {
+    toggleModule() {
+      this.showModule = !this.showModule;
+    },
     showNav() {
       this.showMobileNav = !this.showMobileNav;
     },

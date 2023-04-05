@@ -22,7 +22,7 @@
     <br>
 
     <div class="grid grid-cols-2 gap-5 px-10">
-      <div class="bg-white border-2 border-gray-400 rounded-md p-5">
+      <div class="bg-white border-2 border-gray-400 rounded-md p-5" style="box-shadow: gray.27em .27em;">
         <div class="flex items-center justify-center">
           <span class="text-xl text-center font-bold mb-5">Notifications</span>
           <font-awesome-icon icon="bell" class="text-xl text-center font-bold mb-5 ml-2"/>
@@ -32,12 +32,77 @@
         <div>Notification 2</div>
         <div>Notification 3</div>
       </div>
-      <div class="bg-white border-2 border-gray-400 rounded-md p-5">
+      <div class="bg-white border-2 border-gray-400 rounded-md p-5" style="box-shadow: gray.27em .27em;">
         <div class="text-xl text-center font-bold mb-5">Calendar</div>
         <hr class="border-gray-400 mb-5">
       </div>
     </div>
+    <div class="mx-10 mt-16 bg-white border-2 border-gray-400 rounded-md grid grid-cols-2" style="box-shadow: gray.27em .27em;">
+        <div>
+          <h3 class="text-xl text-left font-bold my-5 ml-5">Questions</h3>
+           <a href="`#`"
+      class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black " style="box-shadow: .13em .13em;">
+        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+          <div class=" self-start "> votes</div>
+          <div class=" self-center "> answers</div>
+          <span class=" self-end  "> views</span>
+        </div>
+
+        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
+          <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400"></div>
+          <div class=" self-center ">Asked by <span   class="text-blue-500 hover:underline hover:text-blue-400"></span><span  class="">Anonymous</span></div>
+          <div class="flex">
+            <div  class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400"></div>
+          </div>
+          <div   class="flex">
+            <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
+          </div>
+        </div>
+
+        <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+          <div class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+            <div class=" text-center leading-[0.9] text-[38px] font-semibold "></div>
+            <div class=" text-center text-[16px] font-medium leading-none "></div>
+          </div>
+        </div>
+      </a>
+        </div>
+      <div>
+          <h3 class="text-xl text-left font-bold my-5 ml-10">Answers</h3>
+        <a href="`#`"
+      class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black " style="box-shadow: .13em .13em;">
+        <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+          <div class=" self-start "> votes</div>
+          <div class=" self-center "> answers</div>
+          <span class=" self-end  "> views</span>
+        </div>
+
+        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
+          <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400"></div>
+          <div class=" self-center ">Asked by <span   class="text-blue-500 hover:underline hover:text-blue-400"></span><span  class="">Anonymous</span></div>
+          <div class="flex">
+            <div  class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400"></div>
+          </div>
+          <div   class="flex">
+            <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
+          </div>
+        </div>
+
+        <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+          <div class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+            <div class=" text-center leading-[0.9] text-[38px] font-semibold "></div>
+            <div class=" text-center text-[16px] font-medium leading-none "></div>
+          </div>
+        </div>
+      </a>
+      </div>
+
+      </div>
+
+
+
   </div>
+
   </div>
 </template>
 

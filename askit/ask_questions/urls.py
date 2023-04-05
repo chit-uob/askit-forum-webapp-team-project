@@ -7,4 +7,5 @@ urlpatterns = [
     path('tagging/', views.tag_api, name='tagApi'),
     path('spacy/', views.spacy_tag, name='spacyTag'),
     path('module/<str:mod>/', views.submit_question, name='submitQuestions'),
+    path('suggest/<str:mod>/', views.suggest, name='suggest'),
 ]

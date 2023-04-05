@@ -25,9 +25,9 @@ export default {
       suggestQuestion: {
         title: 'suggest question title',
         explanation: 'suggest question explanation',
-        tried: 'suggest question tried',
         tags: 'suggest question tags',
         summary: 'suggest question summary',
+        id: -1,
       },
       showSuggestQuestion: false,
     }
@@ -38,8 +38,11 @@ export default {
       this.askLoadWheel = 'flex pl-1'
 
       this.getSuggestQuestion()
-      return;
 
+    },
+
+
+    submitQuestion() {
       axiosClient.post(`/ask/module/${this.$route.params.mod}/`, {
         title: this.questionTitle,
         explanation: this.questionExplanation,
@@ -112,18 +115,33 @@ export default {
     },
 
     getSuggestQuestion() {
-      axiosClient.post("/ask/suggest/", {
+      axiosClient.post(`/ask/suggest/${this.$route.params.mod}/`, {
         title: this.questionTitle,
         explanation: this.questionExplanation,
+        tags : this.questionTags,
       })
           .then((response) => {
             console.log(response);
+            if (response.data.success === false) {
+              this.submitQuestion();
+              return;
+            }
             this.suggestQuestion = response.data;
             this.showSuggestQuestion = true;
           })
           .catch((error) => {
             console.log(error);
           });
+    },
+
+    acceptSuggestion() {
+      this.showSuggestQuestion = false;
+      window.location.href = '/question/' + this.suggestQuestion.id;
+    },
+
+    denySuggestion() {
+      this.showSuggestQuestion = false;
+      this.submitQuestion();
     },
   }
 }
@@ -142,10 +160,10 @@ export default {
         <p class="mb-4">Explanation: {{ suggestQuestion.explanation }}</p>
         <p class="mb-4">Tags: {{ suggestQuestion.tags }}</p>
         <div class="flex">
-          <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-1">
+          <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="acceptSuggestion">
             Yes, DELETE my question and view that question
           </button>
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-1">
+          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="denySuggestion">
             No
           </button>
         </div>

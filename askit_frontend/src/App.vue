@@ -69,7 +69,7 @@
     </div>
   </nav>
     <div class="absolute md:hidden">
-    <button class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded" @click="toggleModule">
+    <button class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded" @click="toggleModule" v-if="enable">
       Select module
     </button>
   </div>

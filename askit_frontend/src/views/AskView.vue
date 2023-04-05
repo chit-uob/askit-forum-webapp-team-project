@@ -36,7 +36,10 @@ export default {
     addQuestion() {
       this.isAskDisabled = true
       this.askLoadWheel = 'flex pl-1'
+
+      this.getSuggestQuestion()
       return;
+
       axiosClient.post(`/ask/module/${this.$route.params.mod}/`, {
         title: this.questionTitle,
         explanation: this.questionExplanation,
@@ -108,7 +111,7 @@ export default {
           });
     },
 
-    get_suggest_question() {
+    getSuggestQuestion() {
       axiosClient.post("/ask/suggest/", {
         title: this.questionTitle,
         explanation: this.questionExplanation,

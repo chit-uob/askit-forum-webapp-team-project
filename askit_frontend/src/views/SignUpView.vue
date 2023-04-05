@@ -24,15 +24,21 @@
           <input :class="invalidPasswordBox" type="password" name="password" v-model="password" placeholder="Password"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
+        <div class="mb-4">
+          <label for="re_password" class="block text-gray-700 font-bold mb-2">Password confirmation</label>
+          <input type="password" name="re_password" v-model="re_password" placeholder="Re-enter Password" :class="invalidPasswordBox" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
         <div class="mb-3">
           <p class="text-gray-700 font-bold mb-2"> By signing up, you agree to our <a href="/privacy" target="_blank" class="text-blue-400 hover:underline hover:text-blue-500">Privacy Policy</a>.</p>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 flex content-center">
           <button :disabled="!isValidEmail || isFormComplete" type="submit"
-                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
+                  class="flex-none h-[40px] bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
             Sign up
           </button>
-          <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessage }}</label>
+          <div class="ml-4">
+            <label v-if="invalid" class="text-red-600 ">{{ errorMessage }}</label>
+          </div>
         </div>
         <div>
           <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
@@ -64,6 +70,7 @@ export default {
     return {
       username: '',
       password: '',
+      re_password: '',
       firstname: '',
       lastname: '',
       validEmail: '',
@@ -85,7 +92,7 @@ export default {
       }
     },
     isFormComplete(){
-      return (this.username === '') || (this.password === '') || (this.firstname === '') || (this.lastname === '');
+      return (this.username === '') || (this.password === '') || (this.re_password === '') || (this.firstname === '') || (this.lastname === '');
     }
   },
   methods: {
@@ -95,7 +102,7 @@ export default {
         username: this.username,
         email: this.username,
         password: this.password,
-        re_password: this.password,
+        re_password: this.re_password,
       })
           .then(response => {
             

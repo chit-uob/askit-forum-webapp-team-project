@@ -91,13 +91,18 @@ def get_all_users(request,mod):
     the_module = Module.objects.get(title=mod)
     user_array = []
     for user in users:
-        print(user)
-        userProfile = UserProfile.objects.get(user = user)
+        try:
+            userProfile = UserProfile.objects.get(user = user)
+            first_name = userProfile.first_name
+            last_name = userProfile.last_name
+        except:
+            first_name = "n/a"
+            last_name = ""
         admin = user in the_module.admins.all()
         member = user in the_module.members.all() 
         data = {'email': user.username,
-                'first_name': userProfile.first_name,
-                'last_name': userProfile.last_name,
+                'first_name': first_name,
+                'last_name': last_name,
                 'admin': admin,
                 'member': member,
         }

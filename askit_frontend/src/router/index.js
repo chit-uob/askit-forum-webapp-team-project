@@ -11,7 +11,9 @@ import LoginView from "@/views/LoginView.vue";
 import SignUpView from "@/views/SignUpView.vue";
 import SearchView from "@/views/SearchView.vue";
 import AdvancedSearchView from "@/views/AdvancedSearchView.vue";
-import addMembersView from "@/views/addMembersView"; 
+import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
+import ResetPasswordView from "@/views/ResetPasswordView.vue";
+import addMembersView from "@/views/addMembersView";
 import courseSettingsVue from "@/views/CourseSettings.vue";
 
 const routes = [
@@ -49,6 +51,16 @@ const routes = [
         path: '/log-in',
         name: 'LogIn',
         component: LoginView
+    },
+    {
+        path: '/password/reset',
+        name: 'ForgotPassword',
+        component: ForgotPasswordView
+    },
+    {
+        path: '/password/reset/confirm/:uid/:token',
+        name: 'ResetPassword',
+        component: ResetPasswordView
     },
     {
         path: '/sign-up',

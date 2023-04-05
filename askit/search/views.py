@@ -100,11 +100,10 @@ def advanced_search(request):
 
         if request.GET['answered']:
             answered = request.GET['answered']
-            if answered == 'no':
+            if answered == 'yes':
+                adv_result = adv_result.filter(answer__isnull=False)
+            elif answered == 'no':
                 adv_result = adv_result.filter(answer__isnull=True)
-            elif answered == 'yes':
-                adv_result = adv_result.filter(answer__isnull=False).distinct()
-
 
                 
         question_array = []

@@ -1,6 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <nav v-if="enable" class="bg-teal-200 px-2 py-2.5 sm:px-4" id="nav-vue">
+
+  <nav v-if="enable" class="bg-teal-100 px-2 py-1 sm:px-4 border-b-[3px] border-black h-[62px]" id="nav-vue">
     <div class="container mx-auto flex flex-wrap items-center justify-between">
       <router-link to="/" class="pl-4">
         <span class="text-2xl font-bold">ASK.IT</span>
@@ -13,10 +14,10 @@
             <i class="fa fa-search" aria-hidden="true"></i>
           </div>
           <input type="search" id="default-search"
-                 class="block w-full rounded-lg border border-teal-400 bg-teal-50 p-4 pl-10 text-sm text-gray-900 focus:border-teal-500 focus:ring-teal-500"
+                 class="block w-full h-[45px] rounded-lg border-2 border-black bg-white p-4 pl-10 text-sm text-gray-900 focus:border-teal-500 focus:ring-teal-500"
                  placeholder="Search questions" v-model="searchTerm" required>
           <button type="submit"
-                  class="absolute rounded-lg bg-blue-700 px-4 py-2 text-sm font-medium text-white right-2.5 bottom-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                  class="absolute rounded-lg bg-blue-700 px-4 py-1 text-sm font-medium text-white h-[33px] right-2.5 bottom-1.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
             Search
           </button>
         </div>
@@ -67,11 +68,17 @@
       </button>
     </div>
   </nav>
+    <div class="absolute md:hidden">
+    <button class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded" @click="toggleModule" v-if="enable">
+      Select module
+    </button>
+  </div>
   <div class="flex">
-    <div class="hidden flex-col justify-items-center bg-cyan-100 w-[175px] md:block" v-if="enable">
+    <div class="flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black"
+         v-if="enable" :class="{ hidden: !showModule }">
       <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
-      <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black" style="box-shadow: .13em .13em;">
-          <a :href="'/module/' + module.title" class="self-center text-sky-600 hover:no-underline text-center no-underline"><p class="py-8 px-2 truncate text-black">{{ module.title }}</p>
+      <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
+        <a :href="'/module/' + module.title" class="text-sky-600 hover:underline"><p class="p-8">{{ module.title }}</p>
         </a>
       </div>
     </div>
@@ -83,24 +90,22 @@
   <footer class="rounded-lg bg-sky-100 p-4 shadow md:flex md:items-center md:justify-between md:p-6">
     <span class="text-sm text-gray-500 sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
     </span>
-    <span class="text-sm text-gray-500 sm:text-center mr-1">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
+    <span class="text-sm text-gray-500 sm:text-center">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
     </span>
-    <span class="text-sm text-gray-500 sm:text-center"><a target="_blank" href="/privacy" class="mr-4 hover:underline md:mr-1">Privacy Policy</a>
-    </span>
-    <!-- <ul class="mt-3 flex flex-wrap items-center text-sm text-gray-500 sm:mt-0"> -->
+    <ul class="mt-3 flex flex-wrap items-center text-sm text-gray-500 sm:mt-0">
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">About</a>-->
       <!--        </li>-->
-      <!-- <li>
+      <li>
         <a target="_blank" href="/privacy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-      </li> -->
+      </li>
       <!--        <li>-->
       <!--            <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>-->
       <!--        </li>-->
       <!--        <li>-->
       <!--            <a href="#" class="hover:underline">Contact</a>-->
       <!--        </li>-->
-    <!-- </ul> -->
+    </ul>
   </footer>
 
 </template>
@@ -113,45 +118,52 @@ export default {
   watch: {
     $route: {
       handler: function () {
-        if ((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up'))) {
-          this.enable = false
+        if (this.$route.path.startsWith('/log-in') ||
+            this.$route.path.startsWith('/sign-up') ||
+            this.$route.path.startsWith('/privacy') ||
+            this.$route.path.startsWith('/password/reset')
+        ) {
           if (this.$store.state.isAuthenticated) {
             this.$router.push("/")
           }
-        } else {
-          this.enable = true
-        }
-        if (!(this.$store.state.isAuthenticated) && !((this.$route.path.startsWith('/log-in')) || (this.$route.path.startsWith('/sign-up')) || (this.$route.path.startsWith('/privacy')))) {
-          this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
-        }
-        if (this.$route.path.startsWith('/privacy')) {
           this.enable = false
+        } else {
+          console.log("here")
+          this.enable = true
+          if (!this.$store.state.isAuthenticated) {
+            this.$router.push({name: 'LogIn', query: {redirect: this.$route.path}})
+          }
         }
-
       }
     }
   },
   beforeCreate() {
-
     this.$store.commit('initializeStore')
 
     const token = this.$store.state.token
+
+    console.log(token)
 
     if (token) {
       axiosClient.defaults.headers.common['Authorization'] = "Token " + token
     } else {
       axiosClient.defaults.headers.common['Authorization'] = ''
     }
+
   },
   data() {
     return {
       showMobileNav: false,
       searchTerm: '',
       enable: true,
-      modules: []
+      modules: [],
+      showModule: false
     }
   },
   methods: {
+    toggleModule() {
+      this.showModule = !this.showModule;
+    },
     showNav() {
       this.showMobileNav = !this.showMobileNav;
     },
@@ -171,7 +183,6 @@ export default {
     logout() {
       axiosClient.post('/v1/token/logout/')
           .then(response => {
-            console.log(response)
 
             this.$store.commit('removeToken')
 
@@ -182,17 +193,22 @@ export default {
           .catch(error => {
             console.log(error)
           })
+    },
+    loadModules() {
+      axiosClient.get('/module/list/')
+          .then(response => {
+            this.modules = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
     }
   },
   created() {
-    axiosClient.get('/module/list/')
-        .then(response => {
-          this.modules = response.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-  }
+    if (this.$store.state.isAuthenticated) {
+      this.loadModules()
+    }
+  },
 }
 
 

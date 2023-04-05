@@ -14,7 +14,10 @@
     "dayjs": "^1.11.7",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^3.0.0-3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",

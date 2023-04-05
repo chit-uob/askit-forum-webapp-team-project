@@ -10,9 +10,7 @@ urlpatterns = [
     path('<int:question_id>/comment/<int:com_id>/delete_comment/', views.delete_comment, name='delete_comment'),
     path('<int:question_id>/upvote/', views.upvote_question, name='upvote'),
     path('<int:question_id>/downvote/', views.downvote_question, name='downvote'),
-    path('<int:question_id>/delete/', views.delete_question, name='delete_question'),
     path('<int:question_id>/answer/<int:answer_id>/upvote/', views.upvote_answer, name='upvote_answer'),
     path('<int:question_id>/answer/<int:answer_id>/downvote/', views.downvote_answer, name='downvote_answer'),
-    # path('<int:question_id>/answer/<int:answer_id>/accept/', views.accept_answer, name='accept_answer'),
     path('RESET/', views.set_up_test_database, name='set_up_test_database'),
 ]

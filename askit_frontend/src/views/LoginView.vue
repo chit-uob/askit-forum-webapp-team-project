@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+  <div class="bg-gradient-to-r from-cyan-100 to-blue-500 min-h-screen flex flex-col justify-center items-center">
     <div class="flex items-center flex-wrap mb-8">
-      <h1 class="text-6xl font-bold text-center font-sans text-black mr-8">ASK.IT</h1>
-      <form @submit.prevent="submitForm" class="bg-white p-8 rounded-lg shadow-md w-96">
+      <h1 class="text-8xl font-bold text-center font-sans text-black mr-8">ASK.IT</h1>
+      <form @submit.prevent="submitForm" class="bg-gray-100 p-8 rounded-lg shadow-md w-96">
         <h1 class="text-3xl font-bold mb-8 text-center">Log in</h1>
         <div class="mb-4">
           <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>

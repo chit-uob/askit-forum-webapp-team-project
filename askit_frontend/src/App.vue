@@ -121,7 +121,8 @@ export default {
         if (this.$route.path.startsWith('/log-in') ||
             this.$route.path.startsWith('/sign-up') ||
             this.$route.path.startsWith('/privacy') ||
-            this.$route.path.startsWith('/password/reset')
+            this.$route.path.startsWith('/password/reset') ||
+            this.$route.path.startsWith('/activate')
         ) {
           if (this.$store.state.isAuthenticated) {
             this.$router.push("/")

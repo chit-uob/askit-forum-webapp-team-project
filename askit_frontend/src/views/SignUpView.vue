@@ -5,22 +5,22 @@
       <form @submit.prevent="submitForm" class="bg-gray-100 p-8 rounded-lg shadow-md w-96">
         <h1 class="text-3xl font-bold mb-8 text-center">Sign up</h1>
         <div class="mb-2">
-          <label for="username" class="block text-gray-700 font-bold mb-1">Email</label>
+          <label for="username" class="block text-black font-bold mb-1">Email</label>
           <input :class="validEmail" type="email" name="username" v-model="username" placeholder="Email"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-2">
-          <label for="firstname" class="block text-gray-700 font-bold mb-1">First name</label>
+          <label for="firstname" class="block text-black font-bold mb-1">First name</label>
           <input type="text" name="firstname" v-model="firstname" placeholder="First name"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 ">
         </div>
         <div class="mb-2">
-          <label for="lastname" class="block text-gray-700 font-bold mb-1">Last name</label>
+          <label for="lastname" class="block text-black font-bold mb-1">Last name</label>
           <input type="text" name="lastname" v-model="lastname" placeholder="Last name"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <div class="mb-2">
-          <label for="password" class="block text-gray-700 font-bold mb-1">Password</label>
+          <label for="password" class="block text-black font-bold mb-1">Password</label>
           <input :class="invalidPasswordBox" type="password" name="password" v-model="password" placeholder="Password"
                  class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>

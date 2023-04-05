@@ -5,11 +5,11 @@
       <form @submit.prevent="submitForm" class="bg-gray-100 p-8 rounded-lg shadow-md w-96">
         <h1 class="text-3xl font-bold mb-8 text-center">Log in</h1>
         <div class="mb-4">
-          <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>
+          <label for="username" class="block text-black font-bold mb-2">Email</label>
           <input type="email" name="username" v-model="username" placeholder="Email" :class="textInput">        
         </div>
         <div class="mb-4">
-          <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
+          <label for="password" class="block text-black font-bold mb-2">Password</label>
           <input type="password" name="password" v-model="password" placeholder="Password" :class="textInput">
         </div>
         <div class="mb-2">

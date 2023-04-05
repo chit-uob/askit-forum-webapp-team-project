@@ -101,7 +101,7 @@ def suggest(request, mod):
     # find the question with the highest similarity rating
     highest_rating = 0
     highest_question = None
-    for question in questions[:50]:  # only look at the first 50 questions to save time
+    for question in questions[:100]:  # only look at the first 100 questions to save time
         # continue if one of the explanations is empty
         if question.explanation == '' or explanation == '':
             continue

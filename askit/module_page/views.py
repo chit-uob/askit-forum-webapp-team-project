@@ -126,6 +126,93 @@ def update_roles(request, mod):
                 module.admins.add(user)
             else:
                 module.admins.remove(user)
-            module.save()
+        module.save()
         return JsonResponse({"success": True})
 
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def update_members(request, mod):
+    success = 0
+    fail = 0
+    if request.method == 'POST':
+        print(request.body)
+        post_data_array = json.loads(request.body)
+        module = Module.objects.get(title=mod)
+        for post_data in post_data_array:
+            try:
+                user = User.objects.get(username = post_data)
+                module.members.add(user) 
+                success += 1
+            except:
+                print('no user')
+                fail += 1
+        module.save()
+        return JsonResponse({"success": success,"fail":fail})
+    
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def remove_members(request, mod):
+    success = 0
+    fail = 0
+    if request.method == 'POST':
+        print(request.body)
+        post_data_array = json.loads(request.body)
+        module = Module.objects.get(title=mod)
+        for post_data in post_data_array:
+            try:
+                user = User.objects.get(username = post_data)
+                module.members.remove(user) 
+                success += 1
+            except:
+                print('no user')
+                fail += 1
+        module.save()
+        return JsonResponse({"success": success,"fail":fail})
+    
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def update_admins(request, mod):
+    success = 0
+    fail = 0
+    if request.method == 'POST':
+        print(request.body)
+        post_data_array = json.loads(request.body)
+        module = Module.objects.get(title=mod)
+        for post_data in post_data_array:
+            try:
+                user = User.objects.get(username = post_data)
+                module.admins.add(user) 
+                success += 1
+            except:
+                print('no user')
+                fail += 1
+        module.save()
+        return JsonResponse({"success": success,"fail":fail})
+    
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def remove_admins(request, mod):
+    success = 0
+    fail = 0
+    if request.method == 'POST':
+        print(request.body)
+        post_data_array = json.loads(request.body)
+        module = Module.objects.get(title=mod)
+        for post_data in post_data_array:
+            try:
+                user = User.objects.get(username = post_data)
+                module.admins.remove(user) 
+                success += 1
+            except:
+                print('no user')
+                fail += 1
+        module.save()
+        return JsonResponse({"success": success,"fail":fail})

@@ -1,7 +1,7 @@
 import json
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from home_page.models import Question, Answer, Tag, Module, Comment, Notification
+from home_page.models import Question, Answer, Tag, Module, Comment, Notification, Activity
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -197,9 +197,12 @@ def submit_answer(request, question_id):
         answer = Answer(question=question, content=content, author=author)
         answer.save()
         notification = Notification(receiver=question.author,
-                                    detail=f"{author.username} has answered your question {question.title}"[:500],
+                                    detail=f"{author.username} has answered your question '{question.title}'"[:500],
                                     link="/question/" + str(question.id))
         notification.save()
+        activity = Activity(author=author, action=f"answered question '{question.title}'"[0:200],
+                            link="/question/" + str(question.id))
+        activity.save()
         answer_dict = {'id': answer.id,
                        'author': getattr(answer.author, 'username', 'Anonymous'),
                        'content': answer.content,
@@ -222,9 +225,12 @@ def submit_comment(request, question_id):
         comment = Comment(question=question, content=content, author=author)
         comment.save()
         notification = Notification(receiver=question.author,
-                                    detail=f"{author.username} has commented on your question {question.title}"[:500],
+                                    detail=f"{author.username} has commented on your question '{question.title}'"[:500],
                                     link="/question/" + str(question.id))
         notification.save()
+        activity = Activity(author=author, action=f"commented on question '{question.title}'"[0:200],
+                            link="/question/" + str(question.id))
+        activity.save()
         comment_dict = {'id': comment.id,
                         'author': getattr(comment.author, 'username', 'Anonymous'),
                         'content': comment.content,

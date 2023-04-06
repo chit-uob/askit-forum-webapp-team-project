@@ -9,7 +9,7 @@ from rest_framework.decorators import authentication_classes, api_view, permissi
 from rest_framework.permissions import IsAuthenticated
 
 # loads nlp here so it doesn't have to be loaded every time a request is made
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load('en_core_web_lg')
 
 def handle_tag_string(tag_string):
     tags = tag_string.split(',')
@@ -105,7 +105,7 @@ def suggest(request, mod):
         # continue if one of the explanations is empty
         if question.explanation == '' or explanation == '':
             continue
-        rating = get_similarity_rating(question.explanation, explanation)
+        rating = get_similarity_rating(question.title + '\n' + question.explanation, title + '\n' + explanation)
         if rating > highest_rating:
             highest_rating = rating
             highest_question = question

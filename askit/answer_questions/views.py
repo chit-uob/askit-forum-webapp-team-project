@@ -221,6 +221,10 @@ def submit_comment(request, question_id):
         author = request.user
         comment = Comment(question=question, content=content, author=author)
         comment.save()
+        notification = Notification(receiver=question.author,
+                                    detail=f"{author.username} has commented on your question {question.title}"[:500],
+                                    link="/question/" + str(question.id))
+        notification.save()
         comment_dict = {'id': comment.id,
                         'author': getattr(comment.author, 'username', 'Anonymous'),
                         'content': comment.content,

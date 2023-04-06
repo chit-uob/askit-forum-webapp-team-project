@@ -1,6 +1,6 @@
 import json
 from django.http import JsonResponse
-from home_page.models import Question, Module, Tag, Answer
+from home_page.models import Question, Module, Tag, Answer, Activity
 from django.views.decorators.csrf import csrf_exempt
 from ask_questions.aiAPI import text_to_summary, text_to_tag_array, add_to_cluster, spacy_tag
 import spacy # install spacy
@@ -44,6 +44,8 @@ def submit_question(request, mod):
         author = request.user
         q = Question(module=module, title=title, explanation=explanation, tried_what=tried_what, summary=summary, author=author)
         q.save()
+        activity = Activity(author=author, action=f"asked question '{title}'"[0:200], link=f"/question/{q.id}")
+        activity.save()
         for tag in tags:
             t = Tag.objects.get_or_create(tag_name=tag)
             t[0].save()

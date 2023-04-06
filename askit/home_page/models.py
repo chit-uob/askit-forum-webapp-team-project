@@ -66,7 +66,8 @@ class Answer(models.Model):
 
 class Notifications(models.Model):
     receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    detail = models.CharField(max_length=300)
+    detail = models.CharField(max_length=500)
+    link = models.CharField(max_length=150, default="")
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

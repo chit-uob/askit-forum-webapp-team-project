@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -10,9 +11,10 @@ class UserProfile(models.Model):
 
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
-    
+
     def get_short_name(self):
         return self.first_name
+
 
 class Module(models.Model):
     title = models.CharField(max_length=100, unique=True)
@@ -24,11 +26,13 @@ class Module(models.Model):
     def __str__(self):
         return self.title
 
+
 class Tag(models.Model):
     tag_name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.tag_name
+
 
 class Question(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
@@ -59,7 +63,6 @@ class Answer(models.Model):
     downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="answer_downvotes")
     is_solution = models.BooleanField(default=False)
 
-
     def __str__(self):
         return self.content
 
@@ -73,13 +76,21 @@ class Notifications(models.Model):
     def __str__(self):
         return self.detail
 
+
 class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=3000, default="")
 
-
-
     def __str__(self):
         return self.author
+
+
+class Activity(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    action = models.CharField(max_length=200)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.action

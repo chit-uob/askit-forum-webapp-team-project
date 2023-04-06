@@ -25,7 +25,7 @@
     </div>
     <div class="my-4">
       <label class="text-lg font-medium">Add/Remove members by email</label>
-      <input type="text" placeholder="Add multiple emails seperated by commas" id="default-input" v-model="usersCSV" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-2 border-black" style="box-shadow: .2em .2em black;">
+      <input type="text" placeholder="Add multiple emails seperated by commas e.g: (person1@email.com,person2@email.com)" id="default-input" v-model="usersCSV" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-2 border-black" style="box-shadow: .2em .2em black;">
       <div class="flex">
         <button v-on:click="addMembers(false)" type="button" class="p-2 my-2 mr-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" style="box-shadow: .2em .2em black;">Add</button>
         <button v-on:click="addMembers(true)" type="button" class="p-2 my-2 rounded border-black border-2 bg-red-700 text-white hover:bg-red-800 transition" style="box-shadow: .2em .2em black;">Remove</button>
@@ -34,7 +34,7 @@
     </div>
     <div class="my-4">
       <label class="text-lg font-medium">Add/Remove admins by email</label>
-      <input type="text" placeholder="Add multiple emails seperated by commas" id="default-input" v-model="adminsCSV" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-2 border-black" style="box-shadow: .2em .2em black;">
+      <input type="text" placeholder="Add multiple emails seperated by commas e.g: (person1@email.com,person2@email.com)" id="default-input" v-model="adminsCSV" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-2 border-black" style="box-shadow: .2em .2em black;">
       <div class="flex">
         <button v-on:click="addAdmins(false)" type="button" class="p-2 my-2 mr-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" style="box-shadow: .2em .2em black;">Add</button>
         <button v-on:click="addAdmins(true)" type="button" class="p-2 my-2 rounded border-black border-2 bg-red-700 text-white hover:bg-red-800 transition" style="box-shadow: .2em .2em black;">Remove</button>

@@ -24,7 +24,7 @@
         <div class="bg-white border-2 border-gray-400 rounded-md p-5" style="box-shadow: gray.27em .27em;">
           <div class="flex items-center justify-center">
             <span class="text-xl text-center font-bold mb-5">Notifications</span>
-              <i class="fa fa-bell text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
+            <font-awesome-icon icon="bell" class="text-xl text-center font-bold mb-5 ml-2"/>
           </div>
           <hr class="border-gray-400 mb-5">
           <div>Notification 1</div>
@@ -121,9 +121,20 @@
 
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faBell } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faBell)
+
+// @ is an alias to /src
+import HelloWorld from '@/components/HelloWorld.vue'
+
 export default {
   name: 'HomeView',
   components: {
+    HelloWorld,
+    FontAwesomeIcon
   },
 
 }

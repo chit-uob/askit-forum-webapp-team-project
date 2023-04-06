@@ -91,6 +91,7 @@ class Activity(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     action = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
+    link = models.CharField(max_length=150, default="")
 
     def __str__(self):
         return self.action

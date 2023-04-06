@@ -38,10 +38,10 @@ CSRF_TRUSTED_ORIGINS = ["https://teamai55-22.bham.team", "https://askit.bham.tea
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
 

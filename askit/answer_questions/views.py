@@ -1,7 +1,7 @@
 import json
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from home_page.models import Question, Answer, Tag, Module, Comment
+from home_page.models import Question, Answer, Tag, Module, Comment, Notification
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -183,6 +183,7 @@ def set_up_test_database(request):
     tp_q4.save()
     return HttpResponse("The database has been reset, visit https://teamai55-22.bham.team to go back to the home page")
 
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -195,6 +196,10 @@ def submit_answer(request, question_id):
         author = request.user
         answer = Answer(question=question, content=content, author=author)
         answer.save()
+        notification = Notification(receiver=question.author,
+                                    detail=f"{author.username} has answered your question {question.title}"[:500],
+                                    link="/question/" + str(question.id))
+        notification.save()
         answer_dict = {'id': answer.id,
                        'author': getattr(answer.author, 'username', 'Anonymous'),
                        'content': answer.content,
@@ -232,7 +237,8 @@ def upvote_question(request, question_id):
         question = Question.objects.get(id=question_id)
         # check if user has already upvoted or downvoted
         if question.upvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "score": question.score, "error": "You have already upvoted this question"})
+            return JsonResponse(
+                {"success": False, "score": question.score, "error": "You have already upvoted this question"})
         if question.downvotes.filter(id=request.user.id).exists():
             # remove from downvotes and increase score
             question.downvotes.remove(request.user)
@@ -253,7 +259,8 @@ def downvote_question(request, question_id):
         question = Question.objects.get(id=question_id)
         # check if user has already upvoted or downvoted
         if question.downvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "score": question.score, "error": "You have already downvoted this question"})
+            return JsonResponse(
+                {"success": False, "score": question.score, "error": "You have already downvoted this question"})
         if question.upvotes.filter(id=request.user.id).exists():
             # remove from upvotes and decrease score
             question.upvotes.remove(request.user)
@@ -274,7 +281,8 @@ def upvote_answer(request, question_id, answer_id):
         answer = Answer.objects.get(id=answer_id)
         # check if user has already upvoted or downvoted
         if answer.upvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "score": answer.score, "error": "You have already upvoted this answer"})
+            return JsonResponse(
+                {"success": False, "score": answer.score, "error": "You have already upvoted this answer"})
         if answer.downvotes.filter(id=request.user.id).exists():
             # remove from downvotes and increase score
             answer.downvotes.remove(request.user)
@@ -295,7 +303,8 @@ def downvote_answer(request, question_id, answer_id):
         answer = Answer.objects.get(id=answer_id)
         # check if user has already upvoted or downvoted
         if answer.downvotes.filter(id=request.user.id).exists():
-            return JsonResponse({"success": False, "score": answer.score, "error": "You have already downvoted this answer"})
+            return JsonResponse(
+                {"success": False, "score": answer.score, "error": "You have already downvoted this answer"})
         if answer.upvotes.filter(id=request.user.id).exists():
             # remove from upvotes and decrease score
             answer.upvotes.remove(request.user)

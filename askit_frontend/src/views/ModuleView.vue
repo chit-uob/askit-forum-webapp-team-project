@@ -147,22 +147,22 @@
 
     </div>
     <div class="hidden w-[30%] py-11 pr-9 md:block">
-      <div class=" rounded-lg border-[3px] border-black p-2" style="box-shadow: .2em .2em;">
+      <div v-if="admin" class=" rounded-lg border-[3px] border-black p-2" style="box-shadow: .2em .2em;">
         <!-- <div class=" text-center font-medium pb-1 mb-2 border-b-2 border-black border-dotted">Admin tools</div>
         -->
-        <div class=" flex-col flex gap-2 ">
-          <a :href="`/advanced-search/`" class="w-full">
-            <button type="submit"
-                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
-              Advanced Search
-            </button>
-          </a>
-          <a :href="`/ask/${$route.params.mod}`" class="w-full">
-            <button type="submit"
-                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
-              Ask Question
-            </button>
-          </a>
+        <div  class=" flex-col flex gap-2 ">
+<!--          <a :href="`/advanced-search/`" class="w-full">-->
+<!--            <button type="submit"-->
+<!--                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">-->
+<!--              Advanced Search-->
+<!--            </button>-->
+<!--          </a>-->
+<!--          <a :href="`/ask/${$route.params.mod}`" class="w-full">-->
+<!--            <button type="submit"-->
+<!--                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">-->
+<!--              Ask Question-->
+<!--            </button>-->
+<!--          </a>-->
           <a :href= "`/module/${$route.params.mod}/add-members`">
             <button v-if="admin" type="submit"
                     class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
@@ -174,13 +174,13 @@
             </button>
             <a :href="`/module/${$route.params.mod}/course-settings/`" class="w-full">
               <div>
-              <button type="submit" class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
+              <button v-if="admin" type="submit" class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
                 Course Settings
               </button>
               </div>
             </a>
             <a :href="`/new`" class="w-full">
-            <button type="submit"
+            <button  v-if="admin" type="submit"
                     class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black" style="box-shadow: .2em .2em black;">
               Create Module
             </button>

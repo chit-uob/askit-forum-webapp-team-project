@@ -13,6 +13,7 @@ import SearchView from "@/views/SearchView.vue";
 import AdvancedSearchView from "@/views/AdvancedSearchView.vue";
 import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 import ResetPasswordView from "@/views/ResetPasswordView.vue";
+import ActivationView from "@/views/ActivationView";
 import addMembersView from "@/views/addMembersView";
 import courseSettingsVue from "@/views/CourseSettings.vue";
 
@@ -66,6 +67,11 @@ const routes = [
         path: '/sign-up',
         name: 'SignUp',
         component: SignUpView
+    },
+    {
+        path: '/activate/:uid/:token',
+        name: 'Activation',
+        component: ActivationView
     },
     {
         path: '/search/',

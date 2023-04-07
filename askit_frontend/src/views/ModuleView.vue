@@ -53,13 +53,13 @@
           <span class=" self-end  ">{{ question.views }} views</span>
         </div>
 
-        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
+        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
           <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{ question.title }}</div>
           <div class=" truncate self-center ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span></div>
           <div v-if="question.tags[0] != ''"  class="flex overflow-hidden">
-            <div v-for="tag in question.tags" class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
+            <div v-for="tag in question.tags" class=" whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
           </div>
-          <div v-if="question.tags[0] == ''"  class="flex">
+          <div v-if="question.tags[0] == ''"  class="flex overflow-hidden">
             <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
           </div>
         </div>
@@ -106,11 +106,11 @@
           <span class=" self-end  ">{{ question.views }} views</span>
         </div>
 
-        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
+        <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
           <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{ question.title }}</div>
           <div class=" self-center truncate ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span></div>
-          <div v-if="question.tags[0] != ''"  class="flex">
-            <div v-for="tag in question.tags" class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
+          <div v-if="question.tags[0] != ''"  class="flex overflow-hidden">
+            <div v-for="tag in question.tags" class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
           </div >
           <div v-if="question.tags[0] == ''"  class="flex overflow-hidden">
             <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>

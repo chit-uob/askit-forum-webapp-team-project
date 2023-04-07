@@ -80,7 +80,7 @@ def view_module_list(request):
 @permission_classes([IsAuthenticated])
 def is_admin(request, mod):
     the_module = Module.objects.get(title=mod)
-    if request.user in the_module.admins.all():
+    if request.user in the_module.admins.all() or request.user.is_superuser:
         return JsonResponse({'admin': True})
     else:
         return JsonResponse({'admin': False})

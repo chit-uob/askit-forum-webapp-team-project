@@ -32,6 +32,7 @@ def view_question_list(request, mod):
 
     return JsonResponse(question_array, safe=False)
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -39,7 +40,7 @@ def view_popular_questions(request, mod, days):
     module = Module.objects.get(title=mod)
     questions = Question.objects.filter(module=module)
     question_array = []
-    for index ,question in enumerate(questions):
+    for index, question in enumerate(questions):
         context = {'id': question.id,
                    'title': question.title,
                    'author': getattr(question.author, 'username', None),
@@ -52,7 +53,7 @@ def view_popular_questions(request, mod, days):
         context['views'] = question.views
         context['num_answers'] = Answer.objects.filter(question=question).count()
         question_array.append(context)
-        if(index == 3):
+        if (index == 3):
             break
 
     return JsonResponse(question_array, safe=False)
@@ -73,41 +74,47 @@ def view_module_list(request):
 
     return JsonResponse(module_array, safe=False)
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def is_admin(request,mod):
+def is_admin(request, mod):
     the_module = Module.objects.get(title=mod)
-    if request.user in the_module.admins.all(): 
-        return JsonResponse({'admin': True } )
+    if request.user in the_module.admins.all():
+        return JsonResponse({'admin': True})
     else:
-        return JsonResponse({'admin': False } )
-    
+        return JsonResponse({'admin': False})
+
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def get_all_users(request,mod):
-    users = User.objects.all()
+def get_all_users(request, mod):
     the_module = Module.objects.get(title=mod)
-    user_array = []
-    for user in users:
-        try:
-            userProfile = UserProfile.objects.get(user = user)
-            first_name = userProfile.first_name
-            last_name = userProfile.last_name
-        except:
-            first_name = "n/a"
-            last_name = ""
-        admin = user in the_module.admins.all()
-        member = user in the_module.members.all() 
-        data = {'email': user.username,
-                'first_name': first_name,
-                'last_name': last_name,
-                'admin': admin,
-                'member': member,
-        }
-        user_array.append(data)
-    return JsonResponse(user_array, safe=False)
+    if request.user in the_module.admins.all() or request.user.is_superuser:
+        users = User.objects.all()
+        user_array = []
+        for user in users:
+            try:
+                user_profile = UserProfile.objects.get(user=user)
+                first_name = user_profile.first_name
+                last_name = user_profile.last_name
+            except:
+                first_name = "n/a"
+                last_name = ""
+            admin = user in the_module.admins.all()
+            member = user in the_module.members.all()
+            data = {'email': user.username,
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'admin': admin,
+                    'member': member,
+                    }
+            user_array.append(data)
+        return JsonResponse(user_array, safe=False)
+    else:
+        return JsonResponse({"success": False, "error": "You are not an admin"})
+
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
@@ -115,24 +122,27 @@ def get_all_users(request,mod):
 @csrf_exempt
 def update_roles(request, mod):
     if request.method == 'POST':
-        print(request.body)
-        post_data_array = json.loads(request.body)
-        for post_data in post_data_array:
-            username = post_data['email']
-            member = post_data['member']
-            admin = post_data['admin']
-            module = Module.objects.get(title=mod)
-            user = User.objects.get(username = username)
-            if member:
-                module.members.add(user)
-            else:
-                module.members.remove(user)
-            if admin:
-                module.admins.add(user)
-            else:
-                module.admins.remove(user)
-        module.save()
-        return JsonResponse({"success": True})
+        module = Module.objects.get(title=mod)
+        if request.user in module.admins.all() or request.user.is_superuser:
+            post_data_array = json.loads(request.body)
+            for post_data in post_data_array:
+                username = post_data['email']
+                member = post_data['member']
+                admin = post_data['admin']
+                user = User.objects.get(username=username)
+                if member:
+                    module.members.add(user)
+                else:
+                    module.members.remove(user)
+                if admin:
+                    module.admins.add(user)
+                else:
+                    module.admins.remove(user)
+            module.save()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not an admin"})
+
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
@@ -142,20 +152,22 @@ def update_members(request, mod):
     success = 0
     fail = 0
     if request.method == 'POST':
-        print(request.body)
-        post_data_array = json.loads(request.body)
         module = Module.objects.get(title=mod)
-        for post_data in post_data_array:
-            try:
-                user = User.objects.get(username = post_data)
-                module.members.add(user) 
-                success += 1
-            except:
-                print('no user')
-                fail += 1
-        module.save()
-        return JsonResponse({"success": success,"fail":fail})
-    
+        if request.user in module.admins.all() or request.user.is_superuser:
+            post_data_array = json.loads(request.body)
+            for post_data in post_data_array:
+                try:
+                    user = User.objects.get(username=post_data)
+                    module.members.add(user)
+                    success += 1
+                except:
+                    fail += 1
+            module.save()
+            return JsonResponse({"success": success, "fail": fail})
+        else:
+            return JsonResponse({"success": False, "error": "You are not an admin"})
+
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -164,20 +176,22 @@ def remove_members(request, mod):
     success = 0
     fail = 0
     if request.method == 'POST':
-        print(request.body)
-        post_data_array = json.loads(request.body)
         module = Module.objects.get(title=mod)
-        for post_data in post_data_array:
-            try:
-                user = User.objects.get(username = post_data)
-                module.members.remove(user) 
-                success += 1
-            except:
-                print('no user')
-                fail += 1
-        module.save()
-        return JsonResponse({"success": success,"fail":fail})
-    
+        if request.user in module.admins.all() or request.user.is_superuser:
+            post_data_array = json.loads(request.body)
+            for post_data in post_data_array:
+                try:
+                    user = User.objects.get(username=post_data)
+                    module.members.remove(user)
+                    success += 1
+                except:
+                    fail += 1
+            module.save()
+            return JsonResponse({"success": success, "fail": fail})
+        else:
+            return JsonResponse({"success": False, "error": "You are not an admin"})
+
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -186,20 +200,22 @@ def update_admins(request, mod):
     success = 0
     fail = 0
     if request.method == 'POST':
-        print(request.body)
-        post_data_array = json.loads(request.body)
         module = Module.objects.get(title=mod)
-        for post_data in post_data_array:
-            try:
-                user = User.objects.get(username = post_data)
-                module.admins.add(user) 
-                success += 1
-            except:
-                print('no user')
-                fail += 1
-        module.save()
-        return JsonResponse({"success": success,"fail":fail})
-    
+        if request.user in module.admins.all() or request.user.is_superuser:
+            post_data_array = json.loads(request.body)
+            for post_data in post_data_array:
+                try:
+                    user = User.objects.get(username=post_data)
+                    module.admins.add(user)
+                    success += 1
+                except:
+                    fail += 1
+            module.save()
+            return JsonResponse({"success": success, "fail": fail})
+        else:
+            return JsonResponse({"success": False, "error": "You are not an admin"})
+
+
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -208,16 +224,17 @@ def remove_admins(request, mod):
     success = 0
     fail = 0
     if request.method == 'POST':
-        print(request.body)
-        post_data_array = json.loads(request.body)
         module = Module.objects.get(title=mod)
-        for post_data in post_data_array:
-            try:
-                user = User.objects.get(username = post_data)
-                module.admins.remove(user) 
-                success += 1
-            except:
-                print('no user')
-                fail += 1
-        module.save()
-        return JsonResponse({"success": success,"fail":fail})
+        if request.user in module.admins.all() or request.user.is_superuser:
+            post_data_array = json.loads(request.body)
+            for post_data in post_data_array:
+                try:
+                    user = User.objects.get(username=post_data)
+                    module.admins.remove(user)
+                    success += 1
+                except:
+                    fail += 1
+            module.save()
+            return JsonResponse({"success": success, "fail": fail})
+        else:
+            return JsonResponse({"success": False, "error": "You are not an admin"})

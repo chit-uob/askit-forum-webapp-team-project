@@ -59,7 +59,10 @@ import axiosClient from "@/views/axiosClient";
             .catch((error) => {
               console.log(error);
             });
-      }
+      },
+      ManageMembers() {
+        window.location.href = `/module/${this.$route.params.mod}/add-members/`;
+      },
     }
 }
 </script>

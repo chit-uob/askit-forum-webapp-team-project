@@ -17,6 +17,8 @@ def new_module(request):
         title = post_data['title']
         description = post_data['explanation']
         m = Module(title=title, description=description)
+        m.save()
         m.admins.add(request.user)
+        m.members.add(request.user)
         m.save()
         return JsonResponse({'title': title, 'description': description})

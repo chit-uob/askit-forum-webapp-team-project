@@ -20,8 +20,7 @@ def view_notifications(request):
                    'date': notification.link,
                    }
         notification_array.append(context)
-
-        return JsonResponse(notification_array, safe=False)
+    return JsonResponse(notification_array, safe=False)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
@@ -40,7 +39,7 @@ def view_questions(request):
                    'score': question.score,
                    'views': question.views,
                    'status': question.status,
-                   'answers_count': question.answers_count,
+                   'answers_count': question.answer_set.count(),
                    }
         question_array.append(context)
 

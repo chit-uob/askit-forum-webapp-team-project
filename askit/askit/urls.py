@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/search/', include('search.urls')),
     path('api/signup/',include('signup.urls')),
     path('api/create_module/', include('create_module.urls')),
+    path('api/home_page/', include('home_page.urls'))
 ]

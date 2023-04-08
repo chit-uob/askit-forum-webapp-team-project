@@ -26,10 +26,19 @@
             <span class="text-xl text-center font-bold mb-5">Notifications</span>
               <i class="fa fa-bell text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
           </div>
-          <hr class="border-gray-400 mb-5">
-          <div>Notification 1</div>
-          <div>Notification 2</div>
-          <div>Notification 3</div>
+          <hr class="border-gray-400 mb-2">
+
+            <a v-for="notification in notifications" :key="notification.id" :href="`${notification.link}`">
+              <div class="grid grid-rows-2">
+
+                <div class="self-start truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                  {{ notification.detail }}
+               </div>
+               <div class="self-end text-xs font-light">{{ formatPubDate(notification.date) }}</div>
+              </div>
+              <hr class="border-gray-400">
+            </a>
+
         </div>
         <div class="bg-white border-2 border-gray-400 rounded-md p-5" style="box-shadow: gray.27em .27em;">
           <div class="text-xl text-center font-bold mb-5">Calendar</div>
@@ -121,10 +130,29 @@
 
 
 <script>
+import axiosClient  from "@/views/axiosClient";
+import {formatDay, formatPubDate} from "./dateUtils";
 export default {
   name: 'HomeView',
-  components: {
+  methods: {formatPubDate, formatDay},
+  data() {
+    return {
+      notifications: []
+    };
   },
+  mounted(){
+    axiosClient({
+      method: "get",
+      url: '/home_page/notifs',
+    })
+
+        .then(response => {
+          this.notifications = response.data
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }
 
 }
 </script>

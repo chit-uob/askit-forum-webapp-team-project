@@ -48,6 +48,7 @@ class Question(models.Model):
     views = models.PositiveIntegerField(default=0)
     upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="question_upvotes")
     downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="question_downvotes")
+    answers_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

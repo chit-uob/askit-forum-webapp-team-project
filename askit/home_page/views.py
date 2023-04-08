@@ -14,7 +14,7 @@ def view_notifications(request):
     notification_array = []
     for notification in notifications:
         context = {'id': notification.id,
-                   'receiver': notification.receiver,
+                   'receiver': getattr(notification.receiver, 'username', None),
                    'detail': notification.detail,
                    'link': notification.link,
                    'date': notification.link,

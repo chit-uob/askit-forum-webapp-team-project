@@ -236,7 +236,21 @@ def submit_comment(request, question_id):
                         'content': comment.content,
                         'pub_date': comment.pub_date}
         return JsonResponse(comment_dict)
-
+    
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_comment(request, question_id, com_id):
+    if request.method == 'DELETE':
+        # post_data = json.loads(request.body)
+        # comment_id = post_data['comment_id']
+        comment = Comment.objects.get(id=com_id)
+        if request.user == comment.author:
+            comment.delete()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this comment"})
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
@@ -324,3 +338,32 @@ def downvote_answer(request, question_id, answer_id):
         answer.score -= 1
         answer.save()
         return JsonResponse({"success": True, "score": answer.score})
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_question(request, question_id):
+    if request.method == 'DELETE':
+        question = Question.objects.get(id=question_id)
+        # module_title = question.module.title
+        if request.user == question.author:
+            question.delete()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this question"})
+        
+
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_answer(request, question_id, answer_id):
+    if request.method == 'DELETE':
+        answer = Answer.objects.get(id=answer_id)
+        if request.user == answer.author:
+            answer.delete()
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this answer"})

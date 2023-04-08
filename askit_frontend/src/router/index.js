@@ -14,7 +14,8 @@ import AdvancedSearchView from "@/views/AdvancedSearchView.vue";
 import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 import ResetPasswordView from "@/views/ResetPasswordView.vue";
 import ActivationView from "@/views/ActivationView";
-
+import addMembersView from "@/views/addMembersView";
+import courseSettingsVue from "@/views/CourseSettings.vue";
 
 const routes = [
     {
@@ -87,6 +88,17 @@ const routes = [
         name: 'newmodule',
         component: CreateModule
     },
+    {
+        path: '/module/:mod/add-members',
+        name: 'add-members',
+        component: addMembersView
+    },
+
+    {
+        path: '/module/:mod/course-settings',
+        name: 'course_settings',
+        component: courseSettingsVue
+    }
 ]
 
 const router = createRouter({

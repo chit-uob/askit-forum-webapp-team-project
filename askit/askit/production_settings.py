@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'ask_questions.apps.AskQuestionsConfig',
     'answer_questions.apps.AnswerQuestionsConfig',
     'search.apps.SearchConfig',
+    'create_module.apps.CreateModuleConfig',
+    'course_settings.apps.CourseSettingsConfig',
 ]
 
 MIDDLEWARE = [

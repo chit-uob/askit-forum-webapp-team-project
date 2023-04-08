@@ -4,10 +4,10 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-
 def view_notifications(request):
     curuser = request.user
     notifications = Notification.objects.filter(receiver=curuser)
@@ -22,10 +22,10 @@ def view_notifications(request):
         notification_array.append(context)
     return JsonResponse(notification_array, safe=False)
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-
 def view_questions(request):
     qUser = request.user
     questions = Question.objects.filter(author=qUser)
@@ -44,6 +44,7 @@ def view_questions(request):
         question_array.append(context)
 
     return JsonResponse(question_array, safe=False)
+
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
@@ -65,9 +66,6 @@ def view_answers(request):
         answer_array.append(context)
 
     return JsonResponse(answer_array, safe=False)
-
-
-
 
 #         questions = Question.objects.all()
 #         question_list = []
@@ -121,7 +119,3 @@ def view_answers(request):
 #         answer_list.append(context)
 #
 #     return JsonResponse(answer_list, safe=False)
-
-
-
-

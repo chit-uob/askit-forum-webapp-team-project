@@ -17,7 +17,7 @@ def view_notifications(request):
                    'receiver': getattr(notification.receiver, 'username', None),
                    'detail': notification.detail,
                    'link': notification.link,
-                   'date': notification.link,
+                   'date': notification.date,
                    }
         notification_array.append(context)
     return JsonResponse(notification_array, safe=False)

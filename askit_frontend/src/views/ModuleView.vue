@@ -56,10 +56,10 @@
         <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
           <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{ question.title }}</div>
           <div class=" truncate self-center ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span></div>
-          <div v-if="question.tags[0] != ''"  class="flex overflow-hidden">
-            <div v-for="tag in question.tags" class=" whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
+          <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"  class="flex overflow-hidden">
+            <div v-for="tag in question.tags" class=" whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag  }}]</div>
           </div>
-          <div v-if="question.tags[0] == ''"  class="flex overflow-hidden">
+          <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"  class="flex overflow-hidden">
             <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
           </div>
         </div>
@@ -81,10 +81,10 @@
         </div>
 
           <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">{{ question.title }}</div>
-          <div v-if="question.tags[0] != ''"  class="flex-wrap inline-flex leading-none">
+          <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"  class="flex-wrap inline-flex leading-none">
             <div v-for="tag in question.tags" class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">[{{ tag }}]</div>
           </div>
-          <div v-if="question.tags[0] == ''"  class="flex">
+          <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"  class="flex">
             <div class=" text-xs">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
           </div>
           <div class=" text-xs mt-1 ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span> on the <span  class="">{{ formatDate(question.pub_date) }}</span></div>
@@ -98,7 +98,7 @@
       <div>
       <h2 class="pl-10 text-2xl mt-16 mb-6">All questions</h2>
 
-      <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
+      <a v-if="allRender" v-for="question in allQuestions" :key="question.id" :href="`/question/${question.id}`"
       class="transition hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black " style="box-shadow: .23em .23em;">
         <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
           <div class=" self-start ">{{ question.score }} votes</div>
@@ -109,10 +109,10 @@
         <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
           <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{ question.title }}</div>
           <div class=" self-center truncate ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span></div>
-          <div v-if="question.tags[0] != ''"  class="flex overflow-hidden">
-            <div v-for="tag in question.tags" class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ tag }}]</div>
+          <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"  class="flex overflow-hidden">
+            <div v-for="tag in question.tags" class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">[{{ addTagToSet(tag) }}]</div>
           </div >
-          <div v-if="question.tags[0] == ''"  class="flex overflow-hidden">
+          <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"  class="flex overflow-hidden">
             <div class=" self-end mr-[2px]">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
           </div>
         </div>
@@ -126,7 +126,7 @@
 
       </a>
 
-      <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
+      <a v-if="allRender" v-for="question in allQuestions" :key="question.id" :href="`/question/${question.id}`"
       class="transition hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black " style="box-shadow: .23em .23em;">
         <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
           <div class="mr-1 inline">{{ question.score }} votes</div>
@@ -135,10 +135,10 @@
         </div>
 
           <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">{{ question.title }}</div>
-          <div v-if="question.tags[0] != ''"  class="flex-wrap inline-flex leading-none">
+          <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"  class="flex-wrap inline-flex leading-none">
             <div v-for="tag in question.tags" class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">[{{ tag }}]</div>
           </div>
-          <div v-if="question.tags[0] == ''"  class="flex">
+          <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"  class="flex">
             <div class=" text-xs">No tags!  (<span class=" text-cyan-500">╥</span>_<span class=" text-cyan-500">╥</span>)</div>
           </div>
           <div class=" text-xs mt-1 ">Asked by <span  v-if="question.author" class="text-blue-500 hover:underline hover:text-blue-400">{{ question.author  }}</span><span  v-if="!(question.author)" class="">Anonymous</span> on the <span  class="">{{ formatDate(question.pub_date) }}</span></div>
@@ -187,7 +187,12 @@
           </a>
         </div>
       </div>
-
+      <div class=" mt-3 rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
+        <div class="mb-2 text-center">Tag filter</div>  
+        <div class="flex flex-wrap gap-2 justify-center">
+          <div v-for="tag in tagSet" v-on:click="filterByTag(tag)" class="py-1 px-2 rounded-md border-2 border-black " style="box-shadow: .2em .2em;">{{ tag }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -201,9 +206,14 @@ export default {
   data() {
     return {
       questions: [],
+      allQuestions:[],
       popQuestions: [],
+      allRender: true,
       popRender: true,
-      admin: false
+      admin: false,
+      tagSet: new Set(),
+      tagFilter: new Set(),
+      currentTime: 7,
     };
   },
   mounted() {
@@ -212,9 +222,11 @@ export default {
       url: `/module/${this.$route.params.mod}/`,
     })
         .then((response) => {
+          console.log(response)
           this.questions = response.data;
           this.questions.sort((a,b) => new Date(b.pub_date) - new Date(a.pub_date))
           this.popQuestions = this.questions
+          this.allQuestions = this.questions
           this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 7) )
           this.popQuestions = this.popQuestions.sort((a,b) => b.views - a.views).slice(0,3)
         })
@@ -235,12 +247,40 @@ export default {
   },
   methods: {
     updatePopQ(time){
+      this.currentTime = time
       this.popQuestions = this.questions
       this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, time) )
+      for (const tag of this.tagFilter){
+        this.popQuestions = this.popQuestions.filter(a => a.tags.includes(tag))
+      }
       this.popQuestions = this.popQuestions.sort((a,b) => b.views - a.views).slice(0,3)
       this.popRender = false
       this.popRender = true
       console.log('rerender')
+    },
+    updateAllQ(){
+      this.allQuestions = this.questions
+      for (const tag of this.tagFilter){
+        this.allQuestions = this.allQuestions.filter(a => a.tags.includes(tag))
+      }
+      this.allRender = false
+      this.allRender = true
+      console.log('rerender')
+    },
+    addTagToSet(tag){
+      this.tagSet.add(tag)
+      return tag
+    },
+    filterByTag(tag){
+      if(!this.tagFilter.has(tag)){
+        this.tagFilter.add(tag)
+      }
+      else{
+        this.tagFilter.delete(tag)
+      }
+      console.log(this.tagFilter)
+      this.updatePopQ(this.currentTime)
+      this.updateAllQ(this.currentTime)
     }
   }
 };

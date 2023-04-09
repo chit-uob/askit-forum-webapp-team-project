@@ -75,9 +75,6 @@ def user_profiles(request):
     user_profile = UserProfile.objects.get(user=user)
     context = {
         'username': user.username,
-        'email': user.email,
-        'first_name': user.first_name,
-        'last_name': user.last_name,
         'full_name': user_profile.get_full_name(),
     }
     return JsonResponse(context, safe=False)

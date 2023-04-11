@@ -155,7 +155,7 @@ EMAIL_HOST_USER = 'askit.team.ai@gmail.com'
 EMAIL_HOST_PASSWORD = 'apofledtkolttdrt'
 EMAIL_USE_TLS = True
 
-DOMAIN = 'http://localhost:8080'
+DOMAIN = 'localhost:8080'
 SITE_NAME = 'AskIt'
 DJOSER = {
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,

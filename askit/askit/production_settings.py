@@ -160,6 +160,8 @@ EMAIL_HOST_USER = 'askit.team.ai@gmail.com'
 EMAIL_HOST_PASSWORD = 'apofledtkolttdrt'
 EMAIL_USE_TLS = True
 
+DOMAIN = 'https://askit.bham.team'
+SITE_NAME = 'AskIt'
 DJOSER = {
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'SET_PASSWORD_RETYPE': True,

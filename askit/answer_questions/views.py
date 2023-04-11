@@ -85,103 +85,78 @@ def set_up_test_database(request):
     Question.objects.all().delete()
     Tag.objects.all().delete()
     Answer.objects.all().delete()
+    Comment.objects.all().delete()
+    Notification.objects.all().delete()
+    Activity.objects.all().delete()
 
-    ossp = Module(id=1, title="OSSP",
-                  description="An Operating System is the system software that manages computer hardware, hardware and software resources and provides common services for user programs. System programming is the type of programming necessary to produce software, such as operating systems, that deal with hardware, provide services to other software or manage performance constraints. This module teaches the technology of operating systems and introduces students to the challenges of systems-level programming .Also, this module gives practical insight into modern operating system topics. ")
-    ossp.save()
-    tp = Module(id=2, title="TP",
-                description="This module teahes about team project, which is a capstone project for the students to apply the knowledge they have learned in the past 3 years. ")
-    tp.save()
-    sn = Module(id=3, title="SN",
-                description="This moduel teaches about security and networking. It covers the basic concepts of computer security and networking. It also covers the design and implementation of secure systems and networks. ")
+    sn = Module(title="SN", description="Security and Networking")
     sn.save()
-    ossp_q1 = Question(module=ossp, title="Test file not working for part 1",
-                       explanation="Hi, I have noticed that the test file doesn't work for part 1, it seems to want addnode to return the root of the tree, which is not what was done for assignment 1(if i remembering correctly) or what is given to us in the bst.c model answer for this assignment. should I assume that test_bst.c is incorrect and modify it to start the root before the 10k loop and run the loop without it overwriting the root variable or should I modify the model answer bst.c to return the root node and not the newly added node",
-                       tried_what="I have tried to modify the test_bst.c file to start the root before the 10k loop and run the loop without it overwriting the root variable, but it still doesn't work. ",
-                       summary="The test file doesn't work for part 1, it seems to want addnode to return the root of the tree, which is not what was done for assignment 1(if i remembering correctly) or what is given to us in the bst.c model answer for this assignment. ")
-    ossp_q1.save()
-    ossp_q1_a1 = Answer(question=ossp_q1,
-                        content="I think the test file is correct, you should modify the model answer bst.c to return the root node and not the newly added node")
-    ossp_q1_a1.save()
-    ossp_q1_a2 = Answer(question=ossp_q1,
-                        content="The code for the binary search tree actually needs to be slightly different for assignment 2 than the requirements for assignment 1. The difference is that addNode needs to return the root rather than the node which it adds. So whether you're using your own answer to assignment 1 or the model answer to assignment 1 as the code for the binary search tree in assignment 2, you need to change it so that addNode returns the root instead of the leaf. I'm sorry that this wasn't made clear. There will be a canvas announcement later today clarifying this and some other things.")
-    ossp_q1_a2.save()
-    ossp_q2 = Question(module=ossp, title="What is a process in an operating system?",
-                       explanation="I am new to operating systems and system programming, and I keep hearing about processes. What exactly is a process in an operating system? How is it different from a program or a thread?",
-                       tried_what="", summary="What is a process in an operating system?")
-    ossp_q2.save()
-    ossp_q2_a1 = Answer(question=ossp_q2,
-                        content="A process is an instance of a program that is currently running on the operating system. It consists of the program code, data, and a set of resources that are allocated to it, such as memory, CPU time, and input/output devices. A process is different from a program in that a program is a static entity that resides on disk, while a process is a dynamic entity that is created by the operating system when a program is executed. A process can have one or more threads, which are independent paths of execution within the process.")
-    ossp_q2_a1.save()
-    ossp_q2_a2 = Answer(question=ossp_q2,
-                        content="In operating systems, a process is an executing instance of a program. A process is comprised of an executable program, associated data, and system resources such as memory and CPU time. Processes are managed by the operating system's kernel, which is responsible for allocating resources to them, scheduling their execution, and providing interprocess communication mechanisms. A thread, on the other hand, is a lightweight process that shares the same resources as its parent process but executes independently.")
-    ossp_q2_a2.save()
-    tp_q1 = Question(id=1, module=tp, title="How to start the project?",
-                     explanation="I am new to team project, and I don't know how to start the project. Can anyone give me some advice?",
-                     tried_what="", summary="How to start the project?")
-    tp_q1.save()
-    tp_q1_a1 = Answer(question=tp_q1,
-                      content="You can start by reading the project description carefully and understanding the requirements. Then you can start to think about how to implement the project. You can also discuss with your team members about the project.")
-    tp_q1_a1.save()
-    tp_q1 = Question(id=2, module=tp,
-                     title="The marking criteria for the GDPR policy says we need to state where our servers are located - where are the University provided VPS's located?",
-                     explanation="", tried_what="", summary="Where are the University provided VPS's located?")
-    tp_q1.save()
+    ai2 = Module(title="AI2", description="Artificial Intelligence 2")
+    ai2.save()
+    tp = Module(title="TP", description="Team Project")
+    tp.save()
+    misc = Module(title="Misc", description="Miscellaneous")
+    misc.save()
 
-    tp_q2 = Question(id=3, module=tp,
-                     title="How can I access a postgres database during development? My axios requests on the frontend are returning empty and I think its because.",
-                     explanation="", tried_what="", summary="Accessing a postgres database during development")
-    tp_q2.save()
+    sn_q1 = Question(title="What are the best practices for securing a wireless network in a university environment?",
+                     module=sn,
+                     explanation="As universities rely heavily on wireless networks to support their academic and administrative activities, ensuring the security of these networks is crucial. With the rise of cyber threats such as hacking, phishing, and malware attacks, it is important to understand the best practices for securing a wireless network in a university environment. This question seeks to explore the different strategies and tools that can be used to enhance the security of wireless networks, as well as the challenges that may arise in implementing these measures.",
+                     tried_what="I already conducted some research on the topic and has looked into various resources such as online forums, white papers, and academic articles. I also spoken to some IT professionals at their university but is still seeking a broader perspective on the issue.",
+                     summary="This question asks about the best practices for securing a wireless network in a university environment. The author has conducted some research on the topic but is seeking a broader perspective on the issue. The question seeks to explore the different strategies and tools that can be used to enhance the security of wireless networks, as well as the challenges that may arise in implementing these measures.",
+                     score=13)
+    sn_q1.save()
+    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Security")[0])
+    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Wireless")[0])
+    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Network")[0])
+    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="University")[0])
 
-    tp_q2_a1 = Answer(question=tp_q2,
-                      content="Can you instead use a terminal, connect to the VM (with ssh) and log to postgres on it? It might less easy to use than an intelliJ tool, but at least we can avoid restrictions")
-    tp_q2_a1.save()
+    sn_q1_a1 = Answer(question=sn_q1,
+                      content="Securing a wireless network in a university environment is a complex task that requires a comprehensive approach. There are various strategies and tools that can be used to enhance the security of wireless networks, but implementing them can be challenging due to factors such as the size and complexity of the network, the diversity of devices and users, and the need to balance security with usability and accessibility.\nOne of the best practices for securing a wireless network is to use strong encryption and authentication protocols, such as WPA2-Enterprise or 802.1X, which can protect against unauthorized access and eavesdropping. It is also important to use strong and unique passwords for network devices and accounts, and to regularly update them to prevent brute-force attacks and password cracking.\nAnother best practice is to segment the network into different zones or subnets, with different access policies and security controls based on the sensitivity and criticality of the data and services. For example, a university may have separate subnets for student dormitories, academic departments, administrative offices, and research labs, each with its own access control lists, firewalls, and intrusion detection systems.\nIn addition, it is important to monitor the network for suspicious activity and to have incident response plans in place to quickly detect, isolate, and mitigate security breaches. This can involve using network monitoring tools, security information and event management (SIEM) systems, and security analytics to detect anomalies and potential threats in real-time.\nFinally, educating users about good security practices and raising awareness of the risks and consequences of security breaches can also be effective in enhancing the overall security posture of the wireless network. This can involve providing training and awareness campaigns on topics such as password hygiene, social engineering, phishing, and malware prevention.\nOverall, securing a wireless network in a university environment requires a multi-layered approach that combines technical controls, network segmentation, monitoring and incident response, and user education and awareness. By following best practices and staying vigilant, universities can reduce the risk of security breaches and protect their critical data and services from cyber threats.")
+    sn_q1_a1.save()
 
-    tp_q3 = Question(id=4, module=tp,
-                     title="I added some dependencies to the angular.json file but when I tried to push the changes",
-                     explanation=", the pipeline failed at the package stage. How can I solve this issue?",
-                     tried_what="", summary="Angular dependency issue")
-    tp_q3.save()
+    sn_q2 = Question(title="What are the key differences between public and private IP addresses?",
+                     module=sn,
+                     explanation="IP addresses are unique numerical identifiers that are used to identify devices on a network. In general, IP addresses can be classified as either public or private, depending on their scope and accessibility. This question seeks to explore the key differences between public and private IP addresses, as well as the advantages and disadvantages of each type.",
+                     tried_what="The author has done some basic research on the topic, but is looking for a more comprehensive explanation of the differences between public and private IP addresses.",
+                     summary="This question asks about the key differences between public and private IP addresses, and their respective advantages and disadvantages. The author has done some preliminary research on the topic but is seeking a more comprehensive explanation.")
+    sn_q2.save()
+    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="IP")[0])
+    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Address")[0])
+    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Public")[0])
+    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Private")[0])
 
-    tp_q3_a1 = Answer(question=tp_q3, content="Which dependencies have you added?")
-    tp_q3_a1.save()
+    sn_q2_a1 = Answer(question=sn_q2,
+                      content="Public IP addresses are globally unique and accessible from the Internet, while private IP addresses are only accessible within a private network and are not globally unique. Public IP addresses are typically used for servers and devices that need to be accessible from the Internet, while private IP addresses are used for internal devices such as computers, printers, and routers. Public IP addresses are assigned by the Internet Assigned Numbers Authority (IANA) or Internet Service Providers (ISPs), while private IP addresses are assigned by the network administrator according to the standards defined by the Internet Engineering Task Force (IETF).")
+    sn_q2_a1.save()
 
-    tp_q4 = Question(id=5, module=tp,
-                     title="Hello, we are Team DAI 57 and are currently facing an issue with our git repository. ",
-                     explanation="A commit was made that had some errors and when other team members clone the repository, we all get errors related to it, we have tried going back to a previous commit and pushing that to be the recent one and have attempted all possible options but it is not working for us. We have communicated this concern with both Professor Panos and Niloofer and we were recommended to ask if it’s possible we can have our repository reset please.",
-                     tried_what="", summary="Git repository issue")
-    tp_q4.save()
+    ai2_q1 = Question(title="What is the difference between supervised and unsupervised learning in deep learning?",
+                      module=ai2,
+                      explanation="Deep learning is a subfield of machine learning that is inspired by the structure and function of the human brain. In deep learning, neural networks are used to learn from large amounts of data and make predictions or decisions based on that learning. Supervised and unsupervised learning are two of the most common types of learning in deep learning. This question seeks to explore the key differences between supervised and unsupervised learning in deep learning, as well as the advantages and disadvantages of each approach.",
+                      tried_what="The author has done some preliminary research on the topic, but is looking for a more in-depth explanation of the differences between supervised and unsupervised learning in deep learning.",
+                      summary="This question asks about the key differences between supervised and unsupervised learning in deep learning, and their respective advantages and disadvantages. The author has done some preliminary research on the topic but is seeking a more comprehensive explanation.")
+    ai2_q1.save()
+    ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Deep Learning")[0])
+    ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Supervised Learning")[0])
+    ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Unsupervised Learning")[0])
 
-    tp_q4_a1 = Answer(question=tp_q4,
-                      content="Normally this is an issue that can be fixed by reverting the commit. from what I can see the issue is a compilation error - if you can resolve that on your local development environment, then you should be able to get it working again. Also, please consider carefully if this is a good reason to move tech stack days before the MVP deadline. remember - don't commit broken code!")
-    tp_q4_a1.save()
-    t = Tag(tag_name="java")
-    t.save()
-    t2 = Tag(tag_name="python")
-    t2.save()
-    t3 = Tag(tag_name="c")
-    t3.save()
-    t4 = Tag(tag_name="c++")
-    t4.save()
-    t5 = Tag(tag_name="javascript")
-    t5.save()
-    ossp_q1.tags.add(t)
-    ossp_q1.tags.add(t2)
-    ossp_q2.tags.add(t)
-    ossp_q2.tags.add(t2)
-    tp_q1.tags.add(t3)
-    tp_q1.tags.add(t4)
-    tp_q2.tags.add(t3)
-    tp_q2.tags.add(t4)
-    tp_q3.tags.add(t5)
-    tp_q4.tags.add(t5)
-    ossp_q1.save()
-    ossp_q2.save()
-    tp_q1.save()
-    tp_q2.save()
-    tp_q3.save()
-    tp_q4.save()
-    return HttpResponse("The database has been reset, visit https://teamai55-22.bham.team to go back to the home page")
+    ai2_q1_a1 = Answer(question=ai2_q1,
+                       content="Supervised learning is a type of learning where the input data is labeled with corresponding output values, and the neural network learns to map inputs to outputs by minimizing the difference between predicted and actual outputs. In contrast, unsupervised learning is a type of learning where the input data is not labeled, and the neural network learns to identify patterns and structures in the data by clustering or dimensionality reduction. Supervised learning is often used for tasks such as classification, regression, and object detection, while unsupervised learning is often used for tasks such as clustering, anomaly detection, and feature extraction.")
+    ai2_q1_a1.save()
+
+    prob_q1 = Question(title="What is the difference between probability and statistics?",
+                       module=ai2,
+                       explanation="Probability and statistics are two closely related fields of mathematics that deal with analyzing and understanding random events. While there is some overlap between the two fields, they have different goals and methods. This question seeks to explore the key differences between probability and statistics, as well as their relationship and applications.",
+                       tried_what="The author has a basic understanding of both probability and statistics, but is looking for a more in-depth explanation of their differences.",
+                       summary="This question asks about the differences between probability and statistics, and their relationship and applications.")
+    prob_q1.save()
+    prob_q1.tags.add(Tag.objects.get_or_create(tag_name="Probability")[0])
+    prob_q1.tags.add(Tag.objects.get_or_create(tag_name="Statistics")[0])
+
+    prob_q1_a1 = Answer(question=prob_q1,
+                        content="Probability is concerned with measuring the likelihood of an event occurring, based on some underlying model or assumptions. Statistics, on the other hand, is concerned with analyzing and interpreting data that has been generated by random processes, in order to draw conclusions or make predictions about the underlying system. In other words, probability deals with predicting the likelihood of future events, while statistics deals with analyzing past events and drawing conclusions about the underlying process. While the two fields are closely related, probability is more theoretical and concerned with the underlying mathematical models, while statistics is more applied and concerned with real-world data analysis and interpretation.")
+    prob_q1_a1.save()
+
+    return HttpResponse("The database has been reset, visit https://askit.bham.team to go back to the home page")
 
 
 @api_view(['POST'])
@@ -236,7 +211,8 @@ def submit_comment(request, question_id):
                         'content': comment.content,
                         'pub_date': comment.pub_date}
         return JsonResponse(comment_dict)
-    
+
+
 @api_view(['DELETE'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -251,6 +227,7 @@ def delete_comment(request, question_id, com_id):
             return JsonResponse({"success": True})
         else:
             return JsonResponse({"success": False, "error": "You are not the author of this comment"})
+
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
@@ -339,6 +316,7 @@ def downvote_answer(request, question_id, answer_id):
         answer.save()
         return JsonResponse({"success": True, "score": answer.score})
 
+
 @api_view(['DELETE'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -352,7 +330,6 @@ def delete_question(request, question_id):
             return JsonResponse({"success": True})
         else:
             return JsonResponse({"success": False, "error": "You are not the author of this question"})
-        
 
 
 @api_view(['DELETE'])

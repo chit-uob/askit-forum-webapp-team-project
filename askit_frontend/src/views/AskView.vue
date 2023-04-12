@@ -296,7 +296,7 @@ export default {
             <li class="mb-2 break-words">Search, and research</li>
             <li class="mb-2 break-words">Write a title that summarizes the specific problem</li>
             <li class="mb-2 break-words">Introduce the problem before you post any code</li>
-            <li class="mb-2 break-words">Help othersreproduce the problem</li>
+            <li class="mb-2 break-words">Help others reproduce the problem</li>
             <li class="mb-2 break-words">Check if the auto generated tags are relevant</li>
             <li class="mb-2 break-words">Proofread before posting!</li>
             <li class="mb-2 break-words">Ensure that the summary properly captures your question</li>

@@ -4,19 +4,90 @@
       <div class="flex items-center p-4">
         <div class="flex flex-col items-center">
           <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
-                  :class="{ 'border border-4 border-green-600': question.upvote_or_downvote === 'upvote'}"
+                  :class="{ ' border-4 border-green-600': question.upvote_or_downvote === 'upvote'}"
                   v-on:click="upvoteQuestion">
             <i class="fa fa-arrow-up"></i>
           </button>
           <span class="mr-2 text-lg font-bold text-gray-600">{{ question.score }}</span>
           <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
-                  :class="{ 'border border-4 border-red-600': question.upvote_or_downvote === 'downvote'}"
+                  :class="{ ' border-4 border-red-600': question.upvote_or_downvote === 'downvote'}"
                   v-on:click="downvoteQuestion">
             <i class="fa fa-arrow-down"></i>
           </button>
         </div>
+
         <div class="flex-grow">
-          <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
+          <div class="flex justify-between items-center mb-2">
+            <h1 class="p-2 font-mono text-3xl font-bold">{{ question.title }}</h1>
+            <!-- <p>hello there {{ user.username }} </p> -->
+            <div class="relative inline-block text-left">
+    <button v-if="user.username === question.author"
+      class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+      type="button"
+      @click="toggleDropdown"
+    >
+      <span>Options</span>
+    </button>
+
+    <div
+      class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+      v-show="showDropdown"
+    >
+      <div class="py-1">
+
+        <button
+          class="flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          @click="editItem">
+        <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16">
+          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0
+          1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0
+          1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" fill="blue"></path> </svg>
+          Edit
+        </button>
+
+        <button v-on:click="deleteQuestion"
+          class="flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Delete
+        </button>
+
+        <button v-on:click="muteNotifications"
+          class="flex justify-start w-full px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-black">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-bell" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376
+            1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22
+            12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0
+            1 13 6c0 .88.32 4.2 1.22 6z"/> </svg>
+          Mute Notifications
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+            <!-- <div class="relative">
+              <button @click="toggleMenu"
+                      class=" justify-between mr-20 px-4 py-2 rounded-md border-2 border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Options
+              </button>
+              <div v-show="showMenu"
+                  class=" justify-between mr-20 placeholder:absolute z-10 w-56 mt-2  bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+                <button class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                  Option 1
+                </button>
+                <button class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                  Option 2
+                </button>
+              </div>
+            </div> -->
+            <!-- <button    v-on:click="deleteQuestion" type="button"
+                      class="justify-between rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
+                Delete Question
+                v-if=" question.author = 'adinotadmin@mail.com' "
+            </button> -->
+          </div>
           <div class="mb-2 flex justify-between">
             <p class="p-2 font-sans font-thin w-full">Author: {{ question.author }}</p>
             <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
@@ -69,17 +140,24 @@
         </div>
 
         <div v-for="com in all_comments" :key="com.id">
-          <div class="flex items-center rounded-lg bg-white py-1 px-2 shadow">
-            <div class="flex-grow">
-              <div class="flex justify-between">
-                <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
-                <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
-              </div>
-              <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
-              <p class="text-lg">{{ com.content }}</p>
-            </div>
-          </div>
-        </div>
+  <div class="flex items-center rounded-lg bg-white py-1 px-2 shadow">
+    <div class="flex-grow">
+      <div class="flex justify-between">
+        <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
+        <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
+      </div>
+      <div class="flex items-center justify-between">
+        <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
+        <p class="text-lg">{{ com.content }}</p>
+        <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)" class="bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
+          Delete comment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
       </div>
 
       <div class="flex justify-center px-2">
@@ -112,13 +190,13 @@
           <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
             <div class="flex flex-col items-center">
               <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
-                      :class="{ 'border border-4 border-green-600': answer.upvote_or_downvote === 'upvote' }"
+                      :class="{ ' border-4 border-green-600': answer.upvote_or_downvote === 'upvote' }"
                       v-on:click="upvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-up"></i>
               </button>
               <span class="mr-2 text-lg font-bold text-gray-600">{{ answer.score }}</span>
               <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
-                      :class="{ 'border border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
+                      :class="{ ' border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
                       v-on:click="downvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-down"></i>
               </button>
@@ -128,15 +206,69 @@
                 <p class="text-sm text-gray-600">Author: {{ answer.author }} </p>
                 <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(answer.pub_date) }}</p>
               </div>
+              <div class="flex items-center justify-between">
+
               <p v-if="answer.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
               <p class="text-lg">{{ answer.content }}</p>
+
+
+
+
+              <div>
+              <button v-if="user.username === answer.author"
+                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+                type="button"
+                @click="toggleAnswerDropdown">
+                <span>Options</span>
+              </button>
+
+              <div
+                class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+                v-show="showDropdownAnswers" >
+                <div class="py-1">
+
+                  <button @click="editItem"
+                  class="flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                  <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16">
+                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0
+                    1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0
+                    1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" fill="blue"></path> </svg>
+                    Edit Answer
+                  </button>
+
+                  <button v-on:click="deleteAnswer(answer.id)"
+                    class="flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Delete Answer
+                  </button>
+
+                  <button v-on:click="muteNotifications"
+                    class="flex justify-start w-full px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-bell" viewBox="0 0 16 16">
+                      <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376
+                      1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22
+                      12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0
+                      1 13 6c0 .88.32 4.2 1.22 6z"/> </svg>
+                    Mute Notifications
+                  </button>
+                </div>
+              </div>
+              </div>
+
+
+              <!-- <button v-if="user.username == answer.author" class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+          v-on:click="deleteAnswer(answer.id)">
+              Delete Answer
+          </button> -->
+          </div>
             </div>
           </div>
+
         </div>
-        <button v-on:click="deleteQuestion" type="button"
-                    class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300">
-              Delete Question
-          </button>
+
       </div>
     </div>
   </div>
@@ -144,6 +276,7 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
+import axios from 'axios';
 
 export default {
   name: "QuestionView",
@@ -151,6 +284,9 @@ export default {
     return {
       showForm: false,
       showComments: false,
+      showDropdown: false,
+      showDropdownAnswers:false,
+      user:{},
 
       question: {
         title: "Loading...",
@@ -179,13 +315,26 @@ export default {
           this.question = response.data;
           this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
           this.all_comments = response.data.comment_list;
-          //this.question.Module.title = response.data.Module.title;
+          this.module = response.data.module;
+          this.question.Module.title = response.data.Module.title;
         })
         .catch((error) => {
           console.log(error);
         });
+
+    axiosClient.get('/v1/users/me').then(response => {this.user = response.data}).catch(error => {console.log(error)})
   },
+
+
   methods: {
+
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
+    },
+
+    toggleAnswerDropdown() {
+      this.showDropdownAnswers = !this.showDropdownAnswers;
+    },
     addAnswer() {
       console.log(this.answerInput)
       axiosClient.post(`/question/${this.$route.params.id}/submit_answer/`,
@@ -217,6 +366,29 @@ export default {
             console.log(error);
           });
     },
+
+    deleteComment(comId){
+      axiosClient.delete(`/question/${this.$route.params.id}/comment/${comId}/delete_comment/`)
+          .then((response) => {
+            // window.location.href = `/question/${this.$route.params.id}`;
+            this.all_comments = this.all_comments.filter(comment => comment.id !== comId);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+    },
+
+    deleteAnswer(answerId){
+      axiosClient.delete(`/question/${this.$route.params.id}/answer/${answerId}/delete_answer/`)
+          .then((response) => {
+            window.location.href = `/question/${this.$route.params.id}`;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+
 
     upvoteQuestion() {
       axiosClient.post(`/question/${this.$route.params.id}/upvote/`)
@@ -280,8 +452,7 @@ export default {
     deleteQuestion(){
       axiosClient.delete(`/question/${this.$route.params.id}/delete/`)
           .then((response) => {
-            // this.$router.push({ name: "Home" });
-            window.location.href = '/module/';
+            window.location.href = `/module/${response.data.module}`;
           })
           .catch((error) => {
             console.log(error);

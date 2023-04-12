@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9v6y%c4t!=4&bs+a_60pzqaj!%7ofeoz17*(5l&%=15p1wi1i*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,10 +38,10 @@ CSRF_TRUSTED_ORIGINS = ["https://teamai55-22.bham.team", "https://askit.bham.tea
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.IsAuthenticated',
     )
 }
 
@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'ask_questions.apps.AskQuestionsConfig',
     'answer_questions.apps.AnswerQuestionsConfig',
     'search.apps.SearchConfig',
+    'create_module.apps.CreateModuleConfig',
+    'course_settings.apps.CourseSettingsConfig',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +153,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'askit.team.ai@gmail.com'
+EMAIL_HOST_PASSWORD = 'apofledtkolttdrt'
+EMAIL_USE_TLS = True
+
+DJOSER = {
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    'SET_PASSWORD_RETYPE': True,
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': False,
+    'ACTIVATION_URL': 'activate/{uid}/{token}'
+}

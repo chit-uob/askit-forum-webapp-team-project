@@ -8,9 +8,9 @@
                 </div>
                 <div class="grid grid-cols-2 w-full md:w-1/2">
                     <div class="grid grid-rows-3 text-left md:text-right px-16 md:px-0 self-start">
-                        <h2 class="self-start text-3xl font-bold">{{user}}</h2>
+                        <h2 class="self-start text-3xl font-bold">{{user.username}}</h2>
                         <h2 class="self-center text-xl">University of Somewhere</h2>
-                        <h2 class="self-end">{{user}}</h2>
+                        <h2 class="self-end">{{user.username}}</h2>
                     </div>
                     <div
                             class="self-start mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black"

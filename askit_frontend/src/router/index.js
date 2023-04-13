@@ -16,6 +16,7 @@ import ResetPasswordView from "@/views/ResetPasswordView.vue";
 import ActivationView from "@/views/ActivationView";
 import addMembersView from "@/views/addMembersView";
 import courseSettingsVue from "@/views/CourseSettings.vue";
+import SettingsView from "@/views/SettingsView";
 
 const routes = [
     {
@@ -93,11 +94,15 @@ const routes = [
         name: 'add-members',
         component: addMembersView
     },
-
     {
         path: '/module/:mod/course-settings',
         name: 'course_settings',
         component: courseSettingsVue
+    },
+    {
+        path: '/settings/',
+        name: 'settings',
+        component: SettingsView
     }
 ]
 

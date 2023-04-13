@@ -215,7 +215,7 @@
 
         </div>
         <div class="hidden w-[30%] py-11 pr-9 md:block">
-            <div v-if="admin" class=" rounded-lg border-[3px] border-black p-2" style="box-shadow: .2em .2em;">
+            <div v-if="admin" class=" rounded-lg border-[3px] border-black p-2 mb-3" style="box-shadow: .2em .2em;">
                 <!-- <div class=" text-center font-medium pb-1 mb-2 border-b-2 border-black border-dotted">Admin tools</div>
                 -->
                 <div class=" flex-col flex gap-2 ">
@@ -261,13 +261,13 @@
                     </a>
                 </div>
             </div>
-            <div class=" mt-3 rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
-                <div class="mb-2 text-center">Tag filter</div>
+            <div class="rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
+                <div class="mb-2 text-center font-medium">Filter by tags</div>
                 <div class="flex flex-wrap gap-2 justify-center">
-                    <div v-for="tag in tagSet" v-on:click="filterByTag(tag)"
+                    <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
                          class="py-1 px-2 rounded-md border-2 border-black " style="box-shadow: .2em .2em;"
                          :class="{ 'bg-blue-200':tagSelected(tag)} ">{{ tag }}
-                    </div>
+                </button>
                 </div>
             </div>
         </div>

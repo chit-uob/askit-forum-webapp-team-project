@@ -127,7 +127,7 @@
                     <button type="submit"
                             class=" transition absolute right-0 rounded-[4px] bg-cyan-100 px-6 py-2 my-3 mx-10 text-sm font-bold border-black border-2 focus:outline-none hover:bg-cyan-50 focus:ring-4 focus:ring-blue-300"
                             style="box-shadow: .2em .2em;">
-                        Show all >
+                        Show all &raquo;
                     </button>
                 </div>
             </div>

@@ -13,11 +13,17 @@
             <div class="inline-flex w-full justify-between px-10 py-8 items-center">
                 <h1 class="text-[42px] font-bold">{{ $route.params.mod }}</h1>
                 <div>
-                    <a :href="`/advanced-search/`" class="transition shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <a :href="`/advanced-search/`">
+                        <button type="submit"
+                                class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
                             Advanced Search
+                        </button>
                     </a>
-                    <a :href="`/ask/${$route.params.mod}`" class=" transition shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <a :href="`/ask/${$route.params.mod}`">
+                        <button type="submit"
+                                class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
                             Ask Question
+                        </button>
                     </a>
                 </div>
             </div>
@@ -43,7 +49,8 @@
                 </div>
                 <a v-if="popRender" v-for="question in popQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="hidden focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                   class="hidden  transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black "
+                   style="box-shadow: .23em .23em;">
                     <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
                         <div class=" self-start ">{{ question.score }} votes</div>
                         <div class=" self-center ">{{ question.num_answers }} answers</div>
@@ -87,7 +94,8 @@
 
                 <a v-if="popRender" v-for="question in popQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 rounded-2xl bg-white hover:bg-[#f2fdff] border-[0.24em] border-black ">
+                   class="transition hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fdff] border-[0.24em] border-black "
+                   style="box-shadow: .23em .23em;">
                     <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
                         <div class="mr-1 inline">{{ question.score }} votes</div>
                         <div class="mx-1 inline ">{{ question.num_answers }} answers</div>
@@ -117,8 +125,9 @@
                 </a>
                 <div class="w-full relative">
                     <button type="submit"
-                            class="text-white shadow-[3px_3px_0px_0px_#000000] transition absolute right-0 rounded-[4px] bg-blue-600 px-6 py-2 my-3 mx-10 text-sm font-bold focus:outline-none hover:bg-cyan-50 focus:ring-4 focus:ring-blue-300">
-                        Show all >
+                            class=" transition absolute right-0 rounded-[4px] bg-cyan-100 px-6 py-2 my-3 mx-10 text-sm font-bold border-black border-2 focus:outline-none hover:bg-cyan-50 focus:ring-4 focus:ring-blue-300"
+                            style="box-shadow: .2em .2em;">
+                        Show all &raquo;
                     </button>
                 </div>
             </div>
@@ -127,7 +136,8 @@
 
                 <a v-if="allRender" v-for="question in allQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="transition group focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                   class="transition hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black "
+                   style="box-shadow: .23em .23em;">
                     <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
                         <div class=" self-start ">{{ question.score }} votes</div>
                         <div class=" self-center ">{{ question.num_answers }} answers</div>
@@ -172,7 +182,8 @@
 
                 <a v-if="allRender" v-for="question in allQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="transition focus:outline-none focus:ring-4 focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                   class="transition hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black "
+                   style="box-shadow: .23em .23em;">
                     <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
                         <div class="mr-1 inline">{{ question.score }} votes</div>
                         <div class="mx-1 inline ">{{ question.num_answers }} answers</div>
@@ -204,7 +215,7 @@
 
         </div>
         <div class="hidden w-[30%] py-11 pr-9 md:block">
-            <div v-if="admin" class=" rounded-lg border-[3px] border-black p-2" style="box-shadow: .2em .2em;">
+            <div v-if="admin" class=" rounded-lg border-[3px] border-black p-2 mb-3" style="box-shadow: .2em .2em;">
                 <!-- <div class=" text-center font-medium pb-1 mb-2 border-b-2 border-black border-dotted">Admin tools</div>
                 -->
                 <div class=" flex-col flex gap-2 ">
@@ -220,29 +231,41 @@
                     <!--              Ask Question-->
                     <!--            </button>-->
                     <!--          </a>-->
-                    <a :href="`/module/${$route.params.mod}/add-members`" v-if="admin" type="submit"
-                        class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
-                                                  Add members
+                    <a :href="`/module/${$route.params.mod}/add-members`">
+                        <button v-if="admin" type="submit"
+                                class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black"
+                                style="box-shadow: .2em .2em black;">
+                            Add members
+                        </button>
                     </a>
                     <button v-if="admin" v-on:click="deleteModule" type="button"
-                            class="shadow-[3px_3px_0px_0px_#000000] w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                            class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black"
+                            style="box-shadow: .2em .2em black;">
                         Delete Module
                     </button>
-                    <a :href="`/module/${$route.params.mod}/course-settings/`" v-if="admin" type="submit"
-                                    class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                    <a :href="`/module/${$route.params.mod}/course-settings/`" class="w-full">
+                        <div>
+                            <button v-if="admin" type="submit"
+                                    class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black"
+                                    style="box-shadow: .2em .2em black;">
                                 Course Settings
+                            </button>
+                        </div>
                     </a>
-                    <a :href="`/new`" v-if="admin" type="submit"
-                                class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
+                    <a :href="`/new`" class="w-full">
+                        <button v-if="admin" type="submit"
+                                class="w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300 border-2 border-black"
+                                style="box-shadow: .2em .2em black;">
                             Create Module
+                        </button>
                     </a>
                 </div>
             </div>
-            <div class=" mt-3 rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
-                <div class="mb-2 text-center">Tag filter</div>
+            <div class="rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
+                <div class="mb-2 text-center font-medium">Filter by tags</div>
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
-                         class="focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 
+                         class="py-1 px-2 rounded-md border-2 border-black " style="box-shadow: .2em .2em;"
                          :class="{ 'bg-blue-200':tagSelected(tag)} ">{{ tag }}
                 </button>
                 </div>

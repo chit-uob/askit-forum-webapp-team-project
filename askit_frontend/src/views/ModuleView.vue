@@ -28,12 +28,12 @@
                     <div class="self-center flex align-middle radio-toolbar h-[27px] border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"
                          style="box-shadow: .23em .23em;">
 
-                        <button class="focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 7)}" v-on:click="updatePopQ(7)">Week</button>
+                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 7)}" v-on:click="updatePopQ(7)">Week</button>
 
-                        <button class="focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full border-x-2 border-black inline-block" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 30)}" v-on:click="updatePopQ(30)"
+                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full border-x-2 border-black inline-block" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 30)}" v-on:click="updatePopQ(30)"
                                for="month">Month</button>
 
-                        <button class="focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline-block " for="allTime" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 10000)}" v-on:click="updatePopQ(10000)">All time</button>
+                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline-block " for="allTime" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 10000)}" v-on:click="updatePopQ(10000)">All time</button>
 
                     </div>
 
@@ -114,7 +114,7 @@
                 </a>
                 <div class="w-full relative">
                     <button type="submit"
-                            class="text-white shadow-[3px_3px_0px_0px_#000000] transition absolute right-0 rounded-[4px] bg-blue-600 px-6 py-2 my-3 mx-10 text-sm font-bold focus:outline-none hover:bg-cyan-50 focus:ring-4 focus:ring-pink-400">
+                            class=" text-white shadow-[3px_3px_0px_0px_#000000] transition absolute right-0 rounded-[4px] bg-blue-600 px-6 py-2 my-3 mx-10 text-sm font-bold focus:outline-none hover:bg-blue-500 focus:ring-4 focus:ring-pink-400">
                         Show all >
                     </button>
                 </div>
@@ -218,15 +218,15 @@
                     <!--            </button>-->
                     <!--          </a>-->
                     <a :href="`/module/${$route.params.mod}/add-members`" v-if="admin" type="submit"
-                        class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
                                                   Add members
                     </a>
                     <button v-if="admin" v-on:click="deleteModule" type="button"
-                            class="shadow-[3px_3px_0px_0px_#000000] w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                            class="transition shadow-[3px_3px_0px_0px_#000000] w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
                         Delete Module
                     </button>
                     <a :href="`/module/${$route.params.mod}/course-settings/`" v-if="admin" type="submit"
-                                    class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                                    class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
                                 Course Settings
                     </a>
                     <a :href="`/new`" v-if="admin" type="submit"
@@ -239,7 +239,7 @@
                 <div class="mb-2 text-center">Tag filter</div>
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
-                         class="focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 
+                         class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 
                          :class="{ 'bg-blue-200':tagSelected(tag)} ">{{ tag }}
                 </button>
                 </div>

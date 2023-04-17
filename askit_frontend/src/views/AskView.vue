@@ -160,10 +160,10 @@ export default {
         <p class="mb-4">Explanation: {{ suggestQuestion.explanation }}</p>
         <p class="mb-4">Tags: {{ suggestQuestion.tags }}</p>
         <div class="flex">
-          <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="acceptSuggestion">
+          <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="acceptSuggestion">
             Yes, DELETE my question and view that question
           </button>
-          <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="denySuggestion">
+          <button class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="denySuggestion">
             No
           </button>
         </div>
@@ -177,7 +177,7 @@ export default {
     <div class="w-full pt-2 pl-4 md:w-2/3">
       <label for="message" class="block text-lg font-medium text-gray-900">Title</label>
       <textarea id="message" rows="1"
-                class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
+                class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Enter your title" v-model="questionTitle"></textarea>
 
 
@@ -203,11 +203,11 @@ export default {
       <div class>
         <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Summary (optional)</label>
         <textarea :disabled="isSummDisabled" id="message" rows="1"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
+                  class="transition focus:ring-2 focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
         <div class="flex items-center">
           <button type="button" :disabled="isSummDisabled"
-                  class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-500"
+                  class="transition focus:outline-none  mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-500"
                   v-on:click="getSummary">
             Auto-generate summary
           </button>
@@ -230,11 +230,11 @@ export default {
       <div class="mb-6">
         <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Tags</label>
         <textarea :disabled="isTagDisabled" id="message" rows="1"
-                  class="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-600"
+                  class="transition focus:ring-2 focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-600"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
         <div class="flex items-center">
           <button type="button" :disabled="isTagDisabled"
-                  class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600"
+                  class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-600"
                   v-on:click="getTags">
             Auto-generate tags
           </button>
@@ -255,7 +255,7 @@ export default {
 
       <div class="flex items-center">
         <button v-on:click="addQuestion" type="button" :disabled="isAskDisabled"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 disabled:bg-slate-600">
+                class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-600">
           Add Question
         </button>
         <div role="status" :class="askLoadWheel">

@@ -10,7 +10,7 @@
 <!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
 <!--      </div>-->
 <!--    </div>-->
-    <div class="w-2/3">
+    <div class="md:w-[70%] pb-[50px] w-full">
       <div class="inline-flex w-full justify-between p-10">
         <div>
           <h1 class="text-5xl font-bold" v-if="!isAdvanceSearch">Results for: {{ $route.query.searchTerm }}</h1>
@@ -19,47 +19,91 @@
         </div>
 
         <div>
-          <a :href="`/advanced-search/`">
-            <button type="submit"
-                    class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
+          <a :href="`/advanced-search/`" type="submit"
+                    class="transition rounded-lg whitespace-nowrap bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
               Advanced Search
-            </button>
           </a>
-          <a :href="`/ask/${$route.params.mod}`">
-            <button type="submit"
-                    class="rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300">
+          <a v-if="moduleSpecific" :href="`/ask/${moduleSpecificModule}`" type="submit"
+                    class="transition rounded-lg whitespace-nowrap bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
               Ask Question
-            </button>
           </a>
         </div>
       </div>
-      <div v-for="question in questions" :key="question.id">
-        <a class="flex w-full pt-2 pr-10 pl-10" :href="`/question/${question.id}`">
-          <div class="inline-flex w-full rounded-2xl bg-cyan-200 shadow card">
-            <div class="flex flex-col justify-evenly border-r-2 border-black p-3 w-[100px]">
-              <p class="text-right text-xs">{{ question.score }} votes</p>
-              <p class="text-right text-xs">{{ question.num_answers }} answers</p>
-              <p class="text-right text-xs">{{ question.views }} views</p>
-            </div>
-            <div class="flex w-8/12 flex-col justify-evenly p-3">
-              <h3 class="truncate">{{ question.title }}</h3>
-              <p>Asked by {{ question.author }}</p>
-              <div class="flex">
-                <div v-for="tag in question.tags" class="mr-2">
-                  <button
-                      class="rounded bg-blue-50 px-2 text-center text-sm font-light text-blue-400 mt-0.5 h-[25px] hover:bg-blue-100">
-                    {{ tag }}
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col justify-evenly p-3 w-[80px]">
-              <h3>{{ formatPubDate(question.pub_date) }}</h3>
-              <p>{{ question.module }}</p>
-            </div>
-          </div>
-        </a>
-      </div>
+      <a v-for="question in questions" :key="question.id"
+                   :href="`/question/${question.id}`"
+                   class="transition group focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                    <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+                        <div class=" self-start ">{{ question.score }} votes</div>
+                        <div class=" self-center ">{{ question.num_answers }} answers</div>
+                        <span class=" self-end  ">{{ question.views }} views</span>
+                    </div>
+
+                    <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
+                        <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                            {{ question.title }}
+                        </div>
+                        <div class=" self-center truncate ">Asked by <span v-if="question.author"
+                                                                           class="text-blue-500 hover:underline hover:text-blue-400">{{
+                            question.author
+                            }}</span><span v-if="!(question.author)" class="">Anonymous</span></div>
+                        <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
+                             class="flex overflow-hidden">
+                            <div v-for="tag in question.tags"
+                                 class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
+                                [{{ tag }}]
+                            </div>
+                        </div>
+                        <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"
+                             class="flex overflow-hidden">
+                            <div class=" self-end mr-[2px]">No tags! (<span class=" text-cyan-500">╥</span>_<span
+                                    class=" text-cyan-500">╥</span>)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid bg-lime-300 rounded-r-[13px] rounded-bl-2xl  box-content">
+                        <div class="  place-self-center py-2 px-[9px] border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+                            <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
+                                {{ formatDay(question.pub_date) }}
+                            </div>
+                            <div class=" text-center text-[16px] font-medium leading-none ">
+                                {{ formatMonthYear(question.pub_date).toLowerCase() }}
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+
+                <a v-for="question in questions" :key="question.id"
+                   :href="`/question/${question.id}`"
+                   class="transition focus:outline-none focus:ring-4 focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                    <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
+                        <div class="mr-1 inline">{{ question.score }} votes</div>
+                        <div class="mx-1 inline ">{{ question.num_answers }} answers</div>
+                        <span class="mx-1 inline ">{{ question.views }} views</span>
+                    </div>
+
+                    <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">
+                        {{ question.title }}
+                    </div>
+                    <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
+                         class="flex-wrap inline-flex leading-none">
+                        <div v-for="tag in question.tags"
+                             class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">
+                            [{{ tag }}]
+                        </div>
+                    </div>
+                    <div v-if="(question.tags[0] == '') || (question.tags.length == 0)" class="flex">
+                        <div class=" text-xs">No tags! (<span class=" text-cyan-500">╥</span>_<span
+                                class=" text-cyan-500">╥</span>)
+                        </div>
+                    </div>
+                    <div class=" text-xs mt-1 ">Asked by <span v-if="question.author"
+                                                               class="text-blue-500 hover:underline hover:text-blue-400">{{
+                        question.author
+                        }}</span><span v-if="!(question.author)" class="">Anonymous</span> on the <span
+                            class="">{{ formatDate(question.pub_date) }}</span></div>
+                </a>
     </div>
   </div>
 
@@ -95,6 +139,7 @@ export default {
             }
           }).then((response) => {
             this.questions = response.data;
+            console.log(this.questions)
             if (this.$route.query.module) {
               this.moduleSpecific = true;
               this.moduleSpecificModule = this.$route.query.module;
@@ -157,6 +202,9 @@ export default {
 
 <script setup>
 import { formatPubDate } from "./dateUtils";
+import { formatDate } from "./dateUtils";
+import { formatDay } from "./dateUtils";
+import { formatMonthYear } from "./dateUtils";
 </script>
 
 <style scoped>

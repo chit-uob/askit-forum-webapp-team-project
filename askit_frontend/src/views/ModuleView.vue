@@ -10,19 +10,19 @@
         <!--      </div>-->
         <!--    </div>-->
         <div class="md:w-[70%] pb-[50px] w-full">
-            <div class="inline-flex w-full justify-between px-10 py-8 items-center">
+            <div class="inline-flex w-full justify-between px-4 md:px-10 py-8 items-center">
                 <h1 class="text-[42px] font-bold">{{ $route.params.mod }}</h1>
-                <div>
-                    <a :href="`/advanced-search/`" class="transition shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                <div class="flex flex-wrap justify-end">
+                    <a :href="`/advanced-search/`" class="transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
                             Advanced Search
                     </a>
-                    <a :href="`/ask/${$route.params.mod}`" class=" transition shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                    <a :href="`/ask/${$route.params.mod}`" class=" transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
                             Ask Question
                     </a>
                 </div>
             </div>
             <div>
-                <div class="mb-6 px-10 flex justify-between">
+                <div class="mb-6  px-4 md:px-10 flex justify-between">
                     <h2 class=" text-2xl inline">Popular questions</h2>
 
                     <div class="self-center flex align-middle radio-toolbar h-[27px] border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"

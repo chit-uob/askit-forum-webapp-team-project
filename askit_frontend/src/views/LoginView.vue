@@ -14,14 +14,14 @@
         </div>
         <div class="mb-2">
           <button type="submit"
-                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
+                  class="transition focus:ring-4  focus:ring-pink-400 bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
             Log in
           </button>
           <label v-if="invalid" class="text-red-600 pl-4" >{{ errorMessage }}</label>
         </div>
         <div>
-          <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
-          <button v-on:click="redirectToResetPassword" class="text-blue-400 hover:underline hover:text-blue-500">Forgot password?</button>
+          <button v-on:click="redirectToSignUp" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
+          <button v-on:click="redirectToResetPassword" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">Forgot password?</button>
         </div>
       </form>
 
@@ -55,7 +55,7 @@ export default {
       password: '',
       fields: true,
       invalid: false,
-      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400',
+      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400',
       errorMessage: ''
     }
   },
@@ -89,7 +89,7 @@ export default {
               this.errorMessage = Object.values(error.response.data)[0][0]
             }
             this.invalid = true
-            this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
+            this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-red-300 border-red-500"
           })
     },
     redirectToSignUp() {

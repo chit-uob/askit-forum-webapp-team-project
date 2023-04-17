@@ -3,13 +3,13 @@
     <div class="mx-auto w-10/12 max-w-6xl overflow-hidden bg-white shadow-lg">
       <div class="flex items-center p-4">
         <div class="flex flex-col items-center">
-          <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
+          <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
                   :class="{ ' border-4 border-green-600': question.upvote_or_downvote === 'upvote'}"
                   v-on:click="upvoteQuestion">
             <i class="fa fa-arrow-up"></i>
           </button>
           <span class="mr-2 text-lg font-bold text-gray-600">{{ question.score }}</span>
-          <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
+          <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                   :class="{ ' border-4 border-red-600': question.upvote_or_downvote === 'downvote'}"
                   v-on:click="downvoteQuestion">
             <i class="fa fa-arrow-down"></i>
@@ -22,7 +22,7 @@
             <!-- <p>hello there {{ user.username }} </p> -->
             <div class="relative inline-block text-left">
     <button v-if="user.username === question.author"
-      class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+      class="transition  focus:outline-none  mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-pink-400"
       type="button"
       @click="toggleDropdown"
     >
@@ -36,7 +36,7 @@
       <div class="py-1">
 
         <button
-          class="flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+          class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
           @click="editItem">
         <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16">
           <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0
@@ -46,7 +46,7 @@
         </button>
 
         <button v-on:click="deleteQuestion"
-          class="flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900">
+          class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900">
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -54,7 +54,7 @@
         </button>
 
         <button v-on:click="muteNotifications"
-          class="flex justify-start w-full px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-black">
+          class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-black">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-bell" viewBox="0 0 16 16">
             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376
             1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22
@@ -102,7 +102,7 @@
               {{ question.summary }}</p>
             <div class="flex">
               <div v-for="tag in question.tags" class="mr-2">
-                <button class="rounded bg-blue-50 px-2 py-1 text-blue-400 hover:bg-blue-100">{{ tag }}</button>
+                <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 rounded bg-blue-50 px-2 py-1 text-blue-400 hover:bg-blue-100">{{ tag }}</button>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@
         <div class="flex items-center">
           <h1 class="font-bold">Comments:</h1>
           <button
-              class="ml-4 rounded border-gray-300 bg-blue-100 px-4 py-1 font-sans font-bold text-black hover:bg-blue-300"
+              class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 rounded border-gray-300 bg-blue-100 px-4 py-1 font-sans font-bold text-black hover:bg-blue-300"
               @click="showComments = !showComments">Add Comment
           </button>
         </div>
@@ -129,7 +129,7 @@
               </QuillEditor>
             </div>
             <br>
-            <button class="ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
+            <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
               Submit
             </button>
           </form>
@@ -149,7 +149,7 @@
       <div class="flex items-center justify-between">
         <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
         <p class="text-lg">{{ com.content }}</p>
-        <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)" class="bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
+        <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)" class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
           Delete comment
         </button>
       </div>
@@ -162,7 +162,7 @@
 
       <div class="flex justify-center px-2">
         <button
-            class="ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
+            class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
             @click="showForm = !showForm">Answer this question
         </button>
       </div>
@@ -174,7 +174,7 @@
             </QuillEditor>
           </div>
           <br>
-          <button class="ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
+          <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600" type="submit">
             Submit answer
           </button>
         </form>
@@ -189,13 +189,13 @@
         <div v-for="answer in answers" :key="answer.id">
           <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
             <div class="flex flex-col items-center">
-              <button class="mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
+              <button class=" transition focus:ring-4 focus:outline-none focus:ring-blue-400mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
                       :class="{ ' border-4 border-green-600': answer.upvote_or_downvote === 'upvote' }"
                       v-on:click="upvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-up"></i>
               </button>
               <span class="mr-2 text-lg font-bold text-gray-600">{{ answer.score }}</span>
-              <button class="mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
+              <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                       :class="{ ' border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
                       v-on:click="downvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-down"></i>
@@ -216,7 +216,7 @@
 
               <div>
               <button v-if="user.username === answer.author"
-                class="mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-blue-300"
+                class="transition  focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:ring-pink-400"
                 type="button"
                 @click="toggleAnswerDropdown">
                 <span>Options</span>
@@ -228,7 +228,7 @@
                 <div class="py-1">
 
                   <button @click="editItem"
-                  class="flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                     >
                   <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16">
                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0
@@ -238,7 +238,7 @@
                   </button>
 
                   <button v-on:click="deleteAnswer(answer.id)"
-                    class="flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900">
+                    class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-red-700 hover:bg-gray-100 hover:text-red-900">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -246,7 +246,7 @@
                   </button>
 
                   <button v-on:click="muteNotifications"
-                    class="flex justify-start w-full px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-black">
+                    class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-black hover:bg-gray-100 hover:text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="mr-3 bi bi-bell" viewBox="0 0 16 16">
                       <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376
                       1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22

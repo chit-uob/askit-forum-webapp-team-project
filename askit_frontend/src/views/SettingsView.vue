@@ -59,14 +59,14 @@
       </div>
       <div v-if="activeTab === 'password'" class="px-10">
         <h2 class="text-2xl font-bold mb-4">Change Password</h2>
-        <form>
+        <form @submit.prevent="submitForm">
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="current-password">
               Current Password
             </label>
             <input
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="current-password"
+                v-model="old_password"
                 type="password"
                 placeholder="********"
             />
@@ -77,7 +77,7 @@
             </label>
             <input
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="new-password"
+                v-model="new_password"
                 type="password"
                 placeholder="********"
             />
@@ -88,18 +88,20 @@
             </label>
             <input
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="confirm-password"
+                v-model="conf_password"
                 type="password"
                 placeholder="********"
             />
           </div>
           <div class="flex items-center justify-between">
-            <button
+            <button :disabled="isFormComplete"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
+                type="submit"
             >
               Save Changes
             </button>
+            <label v-if="success" class="text-green-600 pl-4">{{ successMessage }}</label>
+            <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessage }}</label>
           </div>
         </form>
       </div>
@@ -175,11 +177,18 @@ export default {
     return {
       activeTab: 'my-details', // Set the default active tab
       shouldDeleteContent: false,
+      old_password: '',
+      new_password: '',
+      conf_password: '',
+      success: false,
+      successMessage: '',
+      errorMessage: '',
+      invalid: false,
     }
   },
   methods: {
     deleteUser() {
-      axiosClient.delete('/settings/delete_account/', {
+      axiosClient.delete('/v1/users/set_password/', {
         data: {
           'should_delete_content': this.shouldDeleteContent
         }
@@ -188,6 +197,40 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+    },
+    submitForm(e) {
+      const formData = {
+          new_password: this.new_password,
+          re_new_password: this.conf_password,
+          current_password: this.old_password,
+      }
+
+      axiosClient.post('/v1/users/set_password/', formData)
+          .then(response => {
+                    console.log(response)
+
+                    this.success = true
+                    this.invalid = false
+                    this.successMessage = "Password successfully changed!"
+            })
+                .catch(error => {
+                  console.log(error)
+                  if (error.response.status === 400) {
+                     this.errorMessage = "Invalid password"
+                     } else {
+                    //set this.errorMessage to the first element of the only attribute of error.response.data
+                       this.errorMessage = Object.values(error.response.data)[0][0]
+                    }
+                    this.invalid = true
+                    this.success = false
+                    this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
+                })
+
+    },
+  },
+  computed: {
+    isFormComplete(){
+      return (this.old_password === '') || (this.new_password === '') || (this.conf_password === '');
     }
   }
 }

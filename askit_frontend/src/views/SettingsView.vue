@@ -210,6 +210,7 @@ export default {
                     console.log(response)
 
                     this.success = true
+                    this.invalid = false
                     this.successMessage = "Password successfully changed!"
             })
                 .catch(error => {
@@ -221,6 +222,7 @@ export default {
                        this.errorMessage = Object.values(error.response.data)[0][0]
                     }
                     this.invalid = true
+                    this.success = false
                     this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
                 })
 

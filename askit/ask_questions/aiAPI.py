@@ -24,6 +24,6 @@ def text_to_tag_array(text):  # accepts stirng input
     return output.topics.values  # returns an array of tags as strings
 
 
-def add_to_cluster(text):
-    collection = oneai.clustering.Collection("questions")
-    collection.add_items(text)
+# def add_to_cluster(text):
+#     collection = oneai.clustering.Collection("questions")
+#     collection.add_items(text)

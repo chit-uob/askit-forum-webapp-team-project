@@ -126,7 +126,7 @@ export default {
                     this.$route.path.startsWith('/password/reset') ||
                     this.$route.path.startsWith('/activate')
                 ) {
-                    if (this.$store.state.isAuthenticated) {
+                    if (this.$store.state.isAuthenticated && !this.$route.path.startsWith('/privacy')) {
                         this.$router.push("/")
                     }
                     this.enable = false

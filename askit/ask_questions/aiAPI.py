@@ -1,6 +1,5 @@
 import oneai  # install oneai
 import spacy # install spacy
-import en_core_web_sm
 
 oneai.api_key = "042258be-d1e8-4bd0-9df1-ce48677e096d"
 
@@ -28,10 +27,3 @@ def text_to_tag_array(text):  # accepts stirng input
 def add_to_cluster(text):
     collection = oneai.clustering.Collection("questions")
     collection.add_items(text)
-
-def spacy_tag(text1, text2):
-    nlp = spacy.load("en_core_web_sm")
-    doc1 = nlp(text1)
-    doc2 = nlp(text2)
-
-    return doc1.similarity(doc2)

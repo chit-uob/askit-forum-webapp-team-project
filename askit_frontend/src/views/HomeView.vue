@@ -62,7 +62,7 @@
                         <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
                             <div
                                     class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{question.title}}</div>
-                            <div class=" self-center">Ask by <span
+                            <div class=" self-center">Asked by <span
                                     class="text-blue-500 hover:underline hover:text-blue-400"></span><span class="">{{user.username}}</span>
                             </div>
                             <div class="flex">
@@ -88,7 +88,7 @@
                         <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
                             <div
                                     class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
-                                <div class=" text-center leading-[0.9] text-[38px] font-semibold "></div>
+                                <div class=" text-center leading-[0.9] text-[38px] font-semibold ">{{ formatDay(question.pub_date) }}</div>
                                 <div class=" text-center text-[16px] font-medium leading-none "></div>
                             </div>
                         </div>
@@ -166,14 +166,15 @@ export default {
     }).catch((error) => {
       console.log(error);
     });
-    // axiosClient({
-    //   method: "get",
-    //   url: "home_page/notifications",
-    // }).then((response) => {
-    //   this.notifications = response.data;
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
+    axiosClient({
+      method: "get",
+      url: "home_page/notifs",
+    }).then((response) => {
+      this.notifications = response.data;
+    }).catch((error) => {
+      console.log(error);
+    });
+
     axiosClient({
       method: "get",
       url: "home_page/vQuestions",
@@ -197,6 +198,15 @@ export default {
     }).catch((error) => {
       console.log(error);
     });
+  },
+  methods: {
+        formatPubDate,
+        formatDay,
+    user() {
+      axiosClient.get("/v1/users/me").then((response) => {
+        this.user = response.data;
+      });
+    },
   },
 };
 </script>

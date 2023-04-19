@@ -3,6 +3,7 @@ from home_page.models import Question, UserProfile, Answer, Notification
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 
 @api_view(['GET'])
@@ -131,3 +132,18 @@ def user_profiles(request):
 #         answer_list.append(context)
 #
 #     return JsonResponse(answer_list, safe=False)
+# Create your views here.
+# @csrf_exempt
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def userInfo(request):
+    if request.method == 'GET':
+        post_data = json.loads(request.body)
+        userName = post_data['username']
+        first_name = post_data['first_name']
+        last_name = post_data['last_name']
+        user = User.objects.get(username=userName)
+        profile = UserProfile.objects.create(user=user,first_name=first_name,last_name=last_name)
+        profile.save()
+        return JsonResponse({"success": True})

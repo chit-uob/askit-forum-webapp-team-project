@@ -78,8 +78,8 @@ class Notification(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    question = models.ForeignKey(Question, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
     pub_date = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=3000, default="")
 
@@ -88,7 +88,7 @@ class Comment(models.Model):
 
 
 class Activity(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     action = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
     link = models.CharField(max_length=150, default="")

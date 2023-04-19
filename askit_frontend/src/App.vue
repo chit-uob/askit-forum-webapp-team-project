@@ -3,7 +3,7 @@
 
     <nav v-if="enable" class="bg-teal-100 px-2 py-1 sm:px-4 border-b-[3px] border-black h-[62px]" id="nav-vue">
         <div class="container mx-auto flex flex-wrap items-center justify-between">
-            <router-link to="/" class="pl-4">
+            <router-link to="/" class="pl-4 transition focus:ring-4 focus:outline-none focus:ring-blue-400">
                 <span class="text-2xl font-bold">ASK.IT</span>
             </router-link>
             <form class="w-1/2" @submit.prevent="search">
@@ -14,16 +14,16 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </div>
                     <input type="search" id="default-search"
-                           class="block w-full h-[45px] rounded-lg border-2 border-black bg-white p-4 pl-10 text-sm text-gray-900 focus:border-teal-500 focus:ring-teal-500"
+                           class="transition focus:ring-4 focus:outline-none block w-full h-[45px] rounded-lg border-2 border-black bg-white p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                            placeholder="Search questions" v-model="searchTerm" required>
                     <button type="submit"
-                            class="absolute rounded-lg bg-blue-700 px-4 py-1 text-sm font-medium text-white h-[33px] right-2.5 bottom-1.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            class="transition absolute rounded-lg bg-blue-700 px-4 py-1 text-sm font-medium text-white h-[33px] right-2.5 bottom-1.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-pink-400">
                         Search
                     </button>
                 </div>
             </form>
             <button type="button"
-                    class="ml-3 inline-flex items-center rounded-lg bg-teal-100 p-2 text-sm text-gray-500 outline-1 outline-teal-300 hover:bg-teal-300 focus:outline-none focus:ring-2 focus:ring-teal-200 md:hidden"
+                    class="ml-3 inline-flex items-center rounded-lg bg-teal-100 p-2 text-sm text-gray-500 outline-1 outline-teal-300 hover:bg-teal-300 focus:outline-none focus:ring-2 focus:ring-blue-400 md:hidden"
                     aria-controls="navbar-default" aria-expanded="false"
                     v-on:click="showNav">
                 <span class="sr-only">Open main menu</span>
@@ -42,28 +42,28 @@
                 <ul class="mt-4 flex flex-col p-4 md:space-x-8 md:mt-0 md:flex-row md:border-0 md:text-sm md:font-medium">
                     <li>
                         <a href="#"
-                           class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
+                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
                            aria-current="page"><i class="fa fa-bell-o scale-150" aria-hidden="true"></i></a>
                     </li>
                     <li>
                         <a href="#"
-                           class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
+                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
                                 class="fa fa-user scale-150" aria-hidden="true"></i></a>
                     </li>
                     <li>
                         <a href="#"
-                           class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
+                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
                                 class="fa fa-question-circle scale-150" aria-hidden="true"></i></a>
                     </li>
                     <li>
-                        <a href="#"
-                           class="block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
+                        <a href="/settings/"
+                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
                                 class="fa fa-cog scale-150" aria-hidden="true"></i></a>
                     </li>
                 </ul>
             </div>
             <button type="button" v-on:click="logout"
-                    class="">
+                    class="transition focus:ring-4 focus:outline-none focus:ring-blue-400">
                 Logout
             </button>
         </div>
@@ -78,12 +78,11 @@
         <div class="flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black"
              v-if="enable" :class="{ hidden: !showModule }">
             <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
-            <div v-for="module in modules" class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">
-                <a :href="'/module/' + module.title" class="text-sky-600 hover:underline"><p class="p-8">{{
-                    module.title
-                    }}</p>
-                </a>
-            </div>
+            <a v-for="module in modules" class="shadow-[4px_4px_0px_0px_#000000] transition hover:translate-x-1 hover:bg-[#fff6fe] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black bg-white flex h-[100px] w-[100px] justify-center" :href="'/module/' + module.title">
+                <div class="justify-center flex w-full m-2 rounded-[0.6rem] border-2 border-black border-dashed">
+                    <p class="inline-block place-self-center text-xl tracking-[1px]">{{module.title}}</p>
+                </div>
+            </a>
         </div>
         <div class="w-full">
             <router-view/>
@@ -127,7 +126,7 @@ export default {
                     this.$route.path.startsWith('/password/reset') ||
                     this.$route.path.startsWith('/activate')
                 ) {
-                    if (this.$store.state.isAuthenticated) {
+                    if (this.$store.state.isAuthenticated && !this.$route.path.startsWith('/privacy')) {
                         this.$router.push("/")
                     }
                     this.enable = false

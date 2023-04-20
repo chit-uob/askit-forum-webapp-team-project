@@ -145,18 +145,9 @@
 <script>
 import axiosClient from "@/views/axiosClient";
 import { formatDay, formatPubDate, formatMonthYear } from "./dateUtils";
-// import {FALSE, TRUE} from "sass";
 
 export default {
     name: "HomeView",
-  computed: {
-    FALSE() {
-      return FALSE
-    },
-    TRUE() {
-      return TRUE
-    }
-  },
     data() {
         return {
             notifications: [],

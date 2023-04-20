@@ -40,21 +40,21 @@
             </div>
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="mt-4 flex flex-col p-4 md:space-x-8 md:mt-0 md:flex-row md:border-0 md:text-sm md:font-medium">
-<!--                    <li>-->
-<!--                        <a href="#"-->
-<!--                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"-->
-<!--                           aria-current="page"><i class="fa fa-bell-o scale-150" aria-hidden="true"></i></a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a href="#"-->
-<!--                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i-->
-<!--                                class="fa fa-user scale-150" aria-hidden="true"></i></a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a href="#"-->
-<!--                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i-->
-<!--                                class="fa fa-question-circle scale-150" aria-hidden="true"></i></a>-->
-<!--                    </li>-->
+                    <!--                    <li>-->
+                    <!--                        <a href="#"-->
+                    <!--                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"-->
+                    <!--                           aria-current="page"><i class="fa fa-bell-o scale-150" aria-hidden="true"></i></a>-->
+                    <!--                    </li>-->
+                    <!--                    <li>-->
+                    <!--                        <a href="#"-->
+                    <!--                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i-->
+                    <!--                                class="fa fa-user scale-150" aria-hidden="true"></i></a>-->
+                    <!--                    </li>-->
+                    <!--                    <li>-->
+                    <!--                        <a href="#"-->
+                    <!--                           class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i-->
+                    <!--                                class="fa fa-question-circle scale-150" aria-hidden="true"></i></a>-->
+                    <!--                    </li>-->
                     <li>
                         <a href="/settings/"
                            class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
@@ -62,10 +62,10 @@
                     </li>
                 </ul>
             </div>
-<!--            <button type="button" v-on:click="logout"-->
-<!--                    class="transition focus:ring-4 focus:outline-none focus:ring-blue-400">-->
-<!--                Logout-->
-<!--            </button>-->
+            <!--            <button type="button" v-on:click="logout"-->
+            <!--                    class="transition focus:ring-4 focus:outline-none focus:ring-blue-400">-->
+            <!--                Logout-->
+            <!--            </button>-->
         </div>
     </nav>
     <div class="absolute md:hidden">
@@ -78,9 +78,11 @@
         <div class="flex-col justify-items-center bg-cyan-50 w-[175px] md:block border-r-[3px] border-black"
              v-if="enable" :class="{ hidden: !showModule }">
             <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
-            <a v-for="module in modules" class="shadow-[4px_4px_0px_0px_#000000] transition hover:translate-x-1 hover:bg-[#fff6fe] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black bg-white flex h-[100px] w-[100px] justify-center" :href="'/module/' + module.title">
+            <a v-for="module in modules"
+               class="shadow-[4px_4px_0px_0px_#000000] transition hover:translate-x-1 hover:bg-[#fff6fe] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black bg-white flex h-[100px] w-[100px] justify-center"
+               :href="'/module/' + module.title">
                 <div class="justify-center flex w-full m-2 rounded-[0.6rem] border-2 border-black border-dashed">
-                    <p class="inline-block place-self-center text-xl tracking-[1px]">{{module.title}}</p>
+                    <p class="inline-block place-self-center text-xl tracking-[1px]">{{ module.title }}</p>
                 </div>
             </a>
         </div>
@@ -210,12 +212,25 @@ export default {
             localStorage.setItem("token", "")
             this.$router.push('/log-in/')
         }
-    },
+    }
+    ,
     created() {
         if (this.$store.state.isAuthenticated) {
             this.loadModules()
         }
-    },
+    }
+    ,
+    updated() {
+        if (localStorage.getItem("largeFont") === "true") {
+            // remove all different text size class
+            document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
+            document.querySelectorAll('.text-sm').forEach(e => e.classList.remove('text-sm'));
+            document.querySelectorAll('.text-base').forEach(e => e.classList.remove('text-base'));
+            document.querySelectorAll('.text-lg').forEach(e => e.classList.remove('text-lg'));
+            document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
+            document.body.classList.add('text-xl')
+        }
+    }
 }
 
 

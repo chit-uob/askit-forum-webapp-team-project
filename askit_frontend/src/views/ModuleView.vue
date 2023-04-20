@@ -4,11 +4,13 @@
             <div class="inline-flex w-full justify-between px-4 md:px-10 py-8 items-center">
                 <h1 class="text-[42px] font-bold">{{ $route.params.mod }}</h1>
                 <div class="flex flex-wrap justify-end">
-                    <a :href="`/advanced-search/`" class="transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
-                            Advanced Search
+                    <a :href="`/advanced-search/`"
+                       class="transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                        Advanced Search
                     </a>
-                    <a :href="`/ask/${$route.params.mod}`" class=" transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
-                            Ask Question
+                    <a :href="`/ask/${$route.params.mod}`"
+                       class=" transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                        Ask Question
                     </a>
                 </div>
             </div>
@@ -19,12 +21,19 @@
                     <div class="self-center flex align-middle radio-toolbar h-[27px] border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"
                          style="box-shadow: .23em .23em;">
 
-                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 7)}" v-on:click="updatePopQ(7)">Week</button>
+                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline"
+                                :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 7)}" v-on:click="updatePopQ(7)">Week
+                        </button>
 
-                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full border-x-2 border-black inline-block" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 30)}" v-on:click="updatePopQ(30)"
-                               for="month">Month</button>
+                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full border-x-2 border-black inline-block"
+                                :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 30)}" v-on:click="updatePopQ(30)"
+                                for="month">Month
+                        </button>
 
-                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline-block " for="allTime" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 10000)}" v-on:click="updatePopQ(10000)">All time</button>
+                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline-block "
+                                for="allTime" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 10000)}"
+                                v-on:click="updatePopQ(10000)">All time
+                        </button>
 
                     </div>
 
@@ -209,20 +218,20 @@
                     <!--            </button>-->
                     <!--          </a>-->
                     <a :href="`/module/${$route.params.mod}/add-members`" v-if="admin" type="submit"
-                        class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
-                                                  Add members
+                       class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        Add members
                     </a>
                     <button v-if="admin" v-on:click="deleteModule" type="button"
                             class="transition shadow-[3px_3px_0px_0px_#000000] w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
                         Delete Module
                     </button>
                     <a :href="`/module/${$route.params.mod}/course-settings/`" v-if="admin" type="submit"
-                                    class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
-                                Course Settings
+                       class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        Course Settings
                     </a>
                     <a :href="`/new`" v-if="admin" type="submit"
-                                class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
-                            Create Module
+                       class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        Create Module
                     </a>
                 </div>
             </div>
@@ -230,9 +239,9 @@
                 <div class="mb-2 text-center">Tag filter</div>
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
-                         class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 
-                         :class="{ 'bg-blue-200':tagSelected(tag)} ">{{ tag }}
-                </button>
+                            class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black "
+                            :class="{ 'bg-blue-200':tagSelected(tag)} ">{{ tag }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -257,6 +266,17 @@ export default {
             tagFilter: new Set(),
             currentTime: 7,
         };
+    },
+    updated() {
+        if (localStorage.getItem("largeFont") === "true") {
+            // remove all different text size class
+            document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
+            document.querySelectorAll('.text-sm').forEach(e => e.classList.remove('text-sm'));
+            document.querySelectorAll('.text-base').forEach(e => e.classList.remove('text-base'));
+            document.querySelectorAll('.text-lg').forEach(e => e.classList.remove('text-lg'));
+            document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
+            document.body.classList.add('text-xl')
+        }
     },
     mounted() {
         axiosClient({

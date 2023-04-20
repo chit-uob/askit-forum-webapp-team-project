@@ -164,7 +164,8 @@
                 </div>
                 <div class="flex items-center mb-6">
                     <label for="large-font-size" class="mr-4">Large Font Size</label>
-                    <input type="checkbox" id="large-font-size" class="mr-2" v-model="largeFontSize">
+                    <input type="checkbox" id="large-font-size" class="mr-2" v-model="largeFontSize"
+                           v-on:change="toggleLargeFontSize">
                 </div>
                 <div class="flex items-center mb-6">
                     <label for="screen-reader-mode" class="mr-4">Screen Reader Mode</label>
@@ -192,9 +193,16 @@ export default {
             successMessage: '',
             errorMessage: '',
             invalid: false,
+            largeFontSize: localStorage.getItem("largeFont") === "true",
+            highContrastMode: false,
+            screenReaderMode: false,
         }
     },
     methods: {
+        toggleLargeFontSize() {
+            localStorage.setItem("largeFont", this.largeFontSize)
+            window.location.reload()
+        },
         logout() {
             axiosClient.post('/v1/token/logout/')
                 .then(response => {

@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
     state: {
         token: '',
-        isAuthenticated: false
+        isAuthenticated: false,
     },
     getters: {},
     mutations: {
@@ -24,7 +24,7 @@ export default createStore({
         removeToken(state){
             state.token = ''
             state.isAuthenticated = false
-        }
+        },
     },
     actions: {},
     modules: {}

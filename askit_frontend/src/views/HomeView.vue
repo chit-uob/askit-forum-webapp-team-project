@@ -49,7 +49,7 @@
                  style="box-shadow: gray.27em .27em;">
                 <div>
                     <h3 class="text-xl text-left font-bold my-5 ml-5">Questions</h3>
-                    <a v-for="question in questions" :key="question.id" href="`#`"
+                    <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black "
                        style="box-shadow: .13em .13em;">
                         <div
@@ -96,7 +96,7 @@
                 </div>
                 <div>
                     <h3 class="text-xl text-left font-bold my-5 ml-10">Answers</h3>
-                    <a href="`#`" v-for="answer in answers" :key="answers.id"
+                    <a v-for="answer in answers" :key="answers.id" :href="`/question/${answer.question_id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black "
                        style="box-shadow: .13em .13em;">
                         <div
@@ -208,6 +208,9 @@ export default {
       axiosClient.get("/v1/users/me").then((response) => {
         this.user = response.data;
       });
+    },
+    redirect(id) {
+      this.$router.push({ name: "QuestionView", params: { id: id } });
     },
   },
 };

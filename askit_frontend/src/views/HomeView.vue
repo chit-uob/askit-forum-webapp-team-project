@@ -49,7 +49,7 @@
                  style="box-shadow: gray.27em .27em;">
                 <div>
                     <h3 class="text-xl text-left font-bold my-5 ml-5">Questions</h3>
-                    <a v-for="question in questions" :key="question.id" href="`#`"
+                    <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black "
                        style="box-shadow: .13em .13em;">
                         <div
@@ -89,31 +89,32 @@
                             <div
                                     class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                                 <div class=" text-center leading-[0.9] text-[38px] font-semibold ">{{ formatDay(question.pub_date) }}</div>
-                                <div class=" text-center text-[16px] font-medium leading-none "></div>
+                                <div class=" text-center text-[16px] font-medium leading-none ">{{formatMonthYear(question.pub_date)}}</div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div>
                     <h3 class="text-xl text-left font-bold my-5 ml-10">Answers</h3>
-                    <a href="`#`"
+                    <a v-for="answer in answers" :key="answers.id" :href="`/question/${answer.question_id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black "
                        style="box-shadow: .13em .13em;">
                         <div
                                 class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
-                            <div class=" self-end "> votes {{answers.score}}</div>
-<!--                            <div class=" self-center "> answers</div>-->
-<!--                            <span class=" self-end  "> views</span>-->
+                            <div class=" self-start "> votes {{answer.score}}</div>
+                            <div v-if="(answer.is_solution) == false" class=" self-center ">Not selected</div>
+                            <div v-if="(answer.is_solution) == true" class=" self-center ">Selected</div>
+
                         </div>
 
                         <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
                             <div
-                                    class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400"></div>
+                                    class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">{{answer.content}}</div>
                             <div class=" self-center ">Asked by <span
                                     class="text-blue-500 hover:underline hover:text-blue-400"></span><span class="">Anonymous</span>
                             </div>
                             <div class="flex">
-                                <div class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400"></div>
+                                <div class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">aaaa?</div>
                             </div>
                             <div class="flex">
                                 <div class=" self-end mr-[2px]">No tags! (<span class=" text-cyan-500">╥</span>_<span
@@ -125,8 +126,8 @@
                         <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
                             <div
                                     class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
-                                <div class=" text-center leading-[0.9] text-[38px] font-semibold "></div>
-                                <div class=" text-center text-[16px] font-medium leading-none "></div>
+                                <div class=" text-center leading-[0.9] text-[38px] font-semibold ">{{ formatDay(answer.pub_date) }}</div>
+                                <div class=" text-center text-[16px] font-medium leading-none ">{{formatMonthYear(answer.pub_date)}}</div>
                             </div>
                         </div>
                     </a>
@@ -143,7 +144,7 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
-import { formatDay, formatPubDate } from "./dateUtils";
+import { formatDay, formatPubDate, formatMonthYear } from "./dateUtils";
 
 export default {
     name: "HomeView",
@@ -202,10 +203,14 @@ export default {
   methods: {
         formatPubDate,
         formatDay,
+        formatMonthYear,
     user() {
       axiosClient.get("/v1/users/me").then((response) => {
         this.user = response.data;
       });
+    },
+    redirect(id) {
+      this.$router.push({ name: "QuestionView", params: { id: id } });
     },
   },
 };

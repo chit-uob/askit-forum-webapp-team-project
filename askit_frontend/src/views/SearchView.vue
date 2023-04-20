@@ -1,16 +1,7 @@
 <template>
 
   <div class="flex min-h-screen">
-<!--    <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">-->
-<!--      <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>-->
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->
-<!--      </div>-->
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
-<!--      </div>-->
-<!--    </div>-->
-    <div class="md:w-[70%] pb-[50px] w-full">
+    <div class="w-2/3">
       <div class="inline-flex w-full justify-between p-10">
         <div>
           <h1 class="text-5xl font-bold" v-if="!isAdvanceSearch">Results for: {{ $route.query.searchTerm }}</h1>
@@ -29,7 +20,7 @@
           </a>
         </div>
       </div>
-      <a v-for="question in questions" :key="question.id"
+                <a v-for="question in questions" :key="question.id"
                    :href="`/question/${question.id}`"
                    class="transition group focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
                     <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
@@ -50,7 +41,7 @@
                              class="flex overflow-hidden">
                             <div v-for="tag in question.tags"
                                  class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
-                                [{{ tag }}]
+                                [{{ addTagToSet(tag) }}]
                             </div>
                         </div>
                         <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"
@@ -72,37 +63,6 @@
                         </div>
                     </div>
 
-                </a>
-
-                <a v-for="question in questions" :key="question.id"
-                   :href="`/question/${question.id}`"
-                   class="transition focus:outline-none focus:ring-4 focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
-                    <div class=" flex-wrap text-xs font-medium text-gray-600 self-start  object-fill box-content mb-1">
-                        <div class="mr-1 inline">{{ question.score }} votes</div>
-                        <div class="mx-1 inline ">{{ question.num_answers }} answers</div>
-                        <span class="mx-1 inline ">{{ question.views }} views</span>
-                    </div>
-
-                    <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">
-                        {{ question.title }}
-                    </div>
-                    <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
-                         class="flex-wrap inline-flex leading-none">
-                        <div v-for="tag in question.tags"
-                             class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">
-                            [{{ tag }}]
-                        </div>
-                    </div>
-                    <div v-if="(question.tags[0] == '') || (question.tags.length == 0)" class="flex">
-                        <div class=" text-xs">No tags! (<span class=" text-cyan-500">╥</span>_<span
-                                class=" text-cyan-500">╥</span>)
-                        </div>
-                    </div>
-                    <div class=" text-xs mt-1 ">Asked by <span v-if="question.author"
-                                                               class="text-blue-500 hover:underline hover:text-blue-400">{{
-                        question.author
-                        }}</span><span v-if="!(question.author)" class="">Anonymous</span> on the <span
-                            class="">{{ formatDate(question.pub_date) }}</span></div>
                 </a>
     </div>
   </div>
@@ -139,7 +99,6 @@ export default {
             }
           }).then((response) => {
             this.questions = response.data;
-            console.log(this.questions)
             if (this.$route.query.module) {
               this.moduleSpecific = true;
               this.moduleSpecificModule = this.$route.query.module;
@@ -201,10 +160,7 @@ export default {
 </script>
 
 <script setup>
-import { formatPubDate } from "./dateUtils";
-import { formatDate } from "./dateUtils";
-import { formatDay } from "./dateUtils";
-import { formatMonthYear } from "./dateUtils";
+import { formatDay, formatMonthYear, formatPubDate, formatDate } from "./dateUtils";
 </script>
 
 <style scoped>

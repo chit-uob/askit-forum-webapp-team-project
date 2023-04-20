@@ -2,7 +2,7 @@ import json
 from django.http import JsonResponse
 from home_page.models import Question, Module, Tag, Answer, Activity
 from django.views.decorators.csrf import csrf_exempt
-from ask_questions.aiAPI import text_to_summary, text_to_tag_array, add_to_cluster, spacy_tag
+from ask_questions.aiAPI import text_to_summary, text_to_tag_array
 import spacy # install spacy
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import authentication_classes, api_view, permission_classes
@@ -73,15 +73,15 @@ def tag_api(request):
     return JsonResponse({"tag": text_to_tag_array(text)})
 
 
-@csrf_exempt
-def spacy_sim(request):
-    post_data = json.loads(request.body)
-    text1 = post_data['explanation']
-    for question in Question.objects.all():
-        text2 = question.explanation
-        if spacy_tag(text1, text2) > 0.5:
-            return JsonResponse(text2)
-    return JsonResponse({"success": False})
+# @csrf_exempt
+# def spacy_sim(request):
+#     post_data = json.loads(request.body)
+#     text1 = post_data['explanation']
+#     for question in Question.objects.all():
+#         text2 = question.explanation
+#         if spacy_tag(text1, text2) > 0.5:
+#             return JsonResponse(text2)
+#     return JsonResponse({"success": False})
 
 
 @api_view(['POST'])

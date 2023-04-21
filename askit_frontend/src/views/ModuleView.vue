@@ -227,10 +227,10 @@
                 </div>
             </div>
             <div class=" mt-3 rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
-                <div class="mb-2 text-center">Tag filter</div>
+                <div class="mb-2 text-center font-bold text-lg">Tag filter</div>
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
-                         class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 
+                         class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition bg-blue-600 text-sm font-medium text-white hover:bg-purple-500 focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 
                          :class="{ 'bg-blue-200':tagSelected(tag)} ">{{ tag }}
                 </button>
                 </div>

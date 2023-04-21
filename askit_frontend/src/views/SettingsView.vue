@@ -7,7 +7,7 @@
             </div>
             <div class="flex border-gray-200 px-9 mb-6">
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'my-details' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'my-details'"
@@ -15,7 +15,7 @@
                     My Details
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'password' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'password'"
@@ -23,7 +23,7 @@
                     Password
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'preference' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'preference'"
@@ -31,7 +31,7 @@
                     Preference
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'accessibility' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'accessibility'"
@@ -39,7 +39,7 @@
                     Accessibility
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         style="box-shadow: .13em .13em;"
                         @click="logout"
                 >
@@ -72,7 +72,7 @@
                             Current Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="old_password"
                                 type="password"
                                 placeholder="********"
@@ -83,7 +83,7 @@
                             New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="new_password"
                                 type="password"
                                 placeholder="********"
@@ -94,7 +94,7 @@
                             Confirm New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="conf_password"
                                 type="password"
                                 placeholder="********"
@@ -102,7 +102,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <button :disabled="isFormComplete"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                class="bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit"
                         >
                             Save Changes
@@ -131,7 +131,7 @@
                         </label>
                         <div class="relative">
                             <select
-                                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                    class="block appearance-none w-full bg-white border border-gray-400 focus:bg-gray-100 hover:bg-gray-100 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                                     id="theme-select">
                                 <option value="default">Default</option>
                                 <option value="dark">Dark</option>
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                     <button
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            class="bg-blue-500 focus:bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="submit">
                         Save Settings
                     </button>

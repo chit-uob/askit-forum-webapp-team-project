@@ -179,6 +179,7 @@ export default {
         // axiosClient.get('/v1/users/me').then(response => {this.user = response.data}).catch(error => {console.log(error)})
         axiosClient.get("home_page/user_prof").then((response) => {
             this.user = response.data;
+            console.log("got user")
             // this.questions = response.data.questions;
             // this.answers = response.data.answers;
 

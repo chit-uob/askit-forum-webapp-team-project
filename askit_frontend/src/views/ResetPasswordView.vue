@@ -14,14 +14,13 @@
         </div>
         <div class="mb-2">
           <button type="submit"
-                  class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
+                  class="transition focus:ring-4  focus:ring-pink-400 bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600">
             Reset password
           </button>
           <label v-if="invalid" class="text-red-600 pl-4" >{{ errorMessage }}</label>
         </div>
         <div>
-          <a>Don't have an account? </a>
-          <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">Sign up!</button>
+          <button v-on:click="redirectToSignUp" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">Don't have an account sign up!</button>
         </div>
       </form>
 
@@ -55,7 +54,7 @@ export default {
       Cpassword: '',
       fields: true,
       invalid: false,
-      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400',
+      textInput: 'border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400',
       errorMessage: ''
     }
   },

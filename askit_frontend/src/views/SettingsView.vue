@@ -72,7 +72,7 @@
                             Current Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="old_password"
                                 type="password"
                                 placeholder="********"
@@ -83,7 +83,7 @@
                             New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="new_password"
                                 type="password"
                                 placeholder="********"
@@ -94,7 +94,7 @@
                             Confirm New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="conf_password"
                                 type="password"
                                 placeholder="********"
@@ -102,7 +102,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <button :disabled="isFormComplete"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                class="bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit"
                         >
                             Save Changes

@@ -14,30 +14,30 @@
         <div class=" grid-cols-4 grid p-1 " :class="colour(index)" v-for="(user, index) in users">
           <div class="truncate">{{ user.first_name }} {{ user. last_name }}</div>
           <div class="truncate">{{ user.email }}</div>
-          <div class="justify-self-center"><input  type="checkbox" name="member" :id="`member_`+user.email" :checked="user.member" v-on:click="membersChecked(index)"></div>
-          <div class="justify-self-center"><input type="checkbox" name="admin" :id="`admin_`+user.email" :checked="user.admin" v-on:click="adminsChecked(index)"></div>
+          <div class="justify-self-center"><input class="transition focus:ring-4 focus:outline-none focus:ring-blue-400"  type="checkbox" name="member" :id="`member_`+user.email" :checked="user.member" v-on:click="membersChecked(index)"></div>
+          <div class="justify-self-center"><input class="transition focus:ring-4 focus:outline-none focus:ring-blue-400" type="checkbox" name="admin" :id="`admin_`+user.email" :checked="user.admin" v-on:click="adminsChecked(index)"></div>
         </div>
       </div>
     </div>   
     <div class="flex"> 
-      <button v-on:click="update" type="button" class="p-2 my-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" style="box-shadow: .2em .2em black;">Update</button>
+      <button v-on:click="update" type="button" class="shadow-[3px_3px_0px_0px_#000000] focus:ring-4 focus:outline-none focus:ring-pink-400 p-2 my-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" >Update</button>
       <div v-if="success" class="mx-5 self-center text-lg text-green-700 font-medium">Success!</div>
     </div>
     <div class="my-4">
       <label class="text-lg font-medium">Add/Remove members by email</label>
-      <input type="text" placeholder="Add multiple emails seperated by commas e.g: (person1@email.com,person2@email.com)" id="default-input" v-model="usersCSV" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-2 border-black" style="box-shadow: .2em .2em black;">
+      <input type="text" placeholder="Add multiple emails seperated by commas e.g: (person1@email.com,person2@email.com)" id="default-input" v-model="usersCSV" class="transition shadow-[3px_3px_0px_0px_#000000] bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500 block w-full p-2.5 border-2 border-black" >
       <div class="flex">
-        <button v-on:click="addMembers(false)" type="button" class="p-2 my-2 mr-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" style="box-shadow: .2em .2em black;">Add</button>
-        <button v-on:click="addMembers(true)" type="button" class="p-2 my-2 rounded border-black border-2 bg-red-700 text-white hover:bg-red-800 transition" style="box-shadow: .2em .2em black;">Remove</button>
+        <button v-on:click="addMembers(false)" type="button" class="shadow-[3px_3px_0px_0px_#000000] focus:ring-4 focus:outline-none focus:ring-pink-400 p-2 my-2 mr-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" >Add</button>
+        <button v-on:click="addMembers(true)" type="button" class="shadow-[3px_3px_0px_0px_#000000] focus:ring-4 focus:outline-none focus:ring-pink-400 p-2 my-2 rounded border-black border-2 bg-red-700 text-white hover:bg-red-800 transition" >Remove</button>
         <div v-if="membersAddShow" class="mx-5 self-center text-lg font-medium">{{ successFromMembersAdd }} success, {{ failFromMembersAdd }} failed <span class="text-sm text-gray-500">(refresh the page to see changes)</span></div>
       </div>
     </div>
     <div class="my-4">
       <label class="text-lg font-medium">Add/Remove admins by email</label>
-      <input type="text" placeholder="Add multiple emails seperated by commas e.g: (person1@email.com,person2@email.com)" id="default-input" v-model="adminsCSV" class="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 border-2 border-black" style="box-shadow: .2em .2em black;">
+      <input type="text" placeholder="Add multiple emails seperated by commas e.g: (person1@email.com,person2@email.com)" id="default-input" v-model="adminsCSV" class=" transition shadow-[3px_3px_0px_0px_#000000] bg-gray-50 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border-blue-500 block w-full p-2.5 border-2 border-black" >
       <div class="flex">
-        <button v-on:click="addAdmins(false)" type="button" class="p-2 my-2 mr-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" style="box-shadow: .2em .2em black;">Add</button>
-        <button v-on:click="addAdmins(true)" type="button" class="p-2 my-2 rounded border-black border-2 bg-red-700 text-white hover:bg-red-800 transition" style="box-shadow: .2em .2em black;">Remove</button>
+        <button v-on:click="addAdmins(false)" type="button" class="shadow-[3px_3px_0px_0px_#000000] focus:ring-4 focus:outline-none focus:ring-pink-400 p-2 my-2 mr-2 rounded border-black border-2 bg-blue-500 text-white hover:bg-blue-600 transition" >Add</button>
+        <button v-on:click="addAdmins(true)" type="button" class="shadow-[3px_3px_0px_0px_#000000] focus:ring-4 focus:outline-none focus:ring-pink-400 p-2 my-2 rounded border-black border-2 bg-red-700 text-white hover:bg-red-800 transition" >Remove</button>
         <div v-if="adminsAddShow" class="mx-5 self-center text-lg font-medium">{{ successFromAdminsAdd }} success, {{ failFromAdminsAdd }} failed <span class="text-sm text-gray-500">(refresh the page to see changes)</span></div>
       </div>
     </div>

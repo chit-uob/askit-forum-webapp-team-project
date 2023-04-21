@@ -1,7 +1,7 @@
 <template>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <nav v-if="enable" class="bg-teal-100 px-2 py-1 sm:px-4 border-b-[3px] border-black h-[62px]" id="nav-vue">
+    <nav v-if="enable" class="bg-teal-100 px-2  sm:px-4 border-b-[3px] border-black h-[68px]" id="nav-vue">
         <div class="container mx-auto flex flex-wrap items-center justify-between">
             <router-link to="/" class="pl-4 transition focus:ring-4 focus:outline-none focus:ring-blue-400">
                 <span class="text-2xl font-bold">ASK.IT</span>

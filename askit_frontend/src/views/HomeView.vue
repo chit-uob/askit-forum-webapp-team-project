@@ -232,5 +232,16 @@ export default {
             this.$router.push({name: "QuestionView", params: {id: id}});
         },
     },
+    updated() {
+        if (localStorage.getItem("largeFont") === "true") {
+            // remove all different text size class
+            document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
+            document.querySelectorAll('.text-sm').forEach(e => e.classList.remove('text-sm'));
+            document.querySelectorAll('.text-base').forEach(e => e.classList.remove('text-base'));
+            document.querySelectorAll('.text-lg').forEach(e => e.classList.remove('text-lg'));
+            document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
+            document.body.classList.add('text-xl')
+        }
+    },
 };
 </script>

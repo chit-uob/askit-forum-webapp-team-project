@@ -41,7 +41,8 @@
           </div>
         </div>
         <div>
-          <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
+          <a>Already have an account? </a>
+          <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Log in!</a>
         </div>
       </form>
     </div>

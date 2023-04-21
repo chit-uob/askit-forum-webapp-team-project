@@ -230,7 +230,7 @@ export default {
             document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
             document.body.classList.add('text-xl')
         }
-    }
+    },
 }
 
 

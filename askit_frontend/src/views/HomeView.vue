@@ -8,9 +8,9 @@
                 </div>
                 <div class="grid grid-cols-2 w-full md:w-1/2">
                     <div class="grid grid-rows-3 text-left md:text-right px-16 md:px-0 self-start">
-                        <h2 class="self-start text-3xl font-bold">{{ user.full_name }}</h2>
+                        <h2 class="self-start text-3xl font-bold">{{ user_full_name }}</h2>
                         <h2 class="self-center text-xl">University of Somewhere</h2>
-                        <h2 class="self-end">{{ user.username }}</h2>
+                        <h2 class="self-end">{{ user_username }}</h2>
                     </div>
                     <div
                             class="self-start mt-2 mr-5 ml-5 rounded-2xl bg-white dark:bg-gray-800 w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white"
@@ -172,10 +172,9 @@ export default {
             notifications: [],
             questions: [],
             answers: [],
-            user: {
-                full_name: "loading...",
-                username: "loading...",
-            },
+            user_full_name: "",
+            user_username: "",
+            user: {},
         };
     },
     mounted() {
@@ -183,6 +182,8 @@ export default {
         // axiosClient.get('/v1/users/me').then(response => {this.user = response.data}).catch(error => {console.log(error)})
         axiosClient.get("home_page/user_prof").then((response) => {
             this.user = response.data;
+            this.user_full_name = response.data.full_name;
+            this.user_username = response.data.username;
             console.log("got user")
             // this.questions = response.data.questions;
             // this.answers = response.data.answers;
@@ -235,6 +236,17 @@ export default {
         redirect(id) {
             this.$router.push({name: "QuestionView", params: {id: id}});
         },
+    },
+    updated() {
+        if (localStorage.getItem("largeFont") === "true") {
+            // remove all different text size class
+            document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
+            document.querySelectorAll('.text-sm').forEach(e => e.classList.remove('text-sm'));
+            document.querySelectorAll('.text-base').forEach(e => e.classList.remove('text-base'));
+            document.querySelectorAll('.text-lg').forEach(e => e.classList.remove('text-lg'));
+            document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
+            document.body.classList.add('text-xl')
+        }
     },
 };
 </script>

@@ -1,15 +1,6 @@
 <template>
 
   <div class="flex min-h-screen">
-<!--    <div class="flex-col justify-items-center bg-cyan-100 w-[175px]">-->
-<!--      <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>-->
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/OSSP" class="text-sky-600 hover:underline"><p class="p-8">OSSP</p></a>-->
-<!--      </div>-->
-<!--      <div class="mt-2 mr-5 ml-5 rounded-2xl bg-gray-400 w-[100px] h-[100px]">-->
-<!--        <a href="/module/TP" class="text-sky-600 hover:underline"><p class="p-8">TP</p></a>-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="w-2/3">
       <div class="inline-flex w-full justify-between p-10">
         <div>
@@ -33,33 +24,50 @@
           </a>
         </div>
       </div>
-      <div v-for="question in questions" :key="question.id">
-        <a class="flex w-full pt-2 pr-10 pl-10" :href="`/question/${question.id}`">
-          <div class="inline-flex w-full rounded-2xl bg-cyan-200 shadow card">
-            <div class="flex flex-col justify-evenly border-r-2 border-black p-3 w-[100px]">
-              <p class="text-right text-xs">{{ question.score }} votes</p>
-              <p class="text-right text-xs">{{ question.num_answers }} answers</p>
-              <p class="text-right text-xs">{{ question.views }} views</p>
-            </div>
-            <div class="flex w-8/12 flex-col justify-evenly p-3">
-              <h3 class="truncate">{{ question.title }}</h3>
-              <p>Asked by {{ question.author }}</p>
-              <div class="flex">
-                <div v-for="tag in question.tags" class="mr-2">
-                  <button
-                      class="rounded bg-blue-50 px-2 text-center text-sm font-light text-blue-400 mt-0.5 h-[25px] hover:bg-blue-100">
-                    {{ tag }}
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="flex flex-col justify-evenly p-3 w-[80px]">
-              <h3>{{ formatPubDate(question.pub_date) }}</h3>
-              <p>{{ question.module }}</p>
-            </div>
-          </div>
-        </a>
-      </div>
+                <a v-for="question in questions" :key="question.id"
+                   :href="`/question/${question.id}`"
+                   class="transition group focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                    <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+                        <div class=" self-start ">{{ question.score }} votes</div>
+                        <div class=" self-center ">{{ question.num_answers }} answers</div>
+                        <span class=" self-end  ">{{ question.views }} views</span>
+                    </div>
+
+                    <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
+                        <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                            {{ question.title }}
+                        </div>
+                        <div class=" self-center truncate ">Asked by <span v-if="question.author"
+                                                                           class="text-blue-500 hover:underline hover:text-blue-400">{{
+                            question.author
+                            }}</span><span v-if="!(question.author)" class="">Anonymous</span></div>
+                        <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
+                             class="flex overflow-hidden">
+                            <div v-for="tag in question.tags"
+                                 class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
+                                [{{ addTagToSet(tag) }}]
+                            </div>
+                        </div>
+                        <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"
+                             class="flex overflow-hidden">
+                            <div class=" self-end mr-[2px]">No tags! (<span class=" text-cyan-500">╥</span>_<span
+                                    class=" text-cyan-500">╥</span>)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid bg-lime-300 rounded-r-[13px] rounded-bl-2xl  box-content">
+                        <div class="  place-self-center py-2 px-[9px] border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+                            <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
+                                {{ formatDay(question.pub_date) }}
+                            </div>
+                            <div class=" text-center text-[16px] font-medium leading-none ">
+                                {{ formatMonthYear(question.pub_date).toLowerCase() }}
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
     </div>
   </div>
 
@@ -156,7 +164,7 @@ export default {
 </script>
 
 <script setup>
-import { formatPubDate } from "./dateUtils";
+import { formatDay, formatMonthYear, formatPubDate } from "./dateUtils";
 </script>
 
 <style scoped>

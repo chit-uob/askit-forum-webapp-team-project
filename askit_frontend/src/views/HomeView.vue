@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-pink-50">
+    <div class="bg-pink-50 dark:bg-gray-900 text-black dark:text-white">
         <div class="min-h-screen">
             <div class="flex flex-col md:flex-row justify-between py-10">
                 <div class="px-16 w-full md:w-1/2">
@@ -13,7 +13,7 @@
                         <h2 class="self-end">{{ user.username }}</h2>
                     </div>
                     <div
-                            class="self-start mt-2 mr-5 ml-5 rounded-2xl bg-white w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black"
+                            class="self-start mt-2 mr-5 ml-5 rounded-2xl bg-white dark:bg-gray-800 w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white"
                             style="box-shadow: .13em .13em;"></div>
                 </div>
 
@@ -21,7 +21,8 @@
             <br>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 px-10">
-                <div class="bg-white border-2 border-gray-400 rounded-md p-5" style="box-shadow: gray.27em .27em;">
+                <div class="bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md p-5"
+                     style="box-shadow: gray.27em .27em;">
                     <div class="flex items-center justify-center">
                         <span class="text-xl text-center font-bold mb-5">Notifications</span>
                         <i class="fa fa-bell text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
@@ -31,7 +32,7 @@
                     <a v-for="notification in notifications" :key="notification.id" :href="`${notification.link}`">
                         <div class="grid grid-rows-2">
 
-                            <div class="self-start truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                            <div class="self-start truncate self-start text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
                                 {{ notification.detail }}
                             </div>
                             <div class="self-end text-xs font-light">{{ formatPubDate(notification.date) }}</div>
@@ -40,20 +41,21 @@
                     </a>
 
                 </div>
-                <div class="bg-white border-2 border-gray-400 rounded-md p-5" style="box-shadow: gray.27em .27em;">
+                <div class="bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md p-5"
+                     style="box-shadow: gray.27em .27em;">
                     <div class="text-xl text-center font-bold mb-5">Calendar</div>
                     <hr class="border-gray-400 mb-5">
                 </div>
             </div>
-            <div class="mx-10 mt-16 bg-white border-2 border-gray-400 rounded-md grid grid-cols-1 md:grid-cols-2"
+            <div class="mx-10 mt-16 bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md grid grid-cols-1 md:grid-cols-2"
                  style="box-shadow: gray.27em .27em;">
                 <div>
                     <h3 class="text-xl text-left font-bold my-5 ml-5">Questions</h3>
                     <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
-                       class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black "
+                       class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white dark:bg-gray-800 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white "
                        style="box-shadow: .13em .13em;">
                         <div
-                                class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+                                class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black dark:border-white my-3  object-fill box-content">
                             <div class=" self-start "> {{ question.score }} votes</div>
                             <div class=" self-center "> answers {{ question.answers_count }}</div>
                             <span class=" self-end  "> {{ question.views }} views </span>
@@ -61,15 +63,15 @@
 
                         <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
                             <div
-                                    class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                                    class=" truncate self-start text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
                                 {{ question.title }}
                             </div>
                             <div class=" self-center">Asked by <span
-                                    class="text-blue-500 hover:underline hover:text-blue-400"></span><span
+                                    class="text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></span><span
                                     class="">{{ user.username }}</span>
                             </div>
                             <div class="flex">
-                                <div class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400"></div>
+                                <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></div>
                             </div>
                             <div class="flex" v-if="(question.tags[0] != '') && (question.tags.length != 0)">
                                 <div v-for="tag in question.tags" class=" self-end mr-[2px]">{{ question.tags }}(<span
@@ -83,7 +85,7 @@
                                 </div>
                             </div>
                             <!--                            <div class=" text-xs mt-1 ">Asked by <span v-if="question.author"-->
-                            <!--                                                                       class="text-blue-500 hover:underline hover:text-blue-400">{{-->
+                            <!--                                                                       class="text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">{{-->
                             <!--                                question.author-->
                             <!--                                }}</span><span v-if="!(question.author)" class="">Anonymous</span> on the <span-->
                             <!--                                    class="">{{ formatDate(question.pub_date) }}</span></div>-->
@@ -91,7 +93,7 @@
 
                         <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
                             <div
-                                    class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+                                    class="  place-self-center py-2 px-3 border-[0.1em] border-black dark:border-white border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                                 <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
                                     {{ formatDay(question.pub_date) }}
                                 </div>
@@ -105,10 +107,10 @@
                 <div>
                     <h3 class="text-xl text-left font-bold my-5 ml-10">Answers</h3>
                     <a v-for="answer in answers" :key="answers.id" :href="`/question/${answer.question_id}`"
-                       class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white hover:bg-[#F2FFFA] border-[0.12em] border-black "
+                       class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white dark:bg-gray-800 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white "
                        style="box-shadow: .13em .13em;">
                         <div
-                                class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+                                class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black dark:border-white my-3  object-fill box-content">
                             <div class=" self-start "> votes {{ answer.score }}</div>
                             <div v-if="(answer.is_solution) == false" class=" self-center ">Not selected</div>
                             <div v-if="(answer.is_solution) == true" class=" self-center ">Selected</div>
@@ -117,14 +119,15 @@
 
                         <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3  box-content object-fill">
                             <div
-                                    class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                                    class=" truncate self-start text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
                                 {{ answer.content }}
                             </div>
                             <div class=" self-center ">Asked by <span
-                                    class="text-blue-500 hover:underline hover:text-blue-400"></span><span class="">Anonymous</span>
+                                    class="text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></span><span
+                                    class="">Anonymous</span>
                             </div>
                             <div class="flex">
-                                <div class=" self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
+                                <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
                                     aaaa?
                                 </div>
                             </div>
@@ -137,7 +140,7 @@
 
                         <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
                             <div
-                                    class="  place-self-center py-2 px-3 border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
+                                    class="  place-self-center py-2 px-3 border-[0.1em] border-black dark:border-white border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                                 <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
                                     {{ formatDay(answer.pub_date) }}
                                 </div>
@@ -171,6 +174,7 @@ export default {
             answers: [],
             user: {
                 full_name: "loading...",
+                username: "loading...",
             },
         };
     },

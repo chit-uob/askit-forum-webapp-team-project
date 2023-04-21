@@ -7,7 +7,7 @@
             </div>
             <div class="flex border-gray-200 px-9 mb-6">
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'my-details' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'my-details'"
@@ -15,7 +15,7 @@
                     My Details
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'password' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'password'"
@@ -23,7 +23,7 @@
                     Password
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'preference' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'preference'"
@@ -31,7 +31,7 @@
                     Preference
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'accessibility' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'accessibility'"
@@ -39,7 +39,7 @@
                     Accessibility
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:border-indigo-500 hover:border-indigo-500 mr-2"
+                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         style="box-shadow: .13em .13em;"
                         @click="logout"
                 >

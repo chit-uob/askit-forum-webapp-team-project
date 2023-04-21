@@ -1,13 +1,13 @@
 <template>
-    <div class="bg-pink-50">
+    <div class="bg-pink-50 dark:bg-gray-900">
         <div class="min-h-screen">
-            <div class="flex items-center mb-1 px-10 py-10 ">
+            <div class="flex items-center mb-1 px-10 py-10">
                 <br><br>
                 <h1 class="text-5xl font-bold">Settings</h1>
             </div>
-            <div class="flex border-gray-200 px-9 mb-6">
+            <div class="flex border-gray-200 px-9 mb-6 rounded-md">
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none focus:bg-blue-300 hover:bg-blue-300 mr-2"
+                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'my-details' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'my-details'"
@@ -15,7 +15,7 @@
                     My Details
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
+                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'password' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'password'"
@@ -23,7 +23,7 @@
                     Password
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
+                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'preference' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'preference'"
@@ -31,7 +31,7 @@
                     Preference
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
+                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         :class="{ 'border-indigo-500': activeTab === 'accessibility' }"
                         style="box-shadow: .13em .13em;"
                         @click="activeTab = 'accessibility'"
@@ -39,7 +39,7 @@
                     Accessibility
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white text-gray-700 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
+                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
                         style="box-shadow: .13em .13em;"
                         @click="logout"
                 >
@@ -51,13 +51,13 @@
                 <br>
                 <form>
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="name">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="name">
                             Name:
                         </label>
                         <p class="font-medium mb-2">Student Name</p>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="email">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="email">
                             Email
                         </label>
                         <p class="italic mb-2"> student@xyz.com </p>
@@ -68,33 +68,33 @@
                 <h2 class="text-2xl font-bold mb-4">Change Password</h2>
                 <form @submit.prevent="submitForm">
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="current-password">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="current-password">
                             Current Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
                                 v-model="old_password"
                                 type="password"
                                 placeholder="********"
                         />
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="new-password">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="new-password">
                             New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
                                 v-model="new_password"
                                 type="password"
                                 placeholder="********"
                         />
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="confirm-password">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="confirm-password">
                             Confirm New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
                                 v-model="conf_password"
                                 type="password"
                                 placeholder="********"
@@ -117,27 +117,27 @@
                 <h2 class="text-2xl font-bold mb-4">Preference Settings</h2>
                 <form>
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="notification-toggle">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="notification-toggle">
                             Receive Notifications
                         </label>
                         <input class="mr-2 leading-tight" type="checkbox" id="notification-toggle">
-                        <label class="text-sm text-gray-700" for="notification-toggle">
+                        <label class="text-sm text-gray-700 dark:text-gray-200" for="notification-toggle">
                             Enable email notifications for new messages
                         </label>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-gray-700 font-bold mb-2" for="theme-select">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="theme-select">
                             Theme
                         </label>
                         <div class="relative">
                             <select
-                                    class="block appearance-none w-full bg-white border border-gray-400 focus:bg-gray-100 hover:bg-gray-100 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-                                    id="theme-select">
+                                    class="block appearance-none w-full bg-white dark:bg-black border border-gray-400 dark:border-gray-600 focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                    id="theme-select" v-model="themeSelect">
                                 <option value="default">Default</option>
                                 <option value="dark">Dark</option>
                                 <option value="light">Light</option>
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-200">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 20 20">
                                     <path
@@ -148,7 +148,7 @@
                     </div>
                     <button
                             class="bg-blue-500 focus:bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit">
+                            type="submit" v-on:click="changeTheme">
                         Save Settings
                     </button>
                 </form>
@@ -196,9 +196,14 @@ export default {
             largeFontSize: localStorage.getItem("largeFont") === "true",
             highContrastMode: false,
             screenReaderMode: false,
+            themeSelect: localStorage.getItem("theme") || "default"
         }
     },
     methods: {
+        changeTheme() {
+            localStorage.setItem("theme", this.themeSelect || "default")
+            window.location.reload()
+        },
         toggleLargeFontSize() {
             localStorage.setItem("largeFont", this.largeFontSize)
             window.location.reload()
@@ -253,7 +258,7 @@ export default {
                     }
                     this.invalid = true
                     this.success = false
-                    this.textInput = "border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
+                    this.textInput = "border-2 p-2 w-full rounded text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
                 })
 
         },

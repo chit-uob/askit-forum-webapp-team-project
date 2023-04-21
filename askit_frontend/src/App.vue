@@ -17,7 +17,7 @@
                            class="transition focus:ring-4 focus:outline-none block w-full h-[45px] rounded-lg border-2 border-black bg-white p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                            placeholder="Search questions" v-model="searchTerm" required>
                     <button type="submit"
-                            class="transition absolute rounded-lg bg-blue-700 px-4 py-1 text-sm font-medium text-white h-[33px] right-2.5 bottom-1.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                            class="transition absolute rounded-lg top-1 bg-blue-700 px-4  text-sm font-medium text-white h-[33px] right-2.5 bottom-1.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-pink-400">
                         Search
                     </button>
                 </div>

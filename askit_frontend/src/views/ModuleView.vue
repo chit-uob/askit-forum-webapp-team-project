@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-screen">
+    <div class=" dark:bg-gray-900 flex min-h-screen">
         <div class="md:w-[70%] pb-[50px] w-full">
             <div class="inline-flex w-full justify-between px-4 md:px-10 py-8 items-center">
                 <h1 class="text-[42px] font-bold">{{ $route.params.mod }}</h1>
@@ -40,15 +40,15 @@
                 </div>
                 <a v-if="popRender" v-for="question in popQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="hidden focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
-                    <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+                   class="hidden focus:ring-4 focus:outline-none  focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                    <div class="grid grid-rows-3 text-right  text-xs  font-medium pr-2 border-r-[0.16em]  border-black my-3  object-fill box-content">
                         <div class=" self-start ">{{ question.score }} votes</div>
                         <div class=" self-center ">{{ question.num_answers }} answers</div>
                         <span class=" self-end  ">{{ question.views }} views</span>
                     </div>
 
                     <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
-                        <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                        <div class=" truncate self-start text-base leading-[1.15]  text-blue-500 hover:underline hover:text-blue-400">
                             {{ question.title }}
                         </div>
                         <div class=" truncate self-center ">Asked by <span v-if="question.author"
@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                    <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+                    <div class=" bg-lime-300 dark:bg-blue-600 rounded-r-[13px] rounded-bl-2xl grid box-content">
                         <div class="  place-self-center py-2 px-[9px] border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                             <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
                                 {{ formatDay(question.pub_date) }}
@@ -124,7 +124,7 @@
 
                 <a v-if="allRender" v-for="question in allQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="transition group focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                   class="transition group focus:ring-4 dark:bg-gray-800 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
                     <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
                         <div class=" self-start ">{{ question.score }} votes</div>
                         <div class=" self-center ">{{ question.num_answers }} answers</div>
@@ -154,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="grid bg-lime-300 rounded-r-[13px] rounded-bl-2xl  box-content">
+                    <div class="grid bg-lime-300 dark:bg-blue-600 rounded-r-[13px] rounded-bl-2xl  box-content">
                         <div class="  place-self-center py-2 px-[9px] border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                             <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
                                 {{ formatDay(question.pub_date) }}

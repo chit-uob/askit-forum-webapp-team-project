@@ -43,7 +43,7 @@
                          class="flex overflow-hidden">
                         <div v-for="tag in question.tags"
                              class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
-                            [{{ addTagToSet(tag) }}]
+                            [{{ tag }}]
                         </div>
                     </div>
                     <div v-if="(question.tags[0] == '') || (question.tags.length == 0)"

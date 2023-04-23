@@ -158,7 +158,20 @@
                 <h2 class="text-2xl font-bold mb-4">Accessibility Options</h2>
                 <p class="mb-2">Adjust the following settings to enhance the accessibility of this website:</p>
                 <br>
-                <div class="px-16 py-6 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
+                <div class=" rounded-lg px-16 py-6 mb-3 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
+                    <div class="mb-6">Text adjustments</div>
+                    <div class="flex flex-wrap gap-1">
+                        <button v-on:click="toggleLargeFontSize"  class=" rounded relative h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700">
+                            <label for="grayscale-mode" class="mr-4">Large font size</label>
+                        </button>
+                        <button v-on:click="toggleFont" class=" rounded h-[200px] w-[400px] dark:bg-gray-700 bg-white border-2 border-gray-700"><div class=" text-center">Readable font</div></button>
+                        <button v-on:click="changeLetterSpacing" class=" rounded  h-[200px] w-[200px] dark:bg-gray-700 bg-white col-span-2 border-2 border-gray-700">
+                            <label class="text-center">Change letter spacing</label><br>
+                            <label for="">{{ currentLetterSpacing }}</label>
+                        </button>
+                    </div>
+                </div>
+                <div class=" rounded-lg px-16 py-6 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
                     <div class="mb-6">Colour adjustments</div>
                     <div class="flex flex-wrap gap-1">
                         <button v-on:click="toggleGrayscale"  for="grayscale-mode" class=" rounded relative h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700">
@@ -168,33 +181,14 @@
                         <div class=" rounded flex flex-col justify-center h-[200px] w-[400px] dark:bg-gray-700 bg-white col-span-2 border-2 border-gray-700">
                             <div class="flex gap-1 justify-center">
                                 <button v-on:click="changeHue(-30)" class="font-bold rounded-md h-8 w-8 bg-blue-500 text-center text-white">-</button>
-                                <div class=" flex flex-col w-16 rounded-md dark:bg-gray-600 bg-blue-50 text-center justify-center"><label class="font-medium">{{ colourHue }}</label></div>
+                                <div class=" flex flex-col w-16 rounded-md dark:bg-gray-600 bg-blue-50 text-center justify-center"><label class="font-medium">{{ colourHue }}°</label></div>
                                 <button v-on:click="changeHue(30)" class=" font-bold rounded-md  h-8 w-8 bg-blue-500 text-center text-white">+</button>
                             </div>
                             <div class="text-center">Shift colour hue</div>
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center mb-6">
-                    <label for="high-contrast-mode" class="mr-4">High Contrast Mode</label>
-                    <input type="checkbox" id="high-contrast-mode" class="mr-2" v-model="highContrastMode">
-                </div>
-                <div class="flex items-center mb-6">
-                    <label for="large-font-size" class="mr-4">Large Font Size</label>
-                    <input type="checkbox" id="large-font-size" class="mr-2" v-model="largeFontSize"
-                           v-on:change="toggleLargeFontSize">
-                </div>
-                <div class="flex items-center mb-6">
-                    <label for="readable-font" class="mr-4">Readable Font</label>
-                    <input type="checkbox" id="readable-font" class="mr-2" v-model="readableFont"
-                           v-on:change="toggleFont">
-                </div>
-                <div class="flex items-center mb-6">
-                    <label for="screen-reader-mode" class="mr-4">Screen Reader Mode</label>
-                    <input type="checkbox" id="screen-reader-mode" class="mr-2" v-model="screenReaderMode">
-                </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -220,6 +214,8 @@ export default {
             grayscaleMode: localStorage.getItem("grayscale") === "true",
             invert: localStorage.getItem("invert") === "true",
             colourHue: Number(localStorage.getItem("colourHue")) || 0,
+            letterSpacing: ['tight', 'normal', 'wide'],
+            currentLetterSpacing: localStorage.getItem("letterSpacing") || 'normal',
             highContrastMode: false,
             screenReaderMode: false,
             themeSelect: localStorage.getItem("theme") || "default",
@@ -233,11 +229,13 @@ export default {
             window.location.reload()
         },
         toggleLargeFontSize() {
+            this.largeFontSize = !this.largeFontSize
             localStorage.setItem("largeFont", this.largeFontSize)
             localStorage.setItem("pageReload", true)
             window.location.reload()
         },
         toggleFont() {
+            this.readableFont = !this.readableFont
             localStorage.setItem("readableFont", this.readableFont)
             localStorage.setItem("pageReload", true)
             window.location.reload()
@@ -258,6 +256,12 @@ export default {
             this.colourHue += hue
             this.colourHue = this.colourHue % 360
             localStorage.setItem("colourHue", this.colourHue)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        changeLetterSpacing(){
+            var current = this.letterSpacing.indexOf(localStorage.getItem("letterSpacing") || 1)
+            localStorage.setItem("letterSpacing", this.letterSpacing[(current + 1) % 3])
             localStorage.setItem("pageReload", true)
             window.location.reload()
         },

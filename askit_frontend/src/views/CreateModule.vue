@@ -9,11 +9,11 @@
           <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900">Course
             Name</label>
           <input type="text" id="default-input" v-model="moduleTitle"
-                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" style="box-shadow: .2em .2em black;">
         </div>
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Course description</label>
         <textarea id="message" rows="16" v-model="moduleExplanation"
-                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" style="box-shadow: .2em .2em black;"
                   placeholder="Description here..."></textarea>
 
         <button v-on:click="addModule" type="button"

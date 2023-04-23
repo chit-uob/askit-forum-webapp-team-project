@@ -1,39 +1,39 @@
 <template>
-  <div class="bg-gradient-to-r from-cyan-100 to-blue-500 min-h-screen flex flex-col justify-center items-center">
+  <div class="bg-gradient-to-r from-cyan-100 to-blue-500 dark:bg-gradient-to-r from-blue-700 to-gray-700 min-h-screen flex flex-col justify-center items-center">
     <div class="flex items-center flex-wrap mb-8">
       <h1 class="text-8xl font-bold text-center font-sans text-black mr-8">ASK.IT</h1>
-      <form @submit.prevent="submitForm" class="bg-gray-100 p-8 rounded-lg shadow-md w-96">
-        <h1 class="text-3xl font-bold mb-8 text-center">Sign up</h1>
+      <form @submit.prevent="submitForm" class=" dark:bg-gray-900 bg-gray-100 p-8 rounded-lg shadow-md w-96">
+        <h1 class="text-3xl dark:text-blue-400 font-bold mb-8 text-center">Sign up</h1>
         <div class="mb-2">
-          <label for="username" class="block text-black font-bold mb-1">Email</label>
+          <label for="username" class="block dark:text-blue-400 text-black font-bold mb-1">Email</label>
           <input :class="validEmail" type="email" name="username" v-model="username" placeholder="Email"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                 class="transition border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400">
         </div>
         <div class="mb-2">
-          <label for="firstname" class="block text-black font-bold mb-1">First name</label>
+          <label for="firstname" class="block dark:text-blue-400 text-black font-bold mb-1">First name</label>
           <input type="text" name="firstname" v-model="firstname" placeholder="First name"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 ">
+                 class="transition border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400 ">
         </div>
         <div class="mb-2">
-          <label for="lastname" class="block text-black font-bold mb-1">Last name</label>
+          <label for="lastname" class="block dark:text-blue-400 text-black font-bold mb-1">Last name</label>
           <input type="text" name="lastname" v-model="lastname" placeholder="Last name"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                 class="transition border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400">
         </div>
         <div class="mb-2">
-          <label for="password" class="block text-black font-bold mb-1">Password</label>
+          <label for="password" class="block dark:text-blue-400 text-black font-bold mb-1">Password</label>
           <input :class="invalidPasswordBox" type="password" name="password" v-model="password" placeholder="Password"
-                 class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                 class="transition border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400">
         </div>
         <div class="mb-4">
-          <label for="re_password" class="block text-gray-700 font-bold mb-2">Password confirmation</label>
-          <input type="password" name="re_password" v-model="re_password" placeholder="Re-enter Password" :class="invalidPasswordBox" class="border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <label for="re_password" class="block dark:text-blue-200 text-gray-700 font-bold mb-2">Password confirmation</label>
+          <input type="password" name="re_password" v-model="re_password" placeholder="Re-enter Password" :class="invalidPasswordBox" class="transition border-2 p-2 w-full rounded text-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-400">
         </div>
         <div class="mb-3">
-          <p class="text-gray-700 font-bold mb-2"> By signing up, you agree to our <a href="/privacy" target="_blank" class="text-blue-400 hover:underline hover:text-blue-500">Privacy Policy</a>.</p>
+          <p class="text-gray-700 font-bold mb-2">By signing up, you agree to our <a href="/privacy" target="_blank" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">Privacy Policy</a>.</p>
         </div>
         <div class="mb-3 flex content-center">
           <button :disabled="!isValidEmail || isFormComplete" type="submit"
-                  class="flex-none h-[40px] bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
+                  class="transition focus:ring-4 focus:ring-pink-400 flex-none h-[40px] bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-600 disabled:bg-gray-500">
             Sign up
           </button>
           <div class="ml-4">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div>
-          <a href="/log-in/" class="text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
+          <a href="/log-in/" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
         </div>
       </form>
     </div>

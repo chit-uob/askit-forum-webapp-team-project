@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-100 pt-[40px]">
-  <div class="mx-[70px]  px-[30px] py-[20px] bg-white shadow-md rounded-md">
+  <div class= "dark:bg-gray-900 bg-gray-100 pt-[40px]">
+  <div class="mx-[70px]  px-[30px] py-[20px] dark:bg-gray-800 bg-white shadow-md rounded-md">
     <p class="p-3 text-center text-2xl font-bold">Team 55 Privacy Policy</p>
     <p>This privacy policy will explain how our organization uses the personal data we collect from you when you use our
       website.</p>

@@ -1,55 +1,64 @@
 <template>
-    <div class="flex min-h-screen">
+    <div class=" dark:bg-gray-900 flex min-h-screen">
         <div class="md:w-[70%] pb-[50px] w-full">
-            <div class="inline-flex w-full justify-between px-10 py-8 items-center">
+            <div class="inline-flex w-full justify-between px-4 md:px-10 py-8 items-center">
                 <h1 class="text-[42px] font-bold">{{ $route.params.mod }}</h1>
-                <div>
-                    <a :href="`/advanced-search/`" class="transition shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
-                            Advanced Search
+                <div class="flex flex-wrap justify-end">
+                    <a :href="`/advanced-search/`"
+                       class="transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                        Advanced Search
                     </a>
-                    <a :href="`/ask/${$route.params.mod}`" class=" transition shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
-                            Ask Question
+                    <a :href="`/ask/${$route.params.mod}`"
+                       class=" transition whitespace-nowrap shadow-[3px_3px_0px_0px_#000000] rounded-lg bg-blue-600 px-4 py-2 m-1 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-pink-400">
+                        Ask Question
                     </a>
                 </div>
             </div>
             <div>
-                <div class="mb-6 px-10 flex justify-between">
+                <div class="mb-6  px-4 md:px-10 flex justify-between">
                     <h2 class=" text-2xl inline">Popular questions</h2>
 
                     <div class="self-center flex align-middle radio-toolbar h-[27px] border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"
                          style="box-shadow: .23em .23em;">
 
-                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 7)}" v-on:click="updatePopQ(7)">Week</button>
+                        <button class="transition dark:hover:bg-slate-400 hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline"
+                                :class="{ 'dark:bg-orange-500 bg-[rgb(47,255,47)]':(currentTime == 7)}" v-on:click="updatePopQ(7)">Week
+                        </button>
 
-                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full border-x-2 border-black inline-block" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 30)}" v-on:click="updatePopQ(30)"
-                               for="month">Month</button>
+                        <button class="transition dark:hover:bg-slate-400 hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full border-x-2 border-black inline-block"
+                                :class="{ 'bg-[rgb(47,255,47)] dark:bg-orange-500':(currentTime == 30)}" v-on:click="updatePopQ(30)"
+                                for="month">Month
+                        </button>
 
-                        <button class="transition hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline-block " for="allTime" :class="{ 'bg-[rgb(47,255,47)]':(currentTime == 10000)}" v-on:click="updatePopQ(10000)">All time</button>
+                        <button class="transition dark:hover:bg-slate-400 hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline-block "
+                                for="allTime" :class="{ 'bg-[rgb(47,255,47)] dark:bg-orange-500':(currentTime == 10000)}"
+                                v-on:click="updatePopQ(10000)">All time
+                        </button>
 
                     </div>
 
                 </div>
                 <a v-if="popRender" v-for="question in popQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="hidden focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
-                    <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
+                   class="hidden focus:ring-4 focus:outline-none dark:bg-gray-800 focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                    <div class="grid grid-rows-3 text-right  text-xs  font-medium pr-2 border-r-[0.16em]  border-black my-3  object-fill box-content">
                         <div class=" self-start ">{{ question.score }} votes</div>
                         <div class=" self-center ">{{ question.num_answers }} answers</div>
                         <span class=" self-end  ">{{ question.views }} views</span>
                     </div>
 
                     <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
-                        <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                        <div class=" truncate self-start text-base leading-[1.15]  dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">
                             {{ question.title }}
                         </div>
                         <div class=" truncate self-center ">Asked by <span v-if="question.author"
-                                                                           class="text-blue-500 hover:underline hover:text-blue-400">{{
+                                                                           class="dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">{{
                             question.author
                             }}</span><span v-if="!(question.author)" class="">Anonymous</span></div>
                         <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
                              class="flex overflow-hidden">
                             <div v-for="tag in question.tags"
-                                 class=" whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
+                                 class=" whitespace-nowrap self-end mr-[2px] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">
                                 [{{ tag }}]
                             </div>
                         </div>
@@ -61,7 +70,7 @@
                         </div>
                     </div>
 
-                    <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+                    <div class=" bg-lime-300 dark:bg-blue-600 rounded-r-[13px] rounded-bl-2xl grid box-content">
                         <div class="  place-self-center py-2 px-[9px] border-[0.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                             <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
                                 {{ formatDay(question.pub_date) }}
@@ -82,13 +91,13 @@
                         <span class="mx-1 inline ">{{ question.views }} views</span>
                     </div>
 
-                    <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">
+                    <div class=" text-sm font-medium dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none ">
                         {{ question.title }}
                     </div>
                     <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
                          class="flex-wrap inline-flex leading-none">
                         <div v-for="tag in question.tags"
-                             class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">
+                             class=" inline  text-xs mr-[2px] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">
                             [{{ tag }}]
                         </div>
                     </div>
@@ -98,7 +107,7 @@
                         </div>
                     </div>
                     <div class=" text-xs mt-1 ">Asked by <span v-if="question.author"
-                                                               class="text-blue-500 hover:underline hover:text-blue-400">{{
+                                                               class="dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">{{
                         question.author
                         }}</span><span v-if="!(question.author)" class="">Anonymous</span> on the <span
                             class="">{{ formatDate(question.pub_date) }}</span></div>
@@ -115,7 +124,7 @@
 
                 <a v-if="allRender" v-for="question in allQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
-                   class="transition group focus:ring-4 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
+                   class="transition group focus:ring-4 dark:bg-gray-800 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
                     <div class="grid grid-rows-3 text-right  text-xs font-medium pr-2 border-r-[0.16em] border-black my-3  object-fill box-content">
                         <div class=" self-start ">{{ question.score }} votes</div>
                         <div class=" self-center ">{{ question.num_answers }} answers</div>
@@ -123,17 +132,17 @@
                     </div>
 
                     <div class="grid grid-rows-3 pl-2 text-xs font-medium py-3 pr-1  box-content object-fill">
-                        <div class=" truncate self-start text-base leading-[1.15] text-blue-500 hover:underline hover:text-blue-400">
+                        <div class=" truncate self-start text-base leading-[1.15] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">
                             {{ question.title }}
                         </div>
                         <div class=" self-center truncate ">Asked by <span v-if="question.author"
-                                                                           class="text-blue-500 hover:underline hover:text-blue-400">{{
+                                                                           class="dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">{{
                             question.author
                             }}</span><span v-if="!(question.author)" class="">Anonymous</span></div>
                         <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
                              class="flex overflow-hidden">
                             <div v-for="tag in question.tags"
-                                 class="  whitespace-nowrap self-end mr-[2px] text-blue-500 hover:underline hover:text-blue-400">
+                                 class="  whitespace-nowrap self-end mr-[2px] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">
                                 [{{ addTagToSet(tag) }}]
                             </div>
                         </div>
@@ -145,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="grid bg-lime-300 rounded-r-[13px] rounded-bl-2xl  box-content">
+                    <div class="grid bg-lime-300 dark:bg-blue-600 rounded-r-[13px] rounded-bl-2xl  box-content">
                         <div class="  place-self-center py-2 px-[9px] border-[.1em] border-black border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                             <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
                                 {{ formatDay(question.pub_date) }}
@@ -167,13 +176,13 @@
                         <span class="mx-1 inline ">{{ question.views }} views</span>
                     </div>
 
-                    <div class=" text-sm font-medium text-blue-500 hover:underline hover:text-blue-400 leading-none ">
+                    <div class=" text-sm font-medium dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none ">
                         {{ question.title }}
                     </div>
                     <div v-if="(question.tags[0] != '') && (question.tags.length != 0)"
                          class="flex-wrap inline-flex leading-none">
                         <div v-for="tag in question.tags"
-                             class=" inline  text-xs mr-[2px] text-blue-500 hover:underline hover:text-blue-400 leading-none">
+                             class=" inline  text-xs mr-[2px] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">
                             [{{ tag }}]
                         </div>
                     </div>
@@ -183,7 +192,7 @@
                         </div>
                     </div>
                     <div class=" text-xs mt-1 ">Asked by <span v-if="question.author"
-                                                               class="text-blue-500 hover:underline hover:text-blue-400">{{
+                                                               class="dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400">{{
                         question.author
                         }}</span><span v-if="!(question.author)" class="">Anonymous</span> on the <span
                             class="">{{ formatDate(question.pub_date) }}</span></div>
@@ -209,24 +218,24 @@
                     <!--            </button>-->
                     <!--          </a>-->
                     <a :href="`/module/${$route.params.mod}/add-members`" v-if="admin" type="submit"
-                        class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
-                                                  Add members
+                       class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        Add members
                     </a>
                     <button v-if="admin" v-on:click="deleteModule" type="button"
                             class="transition shadow-[3px_3px_0px_0px_#000000] w-full rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
                         Delete Module
                     </button>
                     <a :href="`/module/${$route.params.mod}/course-settings/`" v-if="admin" type="submit"
-                                    class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
-                                Course Settings
+                       class="transition shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        Course Settings
                     </a>
                     <a :href="`/new`" v-if="admin" type="submit"
-                                class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
-                            Create Module
+                       class="shadow-[3px_3px_0px_0px_#000000] w-full text-center rounded bg-blue-600 px-4 text-sm font-medium text-white py-2 hover:bg-blue-500 focus:ring-4 focus:outline-none focus:ring-pink-400 ">
+                        Create Module
                     </a>
                 </div>
             </div>
-            <div class=" mt-3 rounded-lg border-[3px] border-black p-2 " style="box-shadow: .2em .2em;">
+            <div class=" mt-3 rounded-lg border-[3px] dark:bg-gray-800 border-black p-2 " style="box-shadow: .2em .2em;">
                 <div class="mb-2 text-center">Tag filter</div>
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
@@ -257,6 +266,17 @@ export default {
             tagFilter: new Set(),
             currentTime: 7,
         };
+    },
+    updated() {
+        if (localStorage.getItem("largeFont") === "true") {
+            // remove all different text size class
+            document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
+            document.querySelectorAll('.text-sm').forEach(e => e.classList.remove('text-sm'));
+            document.querySelectorAll('.text-base').forEach(e => e.classList.remove('text-base'));
+            document.querySelectorAll('.text-lg').forEach(e => e.classList.remove('text-lg'));
+            document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
+            document.body.classList.add('text-xl')
+        }
     },
     mounted() {
         axiosClient({

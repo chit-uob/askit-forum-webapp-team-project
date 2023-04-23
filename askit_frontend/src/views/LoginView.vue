@@ -21,7 +21,7 @@
                 </div>
                 <div>
                     <button v-on:click="redirectToSignUp"
-                            class="transition focus:ring-4 focus:outline-none focus:ring-blue-400text-blue-400 hover:underline hover:text-blue-500">
+                            class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">
                         Don't have an account sign up!
                     </button>
                     <button v-on:click="redirectToResetPassword"

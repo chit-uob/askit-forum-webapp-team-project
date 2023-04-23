@@ -1,4 +1,5 @@
-<template>
+<template class="hue-rotate-[30deg] hue-rotate-[60deg] hue-rotate-[90deg] hue-rotate-[120deg] hue-rotate-[150deg] hue-rotate-[180deg] hue-rotate-[210deg] hue-rotate-[240deg] hue-rotate-[270deg] hue-rotate-[300deg] hue-rotate-[330deg] hue-rotate-[360deg]
+hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg] hue-rotate-[-150deg] hue-rotate-[-180deg] hue-rotate-[-210deg] hue-rotate-[-240deg] hue-rotate-[-270deg] hue-rotate-[-300deg] hue-rotate-[-330deg] hue-rotate-[-360deg]">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <nav v-if="enable"
@@ -220,6 +221,7 @@ export default {
         if (localStorage.getItem("invert") === "true") {
             document.body.classList.add('invert')
         }
+        document.body.classList.add('hue-rotate-[' + localStorage.getItem("colourHue") + 'deg]')
     },
 }
 

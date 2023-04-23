@@ -201,7 +201,7 @@ export default {
         }
     }
     ,
-    updated() {
+    mounted() {
         if (localStorage.getItem("largeFont") === "true") {
             // remove all different text size class
             document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
@@ -210,6 +210,15 @@ export default {
             document.querySelectorAll('.text-lg').forEach(e => e.classList.remove('text-lg'));
             document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
             document.body.classList.add('text-xl')
+        }
+        if (localStorage.getItem("readableFont") === "true") {
+            document.body.classList.add('font-[helvetica]')
+        }
+        if (localStorage.getItem("grayscale") === "true") {
+            document.body.classList.add('grayscale')
+        }
+        if (localStorage.getItem("invert") === "true") {
+            document.body.classList.add('invert')
         }
     },
 }

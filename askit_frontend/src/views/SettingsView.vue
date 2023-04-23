@@ -1,5 +1,5 @@
-<template>
-    <div class="bg-pink-50 dark:bg-gray-900">
+<template >
+    <div class="bg-pink-50 dark:bg-gray-900 h-full">
         <div class="min-h-screen">
             <div class="flex items-center mb-1 px-10 py-10">
                 <br><br>
@@ -163,9 +163,22 @@
                     <input type="checkbox" id="high-contrast-mode" class="mr-2" v-model="highContrastMode">
                 </div>
                 <div class="flex items-center mb-6">
+                    <label for="grayscale-mode" class="mr-4">Grayscale Mode</label>
+                    <input type="checkbox" id="grayscale-mode" class="mr-2" v-model="grayscaleMode" v-on:change="toggleGrayscale">
+                </div>
+                <div class="flex items-center mb-6">
+                    <label for="invert" class="mr-4">Invert Colour</label>
+                    <input type="checkbox" id="invert" class="mr-2" v-model="invert" v-on:change="toggleInvert">
+                </div>
+                <div class="flex items-center mb-6">
                     <label for="large-font-size" class="mr-4">Large Font Size</label>
                     <input type="checkbox" id="large-font-size" class="mr-2" v-model="largeFontSize"
                            v-on:change="toggleLargeFontSize">
+                </div>
+                <div class="flex items-center mb-6">
+                    <label for="readable-font" class="mr-4">Readable Font</label>
+                    <input type="checkbox" id="readable-font" class="mr-2" v-model="readableFont"
+                           v-on:change="toggleFont">
                 </div>
                 <div class="flex items-center mb-6">
                     <label for="screen-reader-mode" class="mr-4">Screen Reader Mode</label>
@@ -194,9 +207,14 @@ export default {
             errorMessage: '',
             invalid: false,
             largeFontSize: localStorage.getItem("largeFont") === "true",
+            readableFont: localStorage.getItem("readableFont") === "true",
+            grayscaleMode: localStorage.getItem("grayscale") === "true",
+            invert: localStorage.getItem("invert") === "true",
             highContrastMode: false,
             screenReaderMode: false,
-            themeSelect: localStorage.getItem("theme") || "default"
+            themeSelect: localStorage.getItem("theme") || "default",
+            pageReload: localStorage.getItem("pageReload")
+
         }
     },
     methods: {
@@ -206,6 +224,22 @@ export default {
         },
         toggleLargeFontSize() {
             localStorage.setItem("largeFont", this.largeFontSize)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        toggleFont() {
+            localStorage.setItem("readableFont", this.readableFont)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        toggleGrayscale() {
+            localStorage.setItem("grayscale", this.grayscaleMode)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        toggleInvert() {
+            localStorage.setItem("invert", this.invert)
+            localStorage.setItem("pageReload", true)
             window.location.reload()
         },
         logout() {
@@ -266,6 +300,12 @@ export default {
     computed: {
         isFormComplete() {
             return (this.old_password === '') || (this.new_password === '') || (this.conf_password === '');
+        }
+    },
+    mounted(){
+        if (this.pageReload == 'true'){
+            this.activeTab = 'accessibility'
+            localStorage.setItem("pageReload", false)
         }
     }
 }

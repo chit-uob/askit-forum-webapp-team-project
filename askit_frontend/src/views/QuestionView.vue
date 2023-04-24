@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-sky-100">
-    <div class="mx-auto w-10/12 max-w-6xl overflow-hidden bg-white shadow-lg">
+  <div class=" dark:bg-gray-900 bg-sky-100">
+    <div class="mx-auto w-10/12 max-w-6xl dark:bg-gray-800 overflow-hidden bg-white shadow-lg">
       <div class="flex items-center p-4">
         <div class="flex flex-col items-center">
           <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
@@ -8,7 +8,7 @@
                   v-on:click="upvoteQuestion">
             <i class="fa fa-arrow-up"></i>
           </button>
-          <span class="mr-2 text-lg font-bold text-gray-600">{{ question.score }}</span>
+          <span class="mr-2 text-lg font-bold dark:text-white text-gray-600">{{ question.score }}</span>
           <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                   :class="{ ' border-4 border-red-600': question.upvote_or_downvote === 'downvote'}"
                   v-on:click="downvoteQuestion">
@@ -90,7 +90,7 @@
           </div>
           <div class="mb-2 flex justify-between">
             <p class="p-2 font-sans font-thin w-full">Author: {{ question.author }}</p>
-            <span class="w-full text-right text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
+            <span class="w-full text-right dark:text-white text-gray-600">Date Published: {{ formatPubDate(question.pub_date) }}</span>
           </div>
           <div>
             <p class="mb-2 p-2"><span class="font-bold">Explanation:</span> <br>
@@ -102,7 +102,7 @@
               {{ question.summary }}</p>
             <div class="flex">
               <div v-for="tag in question.tags" class="mr-2">
-                <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 rounded bg-blue-50 px-2 py-1 text-blue-400 hover:bg-blue-100">{{ tag }}</button>
+                <button class="transition focus:ring-4 focus:outline-none dark:bg-indigo-900 dark:text-white focus:ring-blue-400 rounded bg-blue-50 px-2 py-1 text-blue-400 hover:bg-blue-100">{{ tag }}</button>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@
         <div class="flex items-center">
           <h1 class="font-bold">Comments:</h1>
           <button
-              class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 rounded border-gray-300 bg-blue-100 px-4 py-1 font-sans font-bold text-black hover:bg-blue-300"
+              class="transition focus:ring-4 focus:outline-none dark:bg-blue-600 dark:text-white focus:ring-blue-400 ml-4 rounded border-gray-300 bg-blue-100 px-4 py-1 font-sans font-bold text-black hover:bg-blue-300"
               @click="showComments = !showComments">Add Comment
           </button>
         </div>
@@ -135,21 +135,21 @@
           </form>
         </div>
 
-        <div v-if="all_comments.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-2 shadow">
-          <p>No comments yet.</p>
+        <div v-if="all_comments.length === 0" class="mb-4 flex items-center rounded-lg dark:text-black dark:bg-blue-100 bg-red-400 p-2 shadow">
+          <p class="dark:text-black">No comments yet.</p>
         </div>
 
         <div v-for="com in all_comments" :key="com.id">
-  <div class="flex items-center rounded-lg bg-white py-1 px-2 shadow">
+  <div class="flex items-center rounded-lg dark:bg-gray-900 bg-white py-1 px-2 shadow">
     <div class="flex-grow">
       <div class="flex justify-between">
-        <p class="text-sm text-gray-600">Author: {{ com.author }} </p>
-        <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
+        <p class="text-sm dark:text-gray-300 text-gray-600">Author: {{ com.author }} </p>
+        <p class="text-right text-sm dark:text-gray-300 text-gray-600">Published: {{ formatPubDate(com.pub_date) }}</p>
       </div>
       <div class="flex items-center justify-between">
         <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
         <p class="text-lg">{{ com.content }}</p>
-        <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)" class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-500 hover:bg-blue-700 text-white text-sm rounded-md">
+        <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)" class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
           Delete comment
         </button>
       </div>
@@ -182,19 +182,19 @@
       <div class="p-5">
         <h1 class="mb-4 text-2xl font-bold">Answers:</h1>
 
-        <div v-if="answers.length === 0" class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+        <div v-if="answers.length === 0" class="mb-4 flex items-center rounded-lg dark:bg-blue-100 dark:text-black bg-white p-4 shadow">
           <p class="text-lg">No answers yet. Be the first to answer this question!</p>
         </div>
 
         <div v-for="answer in answers" :key="answer.id">
-          <div class="mb-4 flex items-center rounded-lg bg-white p-4 shadow">
+          <div class="mb-4 flex items-center rounded-lg dark:bg-gray-900 bg-white p-4 shadow">
             <div class="flex flex-col items-center">
               <button class=" transition focus:ring-4 focus:outline-none focus:ring-blue-400mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"
                       :class="{ ' border-4 border-green-600': answer.upvote_or_downvote === 'upvote' }"
                       v-on:click="upvoteAnswer(answer.id)">
                 <i class="fa fa-arrow-up"></i>
               </button>
-              <span class="mr-2 text-lg font-bold text-gray-600">{{ answer.score }}</span>
+              <span class="mr-2 text-lg font-bold dark:text-white text-gray-600">{{ answer.score }}</span>
               <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                       :class="{ ' border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
                       v-on:click="downvoteAnswer(answer.id)">
@@ -203,8 +203,8 @@
             </div>
             <div class="flex-grow">
               <div class="flex justify-between">
-                <p class="text-sm text-gray-600">Author: {{ answer.author }} </p>
-                <p class="text-right text-sm text-gray-600">Published: {{ formatPubDate(answer.pub_date) }}</p>
+                <p class="text-sm dark:text-gray-300 text-gray-600">Author: {{ answer.author }} </p>
+                <p class="text-right text-sm dark:text-gray-300 text-gray-600">Published: {{ formatPubDate(answer.pub_date) }}</p>
               </div>
               <div class="flex items-center justify-between">
 

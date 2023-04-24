@@ -172,10 +172,10 @@ export default {
   </div>
 
 
-  <div class="flex">
+  <div class=" dark:bg-gray-900 flex">
 
     <div class="w-full pt-2 pl-4 md:w-2/3">
-      <label for="message" class="block text-lg font-medium text-gray-900">Title</label>
+      <label for="message" class="block text-lg font-medium dark:text-white text-gray-900">Title</label>
       <textarea id="message" rows="1"
                 class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="Enter your title" v-model="questionTitle"></textarea>
@@ -183,7 +183,7 @@ export default {
 
       <!-- Explain your problem -->
       <div class="w-full">
-        <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">Explain your problem</label>
+        <label for="large-input" class="mb-2 block text-lg font-medium dark:text-white text-gray-900">Explain your problem</label>
         <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-72" v-model:content="questionExplanation"
                      content-type="text">
         </QuillEditor>
@@ -192,7 +192,7 @@ export default {
 
       <!-- what have you already tried? -->
       <div class="w-full">
-        <label for="large-input" class="mb-2 block text-lg font-medium text-gray-900">What have you already
+        <label for="large-input" class="mb-2 block text-lg font-medium dark:text-white text-gray-900">What have you already
           tried?</label>
         <QuillEditor id="large-input" theme="snow" toolbar="full" class="h-40" v-model:content="questionTried"
                      content-type="text">
@@ -201,7 +201,7 @@ export default {
 
       <!--summary-->
       <div class>
-        <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Summary (optional)</label>
+        <label for="message" class="mb-2 block text-lg font-medium dark:text-white text-gray-900">Summary (optional)</label>
         <textarea :disabled="isSummDisabled" id="message" rows="1"
                   class="transition focus:ring-2 focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Type or auto-generate summary" v-model="questionSummary"></textarea>
@@ -228,7 +228,7 @@ export default {
 
       <!--tags-->
       <div class="mb-6">
-        <label for="message" class="mb-2 block text-lg font-medium text-gray-900">Tags</label>
+        <label for="message" class="mb-2 block text-lg font-medium dark:text-white text-gray-900">Tags</label>
         <textarea :disabled="isTagDisabled" id="message" rows="1"
                   class="transition focus:ring-2 focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-600"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
@@ -275,7 +275,7 @@ export default {
 
     <div class="hidden md:block md:w-1/3">
       <div class="text-center">
-        <p class="text-lg font-medium text-black underline">Rules:</p>
+        <p class="text-lg font-medium dark:text-white text-black underline">Rules:</p>
       </div>
       <div class="flex justify-end">
         <div class="w-11/12">
@@ -288,7 +288,7 @@ export default {
 
 
             <div class="text-center">
-              <p class="text-lg font-medium text-black underline">How to write a good
+              <p class="text-lg font-medium dark:text-white text-black underline">How to write a good
                 question!</p>
             </div>
 

@@ -1,11 +1,11 @@
 <template>
-    <div class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+    <div class="bg-gradient-to-r from-cyan-100 to-blue-500 dark:bg-gradient-to-r from-blue-700 to-gray-700  min-h-screen flex flex-col justify-center items-center">
         <div class="flex items-center flex-wrap mb-8">
             <h1 class="text-6xl font-bold text-center font-sans text-black mr-8">ASK.IT</h1>
-            <form @submit.prevent="submitForm" class="bg-white p-8 rounded-lg shadow-md w-96">
+            <form @submit.prevent="submitForm" class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-md w-96">
                 <h1 class="text-3xl font-bold mb-8 text-center">Reset password</h1>
                 <div class="mb-4">
-                    <label for="username" class="block text-gray-700 font-bold mb-2">Email</label>
+                    <label for="username" class="block dark:text-blue-400 text-gray-700 font-bold mb-2">Email</label>
                     <input type="email" name="username" v-model="username" placeholder="Email" :class="textInput">
                 </div>
                 <div class="mb-2">

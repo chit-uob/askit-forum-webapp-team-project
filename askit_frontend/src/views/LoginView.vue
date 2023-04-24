@@ -20,9 +20,10 @@
                     <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessage }}</label>
                 </div>
                 <div>
+                    <a>Don't have an account? </a>
                     <button v-on:click="redirectToSignUp"
                             class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">
-                        Don't have an account sign up!
+                         Sign up!
                     </button>
                     <button v-on:click="redirectToResetPassword"
                             class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">

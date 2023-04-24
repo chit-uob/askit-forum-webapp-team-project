@@ -41,7 +41,8 @@
           </div>
         </div>
         <div>
-          <a href="/log-in/" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">Already have an account log in!</a>
+          <a>Already have an account? </a>
+          <a href="/log-in/" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 text-blue-400 hover:underline hover:text-blue-500">Log in!</a>
         </div>
       </form>
     </div>

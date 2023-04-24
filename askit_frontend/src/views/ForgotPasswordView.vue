@@ -24,8 +24,9 @@
                     </button>
                 </div>
                 <div>
+                    <a>Don't have an account? </a>
                     <button v-on:click="redirectToSignUp" class="text-blue-400 hover:underline hover:text-blue-500">
-                        Don't have an account sign up!
+                        Sign up!
                     </button>
                 </div>
             </form>

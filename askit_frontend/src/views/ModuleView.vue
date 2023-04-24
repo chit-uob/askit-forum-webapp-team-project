@@ -236,7 +236,19 @@
                 </div>
             </div>
             <div class=" mt-3 rounded-lg border-[3px] dark:bg-gray-800 border-black p-2 " style="box-shadow: .2em .2em;">
-                <div class="mb-2 text-center">Tag filter</div>
+                <div class="mb-2 text-center">
+                <div style="display: inline-block;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-filter" viewBox="0 -4 16 16">
+                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                </div>
+                <div style="display: inline-block; margin-left: 5px;">
+                    <span>Tag filter</span>
+                </div>
+                </div>
+
+
+                
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
                          class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 

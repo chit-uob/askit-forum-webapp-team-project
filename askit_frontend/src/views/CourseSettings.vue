@@ -6,11 +6,11 @@
       <label for="default-input" class="block mb-2 text-sm font-medium ">Course
         Name</label>
       <input type="text" id="default-input" v-model="moduleTitle" placeholder="Course name here..."
-             class="shadow-[3px_3px_0px_0px_#000000] dark:shadow-[3px_3px_0px_0px_#ffffff] bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-4 focus:outline-none transition focus:ring-blue-400 focus:border-blue-500 block w-full p-2.5 border-2 border-black">
+             class="shadow-[3px_3px_0px_0px_#000000] dark:shadow-[3px_3px_0px_0px_#ffffff] bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-4 focus:outline-none transition focus:ring-blue-400 focus:border-blue-500 block w-full p-2.5 border-2 border-black dark:bg-gray-800 dark:text-white">
     </div>
     <label for="message" class="block mb-2 text-sm font-medium ">Course description</label>
     <textarea id="message" rows="16" v-model="moduleExplanation"
-              class="shadow-[3px_3px_0px_0px_#000000] dark:shadow-[3px_3px_0px_0px_#ffffff] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg focus:ring-4 focus:outline-none transition focus:ring-blue-400 focus:border-blue-500 border-2 border-black"
+              class="shadow-[3px_3px_0px_0px_#000000] dark:shadow-[3px_3px_0px_0px_#ffffff] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg focus:ring-4 focus:outline-none transition focus:ring-blue-400 focus:border-blue-500 border-2 border-black dark:bg-gray-800 dark:text-white"
               placeholder="Description here..."></textarea>
 
     <button v-on:click="ManageMembers" type="button"
@@ -41,7 +41,6 @@ import axiosClient from "@/views/axiosClient";
 
     data() {
       return {
-
         moduleTitle: '',
         moduleExplanation: '',
       }
@@ -63,6 +62,19 @@ import axiosClient from "@/views/axiosClient";
       ManageMembers() {
         window.location.href = `/module/${this.$route.params.mod}/add-members/`;
       },
-    }
+    },
+    mounted() {
+      axiosClient({
+        method: "get",
+        url: `/course_settings/details/${this.$route.params.mod}`,
+      })
+          .then((response) => {
+            this.moduleTitle = response.data.title;
+            this.moduleExplanation = response.data.description;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
 }
 </script>

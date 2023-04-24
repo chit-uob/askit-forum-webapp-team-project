@@ -3,5 +3,5 @@ from . import views
 
 app_name = 'course_settings'
 urlpatterns = [
-    path('', views.course_settings, name = "course_settings"),
+    path('details/<str:mod>', views.get_details, name='details'),
 ]

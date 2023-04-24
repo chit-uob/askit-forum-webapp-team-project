@@ -1,23 +1,23 @@
 <template>
-  <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none crypto_bg">
+  <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none crypto_bg dark:bg-slate-900">
     <div class="py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 class="block mb-2 text-3xl font-semibold text-gray-900">Create Course</h1>
+        <h1 class="block mb-2 text-3xl font-semibold">Create Course</h1>
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div class="mb-6">
-          <label for="default-input" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block mb-2 text-sm font-medium text-gray-900" >Course
+          <label for="default-input" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block mb-2 text-sm font-medium">Course
             Name</label>
           <input type="text" id="default-input" v-model="moduleTitle"
-                 class="transition focus:ring-4 focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" style="box-shadow: .2em .2em black;">
+                 class="transition focus:ring-4 focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
         </div>
-        <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Course description</label>
+        <label for="message" class="block mb-2 text-sm font-medium">Course description</label>
         <textarea id="message" rows="16" v-model="moduleExplanation"
-                  class="transition focus:ring-4 focus:outline-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" style="box-shadow: .2em .2em black;"
+                  class="transition focus:ring-4 focus:outline-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Description here..."></textarea>
 
         <button v-on:click="addModule" type="button"
-                class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400">
+                class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-semibold text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400">
           Create Course
         </button>
 <!--        <div class="py-4">-->

@@ -1,4 +1,5 @@
-<template>
+<template class="hue-rotate-[30deg] hue-rotate-[60deg] hue-rotate-[90deg] hue-rotate-[120deg] hue-rotate-[150deg] hue-rotate-[180deg] hue-rotate-[210deg] hue-rotate-[240deg] hue-rotate-[270deg] hue-rotate-[300deg] hue-rotate-[330deg] hue-rotate-[360deg]
+hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg] hue-rotate-[-150deg] hue-rotate-[-180deg] hue-rotate-[-210deg] hue-rotate-[-240deg] hue-rotate-[-270deg] hue-rotate-[-300deg] hue-rotate-[-330deg] hue-rotate-[-360deg] tracking-tight tracking-wide">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <nav v-if="enable"
@@ -201,7 +202,7 @@ export default {
         }
     }
     ,
-    updated() {
+    mounted() {
         if (localStorage.getItem("largeFont") === "true") {
             // remove all different text size class
             document.querySelectorAll('.text-xs').forEach(e => e.classList.remove('text-xs'));
@@ -211,6 +212,18 @@ export default {
             document.querySelectorAll('.text-xl').forEach(e => e.classList.remove('text-xl'));
             document.body.classList.add('text-xl')
         }
+        if (localStorage.getItem("readableFont") === "true") {
+            document.body.classList.add('font-[helvetica]')
+        }
+        if (localStorage.getItem("grayscale") === "true") {
+            document.body.classList.add('grayscale')
+        }
+        if (localStorage.getItem("invert") === "true") {
+            document.body.classList.add('invert')
+        }
+        document.body.classList.add('hue-rotate-[' + localStorage.getItem("colourHue") + 'deg]')
+        document.querySelectorAll('.tracking-tight').forEach(e => e.classList.remove('tracking-tight'));            
+        document.body.classList.add('tracking-' + localStorage.getItem("letterSpacing"))
     },
 }
 

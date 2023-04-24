@@ -1,5 +1,5 @@
-<template>
-    <div class="bg-pink-50 dark:bg-gray-900">
+<template >
+    <div class="bg-pink-50 dark:bg-gray-900 h-full px-10">
         <div class="min-h-screen">
             <div class="flex items-center mb-1 px-10 py-10">
                 <br><br>
@@ -120,7 +120,7 @@
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="notification-toggle">
                             Receive Notifications
                         </label>
-                        <input class="mr-2 leading-tight" type="checkbox" id="notification-toggle">
+                        <input class="mr-2 leading-tight hue-rotate-[90deg]" type="checkbox" id="notification-toggle">
                         <label class="text-sm text-gray-700 dark:text-gray-200" for="notification-toggle">
                             Enable email notifications for new messages
                         </label>
@@ -158,21 +158,37 @@
                 <h2 class="text-2xl font-bold mb-4">Accessibility Options</h2>
                 <p class="mb-2">Adjust the following settings to enhance the accessibility of this website:</p>
                 <br>
-                <div class="flex items-center mb-6">
-                    <label for="high-contrast-mode" class="mr-4">High Contrast Mode</label>
-                    <input type="checkbox" id="high-contrast-mode" class="mr-2" v-model="highContrastMode">
+                <div class=" rounded-lg px-16 py-6 mb-3 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
+                    <div class="mb-6">Text adjustments</div>
+                    <div class="flex flex-wrap gap-1">
+                        <button v-on:click="toggleLargeFontSize"  class=" rounded relative h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700">
+                            <label for="grayscale-mode" class="mr-4">Large font size</label>
+                        </button>
+                        <button v-on:click="toggleFont" class=" rounded h-[200px] w-[400px] dark:bg-gray-700 bg-white border-2 border-gray-700"><div class=" text-center">Readable font</div></button>
+                        <button v-on:click="changeLetterSpacing" class=" rounded  h-[200px] w-[200px] dark:bg-gray-700 bg-white col-span-2 border-2 border-gray-700">
+                            <label class="text-center">Change letter spacing</label><br>
+                            <label for="">{{ currentLetterSpacing }}</label>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center mb-6">
-                    <label for="large-font-size" class="mr-4">Large Font Size</label>
-                    <input type="checkbox" id="large-font-size" class="mr-2" v-model="largeFontSize"
-                           v-on:change="toggleLargeFontSize">
-                </div>
-                <div class="flex items-center mb-6">
-                    <label for="screen-reader-mode" class="mr-4">Screen Reader Mode</label>
-                    <input type="checkbox" id="screen-reader-mode" class="mr-2" v-model="screenReaderMode">
+                <div class=" rounded-lg px-16 py-6 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
+                    <div class="mb-6">Colour adjustments</div>
+                    <div class="flex flex-wrap gap-1">
+                        <button v-on:click="toggleGrayscale"  for="grayscale-mode" class=" rounded relative h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700">
+                            <label for="grayscale-mode" class="mr-4">Grayscale Mode</label>
+                        </button>
+                        <button v-on:click="toggleInvert" class="rounded h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700"><div class=" text-center">Invert colour</div></button>
+                        <div class=" rounded flex flex-col justify-center h-[200px] w-[400px] dark:bg-gray-700 bg-white col-span-2 border-2 border-gray-700">
+                            <div class="flex gap-1 justify-center">
+                                <button v-on:click="changeHue(-30)" class="font-bold rounded-md h-8 w-8 bg-blue-500 text-center text-white">-</button>
+                                <div class=" flex flex-col w-16 rounded-md dark:bg-gray-600 bg-blue-50 text-center justify-center"><label class="font-medium">{{ colourHue }}°</label></div>
+                                <button v-on:click="changeHue(30)" class=" font-bold rounded-md  h-8 w-8 bg-blue-500 text-center text-white">+</button>
+                            </div>
+                            <div class="text-center">Shift colour hue</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -194,9 +210,17 @@ export default {
             errorMessage: '',
             invalid: false,
             largeFontSize: localStorage.getItem("largeFont") === "true",
+            readableFont: localStorage.getItem("readableFont") === "true",
+            grayscaleMode: localStorage.getItem("grayscale") === "true",
+            invert: localStorage.getItem("invert") === "true",
+            colourHue: Number(localStorage.getItem("colourHue")) || 0,
+            letterSpacing: ['tight', 'normal', 'wide'],
+            currentLetterSpacing: localStorage.getItem("letterSpacing") || 'normal',
             highContrastMode: false,
             screenReaderMode: false,
-            themeSelect: localStorage.getItem("theme") || "default"
+            themeSelect: localStorage.getItem("theme") || "default",
+            pageReload: localStorage.getItem("pageReload")
+
         }
     },
     methods: {
@@ -205,7 +229,40 @@ export default {
             window.location.reload()
         },
         toggleLargeFontSize() {
+            this.largeFontSize = !this.largeFontSize
             localStorage.setItem("largeFont", this.largeFontSize)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        toggleFont() {
+            this.readableFont = !this.readableFont
+            localStorage.setItem("readableFont", this.readableFont)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        toggleGrayscale() {
+            this.grayscaleMode = !this.grayscaleMode
+            localStorage.setItem("grayscale", this.grayscaleMode)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        toggleInvert() {
+            this.invert = !this.invert
+            localStorage.setItem("invert", this.invert)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        changeHue(hue){
+            this.colourHue += hue
+            this.colourHue = this.colourHue % 360
+            localStorage.setItem("colourHue", this.colourHue)
+            localStorage.setItem("pageReload", true)
+            window.location.reload()
+        },
+        changeLetterSpacing(){
+            var current = this.letterSpacing.indexOf(localStorage.getItem("letterSpacing") || 1)
+            localStorage.setItem("letterSpacing", this.letterSpacing[(current + 1) % 3])
+            localStorage.setItem("pageReload", true)
             window.location.reload()
         },
         logout() {
@@ -266,6 +323,12 @@ export default {
     computed: {
         isFormComplete() {
             return (this.old_password === '') || (this.new_password === '') || (this.conf_password === '');
+        }
+    },
+    mounted(){
+        if (this.pageReload == 'true'){
+            this.activeTab = 'accessibility'
+            localStorage.setItem("pageReload", false)
         }
     }
 }

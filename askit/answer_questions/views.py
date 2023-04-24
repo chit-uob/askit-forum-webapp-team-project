@@ -171,7 +171,8 @@ def submit_answer(request, question_id):
         post_data = json.loads(request.body)
         content = post_data['content']
         author = request.user
-        answer = Answer(question=question, content=content, author=author)
+        answer = Answer(question=question, content=content, author=author,
+                        from_admin=(request.user.is_superuser or request.user in question.module.admins.all()))
         answer.save()
         notification = Notification(receiver=question.author,
                                     detail=f"{author.username} has answered your question '{question.title}'"[:500],
@@ -317,6 +318,22 @@ def downvote_answer(request, question_id, answer_id):
         answer.score -= 1
         answer.save()
         return JsonResponse({"success": True, "score": answer.score})
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def accept_answer(request, answer_id):
+    if request.method == 'POST':
+        answer = Answer.objects.get(id=answer_id)
+        question = answer.question
+        if request.user == question.author:
+            answer.is_solution = True
+            answer.save()
+            return JsonResponse({"success": True, "accepted_answer": answer.id})
+        else:
+            return JsonResponse({"success": False, "error": "You are not the author of this question"})
 
 
 @api_view(['DELETE'])

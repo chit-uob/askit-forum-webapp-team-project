@@ -43,7 +43,10 @@
                 </div>
                 <div class="bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md p-5"
                      style="box-shadow: gray.27em .27em;">
-                    <div class="text-xl text-center font-bold mb-5">Calendar</div>
+                     <div class="flex items-center justify-center">
+                        <span class="text-xl text-center font-bold mb-5">Calendar</span>
+                        <i class="fa fa-calendar text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
+                    </div>
                     <hr class="border-gray-400 mb-5">
                 </div>
             </div>

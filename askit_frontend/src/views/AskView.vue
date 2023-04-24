@@ -210,6 +210,8 @@ export default {
                   class="transition focus:outline-none  mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-500"
                   v-on:click="getSummary">
             Auto-generate summary
+            <i class="fa fa-list scale-100" aria-hidden="true"></i>
+
           </button>
           <div role="status" :class="summaryLoadWheel">
             <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -229,6 +231,7 @@ export default {
       <!--tags-->
       <div class="mb-6">
         <label for="message" class="mb-2 block text-lg font-medium dark:text-white text-gray-900">Tags</label>
+
         <textarea :disabled="isTagDisabled" id="message" rows="1"
                   class="transition focus:ring-2 focus:outline-none block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-600"
                   placeholder="Type or auto-generate tags" v-model="questionTags"></textarea>
@@ -237,7 +240,10 @@ export default {
                   class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-600"
                   v-on:click="getTags">
             Auto-generate tags
+            <i class="fa fa-tags scale-100" aria-hidden="true"></i>
+
           </button>
+          
           <div role="status" :class="tagLoadWheel">
             <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                  viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -257,6 +263,8 @@ export default {
         <button v-on:click="addQuestion" type="button" :disabled="isAskDisabled"
                 class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-600">
           Add Question
+          <i class="fa fa-paper-plane scale-100" aria-hidden="true"></i>
+
         </button>
         <div role="status" :class="askLoadWheel">
           <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"

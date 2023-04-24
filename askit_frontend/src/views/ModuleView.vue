@@ -16,7 +16,9 @@
             </div>
             <div>
                 <div class="mb-6  px-4 md:px-10 flex justify-between">
-                    <h2 class=" text-2xl inline">Popular questions</h2>
+                    <h2 class=" text-2xl inline">Popular questions  <i class="fa fa-line-chart scale-100" aria-hidden="true"></i></h2>
+ 
+
 
                     <div class="self-center flex align-middle radio-toolbar h-[27px] border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"
                          style="box-shadow: .23em .23em;">
@@ -237,13 +239,9 @@
             </div>
             <div class=" mt-3 rounded-lg border-[3px] dark:bg-gray-800 border-black p-2 " style="box-shadow: .2em .2em;">
                 <div class="mb-2 text-center">
-                <div style="display: inline-block;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-filter" viewBox="0 -4 16 16">
-                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
-                </div>
                 <div style="display: inline-block; margin-left: 5px;">
                     <span>Tag filter</span>
+                    <i class="fa fa-filter text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
                 </div>
                 </div>
 

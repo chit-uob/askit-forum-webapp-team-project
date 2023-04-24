@@ -356,6 +356,19 @@ export default {
         tagSelected(tag) {
             return this.tagFilter.has(tag)
         },
+        deleteModule() {
+            window.confirm("Are you sure you want to delete this module? This action cannot be undone.")
+            axiosClient({
+                method: "delete",
+                url: `/create_module/delete/${this.$route.params.mod}/`,
+            })
+                .then((response) => {
+                    window.location.href = "/"
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     }
 };
 </script>

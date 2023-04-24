@@ -357,7 +357,10 @@ export default {
             return this.tagFilter.has(tag)
         },
         deleteModule() {
-            window.confirm("Are you sure you want to delete this module? This action cannot be undone.")
+            const confirm = window.confirm("Are you sure you want to delete this module? This action cannot be undone.")
+            if (!confirm) {
+                return
+            }
             axiosClient({
                 method: "delete",
                 url: `/create_module/delete/${this.$route.params.mod}/`,

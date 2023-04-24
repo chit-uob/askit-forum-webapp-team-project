@@ -81,82 +81,84 @@ def view_question(request, question_id):
 
 
 def set_up_test_database(request):
-    Module.objects.all().delete()
-    Question.objects.all().delete()
-    Tag.objects.all().delete()
-    Answer.objects.all().delete()
-    Comment.objects.all().delete()
-    Notification.objects.all().delete()
-    Activity.objects.all().delete()
+    return HttpResponse("Databae reset is no longer supported.")
 
-    sn = Module(title="SN", description="Security and Networking")
-    sn.save()
-    ai2 = Module(title="AI2", description="Artificial Intelligence 2")
-    ai2.save()
-    tp = Module(title="TP", description="Team Project")
-    tp.save()
-    misc = Module(title="Misc", description="Miscellaneous")
-    misc.save()
-
-    sn_q1 = Question(title="What are the best practices for securing a wireless network in a university environment?",
-                     module=sn,
-                     explanation="As universities rely heavily on wireless networks to support their academic and administrative activities, ensuring the security of these networks is crucial. With the rise of cyber threats such as hacking, phishing, and malware attacks, it is important to understand the best practices for securing a wireless network in a university environment. This question seeks to explore the different strategies and tools that can be used to enhance the security of wireless networks, as well as the challenges that may arise in implementing these measures.",
-                     tried_what="I already conducted some research on the topic and has looked into various resources such as online forums, white papers, and academic articles. I also spoken to some IT professionals at their university but is still seeking a broader perspective on the issue.",
-                     summary="This question asks about the best practices for securing a wireless network in a university environment. The author has conducted some research on the topic but is seeking a broader perspective on the issue. The question seeks to explore the different strategies and tools that can be used to enhance the security of wireless networks, as well as the challenges that may arise in implementing these measures.",
-                     score=13)
-    sn_q1.save()
-    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Security")[0])
-    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Wireless")[0])
-    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Network")[0])
-    sn_q1.tags.add(Tag.objects.get_or_create(tag_name="University")[0])
-
-    sn_q1_a1 = Answer(question=sn_q1,
-                      content="Securing a wireless network in a university environment is a complex task that requires a comprehensive approach. There are various strategies and tools that can be used to enhance the security of wireless networks, but implementing them can be challenging due to factors such as the size and complexity of the network, the diversity of devices and users, and the need to balance security with usability and accessibility.\nOne of the best practices for securing a wireless network is to use strong encryption and authentication protocols, such as WPA2-Enterprise or 802.1X, which can protect against unauthorized access and eavesdropping. It is also important to use strong and unique passwords for network devices and accounts, and to regularly update them to prevent brute-force attacks and password cracking.\nAnother best practice is to segment the network into different zones or subnets, with different access policies and security controls based on the sensitivity and criticality of the data and services. For example, a university may have separate subnets for student dormitories, academic departments, administrative offices, and research labs, each with its own access control lists, firewalls, and intrusion detection systems.\nIn addition, it is important to monitor the network for suspicious activity and to have incident response plans in place to quickly detect, isolate, and mitigate security breaches. This can involve using network monitoring tools, security information and event management (SIEM) systems, and security analytics to detect anomalies and potential threats in real-time.\nFinally, educating users about good security practices and raising awareness of the risks and consequences of security breaches can also be effective in enhancing the overall security posture of the wireless network. This can involve providing training and awareness campaigns on topics such as password hygiene, social engineering, phishing, and malware prevention.\nOverall, securing a wireless network in a university environment requires a multi-layered approach that combines technical controls, network segmentation, monitoring and incident response, and user education and awareness. By following best practices and staying vigilant, universities can reduce the risk of security breaches and protect their critical data and services from cyber threats.")
-    sn_q1_a1.save()
-
-    sn_q2 = Question(title="What are the key differences between public and private IP addresses?",
-                     module=sn,
-                     explanation="IP addresses are unique numerical identifiers that are used to identify devices on a network. In general, IP addresses can be classified as either public or private, depending on their scope and accessibility. This question seeks to explore the key differences between public and private IP addresses, as well as the advantages and disadvantages of each type.",
-                     tried_what="The author has done some basic research on the topic, but is looking for a more comprehensive explanation of the differences between public and private IP addresses.",
-                     summary="This question asks about the key differences between public and private IP addresses, and their respective advantages and disadvantages. The author has done some preliminary research on the topic but is seeking a more comprehensive explanation.")
-    sn_q2.save()
-    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="IP")[0])
-    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Address")[0])
-    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Public")[0])
-    sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Private")[0])
-
-    sn_q2_a1 = Answer(question=sn_q2,
-                      content="Public IP addresses are globally unique and accessible from the Internet, while private IP addresses are only accessible within a private network and are not globally unique. Public IP addresses are typically used for servers and devices that need to be accessible from the Internet, while private IP addresses are used for internal devices such as computers, printers, and routers. Public IP addresses are assigned by the Internet Assigned Numbers Authority (IANA) or Internet Service Providers (ISPs), while private IP addresses are assigned by the network administrator according to the standards defined by the Internet Engineering Task Force (IETF).")
-    sn_q2_a1.save()
-
-    ai2_q1 = Question(title="What is the difference between supervised and unsupervised learning in deep learning?",
-                      module=ai2,
-                      explanation="Deep learning is a subfield of machine learning that is inspired by the structure and function of the human brain. In deep learning, neural networks are used to learn from large amounts of data and make predictions or decisions based on that learning. Supervised and unsupervised learning are two of the most common types of learning in deep learning. This question seeks to explore the key differences between supervised and unsupervised learning in deep learning, as well as the advantages and disadvantages of each approach.",
-                      tried_what="The author has done some preliminary research on the topic, but is looking for a more in-depth explanation of the differences between supervised and unsupervised learning in deep learning.",
-                      summary="This question asks about the key differences between supervised and unsupervised learning in deep learning, and their respective advantages and disadvantages. The author has done some preliminary research on the topic but is seeking a more comprehensive explanation.")
-    ai2_q1.save()
-    ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Deep Learning")[0])
-    ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Supervised Learning")[0])
-    ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Unsupervised Learning")[0])
-
-    ai2_q1_a1 = Answer(question=ai2_q1,
-                       content="Supervised learning is a type of learning where the input data is labeled with corresponding output values, and the neural network learns to map inputs to outputs by minimizing the difference between predicted and actual outputs. In contrast, unsupervised learning is a type of learning where the input data is not labeled, and the neural network learns to identify patterns and structures in the data by clustering or dimensionality reduction. Supervised learning is often used for tasks such as classification, regression, and object detection, while unsupervised learning is often used for tasks such as clustering, anomaly detection, and feature extraction.")
-    ai2_q1_a1.save()
-
-    prob_q1 = Question(title="What is the difference between probability and statistics?",
-                       module=ai2,
-                       explanation="Probability and statistics are two closely related fields of mathematics that deal with analyzing and understanding random events. While there is some overlap between the two fields, they have different goals and methods. This question seeks to explore the key differences between probability and statistics, as well as their relationship and applications.",
-                       tried_what="The author has a basic understanding of both probability and statistics, but is looking for a more in-depth explanation of their differences.",
-                       summary="This question asks about the differences between probability and statistics, and their relationship and applications.")
-    prob_q1.save()
-    prob_q1.tags.add(Tag.objects.get_or_create(tag_name="Probability")[0])
-    prob_q1.tags.add(Tag.objects.get_or_create(tag_name="Statistics")[0])
-
-    prob_q1_a1 = Answer(question=prob_q1,
-                        content="Probability is concerned with measuring the likelihood of an event occurring, based on some underlying model or assumptions. Statistics, on the other hand, is concerned with analyzing and interpreting data that has been generated by random processes, in order to draw conclusions or make predictions about the underlying system. In other words, probability deals with predicting the likelihood of future events, while statistics deals with analyzing past events and drawing conclusions about the underlying process. While the two fields are closely related, probability is more theoretical and concerned with the underlying mathematical models, while statistics is more applied and concerned with real-world data analysis and interpretation.")
-    prob_q1_a1.save()
-
-    return HttpResponse("The database has been reset, visit https://askit.bham.team to go back to the home page")
+    # Module.objects.all().delete()
+    # Question.objects.all().delete()
+    # Tag.objects.all().delete()
+    # Answer.objects.all().delete()
+    # Comment.objects.all().delete()
+    # Notification.objects.all().delete()
+    # Activity.objects.all().delete()
+    #
+    # sn = Module(title="SN", description="Security and Networking")
+    # sn.save()
+    # ai2 = Module(title="AI2", description="Artificial Intelligence 2")
+    # ai2.save()
+    # tp = Module(title="TP", description="Team Project")
+    # tp.save()
+    # misc = Module(title="Misc", description="Miscellaneous")
+    # misc.save()
+    #
+    # sn_q1 = Question(title="What are the best practices for securing a wireless network in a university environment?",
+    #                  module=sn,
+    #                  explanation="As universities rely heavily on wireless networks to support their academic and administrative activities, ensuring the security of these networks is crucial. With the rise of cyber threats such as hacking, phishing, and malware attacks, it is important to understand the best practices for securing a wireless network in a university environment. This question seeks to explore the different strategies and tools that can be used to enhance the security of wireless networks, as well as the challenges that may arise in implementing these measures.",
+    #                  tried_what="I already conducted some research on the topic and has looked into various resources such as online forums, white papers, and academic articles. I also spoken to some IT professionals at their university but is still seeking a broader perspective on the issue.",
+    #                  summary="This question asks about the best practices for securing a wireless network in a university environment. The author has conducted some research on the topic but is seeking a broader perspective on the issue. The question seeks to explore the different strategies and tools that can be used to enhance the security of wireless networks, as well as the challenges that may arise in implementing these measures.",
+    #                  score=13)
+    # sn_q1.save()
+    # sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Security")[0])
+    # sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Wireless")[0])
+    # sn_q1.tags.add(Tag.objects.get_or_create(tag_name="Network")[0])
+    # sn_q1.tags.add(Tag.objects.get_or_create(tag_name="University")[0])
+    #
+    # sn_q1_a1 = Answer(question=sn_q1,
+    #                   content="Securing a wireless network in a university environment is a complex task that requires a comprehensive approach. There are various strategies and tools that can be used to enhance the security of wireless networks, but implementing them can be challenging due to factors such as the size and complexity of the network, the diversity of devices and users, and the need to balance security with usability and accessibility.\nOne of the best practices for securing a wireless network is to use strong encryption and authentication protocols, such as WPA2-Enterprise or 802.1X, which can protect against unauthorized access and eavesdropping. It is also important to use strong and unique passwords for network devices and accounts, and to regularly update them to prevent brute-force attacks and password cracking.\nAnother best practice is to segment the network into different zones or subnets, with different access policies and security controls based on the sensitivity and criticality of the data and services. For example, a university may have separate subnets for student dormitories, academic departments, administrative offices, and research labs, each with its own access control lists, firewalls, and intrusion detection systems.\nIn addition, it is important to monitor the network for suspicious activity and to have incident response plans in place to quickly detect, isolate, and mitigate security breaches. This can involve using network monitoring tools, security information and event management (SIEM) systems, and security analytics to detect anomalies and potential threats in real-time.\nFinally, educating users about good security practices and raising awareness of the risks and consequences of security breaches can also be effective in enhancing the overall security posture of the wireless network. This can involve providing training and awareness campaigns on topics such as password hygiene, social engineering, phishing, and malware prevention.\nOverall, securing a wireless network in a university environment requires a multi-layered approach that combines technical controls, network segmentation, monitoring and incident response, and user education and awareness. By following best practices and staying vigilant, universities can reduce the risk of security breaches and protect their critical data and services from cyber threats.")
+    # sn_q1_a1.save()
+    #
+    # sn_q2 = Question(title="What are the key differences between public and private IP addresses?",
+    #                  module=sn,
+    #                  explanation="IP addresses are unique numerical identifiers that are used to identify devices on a network. In general, IP addresses can be classified as either public or private, depending on their scope and accessibility. This question seeks to explore the key differences between public and private IP addresses, as well as the advantages and disadvantages of each type.",
+    #                  tried_what="The author has done some basic research on the topic, but is looking for a more comprehensive explanation of the differences between public and private IP addresses.",
+    #                  summary="This question asks about the key differences between public and private IP addresses, and their respective advantages and disadvantages. The author has done some preliminary research on the topic but is seeking a more comprehensive explanation.")
+    # sn_q2.save()
+    # sn_q2.tags.add(Tag.objects.get_or_create(tag_name="IP")[0])
+    # sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Address")[0])
+    # sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Public")[0])
+    # sn_q2.tags.add(Tag.objects.get_or_create(tag_name="Private")[0])
+    #
+    # sn_q2_a1 = Answer(question=sn_q2,
+    #                   content="Public IP addresses are globally unique and accessible from the Internet, while private IP addresses are only accessible within a private network and are not globally unique. Public IP addresses are typically used for servers and devices that need to be accessible from the Internet, while private IP addresses are used for internal devices such as computers, printers, and routers. Public IP addresses are assigned by the Internet Assigned Numbers Authority (IANA) or Internet Service Providers (ISPs), while private IP addresses are assigned by the network administrator according to the standards defined by the Internet Engineering Task Force (IETF).")
+    # sn_q2_a1.save()
+    #
+    # ai2_q1 = Question(title="What is the difference between supervised and unsupervised learning in deep learning?",
+    #                   module=ai2,
+    #                   explanation="Deep learning is a subfield of machine learning that is inspired by the structure and function of the human brain. In deep learning, neural networks are used to learn from large amounts of data and make predictions or decisions based on that learning. Supervised and unsupervised learning are two of the most common types of learning in deep learning. This question seeks to explore the key differences between supervised and unsupervised learning in deep learning, as well as the advantages and disadvantages of each approach.",
+    #                   tried_what="The author has done some preliminary research on the topic, but is looking for a more in-depth explanation of the differences between supervised and unsupervised learning in deep learning.",
+    #                   summary="This question asks about the key differences between supervised and unsupervised learning in deep learning, and their respective advantages and disadvantages. The author has done some preliminary research on the topic but is seeking a more comprehensive explanation.")
+    # ai2_q1.save()
+    # ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Deep Learning")[0])
+    # ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Supervised Learning")[0])
+    # ai2_q1.tags.add(Tag.objects.get_or_create(tag_name="Unsupervised Learning")[0])
+    #
+    # ai2_q1_a1 = Answer(question=ai2_q1,
+    #                    content="Supervised learning is a type of learning where the input data is labeled with corresponding output values, and the neural network learns to map inputs to outputs by minimizing the difference between predicted and actual outputs. In contrast, unsupervised learning is a type of learning where the input data is not labeled, and the neural network learns to identify patterns and structures in the data by clustering or dimensionality reduction. Supervised learning is often used for tasks such as classification, regression, and object detection, while unsupervised learning is often used for tasks such as clustering, anomaly detection, and feature extraction.")
+    # ai2_q1_a1.save()
+    #
+    # prob_q1 = Question(title="What is the difference between probability and statistics?",
+    #                    module=ai2,
+    #                    explanation="Probability and statistics are two closely related fields of mathematics that deal with analyzing and understanding random events. While there is some overlap between the two fields, they have different goals and methods. This question seeks to explore the key differences between probability and statistics, as well as their relationship and applications.",
+    #                    tried_what="The author has a basic understanding of both probability and statistics, but is looking for a more in-depth explanation of their differences.",
+    #                    summary="This question asks about the differences between probability and statistics, and their relationship and applications.")
+    # prob_q1.save()
+    # prob_q1.tags.add(Tag.objects.get_or_create(tag_name="Probability")[0])
+    # prob_q1.tags.add(Tag.objects.get_or_create(tag_name="Statistics")[0])
+    #
+    # prob_q1_a1 = Answer(question=prob_q1,
+    #                     content="Probability is concerned with measuring the likelihood of an event occurring, based on some underlying model or assumptions. Statistics, on the other hand, is concerned with analyzing and interpreting data that has been generated by random processes, in order to draw conclusions or make predictions about the underlying system. In other words, probability deals with predicting the likelihood of future events, while statistics deals with analyzing past events and drawing conclusions about the underlying process. While the two fields are closely related, probability is more theoretical and concerned with the underlying mathematical models, while statistics is more applied and concerned with real-world data analysis and interpretation.")
+    # prob_q1_a1.save()
+    #
+    # return HttpResponse("The database has been reset, visit https://askit.bham.team to go back to the home page")
 
 
 @api_view(['POST'])

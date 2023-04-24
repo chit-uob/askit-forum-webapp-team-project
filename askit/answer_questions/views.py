@@ -71,6 +71,7 @@ def view_question(request, question_id):
             answer_dict['pub_date'] = answer.pub_date
             answer_dict['score'] = answer.score
             answer_dict['is_solution'] = answer.is_solution
+            answer_dict['from_admin'] = answer.from_admin
             answer_dict['upvote_or_downvote'] = check_upvote_or_downvote_answer(answer, request.user)
             context['answer_list'].append(answer_dict)
     except Question.DoesNotExist:
@@ -324,7 +325,7 @@ def downvote_answer(request, question_id, answer_id):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 @csrf_exempt
-def accept_answer(request, answer_id):
+def accept_answer(request, question_id, answer_id):
     if request.method == 'POST':
         answer = Answer.objects.get(id=answer_id)
         question = answer.question

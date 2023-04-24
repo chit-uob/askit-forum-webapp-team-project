@@ -53,7 +53,9 @@
             <div class="mx-10 mt-16 bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md grid grid-cols-1 md:grid-cols-2"
                  style="box-shadow: gray.27em .27em;">
                 <div>
-                    <h3 class="text-xl text-left font-bold my-5 ml-5">Questions</h3>
+                    <h3 class="text-xl text-left font-bold my-5 ml-5">Questions
+                        <i class="fa fa-question-circle-o scale-100" aria-hidden="true"></i>
+                    </h3>
                     <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white dark:bg-gray-800 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white "
                        style="box-shadow: .13em .13em;">
@@ -108,7 +110,9 @@
                     </a>
                 </div>
                 <div>
-                    <h3 class="text-xl text-left font-bold my-5 ml-10">Answers</h3>
+                    <h3 class="text-xl text-left font-bold my-5 ml-10">Answers
+                        <i class="fa fa-pencil scale-100" aria-hidden="true"></i>
+                    </h3>
                     <a v-for="answer in answers" :key="answers.id" :href="`/question/${answer.question_id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white dark:bg-gray-800 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white "
                        style="box-shadow: .13em .13em;">

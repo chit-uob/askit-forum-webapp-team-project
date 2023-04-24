@@ -16,7 +16,9 @@
             </div>
             <div>
                 <div class="mb-6  px-4 md:px-10 flex justify-between">
-                    <h2 class=" text-2xl inline">Popular questions</h2>
+                    <h2 class=" text-2xl inline">Popular questions  <i class="fa fa-line-chart scale-100" aria-hidden="true"></i></h2>
+ 
+
 
                     <div class="self-center flex align-middle radio-toolbar h-[27px] border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"
                          style="box-shadow: .23em .23em;">
@@ -236,7 +238,15 @@
                 </div>
             </div>
             <div class=" mt-3 rounded-lg border-[3px] dark:bg-gray-800 border-black p-2 " style="box-shadow: .2em .2em;">
-                <div class="mb-2 text-center">Tag filter</div>
+                <div class="mb-2 text-center">
+                <div style="display: inline-block; margin-left: 5px;">
+                    <span>Tag filter</span>
+                    <i class="fa fa-filter text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
+                </div>
+                </div>
+
+
+                
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button v-for="tag in tagSet" v-on:click="filterByTag(tag)"
                          class="hover:translate-y-[1px] focus:ring-4 focus:outline-none transition focus:ring-blue-400 shadow-[3px_3px_0px_0px_#000000] py-1 px-2 rounded-md border-2 border-black " 

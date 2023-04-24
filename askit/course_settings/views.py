@@ -17,3 +17,17 @@ def get_details(request, mod):
     module = Module.objects.get(title=mod)
     if request.user.is_superuser or request.user in module.admins.all():
         return JsonResponse({'title': module.title, 'description': module.description}, status=200)
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def update_details(request, mod):
+    module = Module.objects.get(title=mod)
+    if request.user.is_superuser or request.user in module.admins.all():
+        data = json.loads(request.body)
+        module.title = data['title']
+        module.description = data['description']
+        module.save()
+        return JsonResponse({'title': module.title, 'description': module.description}, status=200)

@@ -62,11 +62,27 @@ import axiosClient from "@/views/axiosClient";
       ManageMembers() {
         window.location.href = `/module/${this.$route.params.mod}/add-members/`;
       },
+        SaveChanges() {
+          axiosClient({
+            method: "post",
+            url: `/course_settings/update/${this.$route.params.mod}/`,
+            data: {
+              title: this.moduleTitle,
+              description: this.moduleExplanation,
+            }
+          })
+              .then((response) => {
+                window.location.href = `/module/${this.$route.params.mod}/`;
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+        },
     },
     mounted() {
       axiosClient({
         method: "get",
-        url: `/course_settings/details/${this.$route.params.mod}`,
+        url: `/course_settings/details/${this.$route.params.mod}/`,
       })
           .then((response) => {
             this.moduleTitle = response.data.title;

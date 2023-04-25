@@ -106,15 +106,16 @@
                             }}</span>
                     </div>
                     <div>
-                        <div class="mb-2 p-2 break-words">
-                            <span class="font-bold">Explanation:</span>
-                            <br>
-                            <div class="prose prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert bg-sky-50/30 dark:bg-sky-900/30"
+                        <span class="font-bold">Explanation:</span>
+                        <br>
+                        <div class="mb-2 p-2 break-words border border-gray-200 dark:border-gray-600 rounded-md">
+
+                            <div class="prose prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
                                  v-html="question.explanationHTML"></div>
                         </div>
-                        <div class="mb-2 p-2 break-words">
-                            <span class="font-bold">Tried what:</span> <br>
-                            <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert bg-sky-50/30 dark:bg-sky-900/30"
+                        <span class="font-bold">Tried what:</span> <br>
+                        <div class="mb-2 p-2 break-words border border-gray-200 dark:border-gray-600 rounded-md">
+                            <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
                                  v-html="question.tried_whatHTML"></div>
                         </div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Summary:</span> <br>
@@ -148,7 +149,8 @@
                     <form @submit.prevent="addComment" class="w-5/6">
                         <br>
                         <div>
-                            <textarea v-model="commentInput" class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-24">
+                            <textarea v-model="commentInput"
+                                      class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-24">
                             </textarea>
                         </div>
                         <br>
@@ -177,7 +179,9 @@
                             <div class="flex items-center justify-between">
                                 <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">
                                     Solution</p>
-                                <p class="text-lg" style="word-break: break-word">{{ com.content }}</p>
+                                <!--                                <p class="text-lg" style="word-break: break-word">{{ com.content }}</p>-->
+                                <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                     v-html="com.contentHTML"></div>
                                 <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)"
                                         class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
                                     Delete comment
@@ -192,7 +196,7 @@
 
             <div class="flex justify-center px-2">
                 <button
-                        class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
+                        class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300 dark:bg-blue-700 dark:text-white"
                         @click="showForm = !showForm">Answer this question
                 </button>
             </div>
@@ -200,7 +204,8 @@
                 <form @submit.prevent="addAnswer" class="w-5/6">
                     <br>
                     <div>
-                        <textarea v-model="answerInput" class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-48">
+                        <textarea v-model="answerInput"
+                                  class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-48">
                         </textarea>
                     </div>
                     <br>
@@ -251,7 +256,9 @@
                                 <p v-if="answer.from_admin" class="mt-2 text-sm font-semibold text-green-500">
                                     From admin
                                 </p>
-                                <p class="text-lg" style="word-break: break-word;">{{ answer.content }}</p>
+                                <!--                                <p class="text-lg" style="word-break: break-word;">{{ answer.content }}</p>-->
+                                <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                     v-html="answer.contentHTML"></div>
 
                                 <div>
                                     <button v-if="user.username === answer.author"
@@ -377,7 +384,13 @@ export default {
             .then((response) => {
                 this.question = response.data;
                 this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
+                for (let answer of this.answers) {
+                    answer.contentHTML = DOMPurify.sanitize(marked(answer.content));
+                }
                 this.all_comments = response.data.comment_list;
+                for (let comment of this.all_comments) {
+                    comment.contentHTML = DOMPurify.sanitize(marked(comment.content));
+                }
                 this.module = response.data.module;
                 this.question.explanationHTML = DOMPurify.sanitize(marked(this.question.explanation));
                 this.question.tried_whatHTML = DOMPurify.sanitize(marked(this.question.tried_what));

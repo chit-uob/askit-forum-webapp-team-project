@@ -191,7 +191,6 @@ export default {
             this.user = response.data;
             this.user_full_name = response.data.full_name;
             this.user_username = response.data.username;
-            console.log("got user")
             // this.questions = response.data.questions;
             // this.answers = response.data.answers;
 

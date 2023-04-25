@@ -44,12 +44,11 @@ def delete_account(request):
 @csrf_exempt
 def change_username(request):
         if request.method == 'POST':
-            user = UserProfile.objects.filter(user=request.user)
+            user = UserProfile.objects.get(user=request.user)
             post_data = json.loads(request.body)
             first_name = post_data['first_name']
             last_name = post_data['last_name']
             user.first_name = first_name
-            user.save()
             user.last_name = last_name
             user.save()
             return JsonResponse({'first_name': first_name, 'last_name': last_name})

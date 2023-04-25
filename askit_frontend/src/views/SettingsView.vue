@@ -54,13 +54,13 @@
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="name">
                             Name:
                         </label>
-                        <p class="font-medium mb-2">Student Name</p>
+                        <p class="font-medium mb-2">{{ user_fullname }}</p>
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="email">
                             Email
                         </label>
-                        <p class="italic mb-2"> student@xyz.com </p>
+                        <p class="italic mb-2"> {{ user_email }} </p>
                     </div>
                   <button @click="toggleForm"
                                 class="mb-4 bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -266,6 +266,8 @@ export default {
             shouldDeleteContent: false,
             first_name: '',
             last_name: '',
+            user_fullname: '',
+            user_email: '',
             old_password: '',
             new_password: '',
             conf_password: '',
@@ -443,6 +445,12 @@ export default {
             this.activeTab = 'accessibility'
             localStorage.setItem("pageReload", false)
         }
+
+        axiosClient.get("home_page/user_prof").then((response) => {
+            this.user = response.data;
+            this.user_fullname = response.data.full_name;
+            this.user_email = response.data.username;
+        })
     }
 }
 </script>

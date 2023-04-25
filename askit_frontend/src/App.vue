@@ -59,7 +59,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
         </div>
     </div>
 
-    <footer class=" bg-sky-100 dark:bg-slate-900 p-4 shadow md:flex md:items-center md:justify-between md:p-6 text-black dark:text-white text-sm">
+    <footer class="border-t-[3px] border-black  bg-sky-100 dark:bg-slate-900 p-4 shadow md:flex md:items-center md:justify-between md:p-6 text-black dark:text-white text-sm">
     <span class=" sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
     </span>
         <span class="sm:text-center">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.
@@ -213,7 +213,7 @@ export default {
             document.body.classList.add('text-xl')
         }
         if (localStorage.getItem("readableFont") === "true") {
-            document.body.classList.add('font-[helvetica]')
+            document.body.classList.add('font-[sans-serif]')
         }
         if (localStorage.getItem("grayscale") === "true") {
             document.body.classList.add('grayscale')

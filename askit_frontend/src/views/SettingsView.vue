@@ -1,5 +1,5 @@
-<template >
-    <div class="bg-pink-50 dark:bg-gray-900 h-full px-10">
+<template v-if="render" class="transition" >
+    <div class="bg-pink-50 dark:bg-gray-900 h-full px-10 pb-20">
         <div class="min-h-screen">
             <div class="flex items-center mb-1 px-10 py-10">
                 <br><br>
@@ -158,34 +158,58 @@
                 <h2 class="text-2xl font-bold mb-4">Accessibility Options</h2>
                 <p class="mb-2">Adjust the following settings to enhance the accessibility of this website:</p>
                 <br>
-                <div class=" rounded-lg px-16 py-6 mb-3 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
+                <div class=" rounded-lg px-16 py-8 mb-3  border-2 border-black bg-white dark:bg-gray-800 ">
                     <div class="mb-6">Text adjustments</div>
                     <div class="flex flex-wrap gap-1">
-                        <button v-on:click="toggleLargeFontSize"  class=" rounded relative h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700">
-                            <label for="grayscale-mode" class="mr-4">Large font size</label>
+                        <button v-on:click="toggleFont" :class="{ 'bg-blue-500 hover:bg-blue-400 ': readableFont, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !readableFont}" class="focus:outline-none overflow-hidden relative transition hover:shadow-lg hover:shadow-blue-600 hover:-translate-y-1 group rounded h-[200px] w-[400px] focus:ring-4 focus:ring-pink-400 border-2 border-blue-500">
+                            <div :class="{ 'text-white bg-black bg-opacity-10': readableFont, 'text-blue-500 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-30': !readableFont}" class=" absolute px-5 inset-0 py-7  backdrop-blur-lg delay-700 opacity-0 duration-500 group-focus:opacity-100 group-hover:opacity-100"><span >Current font: Lorem ipsum dolor sit amet, <span class="font-bold">consectetur adipiscing</span> elit. Duis <span class=" italic">placerat</span> ut justo.</span><br><br><span class="font-[helvetica]">Readable font: Lorem ipsum dolor sit amet, <span class="font-bold">consectetur adipiscing</span> elit. Duis <span class="italic">placerat</span> ut justo.</span></div>
+                            <div class="flex justify-center gap-4">
+                                <div :class="{ 'text-white': readableFont, 'text-blue-500': !readableFont}" class=" text-7xl">Aa</div>
+                                <div :class="{ 'text-white': readableFont, 'text-blue-500': !readableFont}" class=" text-center align-middle self-center">Readable font</div>
+                            </div>
                         </button>
-                        <button v-on:click="toggleFont" class=" rounded h-[200px] w-[400px] dark:bg-gray-700 bg-white border-2 border-gray-700"><div class=" text-center">Readable font</div></button>
-                        <button v-on:click="changeLetterSpacing" class=" rounded  h-[200px] w-[200px] dark:bg-gray-700 bg-white col-span-2 border-2 border-gray-700">
-                            <label class="text-center">Change letter spacing</label><br>
-                            <label for="">{{ currentLetterSpacing }}</label>
+                        <button v-on:click="toggleLargeFontSize"  :class="{ 'bg-blue-500 hover:bg-blue-400 ': largeFontSize, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !largeFontSize}"  class="transition  hover:shadow-lg hover:-translate-y-1 hover:shadow-blue-600 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded  h-[200px] w-[200px]  border-2 border-blue-500">
+                            <div class=" inline-block">
+                                <svg :class="{ 'fill-white': largeFontSize, 'fill-blue-500': !largeFontSize}" class=" scale-[0.8]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 128V96h64l0 320H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H192l0-320h64v32c0 17.7 14.3 32 32 32s32-14.3 32-32V80c0-26.5-21.5-48-48-48H160 48C21.5 32 0 53.5 0 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32zM502.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8h32V352H416c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8H512V160h32c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-64-64z"/></svg>
+                                <div :class="{ 'text-white': largeFontSize, 'text-blue-500': !largeFontSize}" class="text-center">Large font size</div>
+                            </div>
+                        </button>
+                        <button v-on:click="changeLetterSpacing"  :class="{'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : true}"  class="transition  hover:shadow-lg hover:-translate-y-1 hover:shadow-blue-600 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded  h-[200px] w-[200px]  border-2 border-blue-500">
+                            <div class=" inline-block">
+                                <svg :class="{'fill-blue-500': true, 'scale-[0.54]': currentLetterSpacing == 'normal'}" class=" scale-[0.6] translate-x-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 128V96H192l0 128H176c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H256l0-128H384v32c0 17.7 14.3 32 32 32s32-14.3 32-32V80c0-26.5-21.5-48-48-48H224 48C21.5 32 0 53.5 0 80v48c0 17.7 14.3 32 32 32s32-14.3 32-32zM9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V416H320v32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6v32H128V320c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64z"/></svg>
+                                <div :class="{'text-blue-500': true,'-translate-y-4' : !largeFontSize && currentLetterSpacing != 'normal', '-translate-y-9' : largeFontSize && currentLetterSpacing == 'normal'}" class="text-center -translate-y-6">Letter spacing: <span class="font-semibold">{{ currentLetterSpacing }}</span></div>
+                            </div>
                         </button>
                     </div>
                 </div>
-                <div class=" rounded-lg px-16 py-6 mr-20 border-2 border-black bg-white dark:bg-gray-800 ">
+                <div class=" rounded-lg px-16 py-6  border-2 border-black bg-white dark:bg-gray-800 ">
                     <div class="mb-6">Colour adjustments</div>
                     <div class="flex flex-wrap gap-1">
-                        <button v-on:click="toggleGrayscale"  for="grayscale-mode" class=" rounded relative h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700">
-                            <label for="grayscale-mode" class="mr-4">Grayscale Mode</label>
-                        </button>
-                        <button v-on:click="toggleInvert" class="rounded h-[200px] w-[200px] dark:bg-gray-700 bg-white border-2 border-gray-700"><div class=" text-center">Invert colour</div></button>
-                        <div class=" rounded flex flex-col justify-center h-[200px] w-[400px] dark:bg-gray-700 bg-white col-span-2 border-2 border-gray-700">
-                            <div class="flex gap-1 justify-center">
-                                <button v-on:click="changeHue(-30)" class="font-bold rounded-md h-8 w-8 bg-blue-500 text-center text-white">-</button>
-                                <div class=" flex flex-col w-16 rounded-md dark:bg-gray-600 bg-blue-50 text-center justify-center"><label class="font-medium">{{ colourHue }}°</label></div>
-                                <button v-on:click="changeHue(30)" class=" font-bold rounded-md  h-8 w-8 bg-blue-500 text-center text-white">+</button>
+                        <button v-on:click="toggleGrayscale"  :class="{ 'bg-blue-500 hover:bg-blue-400 ': grayscaleMode, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !grayscaleMode}"  class="transition hover:shadow-lg hover:-translate-y-1 hover:shadow-blue-600 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded relative h-[200px] w-[200px]  border-2 border-blue-500">
+                            <div class=" block">
+                                <div class="text-7xl mb-5">🗿</div>
+                                <div :class="{ 'text-white': grayscaleMode, 'text-blue-500': !grayscaleMode}" class="text-center">Grayscale mode</div>
                             </div>
-                            <div class="text-center">Shift colour hue</div>
-                        </div>
+                        </button>
+                        <button v-on:click="toggleInvert"  :class="{ 'bg-blue-500 hover:bg-blue-400 ': invert, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !invert}"  class="transition hover:shadow-lg hover:-translate-y-1 hover:shadow-blue-600 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded relative h-[200px] w-[200px]  border-2 border-blue-500">
+                            <div class="block">
+                                <div :class="{ 'text-white': invert, 'text-blue-500': !invert}" class="text-8xl">⥃</div>
+                                <div :class="{ 'text-white': invert, 'text-blue-500': !invert}" class="text-center mt-1 pb-2">Invert colour</div>
+                            </div>
+                        </button>      
+                        <button class=" cursor-default focus:outline-none focus:ring-4 focus:ring-pink-400 hover:shadow-blue-200 hover:bg-sky-50 hover:shadow-lg hover:-translate-y-1 dark:hover:bg-transparent dark:hover:shadow-blue-600 border-blue-500 rounded justify-center h-[200px] w-[400px] col-span-2 border-2">
+                            <div class="flex justify-center -translate-x-2">
+                                <div class="text-7xl">🎨</div>
+                                <div class="flex flex-col pt-4">
+                                    <div class="flex gap-1 justify-center">
+                                        <button v-on:click="changeHue(-30)" class="transition focus:ring-4 focus:ring-pink-400 focus:outline-none hover:bg-blue-400 font-bold rounded-md h-8 w-8 bg-blue-500 text-center text-white">-</button>
+                                        <div class=" flex flex-col w-16 rounded-md dark:bg-gray-600 bg-blue-50 text-center justify-center"><label class="font-medium dark:text-sky-100 text-blue-800">{{ colourHue }}°</label></div>
+                                        <button v-on:click="changeHue(30)" class="transition focus:ring-4 focus:ring-pink-400 focus:outline-none hover:bg-blue-400 font-bold rounded-md  h-8 w-8 bg-blue-500 text-center text-white">+</button>
+                                    </div>
+                                    <div class="text-center text-blue-500 mt-1">Shift colour hue</div>
+                                </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -219,11 +243,19 @@ export default {
             highContrastMode: false,
             screenReaderMode: false,
             themeSelect: localStorage.getItem("theme") || "default",
-            pageReload: localStorage.getItem("pageReload")
+            pageReload: localStorage.getItem("pageReload"),
+            render: true,
 
         }
     },
     methods: {
+        largeFontIcon(largeFontSize){
+            if(largeFontSize){
+                return "color: white;"
+            }else{
+                return "color: #3b82f6;"
+            }
+        },
         changeTheme() {
             localStorage.setItem("theme", this.themeSelect || "default")
             window.location.reload()
@@ -231,39 +263,49 @@ export default {
         toggleLargeFontSize() {
             this.largeFontSize = !this.largeFontSize
             localStorage.setItem("largeFont", this.largeFontSize)
-            localStorage.setItem("pageReload", true)
-            window.location.reload()
+            localStorage.setItem("pageReload", true) 
+            setTimeout(function() {window.location.reload()},155)
         },
         toggleFont() {
+            document.body.classList.remove(this.readableFont? 'font-[sans-serif]': 'font-sans')
             this.readableFont = !this.readableFont
             localStorage.setItem("readableFont", this.readableFont)
-            localStorage.setItem("pageReload", true)
-            window.location.reload()
+            document.body.classList.add(this.readableFont? 'font-[sans-serif]': 'font-sans')
+            this.render=false
+            this.render=true
         },
         toggleGrayscale() {
+            document.body.classList.remove('grayscale')
             this.grayscaleMode = !this.grayscaleMode
             localStorage.setItem("grayscale", this.grayscaleMode)
-            localStorage.setItem("pageReload", true)
-            window.location.reload()
+            document.body.classList.add(this.grayscaleMode? 'grayscale': '')
+            this.render=false
+            this.render=true
         },
         toggleInvert() {
+            document.body.classList.remove('invert')
             this.invert = !this.invert
             localStorage.setItem("invert", this.invert)
-            localStorage.setItem("pageReload", true)
-            window.location.reload()
+            document.body.classList.add(this.invert? 'invert': '')
+            this.render=false
+            this.render=true
         },
-        changeHue(hue){
+        changeHue(hue){ 
+            document.body.classList.remove('hue-rotate-[' + localStorage.getItem("colourHue") + 'deg]')
             this.colourHue += hue
             this.colourHue = this.colourHue % 360
             localStorage.setItem("colourHue", this.colourHue)
-            localStorage.setItem("pageReload", true)
-            window.location.reload()
+            document.body.classList.add('hue-rotate-[' + localStorage.getItem("colourHue") + 'deg]')
+            this.render=false
+            this.render=true
         },
         changeLetterSpacing(){
+            document.body.classList.remove('tracking-' + localStorage.getItem("letterSpacing"))
             var current = this.letterSpacing.indexOf(localStorage.getItem("letterSpacing") || 1)
-            localStorage.setItem("letterSpacing", this.letterSpacing[(current + 1) % 3])
-            localStorage.setItem("pageReload", true)
-            window.location.reload()
+            localStorage.setItem("letterSpacing",this.currentLetterSpacing = this.letterSpacing[(current + 1) % 3])
+            document.querySelectorAll('.tracking-tight').forEach(e => e.classList.remove('tracking-tight'));            
+            document.body.classList.add('tracking-' + localStorage.getItem("letterSpacing"))
+
         },
         logout() {
             axiosClient.post('/v1/token/logout/')
@@ -326,6 +368,7 @@ export default {
         }
     },
     mounted(){
+        document.body.classList.add('transition')
         if (this.pageReload == 'true'){
             this.activeTab = 'accessibility'
             localStorage.setItem("pageReload", false)

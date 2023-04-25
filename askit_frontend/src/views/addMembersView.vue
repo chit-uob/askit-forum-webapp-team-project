@@ -90,7 +90,7 @@
       },
       colour(index){
         if(index%2==0){
-          return "bg-gray-white dark:bg-gray-800"
+          return "bg-white dark:bg-gray-800"
         }
         else{
           return "bg-gray-200 dark:bg-gray-700"

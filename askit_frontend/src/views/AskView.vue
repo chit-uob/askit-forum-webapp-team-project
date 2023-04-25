@@ -1,13 +1,8 @@
 <script>
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import axiosClient from "@/views/axiosClient";
 
 export default {
     name: 'AskView',
-    components: {
-        QuillEditor
-    },
     data() {
         return {
             tagClass: "mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300",

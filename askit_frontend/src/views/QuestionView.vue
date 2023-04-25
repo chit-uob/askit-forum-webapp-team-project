@@ -107,12 +107,14 @@
                     </div>
                     <div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Explanation:</span> <br>
-                            {{ question.explanation }}
                         </p>
+                        <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert" v-html="question.explanationHTML"></div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Tried what:</span> <br>
-                            {{ question.tried_what }}</p>
+                        </p>
+                        <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert" v-html="question.tried_whatHTML"></div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Summary:</span> <br>
-                            {{ question.summary }}</p>
+                            {{ question.summary }}
+                        </p>
                         <div class="flex">
                             <div v-for="tag in question.tags" class="mr-2">
                                 <button
@@ -329,7 +331,8 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
-import axios from 'axios';
+import { marked } from "marked";
+import * as DOMPurify from "dompurify";
 
 export default {
     name: "QuestionView",
@@ -347,9 +350,8 @@ export default {
                 tried_what: "Loading...",
                 summary: "Loading...",
                 pub_date: "2000-01-01T00:00:00Z",
-                // Module: {
-                //   title: ""
-                // }
+                explanationHTML: "# markdown",
+                tried_whatHTML: "# markdown",
 
             },
             answers: [],
@@ -369,7 +371,8 @@ export default {
                 this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
                 this.all_comments = response.data.comment_list;
                 this.module = response.data.module;
-                this.question.Module.title = response.data.Module.title;
+                this.question.explanationHTML = DOMPurify.sanitize(marked(this.question.explanation));
+                this.question.tried_whatHTML = DOMPurify.sanitize(marked(this.question.tried_what));
             })
             .catch((error) => {
                 console.log(error);

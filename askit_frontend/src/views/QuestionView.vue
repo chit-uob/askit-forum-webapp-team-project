@@ -148,9 +148,8 @@
                     <form @submit.prevent="addComment" class="w-5/6">
                         <br>
                         <div>
-                            <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="commentInput"
-                                         contentType="text">
-                            </QuillEditor>
+                            <textarea v-model="commentInput" class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-24">
+                            </textarea>
                         </div>
                         <br>
                         <button
@@ -201,9 +200,8 @@
                 <form @submit.prevent="addAnswer" class="w-5/6">
                     <br>
                     <div>
-                        <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="answerInput"
-                                     contentType="text">
-                        </QuillEditor>
+                        <textarea v-model="answerInput" class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-48">
+                        </textarea>
                     </div>
                     <br>
                     <button

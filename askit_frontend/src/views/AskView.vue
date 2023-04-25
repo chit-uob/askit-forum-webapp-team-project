@@ -185,7 +185,7 @@ export default {
                     your problem</label>
                 <textarea
                         class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-72"
-                        v-model="questionExplanation" placeholder="Enter your explanation">
+                        v-model="questionExplanation" placeholder="Enter your explanation (markdown supported)">
         </textarea>
             </div>
 
@@ -197,7 +197,7 @@ export default {
                     tried?</label>
                 <textarea
                         class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-40"
-                        v-model="questionTried" placeholder="Enter what you have already tried">
+                        v-model="questionTried" placeholder="Enter what you have already tried (markdown supported)">
         </textarea>
             </div>
 

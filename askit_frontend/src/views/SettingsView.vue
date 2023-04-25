@@ -62,6 +62,44 @@
                         </label>
                         <p class="italic mb-2"> student@xyz.com </p>
                     </div>
+                  <button @click="toggleForm"
+                                class="mb-4 bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                type="button"
+                        >
+                            Edit Name
+                        </button>
+                  <div v-show="showForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="first-name">
+                            First Name
+                        </label>
+                        <input
+                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                v-model="first_name"
+                                type="text"
+                                placeholder="Enter first name"
+                        />
+                    </div>
+                  <div class="mb-4">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="last-name">
+                            Last Name
+                        </label>
+                        <input
+                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                v-model="last_name"
+                                type="text"
+                                placeholder="Enter last name"
+                        />
+                    </div>
+                  <button :disabled="isNameFormComplete" v-on:click="changeName"
+                                class="bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                type="submit"
+                        >
+                            Save Changes
+                        </button>
+                  </div>
+                  <label v-if="success" class="text-green-600 pl-4">{{ successMessageName }}</label>
+                  <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessageName }}</label>
                 </form>
             </div>
             <div v-if="activeTab === 'password'" class="px-10">
@@ -226,12 +264,18 @@ export default {
         return {
             activeTab: 'my-details', // Set the default active tab
             shouldDeleteContent: false,
+            first_name: '',
+            last_name: '',
             old_password: '',
             new_password: '',
             conf_password: '',
             success: false,
+            successName: false,
+            successMessageName: '',
             successMessage: '',
             errorMessage: '',
+            errorMessageName: '',
+            invalidName: false,
             invalid: false,
             largeFontSize: localStorage.getItem("largeFont") === "true",
             readableFont: localStorage.getItem("readableFont") === "true",
@@ -245,6 +289,7 @@ export default {
             themeSelect: localStorage.getItem("theme") || "default",
             pageReload: localStorage.getItem("pageReload"),
             render: true,
+            showForm: false,
 
         }
     },
@@ -255,6 +300,25 @@ export default {
             }else{
                 return "color: #3b82f6;"
             }
+        },
+        changeName() {
+          axiosClient.post('/settings/change_username/', {
+            first_name: this.first_name,
+            last_name: this.last_name,
+          })
+              .then((response) => {
+                console.log(response);
+                this.successName = true
+                    this.invalidName = false
+                    this.successMessageName = "Username successfully changed!"
+              })
+              .catch((error) => {
+                console.log(error);
+                this.successName = false
+                this.invalidName = true
+                this.errorMessageName = "Unable to change username"
+                this.textInput = "border-2 p-2 w-full rounded text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
+              });
         },
         changeTheme() {
             localStorage.setItem("theme", this.themeSelect || "default")
@@ -273,6 +337,9 @@ export default {
             document.body.classList.add(this.readableFont? 'font-[sans-serif]': 'font-sans')
             this.render=false
             this.render=true
+        },
+        toggleForm() {
+          this.showForm = !this.showForm
         },
         toggleGrayscale() {
             document.body.classList.remove('grayscale')
@@ -365,7 +432,10 @@ export default {
     computed: {
         isFormComplete() {
             return (this.old_password === '') || (this.new_password === '') || (this.conf_password === '');
-        }
+        },
+      isNameFormComplete() {
+          return (this.first_name === '') || (this.last_name === '');
+      }
     },
     mounted(){
         document.body.classList.add('transition')

@@ -29,12 +29,15 @@
                     </div>
                     <hr class="border-gray-400 mb-2">
 
-                    <a v-for="notification in notifications" :key="notification.id" :href="`${notification.link}`">
-                        <div class="grid grid-rows-2">
-
-                            <div class="self-start truncate self-start text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
+                    <a v-for="notification in notifications.slice(0,4)" :key="notification.id">
+                        <div class="grid grid-rows-2 relative">
+                            <a class="self-start truncate text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400 w-11/12"
+                               :href="`${notification.link}`">
                                 {{ notification.detail }}
-                            </div>
+                            </a>
+                            <button class="absolute right-0 top-0" v-on:click="deleteNotification(notification.id)">
+                                delete
+                            </button>
                             <div class="self-end text-xs font-light">{{ formatPubDate(notification.date) }}</div>
                         </div>
                         <hr class="border-gray-400">
@@ -43,9 +46,10 @@
                 </div>
                 <div class="bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md p-5"
                      style="box-shadow: gray.27em .27em;">
-                     <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center">
                         <span class="text-xl text-center font-bold mb-5">Calendar</span>
-                        <i class="fa fa-calendar text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
+                        <i class="fa fa-calendar text-xl text-center font-bold mb-5 ml-2 scale-150"
+                           aria-hidden="true"></i>
                     </div>
                     <hr class="border-gray-400 mb-5">
                 </div>
@@ -231,6 +235,16 @@ export default {
         });
     },
     methods: {
+        deleteNotification(notificationId) {
+            axiosClient({
+                method: "delete",
+                url: "home_page/delete_notification/" + notificationId + "/"
+            }).then((response) => {
+                this.notifications = this.notifications.filter((n) => n.id !== notificationId);
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
         formatPubDate,
         formatDay,
         formatMonthYear,

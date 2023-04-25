@@ -4,6 +4,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 
 
 @api_view(['GET'])
@@ -22,6 +23,20 @@ def view_notifications(request):
                    }
         notification_array.append(context)
     return JsonResponse(notification_array, safe=False)
+
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_notification(request, notification_id):
+    if request.method == 'DELETE':
+        notification = Notification.objects.get(id=notification_id)
+        notification_user = notification.receiver
+        if notification_user != request.user:
+            return JsonResponse({'message': 'You are not authorized to delete this notification'}, status=403)
+        notification.delete()
+        return JsonResponse({'message': 'Notification deleted successfully'}, status=200)
 
 
 @api_view(['GET'])

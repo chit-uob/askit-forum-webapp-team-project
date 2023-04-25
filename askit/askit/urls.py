@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/create_module/', include('create_module.urls')),
     path('api/home_page/', include('home_page.urls')),
     path('api/settings/', include('settings.urls')),
+    path('api/course_settings/', include('course_settings.urls')),
 ]

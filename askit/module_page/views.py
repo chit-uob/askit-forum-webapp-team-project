@@ -157,7 +157,7 @@ def update_members(request, mod):
             post_data_array = json.loads(request.body)
             for post_data in post_data_array:
                 try:
-                    user = User.objects.get(username=post_data)
+                    user = User.objects.get(username=post_data.strip())
                     module.members.add(user)
                     success += 1
                 except:
@@ -181,7 +181,7 @@ def remove_members(request, mod):
             post_data_array = json.loads(request.body)
             for post_data in post_data_array:
                 try:
-                    user = User.objects.get(username=post_data)
+                    user = User.objects.get(username=post_data.strip())
                     module.members.remove(user)
                     success += 1
                 except:
@@ -205,7 +205,7 @@ def update_admins(request, mod):
             post_data_array = json.loads(request.body)
             for post_data in post_data_array:
                 try:
-                    user = User.objects.get(username=post_data)
+                    user = User.objects.get(username=post_data.strip())
                     module.admins.add(user)
                     success += 1
                 except:
@@ -229,7 +229,7 @@ def remove_admins(request, mod):
             post_data_array = json.loads(request.body)
             for post_data in post_data_array:
                 try:
-                    user = User.objects.get(username=post_data)
+                    user = User.objects.get(username=post_data.strip())
                     module.admins.remove(user)
                     success += 1
                 except:

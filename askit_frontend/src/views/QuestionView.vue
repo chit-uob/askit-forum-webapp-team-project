@@ -170,7 +170,7 @@
                             </div>
                             <div class="flex items-center justify-between">
                                 <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
-                                <p class="text-lg">{{ com.content }}</p>
+                                <p class="text-lg" style="word-break: break-word">{{ com.content }}</p>
                                 <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)"
                                         class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
                                     Delete comment
@@ -237,11 +237,13 @@
                                     {{ formatPubDate(answer.pub_date) }}</p>
                             </div>
                             <div class="flex items-center justify-between">
-
                                 <p v-if="answer.is_solution" class="mt-2 text-sm font-semibold text-green-500">
-                                    Solution</p>
-                                <p class="text-lg">{{ answer.content }}</p>
-
+                                    Solution
+                                </p>
+                                <p v-if="answer.from_admin" class="mt-2 text-sm font-semibold text-green-500">
+                                    From admin
+                                </p>
+                                <p class="text-lg" style="word-break: break-word;">{{ answer.content }}</p>
 
                                 <div>
                                     <button v-if="user.username === answer.author"
@@ -295,6 +297,17 @@
                                                 Mute Notifications
                                             </button>
                                         </div>
+                                    </div>
+                                    <div v-if="user.username === question.author"
+                                         class="flex items-center justify-between">
+                                        <button
+                                                class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-green-600 px-4 text-sm font-medium text-white py-2 hover:bg-green-500 focus:ring-4 focus:ring-pink-400"
+                                                type="button"
+                                                @click="markAsSolution(answer.id)">
+                                            <span>Mark as solution</span>
+                                        </button>
+
+
                                     </div>
                                 </div>
 
@@ -371,6 +384,15 @@ export default {
 
 
     methods: {
+        markAsSolution(answer_id) {
+            axiosClient.post(`/question/${this.$route.params.id}/accept_answer/${answer_id}/`)
+                .then((response) => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
 
         toggleDropdown() {
             this.showDropdown = !this.showDropdown;

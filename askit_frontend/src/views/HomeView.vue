@@ -29,7 +29,7 @@
                     </div>
                     <hr class="border-gray-400 mb-2">
 
-                    <a v-for="notification in notifications.reverse().slice(0,4)" :key="notification.id">
+                    <a v-for="notification in notifications" :key="notification.id">
                         <div class="grid grid-rows-2 relative">
                             <a class="self-start truncate text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400 w-11/12"
                                :href="`${notification.link}`">
@@ -60,7 +60,7 @@
                     <h3 class="text-xl text-left font-bold my-5 ml-5">Questions
                         <i class="fa fa-question-circle-o scale-100" aria-hidden="true"></i>
                     </h3>
-                    <a v-for="question in questions.slice(0,4)" :key="question.id" :href="`/question/${question.id}`"
+                    <a v-for="question in questions" :key="question.id" :href="`/question/${question.id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white dark:bg-gray-800 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white "
                        style="box-shadow: .13em .13em;">
                         <div
@@ -117,7 +117,7 @@
                     <h3 class="text-xl text-left font-bold my-5 ml-10">Answers
                         <i class="fa fa-pencil scale-100" aria-hidden="true"></i>
                     </h3>
-                    <a v-for="answer in answers.slice(0,4)" :key="answers.id" :href="`/question/${answer.question_id}`"
+                    <a v-for="answer in answers" :key="answers.id" :href="`/question/${answer.question_id}`"
                        class=" transition ease-in-out delay-75 hover:scale-[1.02] duration-300 grid grid-cols-[100px_1fr_95px] mx-5 mb-[10px] box-content min-h-[98px] rounded-2xl bg-white dark:bg-gray-800 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white "
                        style="box-shadow: .13em .13em;">
                         <div
@@ -208,6 +208,9 @@ export default {
             url: "home_page/notifs",
         }).then((response) => {
             this.notifications = response.data;
+            // only show the first 4 notifications
+            if (this.notifications.length > 3)
+                this.notifications = this.notifications.slice(0, 3);
         }).catch((error) => {
             console.log(error);
         });
@@ -221,6 +224,11 @@ export default {
             this.questions.sort((a, b) => new Date(b.pub_date) - new Date(a.pub_date))
             this.popQuestions = this.questions
             this.allQuestions = this.questions
+
+            // only show the first 4 questions
+            if (this.questions.length > 3)
+                this.questions = this.questions.slice(0, 4);
+
             //this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 7))
             //this.popQuestions = this.popQuestions.sort((a, b) => b.views - a.views).slice(0, 3)
         })
@@ -232,6 +240,9 @@ export default {
             url: "home_page/vAnswers",
         }).then((response) => {
             this.answers = response.data;
+            // only show the first 3 answers
+            if (this.answers.length > 3)
+                this.answers = this.answers.slice(0, 3);
         }).catch((error) => {
             console.log(error);
         });

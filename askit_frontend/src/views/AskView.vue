@@ -151,25 +151,27 @@ export default {
 <template>
 
   <!-- HTML code for the pop-up window -->
-  <div class="fixed z-10 inset-0 overflow-y-auto" v-if="showSuggestQuestion">
-    <div class="flex items-center justify-center min-h-screen">
-      <div class="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-        <h2 class="text-lg font-medium mb-4">Is this question the same as your question?</h2>
-        <p class="mb-4">Title: {{ suggestQuestion.title }}</p>
-        <p class="mb-4">Summary: {{ suggestQuestion.summary }}</p>
-        <p class="mb-4">Explanation: {{ suggestQuestion.explanation }}</p>
-        <p class="mb-4">Tags: {{ suggestQuestion.tags }}</p>
-        <div class="flex">
-          <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="acceptSuggestion">
-            Yes, DELETE my question and view that question
-          </button>
-          <button class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-1" v-on:click="denySuggestion">
-            No
-          </button>
-        </div>
+<!-- HTML code for the pop-up window -->
+<div class="fixed z-10 inset-0 overflow-y-auto dark:bg-gray-900" v-if="showSuggestQuestion">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="bg-white dark:bg-gray-800 w-full max-w-md p-6 rounded-lg shadow-lg">
+      <h2 class="text-lg font-medium mb-4 dark:text-white">Is this question the same as your question?</h2>
+      <p class="mb-4 dark:text-gray-300">Title: {{ suggestQuestion.title }}</p>
+      <p class="mb-4 dark:text-gray-300">Summary: {{ suggestQuestion.summary }}</p>
+      <p class="mb-4 dark:text-gray-300">Explanation: {{ suggestQuestion.explanation }}</p>
+      <p class="mb-4 dark:text-gray-300">Tags: {{ suggestQuestion.tags }}</p>
+      <div class="flex">
+        <button class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded m-1 dark:bg-red-600" v-on:click="acceptSuggestion">
+          Yes, DELETE my question and view that question
+        </button>
+        <button class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded m-1 dark:bg-blue-600" v-on:click="denySuggestion">
+          No
+        </button>
       </div>
     </div>
   </div>
+</div>
+
 
 
   <div class=" dark:bg-gray-900 flex">

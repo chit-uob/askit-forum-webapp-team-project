@@ -163,7 +163,7 @@
                 </div>
                 <br>
                 <div v-if="all_comments.length === 0"
-                     class="mb-4 flex items-center rounded-lg dark:text-black dark:bg-blue-100 bg-red-400 p-2 shadow">
+                     class="mb-4 flex items-center rounded-lg dark:text-black dark:bg-blue-100 p-2 shadow">
                     <p class="dark:text-black">No comments yet.</p>
                 </div>
 

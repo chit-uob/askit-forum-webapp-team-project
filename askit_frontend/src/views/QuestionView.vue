@@ -106,12 +106,17 @@
                             }}</span>
                     </div>
                     <div>
-                        <p class="mb-2 p-2 break-words"><span class="font-bold">Explanation:</span> <br>
-                        </p>
-                        <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert" v-html="question.explanationHTML"></div>
-                        <p class="mb-2 p-2 break-words"><span class="font-bold">Tried what:</span> <br>
-                        </p>
-                        <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert" v-html="question.tried_whatHTML"></div>
+                        <div class="mb-2 p-2 break-words">
+                            <span class="font-bold">Explanation:</span>
+                            <br>
+                            <div class="prose prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert bg-sky-50/30 dark:bg-sky-900/30"
+                                 v-html="question.explanationHTML"></div>
+                        </div>
+                        <div class="mb-2 p-2 break-words">
+                            <span class="font-bold">Tried what:</span> <br>
+                            <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert bg-sky-50/30 dark:bg-sky-900/30"
+                                 v-html="question.tried_whatHTML"></div>
+                        </div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Summary:</span> <br>
                             {{ question.summary }}
                         </p>
@@ -171,7 +176,8 @@
                                     }}</p>
                             </div>
                             <div class="flex items-center justify-between">
-                                <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
+                                <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">
+                                    Solution</p>
                                 <p class="text-lg" style="word-break: break-word">{{ com.content }}</p>
                                 <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)"
                                         class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
@@ -224,7 +230,9 @@
                                     v-on:click="upvoteAnswer(answer.id)">
                                 <i class="fa fa-arrow-up"></i>
                             </button>
-                            <span class="mr-2 text-lg font-bold dark:text-white text-gray-600">{{ answer.score }}</span>
+                            <span class="mr-2 text-lg font-bold dark:text-white text-gray-600">{{
+                                answer.score
+                                }}</span>
                             <button
                                     class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                                     :class="{ ' border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
@@ -263,9 +271,11 @@
                                             <button @click="editItem"
                                                     class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                             >
-                                                <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20"
+                                                <svg style="color: blue" xmlns="http://www.w3.org/2000/svg"
+                                                     width="20"
                                                      height="20"
-                                                     fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16">
+                                                     fill="currentColor" class="mr-3 bi bi-pencil"
+                                                     viewBox="0 0 16 16">
                                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0
                     1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0
                     1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"

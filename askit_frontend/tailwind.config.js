@@ -6,7 +6,15 @@ module.exports = {
         "./src/**/*.{js,ts,jsx,tsx,vue}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        maxWidth: '100vw',
+                    }
+                }
+            }
+        },
     },
     plugins: [
         require('@tailwindcss/typography'),

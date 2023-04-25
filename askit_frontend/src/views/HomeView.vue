@@ -208,6 +208,9 @@ export default {
             url: "home_page/notifs",
         }).then((response) => {
             this.notifications = response.data;
+            // only show the first 4 notifications
+            if (this.notifications.length > 3)
+                this.notifications = this.notifications.slice(0, 3);
         }).catch((error) => {
             console.log(error);
         });
@@ -221,6 +224,11 @@ export default {
             this.questions.sort((a, b) => new Date(b.pub_date) - new Date(a.pub_date))
             this.popQuestions = this.questions
             this.allQuestions = this.questions
+
+            // only show the first 4 questions
+            if (this.questions.length > 3)
+                this.questions = this.questions.slice(0, 4);
+
             //this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 7))
             //this.popQuestions = this.popQuestions.sort((a, b) => b.views - a.views).slice(0, 3)
         })
@@ -232,6 +240,9 @@ export default {
             url: "home_page/vAnswers",
         }).then((response) => {
             this.answers = response.data;
+            // only show the first 3 answers
+            if (this.answers.length > 3)
+                this.answers = this.answers.slice(0, 3);
         }).catch((error) => {
             console.log(error);
         });

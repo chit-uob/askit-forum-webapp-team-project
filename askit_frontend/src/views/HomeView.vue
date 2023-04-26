@@ -83,9 +83,9 @@
                                 <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></div>
                             </div>
                             <div class="flex" v-if="(question.tags[0] != '') && (question.tags.length != 0)">
-                                <div v-for="tag in question.tags" class=" self-end mr-[2px]">{{ question.tags }}(<span
-                                        class=" text-cyan-500">╥</span>_<span
-                                        class=" text-cyan-500">[{{ tag }}]</span>)
+                                <div v-for="tag in question.tags" class=" self-end mr-[2px]">
+<!--                                        class=" inline  text-xs mr-[2px] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">-->
+                                        [{{ tag }}]
                                 </div>
                             </div>
                             <div class="flex" v-if="(question.tags[0] == '') || (question.tags.length == 0)">

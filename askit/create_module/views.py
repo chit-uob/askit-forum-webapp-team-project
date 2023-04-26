@@ -22,3 +22,17 @@ def new_module(request):
         m.members.add(request.user)
         m.save()
         return JsonResponse({'title': title, 'description': description})
+
+@api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def delete_module(request, mod):
+    if request.method == 'DELETE':
+        m = Module.objects.get(title=mod)
+        if request.user.is_superuser or request.user in m.admins.all():
+            m.delete()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'You are not an admin'})
+

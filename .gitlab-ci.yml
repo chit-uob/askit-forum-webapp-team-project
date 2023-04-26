@@ -72,4 +72,4 @@ deploy-git:
   script:
     - scp -o StrictHostKeyChecking=no -i $RSA -r . $VM_USER@$VM:~/team-project-deployment
     - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker compose -f ~/team-project-deployment/docker-compose.yml up -d"
-    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker image prune"
+    - ssh -o StrictHostKeyChecking=no -i $RSA $VM_USER@$VM "docker image prune -f"

@@ -62,6 +62,7 @@ class Answer(models.Model):
     upvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="answer_upvotes")
     downvotes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="answer_downvotes")
     is_solution = models.BooleanField(default=False)
+    from_admin = models.BooleanField(default=False)
 
     def __str__(self):
         return self.content

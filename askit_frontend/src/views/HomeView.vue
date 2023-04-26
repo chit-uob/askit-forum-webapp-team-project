@@ -29,12 +29,15 @@
                     </div>
                     <hr class="border-gray-400 mb-2">
 
-                    <a v-for="notification in notifications" :key="notification.id" :href="`${notification.link}`">
-                        <div class="grid grid-rows-2">
-
-                            <div class="self-start truncate self-start text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
+                    <a v-for="notification in notifications" :key="notification.id">
+                        <div class="grid grid-rows-2 relative">
+                            <a class="self-start truncate text-base leading-[1.15] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400 w-11/12"
+                               :href="`${notification.link}`">
                                 {{ notification.detail }}
-                            </div>
+                            </a>
+                            <button class="absolute right-0 top-0" v-on:click="deleteNotification(notification.id)">
+                                delete
+                            </button>
                             <div class="self-end text-xs font-light">{{ formatPubDate(notification.date) }}</div>
                         </div>
                         <hr class="border-gray-400">
@@ -43,9 +46,10 @@
                 </div>
                 <div class="bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md p-5"
                      style="box-shadow: gray.27em .27em;">
-                     <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center">
                         <span class="text-xl text-center font-bold mb-5">Calendar</span>
-                        <i class="fa fa-calendar text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
+                        <i class="fa fa-calendar text-xl text-center font-bold mb-5 ml-2 scale-150"
+                           aria-hidden="true"></i>
                     </div>
                     <hr class="border-gray-400 mb-5">
                 </div>
@@ -160,6 +164,8 @@
                 </div>
 
             </div>
+          <br>
+
 
 
         </div>
@@ -191,7 +197,6 @@ export default {
             this.user = response.data;
             this.user_full_name = response.data.full_name;
             this.user_username = response.data.username;
-            console.log("got user")
             // this.questions = response.data.questions;
             // this.answers = response.data.answers;
 
@@ -203,6 +208,9 @@ export default {
             url: "home_page/notifs",
         }).then((response) => {
             this.notifications = response.data;
+            // only show the first 4 notifications
+            if (this.notifications.length > 3)
+                this.notifications = this.notifications.slice(0, 3);
         }).catch((error) => {
             console.log(error);
         });
@@ -216,6 +224,11 @@ export default {
             this.questions.sort((a, b) => new Date(b.pub_date) - new Date(a.pub_date))
             this.popQuestions = this.questions
             this.allQuestions = this.questions
+
+            // only show the first 4 questions
+            if (this.questions.length > 3)
+                this.questions = this.questions.slice(0, 4);
+
             //this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 7))
             //this.popQuestions = this.popQuestions.sort((a, b) => b.views - a.views).slice(0, 3)
         })
@@ -227,11 +240,24 @@ export default {
             url: "home_page/vAnswers",
         }).then((response) => {
             this.answers = response.data;
+            // only show the first 3 answers
+            if (this.answers.length > 3)
+                this.answers = this.answers.slice(0, 3);
         }).catch((error) => {
             console.log(error);
         });
     },
     methods: {
+        deleteNotification(notificationId) {
+            axiosClient({
+                method: "delete",
+                url: "home_page/delete_notification/" + notificationId + "/"
+            }).then((response) => {
+                this.notifications = this.notifications.filter((n) => n.id !== notificationId);
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
         formatPubDate,
         formatDay,
         formatMonthYear,

@@ -64,7 +64,7 @@ class AnswerQuestionsTest(TestCase):
                              "tags": [], "score": 0, "views": 1, "upvote_or_downvote": "none", "comment_list": [],
                              "answer_list": [{"id": 1, "author": "testuser", "content": "test content",
                                               "pub_date": format_response_date(self.answer.pub_date), "score": 0,
-                                              "is_solution": False,
+                                              "is_solution": False, "from_admin": False,
                                               "upvote_or_downvote": "none"}]}
         self.assertEqual(expected_response, response_json)
 
@@ -87,7 +87,7 @@ class AnswerQuestionsTest(TestCase):
                                                "pub_date": format_response_date(comment.pub_date)}],
                              "answer_list": [{"id": 1, "author": "testuser", "content": "test content",
                                               "pub_date": format_response_date(self.answer.pub_date), "score": 0,
-                                              "is_solution": False,
+                                              "is_solution": False, "from_admin": False,
                                               "upvote_or_downvote": "none"}]}
         self.assertEqual(expected_response, response_json)
 
@@ -110,7 +110,7 @@ class AnswerQuestionsTest(TestCase):
                                 "comment_list": [],
                                 "answer_list": [{"id": 1, "author": "testuser", "content": "test content",
                                                     "pub_date": format_response_date(self.answer.pub_date), "score": 0,
-                                                    "is_solution": False,
+                                                    "is_solution": False, "from_admin": False,
                                                     "upvote_or_downvote": "none"}]}
         self.assertEqual(expected_response, response_json)
 
@@ -130,7 +130,7 @@ class AnswerQuestionsTest(TestCase):
                              "tags": [], "score": 0, "views": 1, "upvote_or_downvote": "upvote", "comment_list": [],
                              "answer_list": [{"id": 1, "author": "testuser", "content": "test content",
                                               "pub_date": format_response_date(self.answer.pub_date), "score": 0,
-                                              "is_solution": False,
+                                              "is_solution": False, "from_admin": False,
                                               "upvote_or_downvote": "none"}]}
         self.assertEqual(expected_response, response_json)
 
@@ -150,7 +150,7 @@ class AnswerQuestionsTest(TestCase):
                              "tags": [], "score": 0, "views": 1, "upvote_or_downvote": "downvote", "comment_list": [],
                              "answer_list": [{"id": 1, "author": "testuser", "content": "test content",
                                               "pub_date": format_response_date(self.answer.pub_date), "score": 0,
-                                              "is_solution": False,
+                                              "is_solution": False, "from_admin": False,
                                               "upvote_or_downvote": "none"}]}
         self.assertEqual(expected_response, response_json)
 

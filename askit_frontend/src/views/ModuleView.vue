@@ -40,6 +40,7 @@
                     </div>
 
                 </div>
+                <h1 v-if="popQuestions.length == 0" class="text-center font border-2 p-2 md:mx-10 mx-4 rounded-lg bg-gray-100 text-2xl text-gray-500 shadow-inner">No questions found</h1>
                 <a v-if="popRender" v-for="question in popQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
                    class="pl-2 hidden focus:ring-4 focus:outline-none dark:hover:bg-gray-700 dark:bg-gray-800 dark:border-gray-800 dark:border-0 dark:shadow-[5px_5px_0px_0px_#ffffff] focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
@@ -123,7 +124,7 @@
             </div>
             <div>
                 <h2 class="pl-10 text-2xl mt-16 mb-6">All questions</h2>
-
+                <h1 v-if="allQuestions.length == 0" class="text-center border-2 p-2 md:mx-10 mx-4 rounded-lg bg-gray-100 text-2xl text-gray-500 shadow-inner">No questions found</h1>
                 <a v-if="allRender" v-for="question in allQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
                    class="pl-2 transition group focus:ring-4 dark:hover:bg-gray-700 dark:border-0 dark:shadow-[5px_5px_0px_0px_#ffffff] dark:bg-gray-800 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
@@ -259,7 +260,6 @@
 </template>
 
 <script>
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import axiosClient from "@/views/axiosClient";
 
 export default {
@@ -356,6 +356,22 @@ export default {
         tagSelected(tag) {
             return this.tagFilter.has(tag)
         },
+        deleteModule() {
+            const confirm = window.confirm("Are you sure you want to delete this module? This action cannot be undone.")
+            if (!confirm) {
+                return
+            }
+            axiosClient({
+                method: "delete",
+                url: `/create_module/delete/${this.$route.params.mod}/`,
+            })
+                .then((response) => {
+                    window.location.href = "/"
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     }
 };
 </script>

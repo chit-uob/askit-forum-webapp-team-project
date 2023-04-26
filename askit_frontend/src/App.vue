@@ -16,7 +16,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </div>
-                    <input type="search" id="default-search"
+                    <input type="search" id="default-search" ref="search"
                            class="transition focus:ring-4 focus:outline-none block w-full h-[45px] rounded-lg border-2 border-black dark:border-white bg-white dark:bg-black p-4 pl-10 text-sm text-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-300 focus:ring-blue-500 dark:focus:ring-blue-300"
                            placeholder="Search questions" v-model="searchTerm" required>
                     <button type="submit"
@@ -43,7 +43,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
         </button>
     </div>
     <div class="flex text-black dark:text-white">
-        <div class="flex-col justify-items-center bg-cyan-50 dark:bg-slate-900 w-[175px] md:block border-r-[3px] border-black dark:border-white"
+        <div tabindex="0" ref="modules"  class="focus:ring-4 focus:outline-none focus:ring-inset focus:ring-blue-400 flex-col justify-items-center bg-cyan-50 dark:bg-slate-900 w-[175px] md:block border-r-[3px] border-black dark:border-white"
              v-if="enable" :class="{ hidden: !showModule }">
             <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
             <a v-for="module in modules"
@@ -125,6 +125,20 @@ export default {
         }
     },
     methods: {
+        handleKeyboardShortcuts(event) {
+            if (event.altKey && (event.key === 'K' || event.key === 'k')) {
+              this.$refs.search.focus()
+            }
+            if (event.altKey && (event.key === 'M' || event.key === 'm')) {
+                this.$refs.modules.focus()
+            }
+            if (event.altKey && (event.key === 'H' || event.key === 'h')) {
+                this.$router.push({path: '/'})
+            }
+            if (event.altKey && (event.key === 'Q' || event.key === 'q') && this.$route.params.mod) {
+                this.$router.push({path: '/ask/'+this.$route.params.mod})
+            }
+        },    
         toggleModule() {
             this.showModule = !this.showModule;
         },
@@ -183,6 +197,8 @@ export default {
     }
     ,
     created() {
+        window.addEventListener('keydown', this.handleKeyboardShortcuts)
+
         if (this.$store.state.isAuthenticated) {
             this.loadModules()
         }
@@ -225,6 +241,10 @@ export default {
         document.querySelectorAll('.tracking-tight').forEach(e => e.classList.remove('tracking-tight'));            
         document.body.classList.add('tracking-' + localStorage.getItem("letterSpacing"))
     },
+    beforeDestroy() {
+        console.log("before destroy")
+  window.removeEventListener('keydown', this.handleKeyboardShortcuts)
+},
 }
 
 

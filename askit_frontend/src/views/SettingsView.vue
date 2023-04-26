@@ -7,40 +7,35 @@
             </div>
             <div class="flex border-gray-200 px-9 mb-6 rounded-md">
                 <button
-                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none focus:bg-blue-300 hover:bg-blue-300 mr-2"
-                        :class="{ 'border-indigo-500': activeTab === 'my-details' }"
-                        style="box-shadow: .13em .13em;"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'my-details' }"
                         @click="activeTab = 'my-details'"
                 >
                     My Details
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
-                        :class="{ 'border-indigo-500': activeTab === 'password' }"
-                        style="box-shadow: .13em .13em;"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4 focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'password' }"
                         @click="activeTab = 'password'"
                 >
                     Password
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
-                        :class="{ 'border-indigo-500': activeTab === 'preference' }"
-                        style="box-shadow: .13em .13em;"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'preference' }"
                         @click="activeTab = 'preference'"
                 >
                     Preference
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
-                        :class="{ 'border-indigo-500': activeTab === 'accessibility' }"
-                        style="box-shadow: .13em .13em;"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'accessibility' }"
                         @click="activeTab = 'accessibility'"
                 >
                     Accessibility
                 </button>
                 <button
-                        class="py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none  focus:bg-blue-300 hover:bg-blue-300 mr-2"
-                        style="box-shadow: .13em .13em;"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4 focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
                         @click="logout"
                 >
                     Logout
@@ -54,14 +49,52 @@
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="name">
                             Name:
                         </label>
-                        <p class="font-medium mb-2">Student Name</p>
+                        <p class="font-medium mb-2">{{ user_fullname }}</p>
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="email">
                             Email
                         </label>
-                        <p class="italic mb-2"> student@xyz.com </p>
+                        <p class="italic mb-2"> {{ user_email }} </p>
                     </div>
+                  <button @click="toggleForm"
+                                class="transition focus:ring-4 focus:ring-pink-400 mb-4 bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                type="button"
+                        >
+                            Edit Name
+                        </button>
+                  <div v-show="showForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="first-name">
+                            First Name
+                        </label>
+                        <input
+                                class="transition focus:ring-4 focus:ring-blue-400 appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                v-model="first_name"
+                                type="text"
+                                placeholder="Enter first name"
+                        />
+                    </div>
+                  <div class="mb-4">
+                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="last-name">
+                            Last Name
+                        </label>
+                        <input
+                                class="transition focus:ring-4 focus:ring-blue-400 appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                v-model="last_name"
+                                type="text"
+                                placeholder="Enter last name"
+                        />
+                    </div>
+                  <button :disabled="isNameFormComplete" v-on:click="changeName"
+                                class="transition focus:ring-4  focus:ring-pink-400 bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                type="submit"
+                        >
+                            Save Changes
+                        </button>
+                  </div>
+                  <label v-if="success" class="text-green-600 pl-4">{{ successMessageName }}</label>
+                  <label v-if="invalid" class="text-red-600 pl-4">{{ errorMessageName }}</label>
                 </form>
             </div>
             <div v-if="activeTab === 'password'" class="px-10">
@@ -72,7 +105,7 @@
                             Current Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                class="transition focus:ring-4 focus:ring-blue-400 appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
                                 v-model="old_password"
                                 type="password"
                                 placeholder="********"
@@ -83,7 +116,7 @@
                             New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                class="transition focus:ring-4 focus:ring-blue-400 appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
                                 v-model="new_password"
                                 type="password"
                                 placeholder="********"
@@ -94,7 +127,7 @@
                             Confirm New Password
                         </label>
                         <input
-                                class="appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
+                                class="transition focus:ring-4 focus:ring-blue-400 appearance-none border rounded w-full py-2 px-3 hover:bg-gray-100 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-800 dark:hover:bg-gray-700"
                                 v-model="conf_password"
                                 type="password"
                                 placeholder="********"
@@ -102,7 +135,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <button :disabled="isFormComplete"
-                                class="bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                class="transition focus:ring-4  focus:ring-pink-400 bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit"
                         >
                             Save Changes
@@ -120,7 +153,7 @@
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="notification-toggle">
                             Receive Notifications
                         </label>
-                        <input class="mr-2 leading-tight hue-rotate-[90deg]" type="checkbox" id="notification-toggle">
+                        <input class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 leading-tight " type="checkbox" id="notification-toggle">
                         <label class="text-sm text-gray-700 dark:text-gray-200" for="notification-toggle">
                             Enable email notifications for new messages
                         </label>
@@ -131,7 +164,7 @@
                         </label>
                         <div class="relative">
                             <select
-                                    class="block appearance-none w-full bg-white dark:bg-black border border-gray-400 dark:border-gray-600 focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                    class="block transition focus:ring-4 focus:outline-none focus:ring-blue-400 appearance-none w-full bg-white dark:bg-black border border-gray-400 dark:border-gray-600 focus:bg-gray-100 dark:focus:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                                     id="theme-select" v-model="themeSelect">
                                 <option value="default">Default</option>
                                 <option value="dark">Dark</option>
@@ -147,8 +180,8 @@
                         </div>
                     </div>
                     <button
-                            class="bg-blue-500 focus:bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit" v-on:click="changeTheme">
+                            class="transition focus:ring-4 focus:ring-pink-400 bg-blue-500 focus:bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="button" v-on:click="changeTheme">
                         Save Settings
                     </button>
                 </form>
@@ -226,12 +259,20 @@ export default {
         return {
             activeTab: 'my-details', // Set the default active tab
             shouldDeleteContent: false,
+            first_name: '',
+            last_name: '',
+            user_fullname: '',
+            user_email: '',
             old_password: '',
             new_password: '',
             conf_password: '',
             success: false,
+            successName: false,
+            successMessageName: '',
             successMessage: '',
             errorMessage: '',
+            errorMessageName: '',
+            invalidName: false,
             invalid: false,
             largeFontSize: localStorage.getItem("largeFont") === "true",
             readableFont: localStorage.getItem("readableFont") === "true",
@@ -245,6 +286,7 @@ export default {
             themeSelect: localStorage.getItem("theme") || "default",
             pageReload: localStorage.getItem("pageReload"),
             render: true,
+            showForm: false,
 
         }
     },
@@ -256,9 +298,32 @@ export default {
                 return "color: #3b82f6;"
             }
         },
+        changeName() {
+          axiosClient.post('/settings/change_username/', {
+            first_name: this.first_name,
+            last_name: this.last_name,
+          })
+              .then((response) => {
+                console.log(response);
+                this.successName = true
+                    this.invalidName = false
+                    this.successMessageName = "Username successfully changed!"
+              })
+              .catch((error) => {
+                console.log(error);
+                this.successName = false
+                this.invalidName = true
+                this.errorMessageName = "Unable to change username"
+                this.textInput = "border-2 p-2 w-full rounded text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-100 border-red-500"
+              });
+        },
         changeTheme() {
+            document.body.classList.remove("light", "dark", "default")
             localStorage.setItem("theme", this.themeSelect || "default")
-            window.location.reload()
+            document.body.classList.add(this.themeSelect || "default")
+            //window.location.reload()
+            this.render=false
+            this.render=true
         },
         toggleLargeFontSize() {
             this.largeFontSize = !this.largeFontSize
@@ -273,6 +338,9 @@ export default {
             document.body.classList.add(this.readableFont? 'font-[sans-serif]': 'font-sans')
             this.render=false
             this.render=true
+        },
+        toggleForm() {
+          this.showForm = !this.showForm
         },
         toggleGrayscale() {
             document.body.classList.remove('grayscale')
@@ -365,7 +433,10 @@ export default {
     computed: {
         isFormComplete() {
             return (this.old_password === '') || (this.new_password === '') || (this.conf_password === '');
-        }
+        },
+      isNameFormComplete() {
+          return (this.first_name === '') || (this.last_name === '');
+      }
     },
     mounted(){
         document.body.classList.add('transition')
@@ -373,6 +444,12 @@ export default {
             this.activeTab = 'accessibility'
             localStorage.setItem("pageReload", false)
         }
+
+        axiosClient.get("home_page/user_prof").then((response) => {
+            this.user = response.data;
+            this.user_fullname = response.data.full_name;
+            this.user_email = response.data.username;
+        })
     }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none crypto_bg dark:bg-slate-900">
+  <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none crypto_bg dark:bg-slate-900 h-screen">
     <div class="py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 class="block mb-2 text-3xl font-semibold">Create Course</h1>
@@ -9,11 +9,11 @@
           <label for="default-input" class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block mb-2 text-sm font-medium">Course
             Name</label>
           <input type="text" id="default-input" v-model="moduleTitle"
-                 class="transition focus:ring-4 focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                 class="transition focus:ring-4 focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:text-white">
         </div>
         <label for="message" class="block mb-2 text-sm font-medium">Course description</label>
         <textarea id="message" rows="16" v-model="moduleExplanation"
-                  class="transition focus:ring-4 focus:outline-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                  class="transition focus:ring-4 focus:outline-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                   placeholder="Description here..."></textarea>
 
         <button v-on:click="addModule" type="button"
@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import axiosClient from "@/views/axiosClient";
 
 export default {

@@ -106,13 +106,21 @@
                             }}</span>
                     </div>
                     <div>
-                        <p class="mb-2 p-2 break-words"><span class="font-bold">Explanation:</span> <br>
-                            {{ question.explanation }}
-                        </p>
-                        <p class="mb-2 p-2 break-words"><span class="font-bold">Tried what:</span> <br>
-                            {{ question.tried_what }}</p>
+                        <span class="font-bold">Explanation:</span>
+                        <br>
+                        <div class="mb-2 p-2 break-words border border-gray-200 dark:border-gray-600 rounded-md">
+
+                            <div class="prose prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                 v-html="question.explanationHTML"></div>
+                        </div>
+                        <span class="font-bold">Tried what:</span> <br>
+                        <div class="mb-2 p-2 break-words border border-gray-200 dark:border-gray-600 rounded-md">
+                            <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                 v-html="question.tried_whatHTML"></div>
+                        </div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Summary:</span> <br>
-                            {{ question.summary }}</p>
+                            {{ question.summary }}
+                        </p>
                         <div class="flex">
                             <div v-for="tag in question.tags" class="mr-2">
                                 <button
@@ -141,9 +149,9 @@
                     <form @submit.prevent="addComment" class="w-5/6">
                         <br>
                         <div>
-                            <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="commentInput"
-                                         contentType="text">
-                            </QuillEditor>
+                            <textarea v-model="commentInput"
+                                      class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-24">
+                            </textarea>
                         </div>
                         <br>
                         <button
@@ -155,7 +163,7 @@
                 </div>
                 <br>
                 <div v-if="all_comments.length === 0"
-                     class="mb-4 flex items-center rounded-lg dark:text-black dark:bg-blue-100 bg-red-400 p-2 shadow">
+                     class="mb-4 flex items-center rounded-lg dark:text-black dark:bg-blue-100 p-2 shadow">
                     <p class="dark:text-black">No comments yet.</p>
                 </div>
 
@@ -169,8 +177,11 @@
                                     }}</p>
                             </div>
                             <div class="flex items-center justify-between">
-                                <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">Solution</p>
-                                <p class="text-lg">{{ com.content }}</p>
+                                <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">
+                                    Solution</p>
+                                <!--                                <p class="text-lg" style="word-break: break-word">{{ com.content }}</p>-->
+                                <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                     v-html="com.contentHTML"></div>
                                 <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)"
                                         class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
                                     Delete comment
@@ -185,7 +196,7 @@
 
             <div class="flex justify-center px-2">
                 <button
-                        class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300"
+                        class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 ml-4 w-5/6 rounded border-gray-300 bg-blue-100 px-4 py-2 font-sans font-bold text-black hover:bg-blue-300 dark:bg-blue-700 dark:text-white"
                         @click="showForm = !showForm">Answer this question
                 </button>
             </div>
@@ -193,9 +204,9 @@
                 <form @submit.prevent="addAnswer" class="w-5/6">
                     <br>
                     <div>
-                        <QuillEditor theme="snow" toolbar="full" name="content" v-model:content="answerInput"
-                                     contentType="text">
-                        </QuillEditor>
+                        <textarea v-model="answerInput"
+                                  class="transition focus:ring-2 focus:outline-none  block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 p-2.5 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:text-white h-48">
+                        </textarea>
                     </div>
                     <br>
                     <button
@@ -222,7 +233,9 @@
                                     v-on:click="upvoteAnswer(answer.id)">
                                 <i class="fa fa-arrow-up"></i>
                             </button>
-                            <span class="mr-2 text-lg font-bold dark:text-white text-gray-600">{{ answer.score }}</span>
+                            <span class="mr-2 text-lg font-bold dark:text-white text-gray-600">{{
+                                answer.score
+                                }}</span>
                             <button
                                     class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-600"
                                     :class="{ ' border-4 border-red-600': answer.upvote_or_downvote === 'downvote' }"
@@ -237,11 +250,15 @@
                                     {{ formatPubDate(answer.pub_date) }}</p>
                             </div>
                             <div class="flex items-center justify-between">
-
                                 <p v-if="answer.is_solution" class="mt-2 text-sm font-semibold text-green-500">
-                                    Solution</p>
-                                <p class="text-lg">{{ answer.content }}</p>
-
+                                    Solution
+                                </p>
+                                <p v-if="answer.from_admin" class="mt-2 text-sm font-semibold text-green-500">
+                                    From admin
+                                </p>
+                                <!--                                <p class="text-lg" style="word-break: break-word;">{{ answer.content }}</p>-->
+                                <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                     v-html="answer.contentHTML"></div>
 
                                 <div>
                                     <button v-if="user.username === answer.author"
@@ -259,9 +276,11 @@
                                             <button @click="editItem"
                                                     class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 flex justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                             >
-                                                <svg style="color: blue" xmlns="http://www.w3.org/2000/svg" width="20"
+                                                <svg style="color: blue" xmlns="http://www.w3.org/2000/svg"
+                                                     width="20"
                                                      height="20"
-                                                     fill="currentColor" class="mr-3 bi bi-pencil" viewBox="0 0 16 16">
+                                                     fill="currentColor" class="mr-3 bi bi-pencil"
+                                                     viewBox="0 0 16 16">
                                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0
                     1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0
                     1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"
@@ -296,6 +315,17 @@
                                             </button>
                                         </div>
                                     </div>
+                                    <div v-if="user.username === question.author"
+                                         class="flex items-center justify-between">
+                                        <button
+                                                class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-green-600 px-4 text-sm font-medium text-white py-2 hover:bg-green-500 focus:ring-4 focus:ring-pink-400"
+                                                type="button"
+                                                @click="markAsSolution(answer.id)">
+                                            <span>Mark as solution</span>
+                                        </button>
+
+
+                                    </div>
                                 </div>
 
 
@@ -316,7 +346,8 @@
 
 <script>
 import axiosClient from "@/views/axiosClient";
-import axios from 'axios';
+import { marked } from "marked";
+import * as DOMPurify from "dompurify";
 
 export default {
     name: "QuestionView",
@@ -334,9 +365,8 @@ export default {
                 tried_what: "Loading...",
                 summary: "Loading...",
                 pub_date: "2000-01-01T00:00:00Z",
-                // Module: {
-                //   title: ""
-                // }
+                explanationHTML: "# markdown",
+                tried_whatHTML: "# markdown",
 
             },
             answers: [],
@@ -354,9 +384,16 @@ export default {
             .then((response) => {
                 this.question = response.data;
                 this.answers = response.data.answer_list.sort((a, b) => b.score - a.score);
+                for (let answer of this.answers) {
+                    answer.contentHTML = DOMPurify.sanitize(marked(answer.content));
+                }
                 this.all_comments = response.data.comment_list;
+                for (let comment of this.all_comments) {
+                    comment.contentHTML = DOMPurify.sanitize(marked(comment.content));
+                }
                 this.module = response.data.module;
-                this.question.Module.title = response.data.Module.title;
+                this.question.explanationHTML = DOMPurify.sanitize(marked(this.question.explanation));
+                this.question.tried_whatHTML = DOMPurify.sanitize(marked(this.question.tried_what));
             })
             .catch((error) => {
                 console.log(error);
@@ -371,6 +408,15 @@ export default {
 
 
     methods: {
+        markAsSolution(answer_id) {
+            axiosClient.post(`/question/${this.$route.params.id}/accept_answer/${answer_id}/`)
+                .then((response) => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
 
         toggleDropdown() {
             this.showDropdown = !this.showDropdown;
@@ -506,8 +552,6 @@ export default {
 };
 </script>
 <script setup>
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import { formatPubDate } from "./dateUtils";
 
 </script>

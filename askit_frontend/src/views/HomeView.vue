@@ -82,9 +82,9 @@
                             <div class="flex">
                                 <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></div>
                             </div>
-                            <div class="flex" v-if="(question.tags[0] != '') && (question.tags.length != 0)">
-                                <div v-for="tag in question.tags" class=" self-end mr-[2px]">
-<!--                                        class=" inline  text-xs mr-[2px] dark:text-blue-400  dark:hover:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">-->
+                            <div class="flex-wrap inline-flex leading-none" v-if="(question.tags[0] != '') && (question.tags.length != 0)">
+                                <div v-for="tag in question.tags"
+                                        class="inline text-xs mr-[2px] dark:text-blue-400  dark:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">
                                         [{{ tag }}]
                                 </div>
                             </div>

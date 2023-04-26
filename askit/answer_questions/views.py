@@ -344,10 +344,10 @@ def accept_answer(request, question_id, answer_id):
 def delete_question(request, question_id):
     if request.method == 'DELETE':
         question = Question.objects.get(id=question_id)
-        # module_title = question.module.title
+        module_title = question.module.title
         if request.user == question.author:
             question.delete()
-            return JsonResponse({"success": True})
+            return JsonResponse({"success": True, 'module': module_title})
         else:
             return JsonResponse({"success": False, "error": "You are not the author of this question"})
 

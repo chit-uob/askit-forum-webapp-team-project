@@ -17,6 +17,8 @@ import ActivationView from "@/views/ActivationView";
 import addMembersView from "@/views/addMembersView";
 import courseSettingsVue from "@/views/CourseSettings.vue";
 import SettingsView from "@/views/SettingsView";
+import PopModuleView from "@/views/PopModuleView.vue";
+import VoteModuleView from "@/views/VoteModuleView.vue";
 
 const routes = [
     {
@@ -48,6 +50,16 @@ const routes = [
         path: '/module/:mod',
         name: 'module',
         component: ModuleView
+    },
+    {
+        path: '/module/:mod/popular',
+        name: 'popular',
+        component: PopModuleView
+    },
+    {
+        path: '/module/:mod/most-voted',
+        name: 'popular',
+        component: VoteModuleView
     },
     {
         path: '/log-in',

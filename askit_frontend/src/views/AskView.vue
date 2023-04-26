@@ -212,8 +212,8 @@ export default {
                     <button type="button" :disabled="isSummDisabled"
                             class="transition focus:outline-none  mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-500"
                             v-on:click="getSummary">
-                        Auto-generate summary
                         <i class="fa fa-list scale-100" aria-hidden="true"></i>
+                        Auto-generate summary
 
                     </button>
                     <div role="status" :class="summaryLoadWheel">
@@ -243,9 +243,9 @@ export default {
                     <button type="button" :disabled="isTagDisabled"
                             class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-600"
                             v-on:click="getTags">
-                        Auto-generate tags
                         <i class="fa fa-tags scale-100" aria-hidden="true"></i>
-
+                        Auto-generate tags
+                        
                     </button>
 
                     <div role="status" :class="tagLoadWheel">
@@ -267,9 +267,9 @@ export default {
             <div class="flex items-center">
                 <button v-on:click="addQuestion" type="button" :disabled="isAskDisabled"
                         class="transition focus:outline-none mt-3 mr-2 mb-2 rounded-lg bg-blue-700 px-5 text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:ring-4 focus:ring-pink-400 disabled:bg-slate-600">
-                    Add Question
                     <i class="fa fa-paper-plane scale-100" aria-hidden="true"></i>
-
+                    Add Question
+                    
                 </button>
                 <div role="status" :class="askLoadWheel">
                     <svg aria-hidden="true"

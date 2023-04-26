@@ -40,7 +40,7 @@
                     </div>
 
                 </div>
-                <h1 v-if="popQuestions.length == 0" class="text-center font border-2 p-2 md:mx-10 mx-4 rounded-lg bg-gray-100 text-2xl text-gray-500 shadow-inner">No questions found</h1>
+                <h1 v-if="popQuestions.length == 0" class="text-center dark:bg-gray-700 dark:text-gray-50 dark:border-gray-600 font border-2 p-2 md:mx-10 mx-4 rounded-lg bg-gray-100 text-2xl text-gray-500 shadow-inner">No questions found</h1>
                 <a v-if="popRender" v-for="question in popQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
                    class="pl-2 hidden focus:ring-4 focus:outline-none dark:hover:bg-gray-700 dark:bg-gray-800 dark:border-gray-800 dark:border-0 dark:shadow-[5px_5px_0px_0px_#ffffff] focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] transition hover:translate-x-1 duration-300 sm:grid grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
@@ -124,7 +124,7 @@
             </div>
             <div>
                 <h2 class="pl-10 text-2xl mt-16 mb-6">All questions</h2>
-                <h1 v-if="allQuestions.length == 0" class="text-center border-2 p-2 md:mx-10 mx-4 rounded-lg bg-gray-100 text-2xl text-gray-500 shadow-inner">No questions found</h1>
+                <h1 v-if="allQuestions.length == 0" class="text-center dark:bg-gray-700 dark:text-gray-50 dark:border-gray-600 border-2 p-2 md:mx-10 mx-4 rounded-lg bg-gray-100 text-2xl text-gray-500 shadow-inner">No questions found</h1>
                 <a v-if="allRender" v-for="question in allQuestions" :key="question.id"
                    :href="`/question/${question.id}`"
                    class="pl-2 transition group focus:ring-4 dark:hover:bg-gray-700 dark:border-0 dark:shadow-[5px_5px_0px_0px_#ffffff] dark:bg-gray-800 focus:outline-none focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000]  hover:translate-x-1 sm:grid hidden grid-cols-[100px_1fr_90px] md:mx-10 mb-[8px] box-content min-h-[90px] rounded-2xl  bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
@@ -241,8 +241,8 @@
             <div class=" mt-3 rounded-lg border-[3px] dark:bg-gray-800 border-black p-2 " style="box-shadow: .2em .2em;">
                 <div class="mb-2 text-center">
                 <div style="display: inline-block; margin-left: 5px;">
-                    <span>Tag filter</span>
-                    <i class="fa fa-filter text-xl text-center font-bold mb-5 ml-2 scale-150" aria-hidden="true"></i>
+                    <i class="fa fa-filter text-xl text-center font-bold mb-5 mr-2 scale-150" aria-hidden="true"></i>
+                    <span>Filter by tags</span>
                 </div>
                 </div>
 

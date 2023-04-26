@@ -1,35 +1,35 @@
 <template v-if="render" class="transition">
-    <div class="bg-pink-50 dark:bg-gray-900 h-full px-10 pb-20">
+    <div class="bg-pink-50 dark:bg-gray-900 h-full md:px-10 pb-20">
         <div class="min-h-screen">
-            <div class="flex items-center mb-1 px-10 py-10">
+            <div class="flex items-center mb-1 md:px-10 px-3 py-10">
                 <br><br>
                 <h1 class="text-5xl font-bold">Settings</h1>
             </div>
-            <div class="flex border-gray-200 px-9 mb-6 rounded-md flex-wrap">
+            <div class="flex border-gray-200 md:px-9 px-4 gap-1 mb-6 rounded-md flex-wrap">
                 <button
-                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
-                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'my-details' }"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset  shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'my-details', 'dark:shadow-[2px_2px_0px_0px_#ffffff]': activeTab !== 'my-details' }"
                         @click="activeTab = 'my-details'"
                 >
                     My Details
                 </button>
                 <button
-                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4 focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
-                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'password' }"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset shadow-[2px_2px_0px_0px_#000000] focus:ring-4 focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'password', 'dark:shadow-[2px_2px_0px_0px_#ffffff]': activeTab !== 'password' }"
                         @click="activeTab = 'password'"
                 >
                     Password
                 </button>
                 <button
-                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
-                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'preference' }"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset  shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'preference', 'dark:shadow-[2px_2px_0px_0px_#ffffff]': activeTab !== 'preference' }"
                         @click="activeTab = 'preference'"
                 >
                     Preference
                 </button>
                 <button
-                        class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
-                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'accessibility' }"
+                        class="transition hover:-translate-y-[2px] focus:ring-inset  shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
+                        :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'accessibility', 'dark:shadow-[2px_2px_0px_0px_#ffffff]': activeTab !== 'accessibility' }"
                         @click="activeTab = 'accessibility'"
                 >
                     Accessibility
@@ -41,7 +41,7 @@
                     Logout
                 </button>
             </div>
-            <div v-if="activeTab === 'my-details'" class="px-10">
+            <div v-if="activeTab === 'my-details'" class="md:px-10 px-3">
                 <h2 class="text-2xl font-bold mb-2">My Details</h2>
                 <br>
                 <form>
@@ -103,7 +103,7 @@
                     Delete Account
                 </button>
             </div>
-            <div v-if="activeTab === 'password'" class="px-10">
+            <div v-if="activeTab === 'password'" class="md:px-10 px-3">
                 <h2 class="text-2xl font-bold mb-4">Change Password</h2>
                 <form @submit.prevent="submitForm">
                     <div class="mb-4">
@@ -152,7 +152,7 @@
                 </form>
             </div>
 
-            <div v-if="activeTab === 'preference'" class="px-10">
+            <div v-if="activeTab === 'preference'" class="md:px-10 px-3">
                 <h2 class="text-2xl font-bold mb-4">Preference Settings</h2>
                 <form>
                     <!--                    <div class="mb-4">-->
@@ -193,11 +193,11 @@
                 </form>
             </div>
 
-            <div v-if="activeTab === 'accessibility'" class="px-10">
+            <div v-if="activeTab === 'accessibility'" class="md:px-10 px-3">
                 <h2 class="text-2xl font-bold mb-4">Accessibility Options</h2>
                 <p class="mb-2">Adjust the following settings to enhance the accessibility of this website:</p>
                 <br>
-                <div class=" rounded-lg px-16 py-8 mb-3  border-2 border-black bg-white dark:bg-gray-800 ">
+                <div class=" rounded-lg md:px-16 px-5 py-8 mb-3  border-2 border-black bg-white dark:bg-gray-800 ">
                     <div class="mb-6">Text adjustments</div>
                     <div class="flex flex-wrap gap-1">
                         <button v-on:click="toggleFont"
@@ -250,7 +250,7 @@
                         </button>
                     </div>
                 </div>
-                <div class=" rounded-lg px-16 py-6  border-2 border-black bg-white dark:bg-gray-800 ">
+                <div class=" rounded-lg md:px-16 px-5 py-6  border-2 border-black bg-white dark:bg-gray-800 ">
                     <div class="mb-6">Colour adjustments</div>
                     <div class="flex flex-wrap gap-1">
                         <button v-on:click="toggleGrayscale"

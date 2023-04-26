@@ -48,7 +48,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
              v-if="enable" :class="{ hidden: !showModule }">
             <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
             <a v-for="module in modules"
-               class="shadow-[4px_4px_0px_0px_#000000] transition hover:translate-x-1 hover:bg-[#fff6fe] dark:hover:bg-[#240020] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black dark:border-white bg-white dark:bg-black flex h-[100px] w-[100px] justify-center"
+               class="shadow-[4px_4px_0px_0px_#000000] dark:shadow-[4px_4px_0px_0px_#ffffff] transition hover:translate-x-1 hover:bg-[#fff6fe] dark:hover:bg-[#240020] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black dark:border-white bg-white dark:bg-black flex h-[100px] w-[100px] justify-center"
                :href="'/module/' + module.title">
                 <div class="justify-center flex w-full m-2 rounded-[0.6rem] border-2 border-black dark:border-white border-dashed">
                     <p class="inline-block place-self-center text-xl tracking-[1px]">{{ module.title }}</p>
@@ -60,7 +60,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
         </div>
     </div>
 
-    <footer class="border-t-[3px] border-black  bg-sky-100 dark:bg-slate-900 p-4 shadow md:flex md:items-center md:justify-between md:p-6 text-black dark:text-white text-sm">
+    <footer class="border-t-[3px] dark:border-white border-black  bg-sky-100 dark:bg-slate-900 p-4 shadow md:flex md:items-center md:justify-between md:p-6 text-black dark:text-white text-sm">
     <span class=" sm:text-center">© 2023 <a href="#" class="hover:underline">TeamAI55</a>. All Rights Reserved.
     </span>
         <span class="sm:text-center">Alpha Project Disclaimer This server is provided by the School of Computer Science at the University of Birmingham to allow users to provide feedback on software developed by students as part of an assignment. While we take reasonable precautions, we cannot guarantee the security of the data entered into the system. Do NOT enter any real personal data (e.g., financial information or otherwise) into the system. The assignment runs until May 31st 2023, at which time the server and all associated data will be destroyed.

@@ -58,7 +58,7 @@ const routes = [
     },
     {
         path: '/module/:mod/most-voted',
-        name: 'popular',
+        name: 'most voted',
         component: VoteModuleView
     },
     {

@@ -33,7 +33,6 @@
 
 <script>
 
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import axiosClient from "@/views/axiosClient";
 
 export default {

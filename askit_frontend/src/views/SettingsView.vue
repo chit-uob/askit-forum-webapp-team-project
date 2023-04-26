@@ -149,15 +149,15 @@
             <div v-if="activeTab === 'preference'" class="px-10">
                 <h2 class="text-2xl font-bold mb-4">Preference Settings</h2>
                 <form>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="notification-toggle">
-                            Receive Notifications
-                        </label>
-                        <input class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 leading-tight " type="checkbox" id="notification-toggle">
-                        <label class="text-sm text-gray-700 dark:text-gray-200" for="notification-toggle">
-                            Enable email notifications for new messages
-                        </label>
-                    </div>
+<!--                    <div class="mb-4">-->
+<!--                        <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="notification-toggle">-->
+<!--                            Receive Notifications-->
+<!--                        </label>-->
+<!--                        <input class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 leading-tight " type="checkbox" id="notification-toggle">-->
+<!--                        <label class="text-sm text-gray-700 dark:text-gray-200" for="notification-toggle">-->
+<!--                            Enable email notifications for new messages-->
+<!--                        </label>-->
+<!--                    </div>-->
                     <div class="mb-4">
                         <label class="block text-gray-700 dark:text-gray-200 font-bold mb-2" for="theme-select">
                             Theme

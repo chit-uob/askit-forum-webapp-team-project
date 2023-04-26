@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gradient-to-r from-cyan-100 to-blue-500 dark:bg-gradient-to-r from-blue-700 to-gray-700 min-h-screen flex flex-col justify-center items-center">
-        <div class="flex items-center flex-wrap mb-8">
+      <div class="flex items-center flex-wrap mb-8">
             <h1 class="text-8xl font-bold text-center font-sans text-black mr-8">ASK.IT</h1>
             <form @submit.prevent="submitForm" class=" dark:bg-gray-900 bg-gray-100 p-8 rounded-lg shadow-md w-96">
                 <h1 class="text-3xl dark:text-blue-400 font-bold mb-8 text-center">Log in</h1>
@@ -85,6 +85,11 @@ export default {
                     localStorage.setItem("token", token)
                     localStorage.removeItem("largeFont")
                     localStorage.removeItem("theme")
+                    localStorage.removeItem("readableFont")
+                    localStorage.removeItem("letterSpacing")
+                    localStorage.removeItem("grayscale")
+                    localStorage.removeItem("invert")
+                    localStorage.removeItem("colourHue")
 
                     this.$root.loadModules()
                     this.$router.push(this.$route.query.redirect || '/')

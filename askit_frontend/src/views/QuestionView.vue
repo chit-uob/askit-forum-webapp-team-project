@@ -111,11 +111,13 @@
                         <div class="mb-2 p-2 break-words border border-gray-200 dark:border-gray-600 rounded-md">
 
                             <div class="prose prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                 :class="{ 'prose-lg': largeText }"
                                  v-html="question.explanationHTML"></div>
                         </div>
                         <span class="font-bold">Tried what:</span> <br>
                         <div class="mb-2 p-2 break-words border border-gray-200 dark:border-gray-600 rounded-md">
                             <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
+                                 :class="{ 'prose-lg': largeText }"
                                  v-html="question.tried_whatHTML"></div>
                         </div>
                         <p class="mb-2 p-2 break-words"><span class="font-bold">Summary:</span> <br>
@@ -169,7 +171,7 @@
 
                 <div v-for="com in all_comments" :key="com.id">
                     <div class="flex items-center rounded-lg dark:bg-gray-900 bg-white py-1 px-2 shadow">
-                        <div class="flex-grow">
+                        <div class="w-full">
                             <div class="flex justify-between">
                                 <p class="text-sm dark:text-gray-300 text-gray-600">Author: {{ com.author }} </p>
                                 <p class="text-right text-sm dark:text-gray-300 text-gray-600">Published: {{
@@ -180,8 +182,8 @@
                                 <p v-if="com.is_solution" class="mt-2 text-sm font-semibold text-green-500">
                                     Solution</p>
                                 <!--                                <p class="text-lg" style="word-break: break-word">{{ com.content }}</p>-->
-                                <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
-                                     v-html="com.contentHTML"></div>
+                                <div class="w-full prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert prose-p:break-words"
+                                     v-html="com.contentHTML" :class="{ 'prose-lg': largeText, 'prose-sm': !largeText }"></div>
                                 <button v-if="user.username == com.author" v-on:click="deleteComment(com.id)"
                                         class="transition focus:ring-4 focus:outline-none focus:ring-pink-400 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md">
                                     Delete comment
@@ -243,7 +245,7 @@
                                 <i class="fa fa-arrow-down"></i>
                             </button>
                         </div>
-                        <div class="flex-grow">
+                        <div class="flex-grow w-11/12">
                             <div class="flex justify-between">
                                 <p class="text-sm dark:text-gray-300 text-gray-600">Author: {{ answer.author }} </p>
                                 <p class="text-right text-sm dark:text-gray-300 text-gray-600">Published:
@@ -257,8 +259,8 @@
                                     From admin
                                 </p>
                                 <!--                                <p class="text-lg" style="word-break: break-word;">{{ answer.content }}</p>-->
-                                <div class="prose prose-sm prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert"
-                                     v-html="answer.contentHTML"></div>
+                                <div class="w-full prose prose-headings:m-1 prose-p:m-1 prose-hr:m-1 dark:prose-invert prose-p:break-words"
+                                     v-html="answer.contentHTML" :class="{ 'prose-lg': largeText, 'prose-sm': !largeText }"></div>
 
                                 <div>
                                     <button v-if="user.username === answer.author"
@@ -374,6 +376,7 @@ export default {
             all_comments: [],
             commentInput: "",
             moduleTitle: "",
+            largeText: false,
         };
     },
     mounted() {
@@ -404,6 +407,10 @@ export default {
         }).catch(error => {
             console.log(error)
         })
+
+        if (localStorage.getItem("largeFont") === "true") {
+            this.largeText = true;
+        }
     },
 
 

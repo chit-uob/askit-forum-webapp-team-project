@@ -3,7 +3,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <nav v-if="enable"
-         class="bg-teal-100 dark:bg-slate-900 px-2 sm:px-4 border-b-[3px] border-black dark:border-white h-[68px] text-black dark:text-white"
+         class="bg-teal-100 dark:bg-slate-900 px-2 sm:px-4 border-b-[3px] border-black dark:border-white text-black dark:text-white"
          id="nav-vue">
         <div class="container mx-auto flex flex-wrap items-center justify-between h-full">
             <router-link to="/" class="pl-4 transition focus:ring-4 focus:outline-none focus:ring-blue-400">
@@ -26,7 +26,7 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
                 </div>
             </form>
             <div class="w-auto" id="navbar-default">
-                <ul class="mt-4 flex flex-col p-4 md:space-x-8 md:mt-0 md:flex-row md:border-0 md:text-sm md:font-medium">
+                <ul class="flex flex-col p-4 md:space-x-8 md:mt-0 md:flex-row md:border-0 md:text-sm md:font-medium">
                     <li>
                         <a href="/settings/"
                            class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 block rounded py-2 pr-4 pl-3 text-gray-700 dark:text-gray-200 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"><i
@@ -43,7 +43,8 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
         </button>
     </div>
     <div class="flex text-black dark:text-white">
-        <div tabindex="0" ref="modules"  class="focus:ring-4 focus:outline-none focus:ring-inset focus:ring-blue-400 flex-col justify-items-center bg-cyan-50 dark:bg-slate-900 w-[175px] md:block border-r-[3px] border-black dark:border-white"
+        <div tabindex="0" ref="modules"
+             class="focus:ring-4 focus:outline-none focus:ring-inset focus:ring-blue-400 flex-col justify-items-center bg-cyan-50 dark:bg-slate-900 w-[175px] md:block border-r-[3px] border-black dark:border-white"
              v-if="enable" :class="{ hidden: !showModule }">
             <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
             <a v-for="module in modules"
@@ -127,7 +128,7 @@ export default {
     methods: {
         handleKeyboardShortcuts(event) {
             if (event.altKey && (event.key === 'K' || event.key === 'k')) {
-              this.$refs.search.focus()
+                this.$refs.search.focus()
             }
             if (event.altKey && (event.key === 'M' || event.key === 'm')) {
                 this.$refs.modules.focus()
@@ -136,9 +137,9 @@ export default {
                 this.$router.push({path: '/'})
             }
             if (event.altKey && (event.key === 'Q' || event.key === 'q') && this.$route.params.mod) {
-                this.$router.push({path: '/ask/'+this.$route.params.mod})
+                this.$router.push({path: '/ask/' + this.$route.params.mod})
             }
-        },    
+        },
         toggleModule() {
             this.showModule = !this.showModule;
         },
@@ -238,13 +239,13 @@ export default {
             document.body.classList.add('invert')
         }
         document.body.classList.add('hue-rotate-[' + localStorage.getItem("colourHue") + 'deg]')
-        document.querySelectorAll('.tracking-tight').forEach(e => e.classList.remove('tracking-tight'));            
+        document.querySelectorAll('.tracking-tight').forEach(e => e.classList.remove('tracking-tight'));
         document.body.classList.add('tracking-' + localStorage.getItem("letterSpacing"))
     },
     beforeDestroy() {
         console.log("before destroy")
-  window.removeEventListener('keydown', this.handleKeyboardShortcuts)
-},
+        window.removeEventListener('keydown', this.handleKeyboardShortcuts)
+    },
 }
 
 

@@ -20,22 +20,20 @@ def delete_account(request):
         user = request.user
 
         if should_delete_content:
-            print("delete content")
-            # # delete all questions from the user
-            # questions = Question.objects.filter(author=user)
-            # for question in questions:
-            #     question.delete()
-            # # delete all answers from the user
-            # answers = Answer.objects.filter(author=user)
-            # for answer in answers:
-            #     answer.delete()
-            # # delete all comments from the user
-            # comments = Comment.objects.filter(author=user)
-            # for comment in comments:
-            #     comment.delete()
+            # delete all questions from the user
+            questions = Question.objects.filter(author=user)
+            for question in questions:
+                question.delete()
+            # delete all answers from the user
+            answers = Answer.objects.filter(author=user)
+            for answer in answers:
+                answer.delete()
+            # delete all comments from the user
+            comments = Comment.objects.filter(author=user)
+            for comment in comments:
+                comment.delete()
 
-        # user.delete()
-        print("delete user: ", user.username)
+        user.delete()
         return JsonResponse({'message': 'Account deleted successfully'}, status=200)
 
 @api_view(['POST'])

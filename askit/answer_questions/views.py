@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated
 
 
 def check_upvote_or_downvote_question(question, user):
-    print(question.upvotes.filter(id=user.id))
     if question.upvotes.filter(id=user.id).exists():
         return "upvote"
     elif question.downvotes.filter(id=user.id).exists():

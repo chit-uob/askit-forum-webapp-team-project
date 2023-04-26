@@ -5,7 +5,7 @@
                 <br><br>
                 <h1 class="text-5xl font-bold">Settings</h1>
             </div>
-            <div class="flex border-gray-200 px-9 mb-6 rounded-md">
+            <div class="flex border-gray-200 px-9 mb-6 rounded-md flex-wrap">
                 <button
                         class="transition hover:-translate-y-[2px] focus:ring-inset dark:shadow-[2px_2px_0px_0px_#ffffff] shadow-[2px_2px_0px_0px_#000000] focus:ring-4  focus:ring-blue-400 py-2 px-4 text-xl bg-white dark:bg-black text-gray-700 dark:text-gray-200 border-b-2 rounded-md font-medium focus:outline-none dark:focus:bg-gray-800 dark:hover:bg-gray-800 focus:bg-sky-50 hover:bg-sky-50 mr-2"
                         :class="{ 'border-indigo-500 dark:shadow-[2px_2px_0px_0px_#8b5cf6] shadow-[2px_2px_0px_0px_#8b5cf6]': activeTab === 'my-details' }"

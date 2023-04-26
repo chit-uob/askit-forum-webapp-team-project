@@ -439,7 +439,9 @@ export default {
                     content: this.answerInput,
                 })
                 .then((response) => {
-                    this.answers.push(response.data);
+                    const answer = response.data;
+                    answer.contentHTML = DOMPurify.sanitize(marked(answer.content));
+                    this.answers.push(answer);
                     this.answerInput = "";
                     this.showForm = false;
                 })
@@ -455,7 +457,9 @@ export default {
                     content: this.commentInput,
                 })
                 .then((response) => {
-                    this.all_comments.push(response.data);
+                    let comment = response.data;
+                    comment.contentHTML = DOMPurify.sanitize(marked(comment.content));
+                    this.all_comments.push(comment);
                     this.commentInput = "";
                     this.showComments = false;
                 })

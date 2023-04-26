@@ -85,6 +85,11 @@ export default {
                     localStorage.setItem("token", token)
                     localStorage.removeItem("largeFont")
                     localStorage.removeItem("theme")
+                    localStorage.removeItem("readableFont")
+                    localStorage.removeItem("letterSpacing")
+                    localStorage.removeItem("grayscale")
+                    localStorage.removeItem("invert")
+                    localStorage.removeItem("colourHue")
 
                     this.$root.loadModules()
                     this.$router.push(this.$route.query.redirect || '/')

@@ -175,7 +175,7 @@ export default {
                 this.questions.sort((a, b) => new Date(b.pub_date) - new Date(a.pub_date))
                 this.popQuestions = this.questions
                 this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 10000))
-                this.popQuestions = this.popQuestions.sort((a, b) => b.votes - a.votes)
+                this.popQuestions = this.popQuestions.sort((a, b) => b.score - a.score)
             })
             .catch((error) => {
                 console.log(error);
@@ -189,7 +189,7 @@ export default {
             for (const tag of this.tagFilter) {
                 this.popQuestions = this.popQuestions.filter(a => a.tags.includes(tag))
             }
-            this.popQuestions = this.popQuestions.sort((a, b) => b.votes - a.votes)
+            this.popQuestions = this.popQuestions.sort((a, b) => b.score - a.score)
             this.popRender = false
             this.popRender = true
             console.log('rerender')

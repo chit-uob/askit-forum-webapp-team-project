@@ -412,7 +412,7 @@ export default {
                 this.popQuestions = this.popQuestions.filter(a => withinTime(a.pub_date, 7))
                 this.voteQuestions = this.popQuestions
                 this.popQuestions = this.popQuestions.sort((a, b) => b.views - a.views).slice(0, 3)
-                this.voteQuestions = this.voteQuestions.sort((a, b) => b.votes - a.votes).slice(0, 3)
+                this.voteQuestions = this.voteQuestions.sort((a, b) => b.score - a.score).slice(0, 3)
             })
             .catch((error) => {
                 console.log(error);
@@ -449,7 +449,7 @@ export default {
             for (const tag of this.tagFilter) {
                 this.voteQuestions = this.voteQuestions.filter(a => a.tags.includes(tag))
             }
-            this.voteQuestions = this.voteQuestions.sort((a, b) => b.votes - a.votes).slice(0, 3)
+            this.voteQuestions = this.voteQuestions.sort((a, b) => b.score - a.score).slice(0, 3)
             this.voteRender = false
             this.voteRender = true
             console.log('rerender')

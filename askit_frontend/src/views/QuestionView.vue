@@ -170,10 +170,10 @@
                 </div>
 
                 <div v-for="com in all_comments" :key="com.id">
-                    <div class="flex items-center rounded-lg dark:bg-gray-900 bg-white py-1 px-2 shadow">
+                    <div class="flex mb-4 items-center rounded-lg dark:bg-gray-900 bg-white py-1 px-2 shadow">
                         <div class="w-full">
                             <div class="flex justify-between">
-                                <p class="text-sm dark:text-gray-300 text-gray-600">Author: {{ com.author }} </p>
+                                <p class="text-sm truncate dark:text-gray-300 text-gray-600">Author: {{ com.author }} </p>
                                 <p class="text-right text-sm dark:text-gray-300 text-gray-600">Published: {{
                                     formatPubDate(com.pub_date)
                                     }}</p>
@@ -247,7 +247,7 @@
                         </div>
                         <div class="flex-grow w-11/12">
                             <div class="flex justify-between">
-                                <p class="text-sm dark:text-gray-300 text-gray-600">Author: {{ answer.author }} </p>
+                                <p class="text-sm truncate dark:text-gray-300 text-gray-600">Author: {{ answer.author }} </p>
                                 <p class="text-right text-sm dark:text-gray-300 text-gray-600">Published:
                                     {{ formatPubDate(answer.pub_date) }}</p>
                             </div>

@@ -1,7 +1,7 @@
 <template>
     <div class=" dark:bg-gray-900 bg-sky-100">
-        <div class="mx-auto w-10/12 max-w-6xl dark:bg-gray-800 overflow-hidden bg-white shadow-lg">
-            <div class="flex items-center p-4">
+        <div class="md:mx-auto md:w-10/12 md:max-w-6xl dark:bg-gray-800 overflow-hidden bg-white shadow-lg">
+            <div class="flex items-center sm:w-full p-4">
                 <div class="flex flex-col items-center">
                     <button
                             class="transition focus:ring-4 focus:outline-none focus:ring-blue-400 mr-2 rounded bg-green-500 px-2 py-1 font-bold text-white hover:bg-green-600"

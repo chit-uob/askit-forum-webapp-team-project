@@ -296,9 +296,7 @@ export default {
             ]
 
             for (let i = 0; i < this.calendarDates.length; i++) {
-                console.log(this.calendarDates[i].activityCount)
                 this.calendarDates[i].backgroundColor = backgroundColors[Math.min(this.calendarDates[i].activityCount, 9)];
-                console.log(this.calendarDates[i].backgroundColor)
             }
         }).catch(error => {
             console.log(error)

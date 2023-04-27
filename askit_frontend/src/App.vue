@@ -48,10 +48,10 @@ hue-rotate-[-30deg] hue-rotate-[-60deg] hue-rotate-[-90deg] hue-rotate-[-120deg]
              v-if="enable" :class="{ hidden: !showModule }">
             <h1 class="ml-5 p-3 text-lg font-bold">Modules</h1>
             <a v-for="module in modules"
-               class="shadow-[4px_4px_0px_0px_#000000] dark:shadow-[4px_4px_0px_0px_#ffffff] transition hover:translate-x-1 hover:bg-[#fff6fe] dark:hover:bg-[#240020] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black dark:border-white bg-white dark:bg-black flex h-[100px] w-[100px] justify-center"
+               class="shadow-[4px_4px_0px_0px_#000000] p-2 dark:shadow-[4px_4px_0px_0px_#ffffff] transition hover:translate-x-1 hover:bg-[#fff6fe] dark:hover:bg-[#240020] focus:ring-4 focus:outline-none focus:ring-blue-400 mx-5 my-4 rounded-2xl border-2  border-black dark:border-white bg-white dark:bg-black flex h-[100px] w-[100px] justify-center"
                :href="'/module/' + module.title">
-                <div class="justify-center flex w-full m-2 rounded-[0.6rem] border-2 border-black dark:border-white border-dashed">
-                    <p class="inline-block place-self-center text-xl tracking-[1px]">{{ module.title }}</p>
+                <div class="justify-center flex w-full  rounded-[0.6rem] border-2 border-black dark:border-white border-dashed">
+                    <p class="inline-block place-self-center p-1 text-xl tracking-[1px] truncate">{{ module.title }}</p>
                 </div>
             </a>
         </div>

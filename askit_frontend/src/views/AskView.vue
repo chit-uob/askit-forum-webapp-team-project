@@ -298,13 +298,30 @@ export default {
                         <li class="mb-2 break-words">No name-calling or personal attacks.</li>
                         <li class="mb-2 break-words">No bigotry.</li>
                         <li class="mb-2 break-words">No harassment.</li>
-                        <li class="mb-2 break-words">Report any unacceptable behaviour</li>
+                        <li class="mb-2 break-words">Report any unacceptable behaviour</li></ol>
 
+                        <div class="text-center">
+                            <p class="text-lg font-medium dark:text-white text-black underline"> Markdown tips!</p>
+                        </div>
+                        <ol class="list-inside list-decimal">
+
+                        <li class="mb-2 break-words">Use **(text)** for bold </li>
+                        <li class="mb-2 break-words">Use *(text)* for italic</li>
+                        <li class="mb-2 break-words">Use `(text)` for single line or ```(text)``` for multiple lines of code</li>
+                        <li class="mb-2 break-words">Use > (text) to quote something</li>
+                        <li class="mb-2 break-words">Use - (text) to make bullet points or 1. (text) etc. to make numebered lists</li>
+                        <li class="mb-2 break-words">Use between one and six # in incresing order of size followed by (text) to make headings.</li>
+
+                        </ol>
 
                         <div class="text-center">
                             <p class="text-lg font-medium dark:text-white text-black underline">How to write a good
                                 question!</p>
                         </div>
+
+                        <ol class="list-inside list-decimal">
+
+
 
                         <li class="mb-2 break-words">Make sure your question is on-topic and suitable for this site</li>
                         <li class="mb-2 break-words">Search, and research</li>

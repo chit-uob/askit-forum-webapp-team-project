@@ -4,7 +4,7 @@
             <div class="flex flex-col md:flex-row justify-between py-10">
                 <div class="px-16 w-full md:w-1/2">
                     <h1 class="text-5xl font-bold">Welcome back</h1>
-                    <h1 class="text-5xl italic font-bold">user</h1>
+                    <!--                    <h1 class="text-5xl italic font-bold">user</h1>-->
                 </div>
                 <div class="grid grid-cols-2 w-full md:w-1/2">
                     <div class="grid grid-rows-3 text-left md:text-right px-16 md:px-0 self-start">
@@ -14,7 +14,10 @@
                     </div>
                     <div
                             class="self-start mt-2 mr-5 ml-5 rounded-2xl bg-white dark:bg-gray-800 w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white"
-                            style="box-shadow: .13em .13em;"></div>
+                            style="box-shadow: .13em .13em;">
+                        <div class="text-8xl text-center"><i class="fa fa-user" aria-hidden="true"></i></div>
+
+                    </div>
                 </div>
 
             </div>

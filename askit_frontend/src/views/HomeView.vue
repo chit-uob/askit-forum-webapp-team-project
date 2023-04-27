@@ -117,7 +117,7 @@
                             <!--                                    class="">{{ formatDate(question.pub_date) }}</span></div>-->
                         </div>
 
-                        <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+                        <div class=" bg-lime-300 dark:bg-blue-600 rounded-r-[13px] rounded-bl-2xl grid box-content">
                             <div
                                     class="  place-self-center py-2 px-3 border-[0.1em] border-black dark:border-white border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                                 <div class=" text-center leading-[0.9] text-[38px] font-semibold ">
@@ -166,7 +166,7 @@
                             </div>
                         </div>
 
-                        <div class=" bg-lime-300 rounded-r-[13px] rounded-bl-2xl grid box-content">
+                        <div class=" bg-lime-300 dark:bg-blue-600 rounded-r-[13px] rounded-bl-2xl grid box-content">
                             <div
                                     class="  place-self-center py-2 px-3 border-[0.1em] border-black dark:border-white border-dashed border-spacing-5 rounded-r-md rounded-bl-md">
                                 <div class=" text-center leading-[0.9] text-[38px] font-semibold ">

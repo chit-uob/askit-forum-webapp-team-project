@@ -15,7 +15,7 @@
                     <div
                             class="self-start mt-2 mr-5 ml-5 rounded-2xl bg-white dark:bg-gray-800 w-[100px] h-[100px] transition ease-in-out delay-75 hover:scale-[1.02] duration-150 hover:bg-[#F2FFFA] border-[0.12em] border-black dark:border-white"
                             style="box-shadow: .13em .13em;">
-                        <div class="text-8xl text-center"><i class="fa fa-user" aria-hidden="true"></i></div>
+                        <div class="text-7xl text-center"><i class="fa fa-user mb-10" aria-hidden="true"></i></div>
 
                     </div>
                 </div>

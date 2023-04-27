@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </a>
-                <a v-for="question in allQuestions" :key="question.id"
+                <a v-for="question in questions" :key="question.id"
                    :href="`/question/${question.id}`"
                    class="dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-800 dark:border-0 dark:shadow-[5px_5px_0px_0px_#ffffff] transition focus:outline-none focus:ring-4 focus:ring-blue-400 shadow-[5px_5px_0px_0px_#000000] hover:translate-x-1 duration-300 sm:hidden block mb-[10px] mx-1 p-3 box-content rounded-2xl bg-white hover:bg-[#f2fcff] border-[0.24em] border-black ">
                     <div class=" flex-wrap text-xs font-medium dark:text-gray-300 text-gray-600 self-start  object-fill box-content mb-1">

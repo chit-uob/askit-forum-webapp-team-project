@@ -52,6 +52,19 @@
                            aria-hidden="true"></i>
                     </div>
                     <hr class="border-gray-400 mb-5">
+                    <div class="grid grid-cols-7 gap-1">
+                        <div class="text-xs font-bold text-center">Sun</div>
+                        <div class="text-xs font-bold text-center">Mon</div>
+                        <div class="text-xs font-bold text-center">Tue</div>
+                        <div class="text-xs font-bold text-center">Wed</div>
+                        <div class="text-xs font-bold text-center">Thu</div>
+                        <div class="text-xs font-bold text-center">Fri</div>
+                        <div class="text-xs font-bold text-center">Sat</div>
+                        <div v-for="day in calendarDates" class="text-xs font-bold text-center"
+                             :class="day.backgroundColor">
+                            {{ day.number }}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mx-10 mt-16 bg-white dark:bg-gray-800 border-2 border-gray-400 rounded-md grid grid-cols-1 md:grid-cols-2"
@@ -82,10 +95,11 @@
                             <div class="flex">
                                 <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></div>
                             </div>
-                            <div class="flex-wrap inline-flex leading-none" v-if="(question.tags[0] != '') && (question.tags.length != 0)">
+                            <div class="flex-wrap inline-flex leading-none"
+                                 v-if="(question.tags[0] != '') && (question.tags.length != 0)">
                                 <div v-for="tag in question.tags"
-                                        class="inline text-xs mr-[2px] dark:text-blue-400  dark:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">
-                                        [{{ tag }}]
+                                     class="inline text-xs mr-[2px] dark:text-blue-400  dark:text-blue-300 text-blue-500 hover:underline hover:text-blue-400 leading-none">
+                                    [{{ tag }}]
                                 </div>
                             </div>
                             <div class="flex" v-if="(question.tags[0] == '') || (question.tags.length == 0)">
@@ -164,8 +178,7 @@
                 </div>
 
             </div>
-          <br>
-
+            <br>
 
 
         </div>
@@ -183,11 +196,13 @@ export default {
     data() {
         return {
             notifications: [],
+            activity: [],
             questions: [],
             answers: [],
             user_full_name: "",
             user_username: "",
             user: {},
+            calendarDates: [],
         };
     },
     mounted() {
@@ -246,6 +261,50 @@ export default {
         }).catch((error) => {
             console.log(error);
         });
+
+
+        const currentMonth = new Date().getMonth();
+        const currentYear = new Date().getFullYear();
+        const weekdayOfFirstDay = new Date(currentYear, currentMonth, 1).getDay();
+        const daysInCurrentMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        for (let i = 0; i < weekdayOfFirstDay; i++) {
+            this.calendarDates.push({number: "", activityCount: 0});
+        }
+        for (let i = 1; i <= daysInCurrentMonth; i++) {
+            this.calendarDates.push({number: i, activityCount: 0});
+        }
+
+        axiosClient.get('home_page/activity').then(response => {
+            this.activity = response.data
+            for (let i = 0; i < this.activity.length; i++) {
+                const date = new Date(this.activity[i].date);
+                const day = date.getDate();
+                this.calendarDates[day + weekdayOfFirstDay - 1].activityCount++;
+            }
+
+            const backgroundColors = [
+                "bg-green-50 dark:bg-green-900",
+                "bg-green-100 dark:bg-green-800",
+                "bg-green-200 dark:bg-green-700",
+                "bg-green-300 dark:bg-green-600",
+                "bg-green-400 dark:bg-green-500",
+                "bg-green-500 dark:bg-green-400",
+                "bg-green-600 dark:bg-green-300",
+                "bg-green-700 dark:bg-green-200",
+                "bg-green-800 dark:bg-green-100",
+                "bg-green-900 dark:bg-green-50",
+            ]
+
+            for (let i = 0; i < this.calendarDates.length; i++) {
+                console.log(this.calendarDates[i].activityCount)
+                this.calendarDates[i].backgroundColor = backgroundColors[Math.min(this.calendarDates[i].activityCount, 9)];
+                console.log(this.calendarDates[i].backgroundColor)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+
+
     },
     methods: {
         deleteNotification(notificationId) {

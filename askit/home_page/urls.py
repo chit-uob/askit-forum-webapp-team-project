@@ -10,6 +10,7 @@ urlpatterns = [
     # path('privacy/', views.privacy_page, name='privacyPage'),
     # path('terms/', views.terms_page, name='termsPage'),
     path('notifs/', views.view_notifications, name='all_notifications'),
+    path('activity/', views.view_activity, name='all_activity'),
     path('vQuestions/', views.view_questions, name='all_questions'),
     path('vAnswers/', views.view_answers, name='user_answers'),
     path('user_prof/', views.user_profiles, name='profile'),

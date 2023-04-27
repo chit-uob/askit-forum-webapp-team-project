@@ -1,10 +1,30 @@
+import json
+from datetime import datetime
+
 from django.http import JsonResponse
-from home_page.models import Question, UserProfile, Answer, Notification
+from home_page.models import Question, UserProfile, Answer, Notification, Activity
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def view_activity(request):
+    curuser = request.user
+    activities = Activity.objects.filter(author=curuser)
+    # filter only the activities from this month
+    activities = activities.filter(date__month=datetime.now().month)
+    activity_array = []
+    for activity in activities:
+        context = {
+            'date': activity.date,
+        }
+        activity_array.append(context)
+    return JsonResponse(activity_array, safe=False)
 
 
 @api_view(['GET'])
@@ -83,6 +103,7 @@ def view_answers(request):
 
     return JsonResponse(answer_array, safe=False)
 
+
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -94,6 +115,7 @@ def user_profiles(request):
         'full_name': user_profile.get_full_name(),
     }
     return JsonResponse(context, safe=False)
+
 
 #         questions = Question.objects.all()
 #         question_list = []
@@ -159,6 +181,6 @@ def userInfo(request):
         first_name = post_data['first_name']
         last_name = post_data['last_name']
         user = User.objects.get(username=userName)
-        profile = UserProfile.objects.create(user=user,first_name=first_name,last_name=last_name)
+        profile = UserProfile.objects.create(user=user, first_name=first_name, last_name=last_name)
         profile.save()
         return JsonResponse({"success": True})

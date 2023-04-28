@@ -1,5 +1,11 @@
 <template>
-  <div>Your account has been activated, please close this window</div>
+  <div class="h-screen w-screen flex justify-center content-center dark:bg-gradient-to-r dark:from-gray-700 dark:via-gray-900 dark:to-black bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
+      <div class="flex flex-col justify-center">
+        <div class="p-10 dark:bg-gray-600/50 backdrop-blur-md bg-white/50  rounded drop-shadow-lg shadow-white">
+          <h1 class=" text-center">Your account has been activated, please close this window</h1>
+        </div>
+      </div>
+  </div>
 </template>
 
 

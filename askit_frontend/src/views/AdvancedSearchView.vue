@@ -45,6 +45,8 @@
             </button>
         </form>
     </div>
+    <div class="h-full dark:bg-gray-900 w-full"></div>
+
 </template>
 
 <script>

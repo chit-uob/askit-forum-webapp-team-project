@@ -1,6 +1,6 @@
 <template>
 
-    <div class=" dark:bg-gray-900 flex min-h-screen">
+    <div class=" dark:bg-gray-900 flex h-full min-h-screen">
         <div class="w-full">
             <div class="inline-flex w-full justify-between p-10">
                 <div>

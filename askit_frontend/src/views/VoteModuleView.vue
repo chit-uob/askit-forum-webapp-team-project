@@ -1,5 +1,5 @@
 <template>
-    <div class=" dark:bg-gray-900 flex min-h-screen bg-white">
+    <div class=" dark:bg-gray-900 flex min-h-screen h-full bg-white">
         <div class="md:w-[70%] pb-[50px] w-full ">
             <div class="inline-flex w-full justify-between px-4 md:px-10 py-8 items-center">
                 <h1 class="text-[42px] font-bold">{{ $route.params.mod }}</h1>

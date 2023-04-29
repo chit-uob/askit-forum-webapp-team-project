@@ -1,5 +1,5 @@
 <template>
-<div class="p-10 dark:bg-slate-900">
+<div class="p-10 dark:bg-slate-900 h-full">
   <div class=" text-4xl mb-3">Add members to {{ $route.params.mod }}</div>
   <div>
     <div class="text-xl">All users</div>

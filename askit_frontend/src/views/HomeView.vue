@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-pink-50 dark:bg-gray-900 text-black dark:text-white">
+    <div class="bg-pink-50 dark:bg-gray-900 text-black h-full dark:text-white">
         <div class="min-h-screen">
             <div class="flex flex-col md:flex-row justify-between py-10">
                 <div class="px-16 w-full md:w-1/2">

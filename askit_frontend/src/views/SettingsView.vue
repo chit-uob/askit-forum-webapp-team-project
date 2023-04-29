@@ -204,7 +204,7 @@
                                 :class="{ 'bg-blue-500 hover:bg-blue-400 ': readableFont, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !readableFont}"
                                 class="focus:outline-none overflow-hidden relative transition hover:shadow-lg hover:shadow-blue-600 hover:-translate-y-1 group rounded h-[200px] w-[400px] focus:ring-4 focus:ring-pink-400 border-2 border-blue-500">
                             <div :class="{ 'text-white bg-black bg-opacity-10': readableFont, 'text-blue-500 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-30': !readableFont}"
-                                 class=" absolute px-5 inset-0 py-7  backdrop-blur-lg delay-700 opacity-0 duration-500 group-focus:opacity-100 group-hover:opacity-100">
+                                 class=" overflow-auto absolute px-5 inset-0 py-7  backdrop-blur-lg delay-700 opacity-0 duration-500 group-focus:opacity-100 group-hover:opacity-100">
                                 <span>Current font: Lorem ipsum dolor sit amet, <span class="font-bold">consectetur adipiscing</span> elit. Duis <span
                                         class=" italic">placerat</span> ut justo.</span><br><br><span
                                     class="font-[helvetica]">Readable font: Lorem ipsum dolor sit amet, <span

@@ -1,5 +1,5 @@
 <template>
-    <main class="p-8 bg-[#D6FFD6] dark:bg-slate-800 overflow-visible">
+    <main class="p-8 bg-[#D6FFD6] dark:bg-slate-800 h-full overflow-visible">
         <h1 class="text-4xl font-bold">Course Settings for {{ $route.params.mod }}</h1>
 
         <div class="pt-4 mb-6">

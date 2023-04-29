@@ -1,5 +1,5 @@
 <template>
-    <div class=" dark:bg-gray-900 bg-sky-100">
+    <div class=" dark:bg-gray-900 bg-sky-100 h-full">
         <div class="md:mx-auto md:w-10/12 md:max-w-6xl dark:bg-gray-800 overflow-hidden bg-white shadow-lg">
             <div class="flex items-center sm:w-full p-4">
                 <div class="flex flex-col items-center">

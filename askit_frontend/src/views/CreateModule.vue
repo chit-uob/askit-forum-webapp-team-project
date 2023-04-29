@@ -1,5 +1,5 @@
 <template>
-  <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none crypto_bg dark:bg-slate-900 h-screen">
+  <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none crypto_bg dark:bg-slate-900 h-full">
     <div class="py-6">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 class="block mb-2 text-3xl font-semibold">Create Course</h1>

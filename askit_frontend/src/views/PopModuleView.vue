@@ -20,7 +20,7 @@
  
 
 
-                    <div class="self-center dark:border-white flex align-middle radio-toolbar  h-min border-2  rounded border-black overflow-hidden font-bold text-xs leading-normal"
+                    <div class="self-center overflow-auto dark:border-white flex align-middle radio-toolbar  h-min border-2  rounded border-black  font-bold text-xs leading-normal"
                          style="box-shadow: .23em .23em;">
 
                         <button class="transition dark:bg-gray-800 dark:hover:bg-slate-400 hover:bg-emerald-50 focus:ring-4 focus:outline-none focus:ring-blue-400 ring-inset px-2 py-[3px] h-full inline"

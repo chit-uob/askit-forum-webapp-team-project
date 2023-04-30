@@ -156,7 +156,7 @@
                             </div>
                             <div class="flex">
                                 <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400">
-                                    {{ answer.question.title }}
+                                    {{ answer.question_title }}
                                 </div>
                             </div>
                             <div class="flex">

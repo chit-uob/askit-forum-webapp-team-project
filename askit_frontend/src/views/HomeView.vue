@@ -9,7 +9,7 @@
                 <div class="grid grid-cols-2 w-full md:w-1/2">
                     <div class="grid grid-rows-3 text-left md:text-right px-16 md:px-0 self-start">
                         <h2 class="self-start text-3xl font-bold">{{ user_full_name }}</h2>
-                        <h2 class="self-center text-xl">University of Somewhere</h2>
+                        <h2 class="self-center text-xl">University of Birmingham</h2>
                         <h2 class="self-end">{{ user_username }}</h2>
                     </div>
                     <div

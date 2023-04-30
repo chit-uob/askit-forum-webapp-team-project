@@ -90,10 +90,12 @@ def view_answers(request):
     answers = Answer.objects.filter(author=aUser)
     answer_array = []
     for answer in answers:
+        question_of_answer = answer.question
         context = {
             'id': answer.id,
-            'question_id': answer.question.id,
-            'question_title': answer.question.title,
+            'question_id': question_of_answer.id,
+            'question_title': question_of_answer.title,
+            'author': getattr(question_of_answer.author, 'username', 'Anonymous'),
             'content': answer.content,
             'pub_date': answer.pub_date,
             'score': answer.score,

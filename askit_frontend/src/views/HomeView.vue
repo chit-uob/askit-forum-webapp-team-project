@@ -93,7 +93,7 @@
                             </div>
                             <div class=" self-center">Asked by <span
                                     class="text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></span><span
-                                    class="">{{ user.username }}</span>
+                                    class="">{{ user_username }}</span>
                             </div>
                             <div class="flex">
                                 <div class=" self-end mr-[2px] text-blue-500 dark:text-blue-300 hover:underline hover:text-blue-400"></div>

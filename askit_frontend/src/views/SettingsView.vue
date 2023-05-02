@@ -287,7 +287,7 @@
                                 </div>
                             </div>
                         </button>
-                        <button class=" cursor-default focus:outline-none focus:ring-4 focus:ring-pink-400 hover:shadow-blue-200 hover:bg-sky-50 hover:shadow-lg hover:-translate-y-1 dark:hover:bg-transparent dark:hover:shadow-blue-600 border-blue-500 rounded justify-center h-[200px] w-[400px] col-span-2 border-2">
+                        <button class="transition cursor-default focus:outline-none focus:ring-4 focus:ring-pink-400 hover:shadow-blue-200 hover:bg-sky-50 hover:shadow-lg hover:-translate-y-1 dark:hover:bg-transparent dark:hover:shadow-blue-600 border-blue-500 rounded justify-center h-[200px] w-[400px] col-span-2 border-2">
                             <div class="flex justify-center -translate-x-2">
                                 <div class="text-7xl">🎨</div>
                                 <div class="flex flex-col pt-4">

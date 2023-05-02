@@ -1,8 +1,9 @@
 <template>
-    <h1 class="text-5xl dark:bg-gray-900 font-bold">Advanced Search</h1>
+<div class="h-full min-h-screen dark:bg-gray-900">
+    <h1 class="text-5xl dark:bg-gray-900 font-bold md:px-10 px-3 py-10">Advanced Search</h1>
 
-    <div class="flex dark:bg-gray-900">
-        <form class="w-full pt-2 pl-4 md:w-2/3 grid grid-cols-2 gap-y-2" v-on:submit.prevent="advancedSearch">
+    <div class="flex dark:bg-gray-900 md:px-6 px-3 py-4">
+        <form class="w-full gap-4 pt-2 pl-4 md:w-2/3 grid grid-cols-2 gap-y-2" v-on:submit.prevent="advancedSearch">
             <label for="title-contains" class="text-lg font-medium dark:text-white text-black">Title contains: </label>
             <input type="text" id="title-contains" name="title-contains" placeholder="Title contains"
                    v-model="titleContains"
@@ -45,8 +46,7 @@
             </button>
         </form>
     </div>
-    <div class="h-full dark:bg-gray-900 w-full"></div>
-
+</div>
 </template>
 
 <script>

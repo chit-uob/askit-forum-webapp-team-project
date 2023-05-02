@@ -263,53 +263,7 @@
                         </button>
                     </div>
                 </div>
-                <div class=" rounded-lg md:px-16 px-5 py-6  border-2 border-black bg-white dark:bg-gray-800 ">
-                    <div class="mb-6">Colour adjustments</div>
-                    <div class="flex flex-wrap gap-1">
-                        <button v-on:click="toggleGrayscale"
-                                :class="{ 'bg-blue-500 hover:bg-blue-400 ': grayscaleMode, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !grayscaleMode}"
-                                class="transition hover:shadow-lg hover:-translate-y-1 hover:shadow-blue-600 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded relative h-[200px] w-[200px]  border-2 border-blue-500">
-                            <div class=" block">
-                                <div class="text-7xl mb-5">🗿</div>
-                                <div :class="{ 'text-white': grayscaleMode, 'text-blue-500': !grayscaleMode}"
-                                     class="text-center">Grayscale mode
-                                </div>
-                            </div>
-                        </button>
-                        <button v-on:click="toggleInvert"
-                                :class="{ 'bg-blue-500 hover:bg-blue-400 ': invert, 'hover:shadow-blue-200 hover:bg-sky-50 dark:hover:bg-transparent dark:hover:shadow-blue-600' : !invert}"
-                                class="transition hover:shadow-lg hover:-translate-y-1 hover:shadow-blue-600 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded relative h-[200px] w-[200px]  border-2 border-blue-500">
-                            <div class="block">
-                                <div :class="{ 'text-white': invert, 'text-blue-500': !invert}" class="text-8xl">⥃</div>
-                                <div :class="{ 'text-white': invert, 'text-blue-500': !invert}"
-                                     class="text-center mt-1 pb-2">Invert colour
-                                </div>
-                            </div>
-                        </button>
-                        <button class=" cursor-default focus:outline-none focus:ring-4 focus:ring-pink-400 hover:shadow-blue-200 hover:bg-sky-50 hover:shadow-lg hover:-translate-y-1 dark:hover:bg-transparent dark:hover:shadow-blue-600 border-blue-500 rounded justify-center h-[200px] w-[400px] col-span-2 border-2">
-                            <div class="flex justify-center -translate-x-2">
-                                <div class="text-7xl">🎨</div>
-                                <div class="flex flex-col pt-4">
-                                    <div class="flex gap-1 justify-center">
-                                        <button v-on:click="changeHue(-30)"
-                                                class="transition focus:ring-4 focus:ring-pink-400 focus:outline-none hover:bg-blue-400 font-bold rounded-md h-8 w-8 bg-blue-500 text-center text-white">
-                                            -
-                                        </button>
-                                        <div class=" flex flex-col w-16 rounded-md dark:bg-gray-600 bg-blue-50 text-center justify-center">
-                                            <label class="font-medium dark:text-sky-100 text-blue-800">{{
-                                                colourHue
-                                                }}°</label></div>
-                                        <button v-on:click="changeHue(30)"
-                                                class="transition focus:ring-4 focus:ring-pink-400 focus:outline-none hover:bg-blue-400 font-bold rounded-md  h-8 w-8 bg-blue-500 text-center text-white">
-                                            +
-                                        </button>
-                                    </div>
-                                    <div class="text-center text-blue-500 mt-1">Shift colour hue</div>
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                </div>
+                
                 <div class=" rounded-lg md:px-16 px-5 py-6  border-2 border-black bg-white dark:bg-gray-800 ">
                     <div class="mb-6">Colour adjustments</div>
                     <div class="flex flex-wrap gap-1">

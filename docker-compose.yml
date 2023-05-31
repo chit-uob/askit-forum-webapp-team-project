@@ -44,7 +44,7 @@ services:
         max-file: "3"
   tpvue:
     build:
-        context: ./askit_vue
+        context: ./askit_frontend
         dockerfile: Dockerfile
     ports:
         - "10001:80"

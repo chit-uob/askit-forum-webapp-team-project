@@ -30,11 +30,10 @@ ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8000",
-    "https://teamai55-22.bham.team",
-    "https://askit.bham.team"
+    "https://askit.cpbprojects.me",
 ]
 
-CSRF_TRUSTED_ORIGINS = ["https://teamai55-22.bham.team", "https://askit.bham.team"]
+CSRF_TRUSTED_ORIGINS = ["https://askit.cpbprojects.me"]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(

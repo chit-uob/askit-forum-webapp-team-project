@@ -1,4 +1,5 @@
-# Askit
+# Askit forum webapp team project
+## Demo link: [askit.cpbprojects.me](https://askit.cpbprojects.me)
 AskIT is a platform designed to facilitate better communication between students, TAs and lecturers. The app aims to provide a space where students can ask questions and seek advice regarding course content from others in a seamless and organized manner. 
 
 ![home.png](https://github.com/chit-uob/askit-forum-webapp-team-project/raw/main/demo/img/home.png)
